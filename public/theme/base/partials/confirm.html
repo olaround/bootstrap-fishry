@@ -1,9 +1,9 @@
 
 	<div class="row clearfix">
-		<div class="col-md-12 column">
+		<div class="col-md-12 column"  ng-show="IfCart()">
         <h1>Order Details</h1>
         
-        <table ng-show="IfCart()" class="table">
+        <table class="table">
                                    <thead> 
 									<tr>
                                         <th width="226" class="col-md-4">Product Name</th>
@@ -24,7 +24,7 @@
 									</tbody>
 									<tfoot>
 										<tr>
-                                            <form ng-submit="SubmitOrder()">
+                                            <form  ng-submit="SubmitOrder(PaymentMethod,'/thankyou')">
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -34,31 +34,33 @@
                                         </tr>
 									</tfoot>							
                                 </table>
-                                <div class="col-md-6">
-                                <h1>Shipping Address</h1>
+                                <div class="col-md-6">                                
                                  <form  role="form" ng-submit="SubmitOrder(PaymentMethod,'/thankyou')">
+                                 <div class="page-header">
+                              	   <h1>Shipping Address</h1>
+                                 </div>
                                  <div class="form-group">
-                                     <label for="exampleInputEmail1">Phone</label>
-                                     <input ng-model="Customer.Phone"  type="text" class="form-control" id="exampleInputEmail1" />
+                                     <label >Phone</label>
+                                     <input ng-model="Customer.Phone"  type="text" class="form-control"  />
                                 </div>
                                  <div class="form-group">
-                                     <label for="exampleInputEmail1">Address</label>
-                                     <input ng-model="Customer.Address" required="required" type="text" class="form-control" id="exampleInputEmail1" />
+                                     <label >Address</label>
+                                     <input ng-model="Customer.Address" required="required" type="text" class="form-control"  />
                                 </div>
                                  <div class="form-group">
-                                     <label for="exampleInputEmail1">Address Continue</label>
-                                     <input ng-model="Customer.AddressContinue"  type="text" class="form-control" id="exampleInputEmail1" />
+                                     <label >Address Continue</label>
+                                     <input ng-model="Customer.AddressContinue"  type="text" class="form-control"  />
                                 </div>
                                  <div class="form-group">
-                                     <label for="exampleInputEmail1">City</label>
-                                     <input ng-model="Customer.City"  type="text" class="form-control" id="exampleInputEmail1" />
+                                     <label >City</label>
+                                     <input ng-model="Customer.City"  type="text" class="form-control"  />
                                 </div>
                                  <div class="form-group">
-                                     <label for="exampleInputEmail1">Post / Zip Code</label>
-                                     <input ng-model="Customer.PostCode"  type="text" class="form-control" id="exampleInputEmail1" />
+                                     <label >Post / Zip Code</label>
+                                     <input ng-model="Customer.PostCode"  type="text" class="form-control"  />
                                 </div>
                                  <div class="form-group">
-                                     <label for="exampleInputEmail1">Country</label>
+                                     <label >Country</label>
                                      <select  ng-model="Customer.Country" id="customer-address-province-0"  class="form-control" data-event-change="resetProvince" data-addclass-error="customer.errors.addresses.first.country_code.length">
                                  		   <option value="">
                                       Please Select
@@ -784,6 +786,33 @@
                                     </option>
                                  	 </select>
                                 </div>
+                                <div ng-if="!ListPaymentGateways.same_billing_and_shipping_address">
+                                    <div class="page-header">
+                                       <h1>Billing Address</h1>
+                                       <span><input type="checkbox" ng-model="Customer.SameBilling"  />  Same as shipping</span>
+                                     </div>
+                                     <div ng-show="!Customer.SameBilling">
+                                              <div class="form-group">
+                                                 <label >Phone</label>
+                                                 <input ng-model="Customer.PhoneBilling"  type="text" class="form-control"  />
+                                            </div>
+                                              <div class="form-group">
+                                                 <label >Address</label>
+                                                 <input ng-model="Customer.AddressBilling" required="required" type="text" class="form-control"  />
+                                            </div>
+                                             <div class="form-group">
+                                                 <label >Address Continue</label>
+                                                 <input ng-model="Customer.AddressContinueBilling"  type="text" class="form-control"  />
+                                            </div>
+                                             <div class="form-group">
+                                                 <label >City</label>
+                                                 <input ng-model="Customer.CityBilling"  type="text" class="form-control"  />
+                                            </div>
+                                       </div>
+                                </div>
+                                 <div class="page-header">
+                              	   <h1>Payment Method</h1>
+                                 </div>
                                   <div class="form-group">
                                    <label for="PaymentMethod">Payment Method</label>
                                             <select class="form-control" required ng-model="PaymentMethod">
@@ -797,7 +826,31 @@
                                      </div>
                                  </form>
                                  </div>
-                                <h6 ng-hide="IfCart()" align="center">No Item Found</h6>
+                                 <div class="col-md-6">
+                                 		<div class="col-md-12" ng-if="ListPaymentGateways.refund_policy">
+                                            <div class="page-header">
+                                                                   <h1>Refund Policy</h1>
+                                           </div>
+                                            <p>{{ListPaymentGateways.refund_policy}}</p>
+                                        </div>
+                                        <div class="col-md-12" ng-if="ListPaymentGateways.privacy_policy">
+                                            <div class="page-header">
+                                                                   <h1>Privacy Policy</h1>
+                                           </div>
+                                            <p>{{ListPaymentGateways.privacy_policy}}</p>
+                                        </div>
+                                        <div class="col-md-12" ng-if="ListPaymentGateways.terms_of_service">
+                                            <div class="page-header">
+                                                                   <h1>Terms of Service</h1>
+                                           </div>
+                                            <p>{{ListPaymentGateways.terms_of_service}}</p>
+                                        </div>
+                                 </div>
+                                
 		</div>
+        <div class="col-md-12" ng-hide="IfCart()">
+        		<h6 align="center">No Item Found</h6>
+        </div>
+        
 	</div>
 

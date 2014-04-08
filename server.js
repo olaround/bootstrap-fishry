@@ -37,7 +37,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 app.all('*', function(req, res, next) {
-	app.locals.store = '306628C1-65EB-46D4-B5FF-5195C4D4A1E1';
+	app.locals.store = '12345';
   next()
 })
 app.get('/', routes.index);

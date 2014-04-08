@@ -1,4 +1,4 @@
-<div class="row clearfix">
+<div class="row clearfix"  ng-if="!User.info.CustomerEmail && ListPaymentGateways.accountsDisabled != 'disabled'">
 		<div class="col-md-6 column">
 			<form role="form" ng-submit="CheckLogin('cart')">
 				<div class="form-group">
@@ -21,5 +21,18 @@
             <div class="col-md-6">
             		<a href="./signup" class="btn btn-info">Sign Up</a>
             </div>
+		</div>
+	</div>
+   
+   
+   <div class="row clearfix"  ng-if="User.info.CustomerEmail || ListPaymentGateways.accountsDisabled == 'disabled'">
+        <div class="col-md-6 column" ng-if="User.info.CustomerEmail && ListPaymentGateways.accountsDisabled != 'disabled'">
+           <h4>You are already logged in</h4>
+		</div>
+        <div class="col-md-6 column" ng-if="!User.info.CustomerEmail && ListPaymentGateways.accountsDisabled == 'disabled'">
+           <h4>Login is disabled</h4>
+		</div>
+        <div class="col-md-6 column" ng-if="User.info.CustomerEmail && ListPaymentGateways.accountsDisabled == 'disabled'">
+           <h4>Login is disabled</h4>
 		</div>
 	</div>

@@ -28,8 +28,8 @@
 						<span>Customer Info  :</span>
 											<span ng-if="User.info.CustomerEmail"> Welcome {{User.info.CustomerFirstName}}</span>
 											<span ng-if="User.info.CustomerEmail"> <a class="btn btn-danger" href="javascript:void(0)" ng-click="Logout()"> Logout </a></span>
-											<span ng-if="!User.info.CustomerEmail"> <a class="btn btn-info" href="./login"> Login </a></span>
-											<span ng-if="!User.info.CustomerEmail"> <a class="btn btn-info" href="./signup"> Sign Up </a></span>
+											<span ng-if="!User.info.CustomerEmail && ListPaymentGateways.accountsDisabled != 'disabled'"> <a class="btn btn-info" href="./login"> Login </a></span>
+											<span ng-if="!User.info.CustomerEmail  && ListPaymentGateways.accountsDisabled == 'optional'"> <a class="btn btn-info" href="./signup"> Sign Up </a></span>
 
 					</div>
                       <div class="col-md-12 column">
@@ -123,16 +123,16 @@
 						  </a>
 						</li>
 						<li ng-repeat="links in locationParam" ng-show="links">
-						  <a href="./{{locationParam[1]}}" ng-if="$index==1">
+						  <a href="./{{locationParam[0]}}" ng-if="$index==0">
 						  {{links}}
 						  </a>
-						  <a href="./{{locationParam[1]}}/{{locationParam[2]}}" ng-if="$index==2">
+						  <a href="./{{locationParam[0]}}/{{locationParam[1]}}" ng-if="$index==1">
 						  {{links}}
 						  </a>
-						  <a href="./{{locationParam[1]}}/{{locationParam[2]}}/{locationParam[3]}}" ng-if="$index==3">
+						  <a href="./{{locationParam[0]}}/{{locationParam[1]}}/{locationParam[2]}}" ng-if="$index==2">
 						  {{links}}
 						  </a>
-						  <a href="./{{locationParam[1]}}/{{locationParam[2]}}/{locationParam[3]}}/{locationParam[4]}}" ng-if="$index==4">
+						  <a href="./{{locationParam[0]}}/{{locationParam[1]}}/{locationParam[2]}}/{locationParam[3]}}" ng-if="$index==3">
 						  {{links}}
 						  </a>
 						</li>
