@@ -1,0 +1,45 @@
+
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+        <h1>Cart</h1>
+        
+        <table ng-show="IfCart()" class="table">
+                                   <thead> 
+									<tr>
+                                        <th width="226" class="col-md-4">Product Name</th>
+                                        <th width="242" class="col-md-4">Item Price</th>
+										<th width="94" class="col-md-4">Quantity</th>
+                                        <th width="335" class="col-md-4">Total Price</th>
+										<th width="64" class="col-md-4">Action</th>
+                                    </tr>
+									</thead>
+									<tbody>
+                                    <tr ng-repeat="Items in Cart">
+                                        <td class="col-md-4">{{Items.productInfo.productName}}</td>
+                                        <td class="col-md-4">Rs. {{Items.productInfo.productPrice}}</td>
+										<td class="col-md-4"><input style="width:62px;"  min='1' ng-model="Items.quantity" type="number" ></td>
+                                        <td class="col-md-4">Rs. {{Items.productInfo.productPrice * Items.quantity}}</td>
+										<td><span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Items.productID)"></span></td>
+                                    </tr>
+									</tbody>
+									<tfoot>
+										<tr>
+											<td><a class="btn btn-info"  href="./">Continue Shopping</a></td>
+                                            <td></td>
+											<td>&nbsp;</td>
+											<td><strong>Total Rs. {{ReturnTotal()}}</strong></td>
+                                            
+											<td>
+                                            	<a ng-if="!User.info.CustomerEmail" class="btn btn-info"  href="./login">Checkout</a>
+                                                <a  ng-if="User.info.CustomerEmail"  class="btn btn-info"  href="./confirm">Checkout</a>
+                                                
+                                            </td>
+											
+											
+										</tr>
+									</tfoot>							
+                                </table>
+                                <h6 ng-hide="IfCart()" align="center">No Item Found</h6>
+		</div>
+	</div>
+

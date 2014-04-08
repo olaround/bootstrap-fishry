@@ -1,0 +1,151 @@
+<html ng-app="aeCommerce" ng-controller="AECtrl">
+  <head>
+  <meta name="fragment" content="!">
+    <base href="/">
+	<% if (typeof(meta) != "undefined") { %>
+      <% for (var metaItem in meta) { %>
+		<meta name="
+<%= metaItem %>
+" content="
+<%= meta[metaItem] %>
+" />
+        <% } %>
+          <% } %>
+            <title ng-bind="title">
+              <%= title %>
+              </title>
+              <% include header_resources %>
+               <script>
+			  	var StoreID = '<%= StoreId %>';
+			  </script>  
+              </head>
+              <body id="index" >
+			  <div id="Loader" style="position:fixed;left:0;top:0;padding:5px;">loading...</div>
+				<div class="container">
+				  <div class="row clearfix">
+					<div class="col-md-12 column">
+					<div class="pull-right">
+						<span>Customer Info  :</span>
+											<span ng-if="User.info.CustomerEmail"> Welcome {{User.info.CustomerFirstName}}</span>
+											<span ng-if="User.info.CustomerEmail"> <a class="btn btn-danger" href="javascript:void(0)" ng-click="Logout()"> Logout </a></span>
+											<span ng-if="!User.info.CustomerEmail"> <a class="btn btn-info" href="./login"> Login </a></span>
+											<span ng-if="!User.info.CustomerEmail"> <a class="btn btn-info" href="./signup"> Sign Up </a></span>
+
+					</div>
+                      <div class="col-md-12 column">
+                        <div align="center">
+                            <button class="btn btn-default btn-info" ng-click="isCollapsed = !isCollapsed">
+											Shopping Cart 
+											<span ng-if="ReturnItems()">/ Items({{ReturnItems()}}) /</span>
+											<span  ng-if="ReturnItems()"> Total Price(Rs.{{ReturnTotal()}})</span>
+												<br>
+							</button>
+                            <hr>
+                            <div collapse="isCollapsed">
+                                <table ng-show="IfCart()"  class="table">
+                                   <thead> 
+									<tr>
+                                        <th class="col-md-4">Product Name</th>
+                                        <th class="col-md-4">Item Price</th>
+										<th class="col-md-4">Quantity</th>
+                                        <th class="col-md-4">Total Price</th>
+										<th class="col-md-4">Action</th>
+                                    </tr>
+									</thead>
+									<tbody>
+                                    <tr ng-repeat="Items in Cart">
+                                        <td class="col-md-4">{{Items.productInfo.productName}}</td>
+                                        <td class="col-md-4">Rs. {{Items.productInfo.productPrice}}</td>
+										<td class="col-md-4"><input style="width:62px;"  min='1' ng-model="Items.quantity" type="number" ></td>
+                                        <td class="col-md-4">Rs. {{Items.productInfo.productPrice * Items.quantity}}</td>
+										<td><span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Items.productID)"></span></td>
+                                    </tr>
+									</tbody>
+									<tfoot>
+										<tr>
+											<td></td>
+											<td></td>
+											<td>Total</td>
+											<td>Rs. {{ReturnTotal()}}</td>
+											<td><a class="btn btn-info" ng-click="isCollapsed = true" href="./cart">Checkout</a></td>
+											
+											
+										</tr>
+									</tfoot>							
+                                </table>
+                                <h6 ng-hide="IfCart()" align="center">No Item Found</h6>
+                            </div>
+                        </div>
+				  </div>
+				  <div class="row clearfix">
+					<div class="col-md-12 thumbnail" align="center">
+					  <img width="100" alt="Logo" src="./img/theme/logo.png">
+					</div>
+				  </div>
+				  <div class="row clearfix">
+					<div class="col-md-12 column">
+					  <nav class="navbar navbar-default" role="navigation">
+						<div class="navbar-header">
+						  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							
+							<span class="sr-only">
+							  Toggle navigation
+							</span>
+							<span class="icon-bar">
+							</span>
+							<span class="icon-bar">
+							</span>
+							<span class="icon-bar">
+							</span>
+						  </button>
+						  <a class="navbar-brand" href="./"><em class="glyphicon glyphicon-home"></em></a>
+						</div>
+						
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						  <ul class="nav navbar-nav" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
+							<li ng-repeat="Nav in Navigation.link_list"  ng-class="{active:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
+							  <a href="{{Nav.commaSeprated}}"  >
+								{{Nav.name}}
+							  </a>
+							</li>
+							<li ng-repeat="Nav in Navigation.link_list"  ng-class="{active:  $location.path().indexOf('{{Nav.http}}') >= 0}" ng-show="Nav.http">
+							  <a href="{{Nav.http}}"  >
+								{{Nav.name}}
+							  </a>
+							</li>
+						  </ul>
+						</div>
+					  </nav>
+					  <ul class="col-lg-9 breadcrumb" ng-controller="GlobalCtrl">
+						<li>
+						  <a href="#">
+							Home
+						  </a>
+						</li>
+						<li ng-repeat="links in locationParam" ng-show="links">
+						  <a href="./{{locationParam[1]}}" ng-if="$index==1">
+						  {{links}}
+						  </a>
+						  <a href="./{{locationParam[1]}}/{{locationParam[2]}}" ng-if="$index==2">
+						  {{links}}
+						  </a>
+						  <a href="./{{locationParam[1]}}/{{locationParam[2]}}/{locationParam[3]}}" ng-if="$index==3">
+						  {{links}}
+						  </a>
+						  <a href="./{{locationParam[1]}}/{{locationParam[2]}}/{locationParam[3]}}/{locationParam[4]}}" ng-if="$index==4">
+						  {{links}}
+						  </a>
+						</li>
+					  </ul>
+					  <form class="navbar-form navbar-right" role="search">
+							<div class="form-group">
+							  <input placeholder="Search..." ng-model="Search" type="text" class="form-control">
+							</div>
+							<button ng-click="Search = ''" class="btn btn-default">
+							  Reset
+							</button>
+						  </form>
+					</div>
+				  </div>
+				 
+				  

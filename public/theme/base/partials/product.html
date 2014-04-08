@@ -1,0 +1,48 @@
+<div class="row clearfix">
+		<div class="col-md-12 column" ng-repeat="product in ListProduct | CustomFilter:{productName : routeParam}">
+			<h3>
+				{{product.productName}}
+			</h3>
+             <a class="btn btn-primary" href="javascript:void(0)" ng-click="addToCart(product.id,product)"> Add</a>
+			<hr />
+            <div class="row clearfix">
+				<div class="col-md-6 column">
+					<!--<div class="carousel slide" id="carousel-462309">
+						
+						<div class="carousel-inner">
+							<div class="item" ng-repeat="ProdImage in product.productImage">
+                            <h1>{{ProdImage}}</h1>
+								<img alt="" src="{{ProdImage.Image}}" />
+							</div>
+						</div> <a class="left carousel-control" href="#carousel-462309" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-462309" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+					</div>-->
+                    
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                      <!-- Indicators -->
+                      <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" ng-class="{active:$index == 0}" data-slide-to="{{$index}}" ng-repeat="ProdImage in product.productImage"></li>
+                       </ol>
+                    
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner">
+                        <div class="item" ng-class="{active:$index == 0}"  ng-repeat="ProdImage in product.productImage">
+                        <img alt="" src="{{ProdImage.Image}}" />
+                        </div>
+                      </div>
+                    
+                      <!-- Controls -->
+                      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                      </a>
+                      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                      </a>
+                    </div>
+				</div>
+				<div class="col-md-6 column">
+					<p ng-bind-html="product.productDescription">
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>

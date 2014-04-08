@@ -1,0 +1,778 @@
+<div class="row clearfix">
+		<div class="col-md-6 column">
+			<form role="form" ng-submit="SignUp('cart')">
+				<div class="form-group">
+					 <label for="exampleInputEmail1">First Name</label>
+                     <input ng-model="Customer.FirstName" required="required" type="text" class="form-control" id="exampleInputEmail1" />
+				</div>
+                <div class="form-group">
+					 <label for="exampleInputEmail1">Last Name</label>
+                     <input ng-model="Customer.LastName"  type="text" class="form-control" id="exampleInputEmail1" />
+				</div>
+                <div class="form-group">
+					 <label for="exampleInputEmail1">Email address</label>
+                     <input ng-model="Customer.Email" required="required" type="email" class="form-control" id="exampleInputEmail1" />
+				</div>
+				<div class="form-group">
+					 <label for="exampleInputPassword1">Password</label>
+                     <input ng-model="Customer.Password"  required="required" type="password" class="form-control" id="exampleInputPassword1" />
+				</div>
+                <hr />
+                 <div class="form-group">
+					 <label for="exampleInputEmail1">Company</label>
+                     <input ng-model="Customer.Company"  type="text" class="form-control" id="exampleInputEmail1" />
+				</div>
+                 <div class="form-group">
+					 <label for="exampleInputEmail1">Phone</label>
+                     <input ng-model="Customer.Phone"  type="text" class="form-control" id="exampleInputEmail1" />
+				</div>
+                 <div class="form-group">
+					 <label for="exampleInputEmail1">Address</label>
+                     <input ng-model="Customer.Address" required="required" type="text" class="form-control" id="exampleInputEmail1" />
+				</div>
+                 <div class="form-group">
+					 <label for="exampleInputEmail1">Address Continue</label>
+                     <input ng-model="Customer.AddressContinue"  type="text" class="form-control" id="exampleInputEmail1" />
+				</div>
+                 <div class="form-group">
+					 <label for="exampleInputEmail1">City</label>
+                     <input ng-model="Customer.City"  type="text" class="form-control" id="exampleInputEmail1" />
+				</div>
+                 <div class="form-group">
+					 <label for="exampleInputEmail1">Post / Zip Code</label>
+                     <input ng-model="Customer.PostCode"  type="text" class="form-control" id="exampleInputEmail1" />
+				</div>
+                 <div class="form-group">
+					 <label for="exampleInputEmail1">Country</label>
+                     <select  ng-model="Customer.Country" id="customer-address-province-0"  class="form-control" data-event-change="resetProvince" data-addclass-error="customer.errors.addresses.first.country_code.length">
+                    <option value="">
+                      Please Select
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AF">
+                      Afghanistan
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AX">
+                      Aland Islands
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AL">
+                      Albania
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="DZ">
+                      Algeria
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AD">
+                      Andorra
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AO">
+                      Angola
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AI">
+                      Anguilla
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AG">
+                      Antigua And Barbuda
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AR">
+                      Argentina
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AM">
+                      Armenia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AW">
+                      Aruba
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AU">
+                      Australia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AT">
+                      Austria
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AZ">
+                      Azerbaijan
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BS">
+                      Bahamas
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BH">
+                      Bahrain
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BD">
+                      Bangladesh
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BB">
+                      Barbados
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BY">
+                      Belarus
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BE">
+                      Belgium
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BZ">
+                      Belize
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BJ">
+                      Benin
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BM">
+                      Bermuda
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BT">
+                      Bhutan
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BO">
+                      Bolivia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BA">
+                      Bosnia And Herzegovina
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BW">
+                      Botswana
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BV">
+                      Bouvet Island
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BR">
+                      Brazil
+
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="IO">
+                      British Indian Ocean Territory
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BN">
+                      Brunei
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BG">
+                      Bulgaria
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BF">
+                      Burkina Faso
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MM">
+                      Burma
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BI">
+                      Burundi
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="KH">
+                      Cambodia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CA">
+                      Canada
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CV">
+                      Cape Verde
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="KY">
+                      Cayman Islands
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CF">
+                      Central African Republic
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TD">
+                      Chad
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CL">
+                      Chile
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CN">
+                      China
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CX">
+                      Christmas Island
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CC">
+                      Cocos (Keeling) Islands
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CO">
+                      Colombia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="KM">
+                      Comoros
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CG">
+                      Congo
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CD">
+                      Congo, The Democratic Republic Of The
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CK">
+                      Cook Islands
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CR">
+                      Costa Rica
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="HR">
+                      Croatia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CU">
+                      Cuba
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CW">
+                      Curaçao
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CY">
+                      Cyprus
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CZ">
+                      Czech Republic
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CI">
+                      Côte d'Ivoire
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="DK">
+                      Denmark
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="DJ">
+                      Djibouti
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="DM">
+                      Dominica
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="DO">
+                      Dominican Republic
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="EC">
+                      Ecuador
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="EG">
+                      Egypt
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SV">
+                      El Salvador
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GQ">
+                      Equatorial Guinea
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="ER">
+                      Eritrea
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="EE">
+                      Estonia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="ET">
+                      Ethiopia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="FK">
+                      Falkland Islands (Malvinas)
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="FO">
+                      Faroe Islands
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="FJ">
+                      Fiji
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="FI">
+                      Finland
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="FR">
+                      France
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GF">
+                      French Guiana
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="PF">
+                      French Polynesia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TF">
+                      French Southern Territories
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GA">
+                      Gabon
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GM">
+                      Gambia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GE">
+                      Georgia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="DE">
+                      Germany
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GH">
+                      Ghana
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GI">
+                      Gibraltar
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GR">
+                      Greece
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GL">
+                      Greenland
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GD">
+                      Grenada
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GP">
+                      Guadeloupe
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GT">
+                      Guatemala
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GG">
+                      Guernsey
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GN">
+                      Guinea
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GW">
+                      Guinea Bissau
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GY">
+                      Guyana
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="HT">
+                      Haiti
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="HM">
+                      Heard Island And Mcdonald Islands
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="VA">
+                      Holy See (Vatican City State)
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="HN">
+                      Honduras
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="HK">
+                      Hong Kong
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="HU">
+                      Hungary
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="IS">
+                      Iceland
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="IN">
+                      India
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="ID">
+                      Indonesia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="IR">
+                      Iran, Islamic Republic Of
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="IQ">
+                      Iraq
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="IE">
+                      Ireland
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="IM">
+                      Isle Of Man
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="IL">
+                      Israel
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="IT">
+                      Italy
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="JM">
+                      Jamaica
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="JP">
+                      Japan
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="JE">
+                      Jersey
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="JO">
+                      Jordan
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="KZ">
+                      Kazakhstan
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="KE">
+                      Kenya
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="KI">
+                      Kiribati
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="KP">
+                      Korea, Democratic People's Republic Of
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="KV">
+                      Kosovo
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="KW">
+                      Kuwait
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="KG">
+                      Kyrgyzstan
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="LA">
+                      Lao People's Democratic Republic
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="LV">
+                      Latvia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="LB">
+                      Lebanon
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="LS">
+                      Lesotho
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="LR">
+                      Liberia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="LY">
+                      Libyan Arab Jamahiriya
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="LI">
+                      Liechtenstein
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="LT">
+                      Lithuania
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="LU">
+                      Luxembourg
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MO">
+                      Macao
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MK">
+                      Macedonia, Republic Of
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MG">
+                      Madagascar
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MW">
+                      Malawi
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MY">
+                      Malaysia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MV">
+                      Maldives
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="ML">
+                      Mali
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MT">
+                      Malta
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MQ">
+                      Martinique
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MR">
+                      Mauritania
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MU">
+                      Mauritius
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="YT">
+                      Mayotte
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MX">
+                      Mexico
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MD">
+                      Moldova, Republic of
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MC">
+                      Monaco
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MN">
+                      Mongolia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="ME">
+                      Montenegro
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MS">
+                      Montserrat
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MA">
+                      Morocco
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MZ">
+                      Mozambique
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="NA">
+                      Namibia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="NR">
+                      Nauru
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="NP">
+                      Nepal
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="NL">
+                      Netherlands
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AN">
+                      Netherlands Antilles
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="NC">
+                      New Caledonia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="NZ">
+                      New Zealand
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="NI">
+                      Nicaragua
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="NE">
+                      Niger
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="NG">
+                      Nigeria
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="NU">
+                      Niue
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="NF">
+                      Norfolk Island
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="NO">
+                      Norway
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="OM">
+                      Oman
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="PK">
+                      Pakistan
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="PS">
+                      Palestinian Territory, Occupied
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="PA">
+                      Panama
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="PG">
+                      Papua New Guinea
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="PY">
+                      Paraguay
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="PE">
+                      Peru
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="PH">
+                      Philippines
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="PN">
+                      Pitcairn
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="PL">
+                      Poland
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="PT">
+                      Portugal
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="QA">
+                      Qatar
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CM">
+                      Republic of Cameroon
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="RE">
+                      Reunion
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="RO">
+                      Romania
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="RU">
+                      Russia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="RW">
+                      Rwanda
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="BL">
+                      Saint Barthélemy
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SH">
+                      Saint Helena
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="KN">
+                      Saint Kitts And Nevis
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="LC">
+                      Saint Lucia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="MF">
+                      Saint Martin
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="PM">
+                      Saint Pierre And Miquelon
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="WS">
+                      Samoa
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SM">
+                      San Marino
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="ST">
+                      Sao Tome And Principe
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SA">
+                      Saudi Arabia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SN">
+                      Senegal
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="RS">
+                      Serbia
+                    </option>
+
+                    <option data-bind="key.name" data-bind-value="key.code" value="SC">
+                      Seychelles
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SL">
+                      Sierra Leone
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SG">
+                      Singapore
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SK">
+                      Slovakia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SI">
+                      Slovenia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SB">
+                      Solomon Islands
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SO">
+                      Somalia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="ZA">
+                      South Africa
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GS">
+                      South Georgia And The South Sandwich Islands
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="KR">
+                      South Korea
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="ES">
+                      Spain
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="LK">
+                      Sri Lanka
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="VC">
+                      St. Vincent
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SD">
+                      Sudan
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SR">
+                      Suriname
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SJ">
+                      Svalbard And Jan Mayen
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SZ">
+                      Swaziland
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SE">
+                      Sweden
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="CH">
+                      Switzerland
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="SY">
+                      Syria
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TW">
+                      Taiwan
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TJ">
+                      Tajikistan
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TZ">
+                      Tanzania, United Republic Of
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TH">
+                      Thailand
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TL">
+                      Timor Leste
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TG">
+                      Togo
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TK">
+                      Tokelau
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TO">
+                      Tonga
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TT">
+                      Trinidad and Tobago
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TN">
+                      Tunisia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TR">
+                      Turkey
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TM">
+                      Turkmenistan
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TC">
+                      Turks and Caicos Islands
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="TV">
+                      Tuvalu
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="UG">
+                      Uganda
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="UA">
+                      Ukraine
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="AE">
+                      United Arab Emirates
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="GB">
+                      United Kingdom
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="US">
+                      United States
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="UM">
+                      United States Minor Outlying Islands
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="UY">
+                      Uruguay
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="UZ">
+                      Uzbekistan
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="VU">
+                      Vanuatu
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="VE">
+                      Venezuela
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="VN">
+                      Vietnam
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="VG">
+                      Virgin Islands, British
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="WF">
+                      Wallis And Futuna
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="EH">
+                      Western Sahara
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="YE">
+                      Yemen
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="ZM">
+                      Zambia
+                    </option>
+                    <option data-bind="key.name" data-bind-value="key.code" value="ZW">
+                      Zimbabwe
+                    </option>
+                    <!--batman-iterator-key="sortedCountries"-->
+                  </select>
+				</div>
+				<div class="checkbox">
+				</div> <button type="submit" class="btn btn-default">Sign Up</button>
+			</form>
+		</div>
+      
+	</div>
