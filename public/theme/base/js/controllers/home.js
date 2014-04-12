@@ -7,4 +7,5 @@ function HomeCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	
 }

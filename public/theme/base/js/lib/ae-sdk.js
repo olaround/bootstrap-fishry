@@ -9,13 +9,13 @@ function AECtrl ($scope, $location,AzureMobileClient,$rootScope,$routeParams,$co
 	$rootScope.isCollapsed = true;
 	$rootScope.OrderInfo = true;
 	$rootScope.PaymentMethod = '';
+	$rootScope.SettingGeneral = '';
 	
 	$rootScope.Customer = {};
 	$rootScope.ErrorLogin = false;
 	$scope.GuestEmail = 'guest@fishry.com';
 	$scope.GuestFirstName = 'Guest';
 	$scope.GuestLastName = 'User';
-	//console.log($scope.locationParam);
 		
 //Table Names	
 	$scope.CollectionTable = 'collection';
@@ -28,6 +28,7 @@ function AECtrl ($scope, $location,AzureMobileClient,$rootScope,$routeParams,$co
 	$scope.NavigationTable = 'link_list';
 	$scope.PaymentGatewaysTable = 'settings_payment';
 	$scope.ThemeTable = 'theme';
+	$scope.SettingsGeneralTable = 'settings_general';
 
 //Main Scopes Names	
 	$scope.ThemeSettings = {};
@@ -50,6 +51,16 @@ $scope.GetTheme = function(param){
 					$scope.ThemeSettings.theme_settings = JSON.parse($scope.ThemeSettings.theme_settings);
 				}
 				//$scope.GetCollection();
+		});
+	
+};
+$scope.GetSettingGeneral = function(param){
+		AzureMobileClient.getFilterData($scope.SettingsGeneralTable,{}).then(
+			function(data) {
+				if(data.length > 0){
+					$scope.SettingGeneral = data[0];
+					$scope.SettingGeneral.settings = JSON.parse($scope.SettingGeneral.settings);
+				}
 		});
 	
 };
@@ -143,6 +154,7 @@ $scope.GetProduct = function(param){
 							$scope.ListProduct[index].ProductVendorName = ProductVendor.productVendorName;
 						}
 				});
+				//$rootScope.numberOfPages();
 		   });
 			console.log($scope.ListProduct);
 			$scope.$apply(function(){
@@ -159,6 +171,10 @@ $scope.GetPage();
 $scope.GetProductType();
 $scope.GetProductVendor();
 $scope.GetProduct();
+$scope.GetSettingGeneral();
+
+
+
 
 
 $rootScope.ProductCount = function(collectionName,pageName){
@@ -351,7 +367,6 @@ $rootScope.SubmitOrder =  function(payment,redirect){
 }
 
 }
-
 angular.module('App.filters', []).filter('CustomFilter', [function () {
     return function (items, filterType) {
 		//console.log(items);
