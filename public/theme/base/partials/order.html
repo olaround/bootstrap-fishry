@@ -1,0 +1,161 @@
+<div id="pageFrame">
+    <div id="pageHeader">
+        <div id="genericHeader">
+            <div class="subNavigation">
+                <div id="notch">
+                    <img src="https://cache.dominos.com/nolo/us/en/013167/assets/build/images/img/logoNotch.gif" alt="Domino's Pizza" />
+                </div>
+
+                <a href="/" class="logo">Domino's Pizza</a>
+
+            </div>
+        </div>
+    </div>
+    <div id="pageBody">
+        <div id="pageContent">
+            <div id="js-splitFrame" class="w100 none" style="display: block;">
+                <div id="js-pageSplit" class="pageLeftColumn">
+                    <div id="locationsSearchPage">
+                        <h1 class="sectionHeading">
+                            <span>Address Information</span>
+                        </h1>
+                        <form method="POST" ng-submit="CheckLogin('collections/all')">
+                            <div class="formArea horizontal">
+                                <div class="pageBox">
+                                    <h3>Is this order for delivery or carryout?</h3>
+                                    <div class="formEntry">
+                                        <div class="entryGroup iconsTemplate serviceType js-changeServiceType">
+                                            <label class="squareIcon Delivery">
+                                                <input type="radio" name="Service_Type" value="Delivery">Delivery</label>
+                                            <label class="squareIcon Carryout active">
+                                                <input type="radio" name="Service_Type" value="Carryout">Carryout</label>
+                                            <label class="squareIcon Locations">
+                                                <input type="radio" name="Service_Type" value="Locations">Locations</label>
+                                            <div class="fl" name="sr_cartSummaryDiv">
+                                                <div class="sr_dom_delivery_icon sr_reset" id="sr_dom_delivery_icon_guest">
+                                                    <a href="javascript:void(0)" class="sr_img_a"></a>
+                                                </div>
+                                            </div>
+                                            <div class="clr">
+                                                <!-- -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3>We just need to know where you are so we can find your nearest store.</h3>
+                                    <div class="js-otherAddress none" style="display: block;">
+                                        <!-- <div class="formEntry">
+                                            <div class="entryGroup addressType iconsTemplate js-changeAddressType">
+                                                <label class="squareIcon House active">
+                                                    <input type="radio" name="Address_Type" value="House">House</label>
+                                                <label class="squareIcon Apartment">
+                                                    <input type="radio" name="Address_Type" value="Apartment">Apartment</label>
+                                                <label class="squareIcon Business">
+                                                    <input type="radio" name="Address_Type" value="Business">Business</label>
+                                                <label class="squareIcon Campus">
+                                                    <input type="radio" name="Address_Type" value="Campus">Campus/Base</label>
+                                                <label class="squareIcon Hotel">
+                                                    <input type="radio" name="Address_Type" value="Hotel">Hotel</label>
+                                                <label class="squareIcon Dormitory">
+                                                    <input type="radio" name="Address_Type" value="Dormitory">Dormitory</label>
+                                                <label class="squareIcon Other">
+                                                    <input type="radio" name="Address_Type" value="Other">Other</label>
+                                            </div>
+                                        </div>
+ -->
+                                        <div class="formEntry">
+                                            <label for="Street" class="entryLabel optional">
+                                                <strong>*</strong>Street Address:</label>
+                                            <div class="entryGroup">
+                                                <input type="text" placeholder="Enter Street Address" id="Street" name="Street" maxlength="40" value="350 5TH AVE" class="medium" required>
+                                            </div>
+                                        </div>
+                                        <div class="formEntry">
+                                            <label for="Address_Line_2" class="entryLabel optional">
+                                                <strong>*</strong>
+                                                <span>House #:</span>
+                                            </label>
+                                            <div class="entryGroup">
+                                                <input type="text" placeholder="Enter House No" id="Address_Line_2" name="Address_Line_2" maxlength="40" value="" class="medium" required>
+                                            </div>
+                                        </div>
+                                        <div class="formEntry">
+                                            <label for="City" class="entryLabel">
+                                                <strong>*</strong>City:</label>
+                                            <div class="entryGroup">
+                                                <select id="Region" name="Region" class="mini js-region">
+                                                    <option value="">Select</option>
+                                                    <option value="AK">Lahore</option>
+                                                    <option value="AL">Karachi</option>
+                                                    <option value="AR">Islamabad</option>
+                                                    <option value="AZ">Rawalpindi</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="formEntry actions right">
+                                    <div class="requiredFieldsText">
+                                        <strong>*</strong>
+                                        <span>Indicates required field.</span>
+                                    </div>
+                                    <button class="btn btnLarge" type="submit"><a href="collections/all" style="color: white;">Continue</a>
+                                    </button>
+                                    <div class="clr">
+                                        <!-- -->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="pageRightColumn" style="margin-top: 0px;">
+                    <!--  -->
+                    <div id="js-myOrderPage"></div>
+                    <div id="js-sidePromo">
+                        <!--  -->
+                    </div>
+                    <div id="js-hotDeals">
+                        <!--  -->
+                    </div>
+                    <div id="js-myProfilePage">
+                        <div id="orderDetailsInColumn" class="sidebarBox">
+                            <h2 class="sectionHeading">
+                                <span>Order Settings</span>
+                            </h2>
+                            <div class="content">
+                                <h3 class="dominosColor2">My Location <a class="buttonType5 qa-Myl_Change" href="">Change</a>
+                                </h3>
+                                <ul class="genericList qa-MyLoc">
+                                    <li>Not Selected</li>
+                                </ul>
+                                <div class="divider">
+                                    <!-- -->
+                                </div>
+                                <h3 class="dominosColor2">My Store <a class="buttonType5 qa-Mys_Change" href="">Change</a>
+                                </h3>
+                                <ul class="genericList qa-Mystore">
+                                    <li>Not Selected</li>
+                                </ul>
+                                <div class="divider">
+                                    <!-- -->
+                                </div>
+                                <h3 class="dominosColor2">Service Method <a class="buttonType5 js-serviceMethodChange qa-Sm_Change" href="">Change</a>
+                                </h3>
+                                <ul class="genericList serviceMethodList qa-Cl_SM">
+                                    <li>Not Selected</li>
+                                </ul>
+                                <div class="divider">
+                                    <!-- -->
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clr">
+                    <!--  -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

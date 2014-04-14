@@ -1,0 +1,96 @@
+<!--     <hr>
+<div class="row clearfix">
+							<div class="col-md-12 column">
+							  <div class="row clearfix">
+								<div class="col-md-4 column">
+								  <h3>
+									News</h3>
+								  <p><strong><a href="http://ae-store.myshopify.com/blogs/news/12471177-first-post" title="">First Post</a></strong></p>
+								  <p>This is your store&rsquo;s blog. You can use it to talk about new product launches, experiences, tips or other news you want your customers to read about. You can check...</p>
+								</div>
+								<div class="col-md-4 column">
+								  <h3>
+									Quick Links</h3>
+								  <ul>
+									
+									<li>
+									  <a href="page/about-us">About Us</a>
+									</li>
+								  </ul>
+								</div>
+								<div class="col-md-4 column">
+								  <h3>
+									Follow Us</h3>
+									<ul>
+									 <li>Fb</li>
+									 <li> Twitter</li>
+								   </ul>
+									<p>&nbsp;</p>
+								</div>
+							  </div>
+							</div>
+						  </div>	
+<div class="row clearfix">
+                        <div class="col-md-12 column" align="center">
+                          <address>
+                          Copyright © 2014 ae-store | <a href="#" target="_blank">This website runs on ae-Commerce</a>
+                          </address>
+ </div>
+</div>
+</div> -->
+
+
+
+<div id="pageFrame">
+<div id="pageFooter"><!-- Footer -->
+	<div id="genericFooter">
+		<div id="footerLinks" ng-controller="GlobalCtrl" ng-repeat="Navigation in ListNavigation | filter : 'footer'">
+			<ul class="navigation dominosColor1 nav" ng-repeat="Nav in Navigation.link_list">
+				<li   ng-class="{active:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated"><a href="{{Nav.commaSeprated}}">{{Nav.name}}</a></li>
+				<li class="divider">/</li>
+				<!-- <li><a href="https://order.dominos.com/en/pages/content/nutritional/nutrition.jsp">Nutrition</a></li>
+				<li class="divider">/</li>
+				<li><a href="giftcards.html">Gift Cards</a></li>
+				<li class="divider">/</li>
+				<li><a href="https://order.dominos.com/en/pages/customer/opt-in.jsp">Email <abbr title="and">&amp;</abbr> Text Offers</a></li>
+				<li class="divider">/</li>
+				<li><a href="terms.html">Legal</a></li>
+				<li class="divider">/</li>
+				<li><a href="privacy.html">Privacy</a></li>
+				<li class="divider">/</li>
+				<li><a href="http://www.dominosbiz.com/Biz-Public-EN/Site+Content/Secondary/Careers/" target="_blank">Careers</a></li>
+				<li class="divider">/</li>
+				<li><a href="https://order.dominos.com/en/pages/content/customer-service/faq.jsp">Customer Service</a></li>
+				<li class="divider">/</li>
+				<li><a href="http://dominosbiz.com/Biz-Public-EN/Biz+Footer/Business+Orders/" target="_blank">Large Business Orders</a></li>
+				<li class="divider">/</li>
+				<li><a href="aboutpizza.html">About Pizza</a></li> -->
+			</ul>
+		</div>
+		<div class="column1">
+			<div class="legalStuff">
+				<span class="tag dominosColor1">Legal Stuff:</span>
+				<div>
+					<p><span class="bold">Any Delivery Charge is not a tip paid to your driver. Please reward your driver for awesomeness. Our drivers carry less than $20.</span> You must ask for this limited time offer. Minimum purchase required for delivery. Delivery charge and tax may apply. Prices, participation, delivery area and charges may vary, including AK and HI. Returned checks, along with the state's maximum allowable returned check fee, may be electronically presented to your bank. ©2014 Dominos IP Holder LLC. Dominos®, Domino's Pizza® and the modular logo are trademarks of Domino's IP Holder LLC. "Coca-Cola" and the Contour Bottle design are registered trademarks of The Coca-Cola Company. The Ice Breakers® Mints trademark and trade dress are used under license.</p>
+					<p>Domino's pizza made with a Gluten Free Crust is prepared in a common kitchen with the risk of gluten exposure. Therefore, Domino's DOES NOT recommend this pizza for customers with celiac disease. Customers with gluten sensitivities should exercise judgment in consuming this pizza.</p>
+					<p>Our Guarantee: If you are not completely satisfied with your Domino's Pizza experience, we will make it right or refund your money.</p>
+				</div>
+			</div>
+		</div>
+		<div class="column2">
+			
+			<div id="promoLink">
+				<img alt="Open For Lunch" src="../../img/theme/footerOpenLunch.gif">
+			</div>
+			<div id="promoLink">
+				<img alt="Delivering Dairy Goodness" src="../../img/theme/footerDairyGoodness.jpg">
+			</div>
+		</div>
+		<div class="clr"><!--  --></div>
+	</div>
+</div><!-- Closes Footer -->
+</div>
+<% include footer_resources %>
+  
+</body>
+</html>
