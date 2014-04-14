@@ -1,0 +1,68 @@
+<!--  Route2Health -->
+
+<div class="content_bg">
+	<div id="columns" class="container ">
+		<div class="row">
+			<div class="loader_page">
+				<div id="center_column" class="span9">
+
+					<section class="addhomefeatured" ng-repeat="collection in ListCollection">
+						<section ng-show="(collection.collectionName != 'Frontpage')">
+							<h4 ng-if="ProductCount(collection.collectionName,'Frontpage')">
+								<a href="/collections/{{collection.collectionUrl}}">
+									<span>{{collection.collectionName}}</span>
+								</a>
+							</h4>
+							<ul class="row">
+								<li class="ajax_block_product span3" ng-repeat="products in ListProduct | CustomFilter:{collection:'Frontpage'} | CustomFilter:{collection:collection.collectionName} | filter:Search">
+									<div class="featured_li">
+										<a class="product_image" href="./product/{{products.productName}}" title="{{products.productName}}" rel="tooltip" data-placement="bottom" data-original-title="A180 Injectable Antibiotic">
+											<img src="{{products.productImage[0].Image}}" alt="A180 Injectable Antibiotic" class="main-img">
+											<img src="{{products.productImage[1].Image}}" alt="" style="display: none;" class="next-img">
+										</a>
+										<div ng-controller="HomeCtrl">
+											<h5><a class="product_link" href="./product/{{products.productName}}" title="">{{products.productName}}</a>
+											</h5>
+											<p class="product_desc">
+												<p ng-bind-html="products.productDescription.slice(0,300)">
+											</p>
+											<div class="fleft">
+												<span class="price" ng-if="products.productPrice">
+													${{products.productPrice}}
+												</span>
+												<span class="price-drop-feacherd" ng-if="products.productPriceCompare">${{products.productPriceCompare}}</span>
+											</div>
+											<a class="exclusive ajax_add_to_cart_button btn_add_cart"  rel="ajax_id_product_1" href="javascript:void(0)" id="{{products.id}}" ng-click="addToCartEffect();addToCart(products.id,products);">
+												<span>Add to cart</span>
+											</a>
+											<a class="button" href="./product/{{products.productName}}" rel="tooltip" data-placement="bottom">View</a>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</li>
+							</ul>
+
+						</section>
+					</section>
+					<script>
+					$(document).ready(function() {
+						$(this).find(".addhomefeatured ul li .main-img").mouseover(function() {
+							$(this).next(".addhomefeatured ul li .next-img").stop(true, true).fadeIn(600, 'linear');
+						});
+						$(".addhomefeatured ul li .next-img").mouseleave(function() {
+							$(".addhomefeatured ul li .next-img").stop(true, true).fadeOut(600, 'linear');
+						});
+					});
+					</script>
+
+				</div>
+
+				<aside id="right_column" class="span3">
+
+					<section id="manufacturers_block_left" class="block blockmanufacturer column_box" ng-include src="'partials/sidebar.html'">
+					</section>
+				</aside>
+			</div>
+		</div>
+	</div>
+</div>

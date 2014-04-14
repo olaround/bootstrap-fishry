@@ -1,0 +1,26 @@
+#customcontent_top ul li {
+	background-color: #FFF !important;	
+}
+#customcontent_top ul li img {
+	width: 150px;
+}
+#search_block_top {
+	/*top:20px !important;*/
+}
+.customerInfo div {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0 10px;
+}
+.customerInfo div a.loginBtn{
+	padding: 0 62px !important;
+	display: inline-block !important;
+}
+.customerInfo div .customerName {
+	text-transform: uppercase;
+}
+a.added {
+	border: none !important;
+	background: #353535 !important;
+}
+

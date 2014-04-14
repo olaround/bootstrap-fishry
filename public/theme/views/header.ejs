@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" ng-app="aeCommerce" ng-controller="AECtrl">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="fragment" content="!">
+
+	<base href="/"><% if (typeof(meta) != "undefined") { %>
+	      <% for (var metaItem in meta) { %>
+	      		<meta name="<%= metaItem %>" content="<%= meta[metaItem] %>" />
+	      <% } %>
+    <% } %>
+   	<title ng-bind="title"><%= title %></title>
+   
+   	<% include header_resources %>
+	<script>
+		var StoreID = '<%= StoreId %>';
+	</script>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	
+	<link href='//fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+	<link href="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/normalize.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/font.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="./css/theme/theme.css" rel="stylesheet" type="text/css" media="all" />
+
+	<link href="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/320.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/480.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/768.css" rel="stylesheet" type="text/css" media="all" />
+	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js/source/bootstrap.js"></script>
+	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js/source/plugins.js"></script>
+	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js/source/footable.js"></script>
+	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js/source/jquery.scrollpane.js"></script>
+	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js/source/jquery.uniform.js"></script>
+	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js/source/jquery.mousewheel.js"></script>
+	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js/source/modernizr-2.5.3.min.js"></script>
+	
+
+	<!-- Route2Health files by zaib -->
+	<script src="./js/frontend.js"></script>
+	<link href="./css/theme/frontendstyle.css" rel="stylesheet" type="text/css" media="all" />
+
+	<link rel="alternate" type="application/rss+xml" title="Diet &amp; energy - Drug Store" href="http://livedemo00.template-help.com/prestashop_44889/modules/feeder/rss.php?id_category=4&amp;orderby=position&amp;orderway=asc" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="http://livedemo00.template-help.com/prestashop_44889/img/p/en-default-large.jpg" />
+	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js//source/jquery.carouFredSel-6.2.1.js"></script>
+	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js//source/jquery.touchSwipe.min.js"></script>
+	
+</head>
+<body id="index">
+	<div id="Loader" style="position:fixed;left:0;top:0;padding:5px;">loading...</div>
+	<div id="wrapp">
+		<div id="wrapp_2">
+			<div class="header_bg">
+				<header id="header" class="container ">
+					
+
+					
+					<div id="header-inner">
+						<a id="header_logo" href="/" title="Drug Store">
+							<img class="logo" src="./img/theme/logo.png" alt="Drug Store" width="266" height="98" />
+						</a>
+
+
+						<!-- MODULE Block cart -->
+
+						<section id="cart_block" class="block column_box exclusive"style="display:none" >
+							<h4>
+								<span>Cart</span>
+								<span class="column_icon_toggle"></span>
+							</h4>
+							<div class="block_content toggle_content">
+
+								<div id="cart_block_summary" class="collapsed">
+									<span class="ajax_cart_quantity" style="">{{ReturnItems()}}</span>
+									<span class="ajax_cart_product_txt_s">Products</span>
+									<span class="ajax_cart_total" style="">${{ReturnTotal()}}</span>
+								</div>
+
+								<div id="cart_block_list" class="expanded">
+									<dl class="products clearfix">
+										<dt id="cart_block_product_1_0_0" class="clearfix first_item" ng-repeat="Items in Cart">
+											<a class="cart-images" href="/product/{{Items.productInfo.productName}}">
+												<img src="{{Items.productInfo.productImage[0].Image}}" alt="" title="{{Items.productInfo.productName}}">
+											</a>
+											<span class="quantity-formated">
+												<span class="quantity" style="opacity: 1;">{{Items.quantity}}</span>x
+											</span>
+											<a class="cart_block_product_name product_link" href="/product/{{Items.productInfo.productName}}" title="A180 Injectable Antibiotic">{{Items.productInfo.productName.slice( 0, 10 )}}</a>
+											
+											<span class="remove_link">
+												<a class="ajax_cart_block_remove_link" rel="nofollow" href="javascript:void(0)" ng-click="RemoveCartItem(Items.productID)"></a>
+											</span>
+											<span class="price">${{Items.productInfo.productPrice * Items.quantity}}</span>
+										</dt>
+									</dl>
+									<div class="cart-prices">
+										<div class="cart-prices-block">
+											<span id="cart_block_total" class="price ajax_block_cart_total" ng-if="ReturnItems()">${{ReturnTotal()}}</span>
+											<span>Total</span>
+										</div>
+									</div>
+									<p id="cart-buttons" class="">
+										<a href="/cart" class="button_mini" title="View my shopping cart" rel="nofollow">Cart</a>
+										<a href="/checkout" id="button_order_cart" class="exclusive" title="Checkout" rel="nofollow">Checkout</a>
+									</p>
+								</div>
+							</div>
+						</section>
+
+						<!-- /MODULE Block cart -->
+
+
+						<!-- block seach mobile -->
+						<!-- Block search module TOP -->
+						<section id="search_block_top" class="header-box">
+							
+							<section class="customerInfo">
+								<div ng-if="User.info.CustomerEmail"> Welcome <strong class="customerName">{{User.info.CustomerFirstName}}</strong></div>
+								<div ng-if="User.info.CustomerEmail"> <a class="btn btn-danger" href="javascript:void(0)" ng-click="Logout()"> Logout </a></div>
+
+								<div ng-if="!User.info.CustomerEmail"> <a class="btn btn-info loginBtn" href="./login"> Login </a></div>
+								<!-- <div ng-if="!User.info.CustomerEmail"> <a class="btn btn-info" href="./signup"> Sign Up </a></div> -->
+							
+							</section>
+							
+							<!-- <form method="get" action="#" id="searchbox">
+								<p>
+									<label for="search_query_top">Search</label>
+									<input type="hidden" name="controller" value="search" />
+									<input type="hidden" name="orderby" value="position" />
+									<input type="hidden" name="orderway" value="desc" />
+									<input class="search_query" type="text" id="search_query_top" name="search_query" value="" />
+									<a href="javascript:document.getElementById('searchbox').submit();">Search</a>
+
+								</p>
+							</form> -->
+						</section>
+						
+						<!-- /Block search module TOP -->
+
+						<!-- Block user information module HEADER -->
+						<section id="header_user" class="blockuserinfo-cart header-box">
+							<div id="shopping_cart">
+								<a href="/cart" rel="nofollow">
+									<!-- <strong class="opancart"></strong> -->
+									<span class="shopping_cart_title">Cart</span>
+									<span class="ajax_cart_quantity" >{{ReturnItems()}}</span>
+								</a>
+							</div>
+						</section>
+						<section class="blockuserinfo header-box">
+							<a href="/login" title="Login" class="login" rel="tooltip" data-placement="bottom" data-original-title="first tooltip">
+								<span><i class="icon-lock"></i>
+								</span>
+							</a>
+						</section>
+
+						<!-- Block permanent links module HEADER -->
+						<section class="header-box blockpermanentlinks-header">
+							<ul id="header_links">
+								<li><a href="/" class="header_links_home">home</a>
+								</li>
+								<li id="header_link_contact"><a href="javascript:void(0)" title="contact">Contact</a>
+								</li>
+								<li id="header_link_sitemap"><a href="/page/about" title="sitemap">About Us</a>
+								</li>
+							</ul>
+
+							<div class="mobile-link-top header-button">
+								<h4>
+									<span class="title-hed"></span>
+									<span class="arrow_header_top_menu arrow_header_top"></span>
+								</h4>
+								<ul id="mobilelink" class="list_header">
+									<li><a href="/" class="header_links_home">Home</a>
+									</li>
+									<li id="header_link_contact"><a href="javascript:void(0)"  title="contact">Contact</a>
+									</li>
+									<li id="header_link_sitemap"><a href="/page/about" title="sitemap">About Us</a>
+									</li>
+								</ul>
+							</div>
+						</section>
+						<!-- /Block permanent links module HEADER -->
+
+
+						<div class="clearfix"></div>
+						<div id="menu-wrap" class="clearfix">
+							<div id="menu-trigger">Categories
+								<span class="menu-icon"></span>
+							</div>
+							<ul id="menu-custom" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
+								<li ng-repeat="Nav in Navigation.link_list"  ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
+									<a href="{{Nav.commaSeprated}}">{{Nav.name}}</a>
+								</li>
+							</ul>
+						</div>
+						<!-- Minic Slider -->
+						<div ng-if="$location.path() == '/'">
+							<div id="minic_slider" class="theme-default">
+								<div id="slider" class="nivoSlider" style="display:inline-block;">
+									<a href="#" class="nivo-imageLink" style="display: none;">
+										<img src="http://livedemo00.template-help.com/prestashop_44889/modules/minicslider/uploads/slider1.jpg" class="slider_image" style="width: 770px; visibility: hidden; display: inline;">
+									</a>
+									<a href="#" class="nivo-imageLink" style="display: block;">
+										<img src="http://livedemo00.template-help.com/prestashop_44889/modules/minicslider/uploads/slider2.jpg" class="slider_image" style="width: 770px; visibility: hidden; display: inline;">
+									</a>
+									<img class="nivo-main-image" src="http://livedemo00.template-help.com/prestashop_44889/modules/minicslider/uploads/slider2.jpg" style="display: inline; height: 370px; width: 770px;">
+									<div class="nivo-caption"></div>
+									<div class="nivo-box" name="0" rel="0" style="opacity: 1; left: 0px; top: 0px; width: 96px; height: 370px;">
+										<img src="http://livedemo00.template-help.com/prestashop_44889/modules/minicslider/uploads/slider2.jpg" style="position:absolute; width:770px; height:auto; display:block; top:-0px; left:-0px;">
+									</div>
+								
+								</div>
+								<div class="nivo-controlNav"><a class="nivo-control" rel="0">1</a><a class="nivo-control active" rel="1">2</a>
+								</div>
+							</div>
+
+							<div id="customcontent_top2">
+								<ul class="customcontent-home">
+									<li class="num-1">
+										<a href="#">
+											<img src="http://livedemo00.template-help.com/prestashop_44889/modules/customcontent2/images/d585c113aff322a37ba072c463fbeef6.jpg" alt="">
+										</a>
+									</li>
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+							<div class="clearfix"></div>
+
+							<div id="customcontent_top">
+								<ul class="customcontent-top">
+									<li ng-repeat="products in ListProduct | CustomFilter:{collection:'sports-nutrition'}" class="num-{{$index+1}}">
+										<a href="/product/{{products.productName}}">
+											<img src="{{products.productImage[0].Image}}" alt="{{products.productName}}">
+										</a>
+										<a class="abs" href="/product/{{products.productName}}">
+											<div class="title">{{products.productName.slice(0,30)}}</div>
+											<div class="title2">{{products.productDesciption.slice(0,100)}}</div>
+											<div class="title3">${{products.productPrice}}<i class="icon-circle-arrow-right"></i>
+											</div>
+										</a>
+									</li>
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+
+						</div>
+
+					</div>
+
+				</header>
+			</div>

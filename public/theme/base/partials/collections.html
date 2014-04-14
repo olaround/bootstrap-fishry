@@ -1,0 +1,152 @@
+
+<!-- Route2Health-->
+
+<div class="content_bg">
+	<div id="columns" class="container ">
+		<div class="row ">
+			<div class="loader_page" ng-controller="CollectionCtrl">
+				<div id="center_column" class="center_column span9 clearfix" ng-repeat="collection in ListCollection | CustomFilter:{frontPage:false}" ng-show="collection.collectionUrl == routeParam">
+					<div ng-if="routeParam == collection.collectionUrl">
+						<!-- Breadcrumb -->
+						<div class="breadcrumb" ng-if="routeParam == collection.collectionUrl">
+							<div class="breadcrumb_inset">
+								<a class="breadcrumb-home" href="/" title="Return to Home"><i class="icon-home"></i></a>
+								<span class="navigation-pipe">&gt;</span>
+								<span class="navigation_page">{{collection.collectionName}}</span>
+							</div>
+						</div>
+						<!-- /Breadcrumb -->
+
+
+						<h1>
+							<span ng-if="routeParam == collection.collectionUrl">
+								{{collection.collectionName}}
+								<strong class="category-product-count">There are {{(ListProduct| CustomFilter:{collection:collection.collectionUrl} ).length}} products.</strong>
+							</span>
+						</h1>
+						<div class="row_category clearfix">
+							<!-- Category image -->
+							<div class="align_center category_image ">
+								<img src="https://aecommerce.blob.core.windows.net/collection/{{collection.collectionImage}}" title="{{collection.collectionName}}" id="categoryImage">
+							</div>
+
+							<p class="cat_desc clearfix" id="category_description_short">
+								{{collection.collectionDescription.slice(0,500)}}
+								<span onclick="$('#category_description_short').hide(); $('#category_description_full').show();" class="lnk_more_cat">More</span>
+							</p>
+							<p class="cat_desc clearfix" id="category_description_full" style="display:none">
+								{{collection.collectionDescription}}
+								<span onclick="$('#category_description_short').show(); $('#category_description_full').hide();" class="lnk_more_cat close_cat">Hide</span>
+							</p>
+
+						</div>
+
+						<div class="sortPagiBar shop_box_row shop_box_row clearfix">
+
+							<ul class="product_view clearfix">
+								<li id="product_view_grid" class=""></li>
+								<li id="product_view_list" class="current"></li>
+							</ul>
+							<form id="productsSortForm" action="#" class="nbrItemPage" style="display:none">
+								<label for="selectProductSort">Sort by</label>
+								<div class="selector" id="uniform-selectProductSort" style="width: 170px;">
+									<span style="width: 160px; -webkit-user-select: none;">Price: Lowest first</span>
+									<select id="selectProductSort" class="selectProductSort" name="selectProductSort" style="width:170px;">
+
+										<option value="price:asc">Price: Lowest first</option>
+										<option value="price:desc">Price: Highest first</option>
+										<option value="name:asc">Product Name: A to Z</option>
+										<option value="name:desc">Product Name: Z to A</option>
+										<option value="quantity:desc">In stock</option>
+									</select>
+								</div>
+
+							</form>
+							<!-- /Sort products -->
+
+
+							<!-- nbr product/page -->
+							<!-- /nbr product/page -->
+
+						</div>
+
+						<!-- Products list -->
+
+						<ul id="product_list" class="row list">
+
+							<li class="ajax_block_product span3 shop_box" ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} | CustomFilter:{collection:routeParam} | filter:Search | limitTo: 2">
+								<a href="./product/{{products.productName}}" class="product_img_link" title="A180 Injectable Antibiotic">
+									<img src="{{products.productImage[0].Image}}" alt="">
+								</a>
+								<div class="center_block">
+									<div class="product_flags clearfix">
+
+										<!-- <span class="availability title_shop">Available
+										</span>
+										<span class="online_only title_shop">Online only</span> -->
+									</div>
+									<div class="clear"></div>
+									<h3><a class="product_link" href="./product/{{products.productName}}" title="{{products.productName}}">{{products.productName}}</a>
+									</h3>
+									<p class="product_desc">
+										<p ng-bind-html="product.productDescription"></p>
+									</p>
+									<p class="product_desc mob">
+										<p ng-bind-html="product.productDescription"></p>
+									</p>
+									<p class="product_desc mob2">
+										<p ng-bind-html="product.productDescription"></p>
+									</p>
+								</div>
+								<div class="right_block" ng-controller="CollectionCtrl">
+									<!-- <span class="on_sale title_shop">On sale!</span> -->
+									<span class="price">${{products.productPrice}}</span>
+
+									<p class="compare checkbox choices-thin clearfix"></p>
+									<div class="clear noneclass"></div>
+									<a class="ajax_add_to_cart_button exclusive btn_add_cart" rel="ajax_id_product_1" href="javascript:void(0)" ng-click="addToCartEffect();addToCart(products.id,products)" title="Add to cart" style="margin: 0 10px 0px 0">
+										<span>Add to cart</span>
+									</a>
+
+									<a class="button" href="./product/{{products.productName}}" title="View">View</a> 
+								</div>
+							</li>
+						</ul>
+
+						<div class="bottom_pagination shop_box_row  clearfix">
+
+							<!-- Pagination -->
+							<div id="pagination" class="pagination">
+								<ul class="pagination">
+									<li id="pagination_previous" class="disabled">
+										<span class="button">Previous</span>
+									</li>
+									<li class="current pag-top">
+										<span class="button">1</span>
+									</li>
+									<li class="pag-top"><a class="button" href="#">2</a>
+									</li>
+									<li class="pag-top"><a class="button" href="#">3</a>
+									</li>
+									<li class="pag-top"><a class="button" href="#">4</a>
+									</li>
+									<li id="pagination_next"><a class="button" href="#">Next</a>
+									</li>
+								</ul>
+
+							</div>
+							<!-- /Pagination -->
+
+						</div>
+
+						</script>
+					</div>
+
+				</div>
+				<aside id="right_column" class="span3 column right_home">
+					<section id="manufacturers_block_left" class="block blockmanufacturer column_box" ng-include src="'partials/sidebar.html'">
+					</section>
+				</aside>
+			</div>
+		</div>
+	</div>

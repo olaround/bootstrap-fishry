@@ -1,0 +1,149 @@
+<!-- Route2Health -->
+
+<div class="content_bg">
+	<div id="columns" class="container ">
+		<div class="row ">
+			<div class="loader_page">
+				<div id="center_column" class="center_column span9 clearfix">
+					<!-- Breadcrumb -->
+					<div class="breadcrumb">
+						<div class="breadcrumb_inset">
+							<a class="breadcrumb-home" href="/" title="Return to Home"><i class="icon-home"></i></a>
+							<span class="navigation-pipe">&gt;</span>
+							<span class="navigation_page">Your shopping cart</span>
+						</div>
+					</div>
+					<!-- /Breadcrumb -->
+
+					<h1 id="cart_title">
+						<span>Shopping-cart summary</span>
+					</h1>
+
+					<!-- Steps -->
+					<ul id="order_steps" class="step1" style="display:none">
+						<li class="step_current even">
+							<span>
+								<span>01</span>Summary</span>
+						</li>
+						<li class="step_todo odd">
+							<span>
+								<span>02</span>Login</span>
+						</li>
+						<li class="step_todo even">
+							<span>
+								<span>03</span>Address</span>
+						</li>
+						<li class="step_todo odd">
+							<span>
+								<span>04</span>Shipping</span>
+						</li>
+						<li id="step_end" class="step_todo even">
+							<span>
+								<span>05</span>Payment</span>
+						</li>
+					</ul>
+					<!-- /Steps -->
+
+					<p ng-hide="IfCart()" id="emptyCartWarning" class="warning">Your shopping cart is empty.</p>
+					<div ng-show="IfCart()">
+						<p class="ordercart-title">Your shopping cart contains:
+							<span id="summary_products_quantity">{{ReturnItems()}} products</span>
+						</p>
+						<div id="order-detail-content" class="table_block">
+							<table id="cart_summary" class="std">
+								<thead>
+								</thead>
+								<tfoot>
+									<tr class="cart_total_price ">
+										<td>Total products</td>
+										<td class="price" id="total_product">${{ReturnTotal()}}</td>
+									</tr>
+									<tr class="cart_total_price ">
+										<td>Total (tax excl.)</td>
+										<td class="price" id="total_price_without_tax">
+											${{ReturnTotal()}}
+										</td>
+									</tr>
+									<tr class="cart_total_tax">
+										<td>Total tax</td>
+										<td class="price" id="total_tax">$0.00</td>
+									</tr>
+									<tr class="cart_total_price cart_last_tr">
+										<td class="total_price_container" id="total_price_container">
+											Total
+										</td>
+										<td class="price" id="total_price">
+											${{ReturnTotal()}}
+										</td>
+
+									</tr>
+								</tfoot>
+								<tbody>
+									<tr id="product_1_0_0_0" class="bordercolor first_item  cart_item address_0 odd" ng-repeat="Items in Cart">
+
+										<td class="cart_product">
+											<a href="/product/{{Items.productInfo.productName}}">
+												<img src="{{Items.productInfo.productImage[0].Image}}" alt="{{Items.productInfo.productName}}">
+											</a>
+										</td>
+										<td class="cart">
+											<h5><a class="product_link" href="/product/{{Items.productInfo.productName}}">{{Items.productInfo.productName}}</a>
+											</h5>
+											<div class="clearfix insset-bottom">
+											<div class="clearfix insset-bottom">
+												<span class="title-th">Unit price:</span>
+												<span class="price" id="product_price_1_0_0">
+													<span style="text-decoration:line-through; display:inline-block; padding-right:5px;">${{Items.productInfo.comparePrice}}</span>
+													${{Items.productInfo.productPrice}}
+												</span>
+											</div>
+											<div class="clearfix insset-bottom">
+												<span class="title-th cart_quantity_title">Qty:</span>
+
+												<div class="cart_quantity">
+													<div id="cart_quantity_button" class="cart_quantity_button" style="float:left;" ng-controller="CartCtrl">
+
+														<a rel="nofollow" class="cart_quantity_down" id="cart_quantity_down_1_0_0_0" href="javascript:void(0)" title="Subtract" ng-click="Items.quantity = limitCartProductQuantity(Items.quantity)">
+															<img src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/img/icon/quantity_down.gif" alt="Subtract" width="23" height="24">
+														</a>
+														<input size="2" type="text" autocomplete="off" class="cart_quantity_input" value="{{Items.quantity}}" ng-model="Items.quantity" name="quantity_1_0_0_0" min="1">
+
+														<a rel="nofollow" class="cart_quantity_up" id="cart_quantity_up_1_0_0_0" href="javascript:void(0)" title="Add" ng-click="Items.quantity = Items.quantity+1">
+															<img src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/img/icon/quantity_up.gif" alt="Add" width="23" height="24">
+														</a>
+
+													</div>
+
+													<div class="div_cart_quantity_delete">
+														<a rel="nofollow" class="cart_quantity_delete" id="1_0_0_0" href="#" ng-click="RemoveCartItem(Items.productID)"></a>
+													</div>
+
+												</div>
+											</div>
+											<span class="title-th">Total:</span>
+											<span class="price total-pr" id="total_product_price_1_0_0">
+												$ {{Items.productInfo.productPrice * Items.quantity}}
+											</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				
+					<p class="cart_navigation  clearfix inner-top">
+						<a href="/login" class="exclusive standard-checkout" title="Next">Next »</a>
+						<a href="/" class="button_large" title="Continue shopping">« Continue shopping</a>
+					</p>
+
+				</div>
+
+				<!-- Right -->
+				<aside id="right_column" class="span3 column right_home">
+					<section id="manufacturers_block_left" class="block blockmanufacturer column_box" ng-include src="'partials/sidebar.html'">
+					</section>
+				</aside>
+			</div>
+		</div>
+	</div>
+</div>
