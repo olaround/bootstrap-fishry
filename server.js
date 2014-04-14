@@ -21,7 +21,7 @@ app.configure(function () {
 
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8088);
 app.set('views', path.join(__dirname, 'public/theme/views'));
 app.set('view engine', 'ejs');
 app.use(express.favicon());
@@ -37,7 +37,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 app.all('*', function(req, res, next) {
-	app.locals.store = '12345';
+	app.locals.store = '25A03245-3D56-430E-922E-FCA215450417';
   next()
 })
 app.get('/', routes.index);

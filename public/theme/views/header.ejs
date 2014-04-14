@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" ng-app="aeCommerce" ng-controller="AECtrl">
+<html ng-app="aeCommerce" ng-controller="AECtrl">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -15,37 +15,39 @@
    	<% include header_resources %>
 	<script>
 		var StoreID = '<%= StoreId %>';
+		var BaseUrl = '/';
 	</script>
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	
 	<link href='//fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
-	<link href="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/normalize.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/font.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="./css/theme/theme.css" rel="stylesheet" type="text/css" media="all" />
 
-	<link href="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/320.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/480.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/768.css" rel="stylesheet" type="text/css" media="all" />
-	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js/source/bootstrap.js"></script>
-	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js/source/plugins.js"></script>
-	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js/source/footable.js"></script>
-	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js/source/jquery.scrollpane.js"></script>
-	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js/source/jquery.uniform.js"></script>
-	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js/source/jquery.mousewheel.js"></script>
-	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js/source/modernizr-2.5.3.min.js"></script>
-	
+	<link href="./css/theme/theme-defaults/normalize.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="./css/theme/theme-defaults/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="./css/theme/theme-defaults/bootstrap-responsive.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="./css/theme/theme-defaults/font.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="./css/theme/theme-defaults/theme.css" rel="stylesheet" type="text/css" media="all" />
+
+	<link href="./css/theme/theme-defaults/320.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="./css/theme/theme-defaults/480.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="./css/theme/theme-defaults/768.css" rel="stylesheet" type="text/css" media="all" />
+	<script src="./js/theme-defaults/bootstrap.js"></script>
+	<script src="./js/theme-defaults/plugins.js"></script>
+	<script src="./js/theme-defaults/footable.js"></script>
+	<script src="./js/theme-defaults/jquery.scrollpane.js"></script>
+	<script src="./js/theme-defaults/jquery.uniform.js"></script>
+	<script src="./js/theme-defaults/jquery.mousewheel.js"></script>
+	<script src="./js/theme-defaults/modernizr-2.5.3.min.js"></script>
+	<script src="./js/theme-defaults/jquery.carouFredSel-6.2.1.js"></script>
+	<script src="./js/theme-defaults/jquery.touchSwipe.min.js"></script>
+
 
 	<!-- Route2Health files by zaib -->
 	<script src="./js/frontend.js"></script>
 	<link href="./css/theme/frontendstyle.css" rel="stylesheet" type="text/css" media="all" />
 
-	<link rel="alternate" type="application/rss+xml" title="Diet &amp; energy - Drug Store" href="http://livedemo00.template-help.com/prestashop_44889/modules/feeder/rss.php?id_category=4&amp;orderby=position&amp;orderway=asc" />
 	<meta property="og:type" content="website" />
 	<meta property="og:image" content="http://livedemo00.template-help.com/prestashop_44889/img/p/en-default-large.jpg" />
-	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js//source/jquery.carouFredSel-6.2.1.js"></script>
-	<script src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/js//source/jquery.touchSwipe.min.js"></script>
+	
 	
 </head>
 <body id="index">

@@ -110,13 +110,13 @@ html {
 	width:100%
 }
 #wrapp {
-	background:url(bg-images/bg-main.jpg) left top repeat-x #353535;
+	background:url(../img/bg-main.jpg) left top repeat-x #353535;
 	position:relative;
 	overflow:hidden;
 	width:100%
 }
 body#index .header_bg {
-	background:url(http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/../img/images/header_bg.jpg) center 241px no-repeat
+	background:url(../img/header_bg.jpg) center 241px no-repeat
 }
 body#index.search .header_bg {
 	background:none
