@@ -4,57 +4,57 @@ var aeCommerce = angular.module('aeCommerce', ['ngCookies','ngResource','ui.boot
 function aeCommerceRouter ($routeProvider,$locationProvider,$provide) {
 	$routeProvider
 		.when('/', {
-			templateUrl: './partials/home.html',
+			templateUrl: BaseUrl+'partials/home.html',
 			controller: '',
 			title : 'Home'
 		 })
 		 .when('/collections', {
-			templateUrl: './partials/collections.html',
+			templateUrl: BaseUrl+'partials/collections.html',
 			controller: 'CollectionCtrl',
 			title : 'Collections'
 		 })
 		 .when('/collections/:CollectionName', {
-			templateUrl: './partials/collections.html',
+			templateUrl: BaseUrl+'partials/collections.html',
 			controller: 'CollectionCtrl',
 			title : 'Collections'
 		 })
 		 .when('/product/:ProductName', {
-			templateUrl: './partials/product.html',
+			templateUrl: BaseUrl+'partials/product.html',
 			controller: 'ProductCtrl',
 			title : 'Product'
 		 })
 		 .when('/cart', {
-			templateUrl: './partials/cart.html',
+			templateUrl: BaseUrl+'partials/cart.html',
 			controller: '',
 			title : 'Products'
 		 })
 		 .when('/confirm', {
-			templateUrl: './partials/confirm.html',
+			templateUrl: BaseUrl+'partials/confirm.html',
 			controller: '',
 			title : 'Confirm Order'
 		 })
 		 .when('/thankyou', {
-			templateUrl: './partials/thankyou.html',
+			templateUrl: BaseUrl+'partials/thankyou.html',
 			controller: '',
 			title : 'Thankyou'
 		 })
 		 .when('/login', {
-			templateUrl: './partials/login.html',
+			templateUrl: BaseUrl+'partials/login.html',
 			controller: '',
 			title : 'Login'
 		 })
 		 .when('/signup', {
-			templateUrl: './partials/signup.html',
+			templateUrl: BaseUrl+'partials/signup.html',
 			controller: '',
 			title : 'Signup'
 		 })
 		 .when('/page/:any', {
-			templateUrl: './partials/page.html',
+			templateUrl: BaseUrl+'partials/page.html',
 			controller: 'PageCtrl',
 			title : 'Page Any'
 		 })
 		 .when('/:any', {
-			templateUrl: './partials/404.html',
+			templateUrl: BaseUrl+'partials/404.html',
 			controller: '',
 			title : 'Page Not Found'
 		 });
