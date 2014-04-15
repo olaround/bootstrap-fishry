@@ -15,10 +15,15 @@
 							</h4>
 							<ul class="row">
 								<li class="ajax_block_product span3" ng-repeat="products in ListProduct | CustomFilter:{collection:'Frontpage'} | CustomFilter:{collection:collection.collectionName} | filter:Search">
-									<div class="featured_li">
-										<a class="product_image" href="./product/{{products.productName}}" title="{{products.productName}}" rel="tooltip" data-placement="bottom" data-original-title="A180 Injectable Antibiotic">
-											<img src="{{products.productImage[0].Image}}" alt="A180 Injectable Antibiotic" class="main-img">
-											<img src="{{products.productImage[1].Image}}" alt="" style="display: none;" class="next-img">
+									<div class="featured_li" ng-controller="GlobalCtrl">
+										<a class="product_image" href="./product/{{products.productName}}" title="{{products.productName}}" rel="tooltip" data-placement="bottom" data-original-title="{{products.productName}}">
+											<img src="{{products.productImage[0].Image}}" alt="{{products.productName}}" class="main-img">
+											<!-- <img src="{{products.productImage[1].Image}}" alt="{{products.productName}}" class="main-img"> -->
+
+											<!-- <img src="{{products.productImage[0].Image}}" ng-mouseenter="mouseEnterItem()" ng-mouseleave="mouseLeaveItem()" ng-if="mouseHover == false" alt="{{products.productName}}" class="main-img"> -->
+											
+											<!-- <img src="{{products.productImage[1].Image}}" ng-if="mouseHover == true" alt="{{products.productName}}" class="main-img"> -->
+
 										</a>
 										<div ng-controller="HomeCtrl">
 											<h5><a class="product_link" href="./product/{{products.productName}}" title="">{{products.productName}}</a>
@@ -66,3 +71,12 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+		$('.product_image img').click(function(){
+			console.log('qwerty');
+			// alert('asas');
+		});
+	});
+</script>

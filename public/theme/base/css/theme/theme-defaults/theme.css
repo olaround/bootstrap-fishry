@@ -113,10 +113,11 @@ html {
 	background:url(../img/bg-main.jpg) left top repeat-x #353535;
 	position:relative;
 	overflow:hidden;
-	width:100%
+	width:100%;
+	background-position: 0px -52px !important;
 }
 body#index .header_bg {
-	background:url(../img/header_bg.jpg) center 241px no-repeat
+	background:url(../img/header_bg.jpg) center 189px no-repeat
 }
 body#index.search .header_bg {
 	background:none
@@ -1014,10 +1015,10 @@ ul.footer_links li a i {
 	display:block;
 	position:absolute;
 	left:0;
-	top:30px
+	top:20px
 }
 #header-inner {
-	padding:138px 0 0 0;
+	padding:85px 0 0 0;
 	position:relative
 }
 .blockpermanentlinks-header {
@@ -1114,6 +1115,9 @@ ul.footer_links li a i {
 	position:absolute;
 	right:0;
 	top:8px
+}
+.show {
+	display: block !important;
 }
 #currencies_block_top .mobile-open.arrow_header_top, #languages_block_top .mobile-open.arrow_header_top, .mobile-link-top h4.act .arrow_header_top {
 	background-position:0 -84px
@@ -1218,11 +1222,11 @@ ul.footer_links li a i {
 	width:13px;
 	height:7px;
 	position:absolute;
-	top:11px;
-	right:5px;
+	top:5px;
+	right:60px;
 	display:block
 }
-#header_user.close-cart #shopping_cart .opancart {
+#header_user.closeCart #shopping_cart .opancart {
 	background-position:0 -84px
 }
 #header_user:hover span, #header_user:hover #shopping_cart .shopping_cart_title, #header_user:hover #shopping_cart span, #header_user.close-cart #shopping_cart span, #header_user.close-cart #shopping_cart .shopping_cart_title, #header_user:hover {
@@ -1235,7 +1239,7 @@ ul.footer_links li a i {
 }
 #search_block_top {
 	position:absolute;
-	top:48px;
+	top:20px;
 	right:0;
 	margin:0 0 0 0
 }
@@ -1272,9 +1276,9 @@ ul.footer_links li a i {
 	display:block;
 	float:left;
 	min-width:48px;
-	height:40px;
-	font:normal 16px/40px Arial, Helvetica, sans-serif;
-	font-family:'Fjalla One', sans-serif;
+	/*height:40px;*/
+	/*font:normal 16px/40px Arial, Helvetica, sans-serif;*/
+	/*font-family:'Fjalla One', sans-serif;*/
 	text-transform:uppercase;
 	color:#fff;
 	text-align:center
@@ -1859,8 +1863,8 @@ a.tag_level1 {
 	z-index:999;
 	display:none;
 	position:absolute;
-	right:0;
-	top:142px;
+	right:60px;
+	top:90px;
 	width:275px;
 	padding:0 10px 10px 10px;
 	border:1px solid #ccc;
@@ -4974,7 +4978,7 @@ form#sendComment h3 {
 .list_header li a {
 	color:#fff;
 	text-decoration:none;
-	font-size:13px;
+	font-size:12px;
 	padding:8px 5px 8px 10px;
 	display:block;
 	font-weight:bold
@@ -7710,7 +7714,7 @@ div.uploader input {
 #menu-custom {
 	display:block
 }
-@media only screen and (max-width:1199px) {
+@media only screen and (max-width:767px) {
 	#menu-wrap {
 		position:relative;
 		border-left:none
@@ -7869,4 +7873,48 @@ div.uploader input {
 	#menu-custom li:hover > .no-transition {
 		display:block
 	}
+}
+
+/*------------------------------ BY Zaib ------------------------------*/
+
+#customcontent_top ul li {
+	background-color: #FFF !important;	
+}
+#customcontent_top ul li img {
+	width: 150px;
+}
+#search_block_top {
+	/*top:20px !important;*/
+}
+.customerInfo div {
+	display: inline-block;
+	vertical-align: middle;
+	/*padding: 0 10px;*/
+}
+.customerInfo {
+	padding-right: 50px;
+}
+.customerInfo div a.loginBtn{
+	/*padding: 0 62px !important;*/
+	display: inline-block !important;
+}
+.customerInfo div .customerName {
+	text-transform: uppercase;
+}
+a.added {
+	border: none !important;
+	background: #353535 !important;
+}
+.customerInfo div a {
+	margin: 0 5px;
+	float: none !important;
+}
+.customerInfo div a.createNewBtn {
+	box-shadow: none !important;
+	background: none !important;
+	border: none !important;
+	color: #238F46 !important;
+	font-size: 10px !important;
+	margin-left: -10px !important;
+	margin-right: 0px;
 }

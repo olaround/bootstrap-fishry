@@ -74,7 +74,7 @@
 
 						<ul id="product_list" class="row list">
 
-							<li class="ajax_block_product span3 shop_box" ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} | CustomFilter:{collection:routeParam} | filter:Search | limitTo: 2">
+							<li class="ajax_block_product span3 shop_box" ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} | CustomFilter:{collection:routeParam} | filter:Search">
 								<a href="./product/{{products.productName}}" class="product_img_link" title="A180 Injectable Antibiotic">
 									<img src="{{products.productImage[0].Image}}" alt="">
 								</a>

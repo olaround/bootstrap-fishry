@@ -42,9 +42,9 @@
 			padding-top: 22px;
 		}
 		.blockpermanentlinks-header {position: absolute;right:75%;top:0px;width:25%; }
-		#header #cart_block{ top:90px;}
-		#header-inner {padding-top:157px;position: relative;z-index: 101;}
-		#header_user { position:absolute; right:0; top:65px; border:none;}
+		#header #cart_block{ top:100px; right: 0;}
+		#header-inner {position: relative;z-index: 101;}
+		#header_user { position:absolute; right:-45px; top:65px; border:none;}
 		#header-inner {background:none;}
 		#header_logo {top:52px; width:120px;}
 		.main-mobile-menu{display:block;margin:0px 0px 0px 0px}
@@ -133,7 +133,7 @@
 		footer .block h4{ padding:5px 0px 7px 0px;background:url(../img/footer-button.png) 100%  11px  no-repeat; margin-top:9px; margin-bottom:0;  border-bottom: 3px solid #353535;}
 		footer .block h4:hover{ cursor:pointer;}
 		footer .block h4.active{background:url(../img/mobile-close.png) 100%  11px  no-repeat;}
-		footer .modules .block ul{ display:none; padding:16px 0 0 0}
+		footer .modules .block ul{padding:16px 0 0 0}
 		footer .block .list-footer li {padding: 0 0 6px;}
 		.bottom_footer{ border:none;}
 		footer .block .list-footer li a{ padding-right:10px;}
@@ -235,7 +235,7 @@
 		#product_list li .right_block span.price {margin:0px 0px 0 0; font-size:19px; padding-bottom:0; line-height:23px;}
 		#product_list .right_block span.discount {float: right;margin:0px 0 0px 0px;}
 		#product_list .right_block span.on_sale{ float:right;margin:-11px 0 0 0; width:auto; height:31px;}
-		#product_list li .right_block .button {margin:20px 0 0 0;}
+		#product_list li .right_block .button {}
 		#product_list li .right_block .exclusive{margin:20px 10px 0 0px;}
 		.title_shop { font-size:12px;}
 		#product_list .product_flags span {margin: 0 13px 0 0;}
