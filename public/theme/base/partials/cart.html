@@ -6,21 +6,36 @@
         <table ng-show="IfCart()" class="table">
                                    <thead> 
 									<tr>
-                                        <th width="226" class="col-md-4">Product Name</th>
-                                        <th width="242" class="col-md-4">Item Price</th>
-										<th width="94" class="col-md-4">Quantity</th>
-                                        <th width="335" class="col-md-4">Total Price</th>
-										<th width="64" class="col-md-4">Action</th>
+                                        <th class="col-md-4">Product Name</th>
+                                        <th class="col-md-4">Orignal Price</th>
+										<th class="col-md-4">New Price</th>
+										<th class="col-md-4">Quantity</th>
+                                        <th class="col-md-4">Total Price</th>
+										<th class="col-md-4">Action</th>
                                     </tr>
-									</thead>
-									<tbody>
-                                    <tr ng-repeat="Items in Cart">
-                                        <td class="col-md-4">{{Items.productInfo.productName}}</td>
-                                        <td class="col-md-4">Rs. {{Items.productInfo.productPrice}}</td>
-										<td class="col-md-4"><input style="width:62px;"  min='1' ng-model="Items.quantity" type="number" ></td>
-                                        <td class="col-md-4">Rs. {{Items.productInfo.productPrice * Items.quantity}}</td>
-										<td><span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Items.productID)"></span></td>
+									</thead> 
+									<tbody ng-repeat="(keyMain,Itemss) in Cart track by $index">
+									<tr ng-show="Itemss.productID"> 
+									     
+                                        <td class="col-md-4">{{Itemss.productInfo.productName}} </td>
+                                        <td class="col-md-4">Rs. {{Itemss.productInfo.productPrice}}</td>
+										<td class="col-md-4" ng-hide="Itemss.productInfo.newPrice"> - </td>
+										<td class="col-md-4" ng-show="Itemss.productInfo.newPrice">Rs. {{Itemss.productInfo.newPrice}}</td>
+										<td class="col-md-4"><input style="width:62px;"  min='1'  ng-model="Itemss.quantity" type="number" ></td>
+                                        <td class="col-md-4" ng-hide="Itemss.productInfo.newPrice">Rs. {{Itemss.productInfo.productPrice * Itemss.quantity}}</td>
+										<td class="col-md-4" ng-show="Itemss.productInfo.newPrice">Rs. {{Itemss.productInfo.newPrice * Itemss.quantity}}</td>
+										<td><span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Itemss.productID,false)"></span></td>
                                     </tr>
+									<tr ng-hide="Itemss.productID" ng-repeat="(key,itm) in Itemss track by $index"> 
+                                        <td class="col-md-4">{{itm.productInfo.productName}} - ( {{key}} )</td>
+										<td class="col-md-4">Rs. {{itm.productInfo.productPrice}}</td>
+										<td class="col-md-4" ng-hide="itm.productInfo.newPrice"> - </td> 
+										<td class="col-md-4" ng-show="itm.productInfo.newPrice">Rs. {{itm.productInfo.newPrice}}</td>
+										<td class="col-md-4"><input style="width:62px;"  min='1'  ng-model="itm.quantity" type="number" ></td>
+                                        <td class="col-md-4" ng-hide="itm.productInfo.newPrice">Rs. {{itm.productInfo.productPrice * itm.quantity}}</td>
+										<td class="col-md-4" ng-show="itm.productInfo.newPrice">Rs. {{itm.productInfo.newPrice * itm.quantity}}</td>
+										<td>{{}}<span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(itm.productID,key)"></span></td>
+                                     </tr>
 									</tbody>
 									<tfoot>
 										<tr>

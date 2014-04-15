@@ -10,12 +10,18 @@ function AECtrl ($scope, $location,AzureMobileClient,$rootScope,$routeParams,$co
 	$rootScope.OrderInfo = true;
 	$rootScope.PaymentMethod = '';
 	$rootScope.SettingGeneral = '';
+	$rootScope.BaseUrl = BaseUrl;
 	
 	$rootScope.Customer = {};
 	$rootScope.ErrorLogin = false;
 	$scope.GuestEmail = 'guest@fishry.com';
 	$scope.GuestFirstName = 'Guest';
 	$scope.GuestLastName = 'User';
+	$scope.varientsTypes = ['Title','Size','Color','Material','Style','custom'];
+	$scope.varientSelected = {};
+    $scope.userVraients = {};
+	$scope.varientSizeValue = {};
+	
 		
 //Table Names	
 	$scope.CollectionTable = 'collection';
@@ -135,6 +141,16 @@ $scope.GetProduct = function(param){
 				$scope.ListProduct[index]['productMultiOptionsList'] = JSON.parse($scope.ListProduct[index]['productMultiOptionsList']);
 				$scope.ListProduct[index]['productVarients'] = JSON.parse($scope.ListProduct[index]['productVarients']);
 				$scope.ListProduct[index]['productQuantity'] = 1;
+				$scope.ListProduct[index]['productVarientModel'] = {};
+		   		angular.forEach($scope.ListCollection, function (collections) {
+					angular.forEach($scope.ListProduct[index]['productCollections'], function (productCollection,ind) {
+						//console.log(productCollection);
+						//console.log(ind);
+						if(productCollection.id == collections.id){
+							$scope.ListProduct[index]['productCollections'][ind].urlParam = collections.collectionUrl;
+						}
+					});
+				});
 		   		angular.forEach($scope.ListCollection, function (collections) {
 					angular.forEach($scope.ListProduct[index]['productCollections'], function (productCollection,ind) {
 						//console.log(productCollection);
@@ -153,6 +169,17 @@ $scope.GetProduct = function(param){
 						if(ProductVendor.id == item.productVendor){
 							$scope.ListProduct[index].ProductVendorName = ProductVendor.productVendorName;
 						}
+				});
+				$.each(item.productMultiOptionsList,function(indx,itmx){
+						   $scope.ListProduct[index].productMultiOptionsList[indx].value = itmx.value.split(',');
+						   //console.log($scope.varientsTypes[itmx.optionSelected]);
+							if($scope.varientsTypes[itmx.optionSelected]){
+								$scope.ListProduct[index].productMultiOptionsList[indx].name = $scope.varientsTypes[itmx.optionSelected];
+							}else{
+								//console.log($scope.ListProduct[index].productMultiOptionsList[indx].custom);
+								$scope.ListProduct[index].productMultiOptionsList[indx].name = $scope.ListProduct[index].productMultiOptionsList[indx].custom;
+							}
+						//console.log(item);
 				});
 				//$rootScope.numberOfPages();
 		   });
@@ -204,20 +231,112 @@ $rootScope.GuestLogin = function(redirect){
 }
 //Add to cart
 $rootScope.addToCart = function(productID,productInfo){	
-	console.log(productInfo.productQuantity);
+	//console.log(productInfo);
+
+	var count = 1;
+	$scope.varientSelected = productInfo.productVarientModel;
+	var varient = productInfo.productVarientModel;
 	var quantity = parseInt(productInfo.productQuantity);
-	if(!$rootScope.Cart[productID]){
-		$rootScope.Cart[productID] = {productID:productID,quantity:quantity,productInfo:productInfo};
+	var totalCounts = 0;
+		
+	$.each($scope.varientSelected,function(ind,itm){
+		totalCounts++;
+	})
+	//console.log(quantity);
+	//return true;
+	if(totalCounts > 0){
+	var quantity = parseInt(productInfo.productQuantity);
+	//console.log(productID+varrientArray);
+	  $.each(productInfo.productVarients, function(indx, itmx){
+		var varrientArray = '';
+		var counters = 0;
+		$.each($scope.varientSelected,function(index, item) {
+	    //console.log($scope.varientSelected);
+	 	var varientItem = $scope.varientSelected[index];
+			$.each(itmx.name,function(ind,itm){
+			  if(itm == varientItem){
+				  if(counters  <= totalCounts){
+					  if(varrientArray == ''){
+					  	varrientArray += varientItem;
+					  }else{
+					  	varrientArray += ','+varientItem;
+					  }
+				  }
+				 counters++;
+			  }
+			});
+			
+			/*$.each(varientItem,function(ind,itm){
+				varrientArray += '|'+itm;
+			});*/
+			//console.log(varrientArray);
+			//return true;
+			//productID = productID+varrientArray;
+		//console.log(varrientArray);
+		
+		if(counters == totalCounts){
+			var nextIds = 0;
+			$.each($rootScope.Cart , function(index,index){
+			})
+			//console.log(productID+varrientArray);
+			
+			if(!$rootScope.Cart[productID]){
+				$rootScope.Cart[productID] = {};
+				$rootScope.Cart[productID][varrientArray] = {};
+				$rootScope.Cart[productID][varrientArray] = {productID:productID,quantity:quantity,productInfo:productInfo};
+				$rootScope.Cart[productID][varrientArray].productInfo.newPrice = itmx.price;
+				//$rootScope.Cart[productID][varrientArray].productInfo.selectedVarients = varrientArray;
+			}else{
+				if($rootScope.Cart[productID][varrientArray]){
+					$rootScope.Cart[productID][varrientArray].quantity = parseInt(productInfo.productQuantity) + parseInt($rootScope.Cart[productID][varrientArray].quantity);
+				}else{
+					$rootScope.Cart[productID][varrientArray] = {};
+					$rootScope.Cart[productID][varrientArray] = {productID:productID,quantity:quantity,productInfo:productInfo};
+					$rootScope.Cart[productID][varrientArray].productInfo.newPrice = itmx.price;
+					//$rootScope.Cart[productID][varrientArray].productInfo.selectedVarients = varrientArray;
+				}
+			}
+			console.log($rootScope.Cart);
+			
+			
+		}
+	});
+  });
+		
 	}else{
-		$rootScope.Cart[productID].quantity = parseInt(productInfo.productQuantity);
-		console.log($rootScope.Cart);
+		if(!$rootScope.Cart[productID]){
+			$rootScope.Cart[productID] = {productID:productID,quantity:quantity,productInfo:productInfo};
+		}else{
+			$rootScope.Cart[productID].quantity = parseInt(productInfo.productQuantity)+ parseInt($rootScope.Cart[productID].quantity);
+		}
+		
 	}
+	
+	//console.log(productInfo);
+	//console.log($rootScope.Cart[productID]);
+
 	$rootScope.SetLocalStorage('Cart');
 }
 $rootScope.IfCart= function(){	
 	var length= 0;
-	$.each($rootScope.Cart,function(item){
-		length++
+	$.each($rootScope.Cart,function(index,item){
+		console.log('-----bda=========');
+		console.log(item);
+		console.log(item.productID);
+		console.log(item.productID);
+		if(item.productID){
+			length++
+		}else{
+			var hasProduct = false;
+			$.each(item,function(ind,itm){
+				if(itm.productID){
+					hasProduct = true;
+				}
+			});
+			if(hasProduct){
+				length++
+			}
+		}
 	});
 	if(length == 0){
 		return false;
@@ -227,23 +346,49 @@ $rootScope.IfCart= function(){
 }
 $rootScope.ReturnItems= function(){	
 	var length= 0;
-	$.each($rootScope.Cart,function(item){
-		length++
+	$.each($rootScope.Cart,function(index,item){
+		if(item.productID){
+			length++
+		}else{
+			var hasProduct = false;
+			$.each(item,function(ind,itm){
+				if(itm.productID){
+					hasProduct = true;
+				}
+			});
+			if(hasProduct){
+				length++
+			}
+		}
 	});
-		return length;
+	return length;
 }
 $rootScope.ReturnTotal= function(){	
 	var Amount= 0;
+	//console.log($rootScope.Cart);
 	$.each($rootScope.Cart,function(index,item){
-		Amount += item.productInfo.productPrice * item.quantity ;
+			if(!item.productID){
+			$.each(item,function(indx, itmx){
+				if(indx != '$$hashKey'){
+					Amount += parseInt(itmx.productInfo.newPrice) * parseInt(itmx.quantity);
+				}
+			})
+		  }else{
+			   Amount += parseInt(item.productInfo.productPrice) * parseInt(item.quantity);
+		  }
+
 	});
 	
-	return Amount;
+		 return Amount;
 	
 }
-$rootScope.RemoveCartItem= function(id){
-	console.log(id);	
-	delete $rootScope.Cart[id];
+$rootScope.RemoveCartItem= function(Productid,keyId){
+	if(keyId){
+		delete $rootScope.Cart[Productid][keyId];
+	}else{
+		console.log(Productid);	
+		delete $rootScope.Cart[Productid];
+	}
 	$rootScope.SetLocalStorage('Cart');
 }
 $rootScope.SetLocalStorage= function(Index){

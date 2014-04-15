@@ -3,7 +3,20 @@
 			<h3>
 				{{product.productName}}
 			</h3>
-             <a class="btn btn-primary" href="javascript:void(0)" ng-click="addToCart(product.id,product)"> Add</a>
+            <form name="addtoCart" ng-submit="addToCart(products.id,products)">
+                  <input class="input input-small"  min='1' ng-model="products.productQuantity" type="number" >
+                  <div ng-if="products.productMultiOptions">
+                      <div class="section_attribute" style="width:100px;"  ng-repeat="valueSize in products.productMultiOptionsList">
+                        <select required ng-model="products.productVarientModel[valueSize.name]" name="color" style="width:150px;margin:10px 0;" >
+                           <option  value=""> Select {{valueSize.name}} </option>
+                          <option ng-repeat="parms in valueSize.value" value="{{parms}}">
+                            {{parms}} 
+                          </option>
+                        </select>
+                      </div>
+                  </div>
+                  <input type="submit" value="Add" name="submit" />
+              </form>
 			<hr />
             <div class="row clearfix">
 				<div class="col-md-6 column">
