@@ -38,7 +38,8 @@ if ('development' == app.get('env')) {
 }
 app.all('*', function(req, res, next) {
 	app.locals.store = '25A03245-3D56-430E-922E-FCA215450417';
-  next()
+	app.locals.ThemeFolderPathBase =  '/';	
+  	next()
 })
 app.get('/', routes.index);
 app.get('/product', routes.product);
