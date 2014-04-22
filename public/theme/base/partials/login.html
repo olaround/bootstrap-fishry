@@ -66,7 +66,7 @@
 
 						<div class="form_content clearfix">
 							<p class="submit">
-								<a href="javascript:void(0)" ng-click="GuestLogin('cart')">
+								<a href="javascript:void(0)" ng-click="GuestLogin('cart')" style="margin-left:22px;">
 
 									<input type="submit" id="SubmitCreate" name="SubmitCreate" class="button_large" value="Continue as Guest login">
 								</a>
@@ -77,7 +77,7 @@
 
 					<div class="row-fluid" ng-if="User.info.CustomerEmail || ListPaymentGateways.accountsDisabled == 'disabled'">
 						<div class="span6 column" ng-if="User.info.CustomerEmail && ListPaymentGateways.accountsDisabled != 'disabled'">
-							<h1>{{User.info.CustomerFirstName}}</h1>, <h4>you are already logged in</h4>
+							<!-- <h1>{{User.info.CustomerFirstName}}</h1>, <h4>you are already logged in</h4> -->
 						</div>
 						<div class="span6 column" ng-if="!User.info.CustomerEmail && ListPaymentGateways.accountsDisabled == 'disabled'">
 							<h4>Login is disabled</h4>
@@ -88,7 +88,7 @@
 					</div>
 
 					<p class="cart_navigation  clearfix inner-top" ng-if="User.info.CustomerEmail || ListPaymentGateways.accountsDisabled == 'disabled'">
-						<a href="/confirm" class="exclusive standard-checkout" title="Next">Next »</a>
+						<a href="/confirm" class="exclusive standard-checkout" title="Next">Checkout »</a>
 						<a href="/" class="button_large" title="Continue shopping">« Continue shopping</a>
 					</p>
 

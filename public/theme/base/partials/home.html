@@ -14,28 +14,31 @@
 								</a>
 							</h4>
 							<ul class="row">
-								<li class="ajax_block_product span3" ng-repeat="products in ListProduct | CustomFilter:{collection:'Frontpage'} | CustomFilter:{collection:collection.collectionName} | filter:Search">
+								<li class="ajax_block_product span3" ng-repeat="products in ListProduct | CustomFilter:{collection:'Frontpage'} | CustomFilter:{collection:collection.collectionName} | filter:Search" ng-class="{clearBoth: ($index + 1)%4 == 0}">
 									<div class="featured_li" ng-controller="GlobalCtrl">
 										<a class="product_image" href="./product/{{products.productName}}" title="{{products.productName}}" rel="tooltip" data-placement="bottom" data-original-title="{{products.productName}}">
-											<img src="{{products.productImage[0].Image}}" alt="{{products.productName}}" class="main-img">
-											<!-- <img src="{{products.productImage[1].Image}}" alt="{{products.productName}}" class="main-img"> -->
+											<img ng-if="products.productImage[0].Image == undefined" src="/img/theme/default.jpg" alt="{{products.productName}}" class="main-img">
+											
+											<img ng-if="products.productImage[0].Image != undefined" src="{{products.productImage[0].Image}}" alt="{{products.productName}}" class="main-img">
+											
+											<img ng-if="products.productImage[1].Image != undefined" src="{{products.productImage[1].Image}}" alt="{{products.productName}}" class="next-img">
 
 											<!-- <img src="{{products.productImage[0].Image}}" ng-mouseenter="mouseEnterItem()" ng-mouseleave="mouseLeaveItem()" ng-if="mouseHover == false" alt="{{products.productName}}" class="main-img"> -->
 											
 											<!-- <img src="{{products.productImage[1].Image}}" ng-if="mouseHover == true" alt="{{products.productName}}" class="main-img"> -->
 
 										</a>
-										<div ng-controller="HomeCtrl">
-											<h5><a class="product_link" href="./product/{{products.productName}}" title="">{{products.productName}}</a>
+										<div ng-controller="GlobalCtrl">
+											<h5><a class="product_link" href="./product/{{products.productName}}" title="">{{products.productName.slice(0,30)}}<span ng-if="products.productName.length > 30">....</span></a>
 											</h5>
 											<p class="product_desc">
-												<p ng-bind-html="products.productDescription.slice(0,300)">
+												<p ng-bind-html="products.productDescription.slice(0,80)"><span ng-if="products.productDescription.length > 80">....</span></p>
 											</p>
 											<div class="fleft">
 												<span class="price" ng-if="products.productPrice">
-													${{products.productPrice}}
+													{{SettingGeneral.settings.currencies_format}}&nbsp;{{products.productPrice}}
 												</span>
-												<span class="price-drop-feacherd" ng-if="products.productPriceCompare">${{products.productPriceCompare}}</span>
+												<span class="price-drop-feacherd" ng-if="products.productPriceCompare">{{SettingGeneral.settings.currencies_format}}&nbsp;{{products.productPriceCompare}}</span>
 											</div>
 											<a class="exclusive ajax_add_to_cart_button btn_add_cart"  rel="ajax_id_product_1" href="javascript:void(0)" id="{{products.id}}" ng-click="addToCartEffect();addToCart(products.id,products);">
 												<span>Add to cart</span>

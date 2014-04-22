@@ -4,7 +4,7 @@
 	<div id="columns" class="container ">
 		<div class="row ">
 			<div class="loader_page">
-				<div id="center_column" class="center_column span9 clearfix">
+				<div id="center_column" class="center_column span12 clearfix">
 					<!-- Breadcrumb -->
 					<div class="breadcrumb">
 						<div class="breadcrumb_inset">
@@ -115,7 +115,7 @@
 													</div>
 
 													<div class="div_cart_quantity_delete">
-														<a rel="nofollow" class="cart_quantity_delete" id="1_0_0_0" href="#" ng-click="RemoveCartItem(Items.productID)"></a>
+														<a rel="nofollow" class="cart_quantity_delete" id="1_0_0_0" href="javascript:void(0)" ng-click="RemoveCartItem(Items.productID)"></a>
 													</div>
 
 												</div>
@@ -132,17 +132,18 @@
 					</div>
 				
 					<p class="cart_navigation  clearfix inner-top">
-						<a href="/login" class="exclusive standard-checkout" title="Next">Next »</a>
+						<a href="/confirm" ng-if="User.info.CustomerEmail" class="exclusive standard-checkout" title="Next">Checkout »</a>
+						<a href="/login" ng-if="!User.info.CustomerEmail"  class="exclusive standard-checkout" title="Next">Checkout »</a>
 						<a href="/" class="button_large" title="Continue shopping">« Continue shopping</a>
 					</p>
 
 				</div>
 
 				<!-- Right -->
-				<aside id="right_column" class="span3 column right_home">
+				<!-- <aside id="right_column" class="span3 column right_home">
 					<section id="manufacturers_block_left" class="block blockmanufacturer column_box" ng-include src="'partials/sidebar.html'">
 					</section>
-				</aside>
+				</aside> -->
 			</div>
 		</div>
 	</div>

@@ -9,6 +9,6 @@ function HomeCtrl($scope,$location,$rootScope,$timeout){
 	});
 
 	$rootScope.addToCartEffect = function(){
-		$("html, body").animate({ scrollTop: $(".content_bg").offset().top }, 2000);
+		$("html, body").animate({ scrollTop: $("body").offset().top }, 1000);
 	}
 }

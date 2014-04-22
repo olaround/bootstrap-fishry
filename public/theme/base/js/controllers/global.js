@@ -8,13 +8,15 @@ function GlobalCtrl($scope,$location,$rootScope){
 		}
 	});
 
-	$rootScope.addToCartEffect = function(){
-		$("html, body").animate({ scrollTop: $(".content_bg").offset().top }, 2000);
-	}
 
 	$rootScope.cartHandler = false;
 	$rootScope.enableDropdown = false;
 	$rootScope.mouseHover = false;
+
+	$rootScope.addToCartEffect = function(){
+		$("html, body").animate({ scrollTop: $("body").offset().top }, 1000);
+		$rootScope.cartHandler = true;
+	}
 
 	$rootScope.openMenu = function(){
 		console.log('clicked');
@@ -23,7 +25,7 @@ function GlobalCtrl($scope,$location,$rootScope){
 
 
 	$rootScope.isCartOpen = function(){
-		console.log('open cat bhai g');
+		// console.log('open cat bhai g');
 		$rootScope.cartHandler = !$rootScope.cartHandler;
 	}
 

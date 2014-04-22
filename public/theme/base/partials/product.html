@@ -6,9 +6,9 @@
 					<!-- Breadcrumb -->
 					<div class="breadcrumb">
 						<div class="breadcrumb_inset">
-							<a class="breadcrumb-home" href="http://livedemo00.template-help.com/prestashop_44889/" title="Return to Home"><i class="icon-home"></i></a>
+							<a class="breadcrumb-home" href="/" title="Return to Home"><i class="icon-home"></i></a>
 							<span class="navigation-pipe">&gt;</span>
-							<a href="http://livedemo00.template-help.com/prestashop_44889/index.php?id_category=4&amp;controller=category&amp;id_lang=1" title="Diet &amp; energy">Diet &amp; energy</a>
+							<a href="" title="">Products</a>
 							<span class="navigation-pipe">&gt;</span>{{product.productName}}
 						</div>
 					</div>
@@ -18,122 +18,53 @@
 						<!-- Call quick start function. -->
 						<!-- right infos-->
 						<div class="row">
-							<div id="pb-right-column" class="span4">
+							<div id="pb-right-column" class="span4" ng-if="product.productImage[0].Image">
 								<h1 class="pb-right-colum-h">{{product.productName}}</h1>
 								<!-- product img-->
 								<div id="image-block">
 									<span id="view_full_size">
 										<div id="wrap" style="top:0px;z-index:auto;position:relative;">
-											<img id="bigpic" alt="Nutra Life Garlic" title="Nutra Life Garlic" src="{{product.productImage[0].Image}}" >
+											<a href="{{product.productImage[0].Image}}" class = 'cloud-zoom' id='zoom1' rel="adjustX: 10, adjustY:-4, softFocus:true">
+												<img id="bigpic" alt="{{product.productName}}" title="{{product.productName}}" src="{{product.productImage[0].Image}}">
+											</a>	
 										</div>
 									</span>
 								</div>
 
 								<!-- thumbnails -->
-								<div id="views_block" class="" style="display: none;">
+								<div id="views_block">
 									<div id="thumbs_list">
 										<ul id="thumbs_list_frame" style="width: 380px;">
+											<li id="thumbnail_9" ng-if="product.productImage[1].Image">
+												<a href="javascript:void(0)"  class="cloud-zoom-gallery" rel="useZoom: 'zoom1', smallImage: '{{product.productImage[1].Image}}' ">
+													<img onClick="$('#bigpic').attr('src',$(this).attr('src'));" id="thumb_9" src="{{product.productImage[1].Image}}" alt="">
+												</a>
+											</li>
 
-
-											<li id="thumbnail_9">
-												<a href="http://livedemo00.template-help.com/prestashop_44889/img/p/9/9-thickbox_default.jpg" class="cloud-zoom-gallery" title="" rel="useZoom: 'zoom1', smallImage: 'http://livedemo00.template-help.com/prestashop_44889/img/p/9/9-large_default.jpg'">
-													<img id="thumb_9" src="http://livedemo00.template-help.com/prestashop_44889/img/p/9/9-medium_default.jpg" alt="">
+											<li id="thumbnail_10" ng-if="product.productImage[2].Image">
+												<a href="javascript:void(0)" class="cloud-zoom-gallery" title="" class="cloud-zoom-gallery" rel="useZoom: 'zoom1', smallImage: '{{product.productImage[2].Image}}' ">
+													<img onClick="$('#bigpic').attr('src',$(this).attr('src'));" id="thumb_10" src="{{product.productImage[2].Image}}" alt="">
 												</a>
 
 											</li>
 
-											<li id="thumbnail_10">
-												<a href="http://livedemo00.template-help.com/prestashop_44889/img/p/1/0/10-thickbox_default.jpg" class="cloud-zoom-gallery" title="" rel="useZoom: 'zoom1', smallImage: 'http://livedemo00.template-help.com/prestashop_44889/img/p/1/0/10-large_default.jpg'">
-													<img id="thumb_10" src="http://livedemo00.template-help.com/prestashop_44889/img/p/1/0/10-medium_default.jpg" alt="">
+											<li id="thumbnail_11" ng-if="product.productImage[3].Image">
+												<a href="javascript:void(0)" class="cloud-zoom-gallery" title="" class="cloud-zoom-gallery" rel="useZoom: 'zoom1', smallImage: '{{product.productImage[3].Image}}' ">
+													<img onClick="$('#bigpic').attr('src',$(this).attr('src'));" id="thumb_11" src="{{product.productImage[3].Image}}" alt="">
 												</a>
 
 											</li>
 
-											<li id="thumbnail_11">
-												<a href="http://livedemo00.template-help.com/prestashop_44889/img/p/1/1/11-thickbox_default.jpg" class="cloud-zoom-gallery" title="" rel="useZoom: 'zoom1', smallImage: 'http://livedemo00.template-help.com/prestashop_44889/img/p/1/1/11-large_default.jpg'">
-													<img id="thumb_11" src="http://livedemo00.template-help.com/prestashop_44889/img/p/1/1/11-medium_default.jpg" alt="">
-												</a>
-
-											</li>
-
-											<li id="thumbnail_12">
-												<a href="http://livedemo00.template-help.com/prestashop_44889/img/p/1/2/12-thickbox_default.jpg" class="cloud-zoom-gallery" title="" rel="useZoom: 'zoom1', smallImage: 'http://livedemo00.template-help.com/prestashop_44889/img/p/1/2/12-large_default.jpg'">
-													<img id="thumb_12" src="http://livedemo00.template-help.com/prestashop_44889/img/p/1/2/12-medium_default.jpg" alt="">
+											<li id="thumbnail_12" ng-if="product.productImage[4].Image">
+												<a href="javascript:void(0)" class="cloud-zoom-gallery" title="" class="cloud-zoom-gallery" rel="useZoom: 'zoom1', smallImage: '{{product.productImage[4].Image}}' ">
+													<img onClick="$('#bigpic').attr('src',$(this).attr('src'));" id="thumb_12" src="{{product.productImage[4].Image}}" alt="">
 												</a>
 
 											</li>
 										</ul>
 									</div>
 								</div>
-								<p class="resetimg">
-									<span id="wrapResetImages" style="display: none;">
-										<i class="icon-reply"></i>
-										<a id="resetImages" href="http://livedemo00.template-help.com/prestashop_44889/index.php?id_product=3&amp;controller=product&amp;id_lang=1" onclick="$('span#wrapResetImages').hide('slow');return (false);">Display all pictures</a>
-									</span>
-								</p>
 
-								<ul id="usefull_link_block" class="clearfix">
-
-
-									<li id="favoriteproducts_block_extra_added" class="favorite">
-										<i class="icon-heart"></i>Remove this product from my favorite's list.
-									</li>
-									<li id="favoriteproducts_block_extra_removed" class="favorite">
-										<i class="icon-heart-empty"></i>Add this product to my list of favorites.
-									</li>
-									<li id="left_share_fb">
-										<a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Flivedemo00.template-help.com%2Fprestashop_44889%2Findex.php%3Fid_product%3D3%26controller%3Dproduct%26id_lang%3D1&amp;t=Nutra+Life+Garlic" class="js-new-window"><i class="icon-facebook-sign"></i>Share on Facebook</a>
-									</li>
-									<li class="sendtofriend">
-										<a id="send_friend_button" href="#send_friend_form"><i class="icon-envelope"></i>Send to a friend</a>
-									</li>
-
-									<div style="display: none;">
-										<div id="send_friend_form">
-											<h1 class="title clearfix">Send to a friend</h1>
-											<div class="row-fluid">
-												<div class="span6 titled_box">
-													<h2 class="product_name">
-														<span>{{product.productName}}</span>
-													</h2>
-													<div class="product clearfix">
-														<img src="http://livedemo00.template-help.com/prestashop_44889/img/p/9/9-small_default.jpg" alt="Nutra Life Garlic">
-														<div class="product_desc">
-															<p ng-bind-html="product.productDescription">
-														</div>
-													</div>
-												</div>
-												<div class="span6">
-													<div class="send_friend_form_content">
-														<div id="send_friend_form_error"></div>
-														<div class="form_container titled_box">
-															<h2 class="intro_form ">
-																<span>Recipient :</span>
-															</h2>
-															<p class="text">
-																<label for="friend_name">Name of your friend <sup class="required">*</sup> :</label>
-																<input id="friend_name" name="friend_name" type="text" value="">
-															</p>
-															<p class="text">
-																<label for="friend_email">E-mail address of your friend <sup class="required">*</sup> :</label>
-																<input id="friend_email" name="friend_email" type="text" value="">
-															</p>
-															<p class="txt_required"><sup class="required">*</sup> Required fields</p>
-														</div>
-													</div>
-												</div>
-											</div>
-											<p class="submit sendfrend_footer">
-												<input id="id_product_comment_send" name="id_product" type="hidden" value="3">
-												<button class="btn btn-inverse" onclick="$.fancybox.close();">Cancel</button>
-												<button id="sendEmail" class="btn btn-inverse" name="sendEmail" type="submit">Send</button>
-												<!--input id="sendEmail" class="btn btn-inverse" name="sendEmail" type="submit" value="Send" /-->
-											</p>
-										</div>
-									</div>
-									<li class="print"><a href="javascript:print();"><i class="icon-print"></i>Print</a>
-									</li>
-								</ul>
 							</div>
 							<!-- left infos-->
 							<div id="pb-left-column" class="span5">
@@ -158,24 +89,22 @@
 										<input type="hidden" name="add" value="1">
 										<input type="hidden" name="id_product_attribute" id="idCombination" value="">
 									</p>
-								
+
 									<div class="content_prices clearfix">
 										<!-- prices -->
-										<div class="row-2">
-											<p id="old_price" ng-if="products.productPriceCompare">
+										<div class="row-2" ng-if="products.productPriceCompare">
+											<p id="old_price">
 												<span class="price">
-													<span id="old_price_display price">${{products.productPriceCompare}}</span>
-													<!--  -->
+													<span id="old_price_display price">{{SettingGeneral.settings.currencies_format}}&nbsp;{{products.productPriceCompare}}</span>
 												</span>
 											</p>
 										</div>
-										<div class="row_1">
+										<div class="row_1" >
 											<p class="our_price_display">
-												<span id="our_price_display">${{product.productPrice}}</span>
-												<!---->
+												<span id="our_price_display">{{SettingGeneral.settings.currencies_format}}&nbsp;{{product.productPrice}}</span>
 											</p>
 
-											<p id="add_to_cart" class="buttons_bottom_block" ng-controller="ProductCtrl">
+											<p id="add_to_cart" class="buttons_bottom_block" ng-controller="GlobalCtrl">
 
 												<a class="exclusive button btn_add_cart" href="javascript:void(0)" ng-click="addToCartEffect();addToCart(product.id,product)">
 													<span>Add to cart</span>
@@ -195,19 +124,32 @@
 										</div>
 									</div>
 
-
-									<div id="product_comments_block_extra">
-
-										<div class="comments_advices">
-											<a class="open-comment-form" href="#new_comment_form">Write your review</a>
-										</div>
-									</div>
 									<!--  /Module ProductComments -->
 
 									<p></p>
-
-
 								</form>
+								<link rel="stylesheet" type="text/css" href="http://livedemo00.template-help.com/prestashop_44889/modules/addsharethis/css/addsharethis.css">
+								<div class="addsharethis">
+										
+										<iframe id="twitter-widget-6" scrolling="no" frameborder="0" allowtransparency="true" src="https://platform.twitter.com/widgets/tweet_button.1397165098.html#_=1397739192841&amp;count=horizontal&amp;id=twitter-widget-6&amp;lang=en&amp;original_referer=https%3A%2F%2Fdev.twitter.com%2Fdocs%2Ftweet-button&amp;size=m&amp;text=Tweet%20Button%20%7C%20Twitter%20Developers&amp;url=https%3A%2F%2Fdev.twitter.com%2Fdocs%2Ftweet-button" class="twitter-share-button twitter-tweet-button twitter-count-horizontal" title="Twitter Tweet Button" data-twttr-rendered="true" style="width: 110px; height: 20px;"></iframe>
+
+										<iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=21&amp;appId=358436447628477" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:20px; width: 140px;" allowTransparency="true"></iframe>
+
+
+										<iframe src="https://plusone.google.com/_/+1/fastbutton?bsv&amp;size=medium&amp;hl=en-US&amp;url=http://test.com/&amp;parent=http://test.com/" allowtransparency="true" frameborder="0" scrolling="no" title="share" style="height: 20px; width:75px;"></iframe>
+
+										<!-- Place this tag where you want the share button to render. -->
+										<!-- <div class="g-plus" data-action="share" style="width:100px"></div> -->
+
+										<!-- Place this tag after the last share tag. -->
+										<!-- <script type="text/javascript">
+										  (function() {
+										    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+										    po.src = 'https://apis.google.com/js/platform.js';
+										    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+										  })();
+										</script> -->
+								</div>
 							</div>
 						</div>
 
@@ -217,124 +159,125 @@
 
 					<div class="extra-box-product">
 
-						<section class="page_product_box toggle_frame more_info_inner">
-							<h3 class="toggle">More info
+						<section class="page_product_box blockproductscategory">
+							<h3>more realted products in the same category:
 								<span class="icon-toggle"></span>
 							</h3>
-							<div class="toggle_content">
-								The human's immune system is very uncertain thing because there is a countless quantity of different dangerous viruses and bacteria. From ancient times plague and other infectious diseases have been killing people without leaving them any chance to survive.
+							<div id="block-category-slider" class="carusel-inner responsive  toggle_content">
+								<div class="caroufredsel_wrapper" style="display: block; text-align: left; float: none; position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto; width: 830px; height: 210px; margin: 0px; overflow: hidden;">
+									<ul id="carouselproduct" class="carousel-ul" style="text-align: left; float: none; position: absolute; top: 0px; right: auto; bottom: auto; left: 0px; margin: 0px; width: 4440px; height: 210px; z-index: auto;">
+										<li ng-repeat="products in ListProduct | filter: {productType: product.productType}" class="num-{{$index+1}}">
+											<a href="/product/{{products.productName}}" class="lnk_img" title="{{productItem.productName}}">
+												<img src="{{products.productImage[0].Image}}" alt="{{products.productName}}">
+											</a>
+											<a class="product_link" href="/product/{{products.productName}}">
+												<div class="title">{{products.productName.slice(0,15)}}
+													<span ng-if="products.productName.length > 15">....</span>
+												</div>
+												<!-- <div class="title3">{{SettingGeneral.settings.currencies_format}}&nbsp;{{products.productPrice}}<i class="icon-circle-arrow-right"></i>
+												</div> -->
+											</a>
+										</li>
+
+									</ul>
+								</div>
+
+								<!-- <a class="prev" id="cat_prev" href="javascript:void(0)" style="display: inline;"></a>
+								<a class="next" id="cat_next" href="javascript:void(0)" style="display: inline;"></a> -->
 							</div>
 						</section>
 
+						<script type="text/javascript">
+						$(function() {
+							// $("#carouselproduct").carouFredSel({
+							// 	debug: true,
+							// 	circular: true,
+							//        infinite: true,
+							// 	responsive: true,
+							// 	align   : "center",
+							// 	width: '100%',
+							//     auto	: {
+							//    		play	: 1,
+							//     	timeoutDuration :15000
+							//     },
 
+							//     items	: {
 
+							// 	visible: {
+							// 				min: 2,
+							// 				max: 6
+							// 				 },
+							// 				 width:167,
 
+							// 	},		
+							// 	scroll	: {
+							// 		items	: 1,
+							// 		pauseOnHover:false
+							// 	},
+							// 	prev	: {
+							// 		button	: "#cat_prev"
+							// 	},
+							// 	next	: {
+							// 		button	: "#cat_next"
+							// 	},
+							// 	swipe: {
+							// 				onMouse: false,
+							// 				onTouch: true
+							// 		   }
+							// }, 
+							// {
+							//     classnames		: {
+							// 	    selected		: "selected",
+							// 	    hidden			: "hidden",
+							// 	    disabled		: "disabled",
+							// 	    paused			: "paused",
+							// 	    stopped			: "stopped"
+							//     },
 
+							// });
+						});
+						</script>
+						<script type="text/javascript">
+						// $(function(){
+						 // 	$("#carouselproductcross").carouFredSel({
+						 // 		debug: true,
+						 // 		circular: true,
+						 //         infinite: true,
+						 // 		responsive: true,
+						 // 		align   : "center",
+						 // 		width: '100%',
+						 // 	    auto	: {
+						 //     		play	: 1,
+						 // 	    	timeoutDuration :20000
+						 // 	    },
 
-						<section id="last_page_product" class="page_product_box toggle_frame">
-							<h3 href="#idTab5" class="idTabHrefShort">Comments
-								<span class="icon-toggle"></span>
-							</h3>
-							<div id="more_info_sheets" class="toggle_content toggle_content_comment">
-								<script type="text/javascript">
-								var productcomments_controller_url = 'http://livedemo00.template-help.com/prestashop_44889/index.php?fc=module&module=productcomments&controller=default&id_lang=1';
-								var confirm_report_message = "Are you sure you want report this comment?";
-								var secure_key = "77bdb413b792fe95af969b14e0a4fbf1";
-								var productcomments_url_rewrite = '0';
-								</script>
+						 // 	    items	: {
 
-								<div id="idTab5">
-									<div id="product_comments_block_tab">
-										<p class="align_center">
-											<a id="new_comment_tab_btn" class="open-comment-form" href="#new_comment_form">Be the first to write your review !</a>
-										</p>
+						 // 		visible: {
+						 // 					min: 2,
+						 // 					max: 6
+						 // 					 },
+						 // 					 width:167,
 
-									</div>
-								</div>
+						 // 		},		
+						 // 		scroll	: {
+						 // 			items	: 1,
+						 // 			pauseOnHover:false
+						 // 		},
+						 // 		prev	: {
+						 // 			button	: "#cross_prev"
+						 // 		},
+						 // 		next	: {
+						 // 			button	: "#cross_next"
+						 // 		},
+						 // 		swipe: {
+						 // 					onMouse: true,
+						 // 					onTouch: true
+						 // 			   }
+						 // 	});
+						 // });
+						</script>
 
-								<!-- Fancybox -->
-								<div style="display: none;">
-									<div id="new_comment_form">
-										<form action="#">
-											<h1 class="title">
-												<span>Write your review</span>
-											</h1>
-											<div class="row-fluid">
-												<div class="span6 titled_box">
-													<div class="product clearfix">
-														<h2 class="product_name">
-															<span>Nutra Life Garlic</span>
-														</h2>
-														<img src="http://livedemo00.template-help.com/prestashop_44889/img/p/9/9-small_default.jpg" alt="Nutra Life Garlic">
-														<div class="product_desc">
-															The human's immune system is very uncertain thing because there is a countless quantity of different dangerous viruses and bacteria. From ancient times plague and other infectious diseases have been killing people without leaving them any chance to survive.
-														</div>
-													</div>
-												</div>
-												<div class="span6 titled_box">
-													<div class="new_comment_form_content">
-														<h2>
-															<span>Write your review</span>
-														</h2>
-
-														<div id="new_comment_form_error" class="error" style="display: none;">
-															<ul></ul>
-														</div>
-
-														<ul id="criterions_list">
-															<li>
-																<label>Quality:</label>
-																<div class="star_content">
-																	<input type="hidden" name="criterion[1]" value="3">
-																	<div class="cancel">
-																		<a title="Cancel Rating"></a>
-																	</div>
-																	<div class="star star_on"><a title="1">1</a>
-																	</div>
-																	<div class="star star_on"><a title="2">2</a>
-																	</div>
-																	<div class="star star_on"><a title="3">3</a>
-																	</div>
-																	<div class="star"><a title="4">4</a>
-																	</div>
-																	<div class="star"><a title="5">5</a>
-																	</div>
-																</div>
-																<div class="clearfix"></div>
-															</li>
-														</ul>
-
-														<label for="comment_title">Title: <sup class="required">*</sup>
-														</label>
-														<input id="comment_title" name="title" type="text" value="">
-
-														<label for="content">Comment: <sup class="required">*</sup>
-														</label>
-														<textarea id="content" name="content"></textarea>
-
-														<label>Your name: <sup class="required">*</sup>
-														</label>
-														<input id="commentCustomerName" name="customer_name" type="text" value="">
-
-													</div>
-												</div>
-											</div>
-											<div id="new_comment_form_footer" class=" sendfrend_footer">
-												<input id="id_product_comment_send" name="id_product" type="hidden" value="3">
-												<p class="fl required"><sup>*</sup> Required fields</p>
-												<p class="fr ">
-													<button id="submitNewMessage" class="btn btn-inverse" name="submitMessage" type="submit">Send</button>
-													<input class="btn btn-inverse" type="button" value="Cancel" onclick="$.fancybox.close();">
-												</p>
-												<div class="clearfix"></div>
-											</div>
-										</form>
-										<!-- /end new_comment_form_content -->
-									</div>
-								</div>
-								<!-- End fancybox -->
-							</div>
-						</section>
 					</div>
 
 				</div>
