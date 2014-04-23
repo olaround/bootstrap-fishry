@@ -15,42 +15,44 @@
    	<% include header_resources %>
 	<script>
 		var StoreID = '<%= StoreId %>';
-		var BaseUrl = '/';
+		var BaseUrl = '<%= BaseUrl %>';
 	</script>
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	
 	<link href='//fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
 
-	<link href="./css/theme/theme-defaults/normalize.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="./css/theme/theme-defaults/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="./css/theme/theme-defaults/bootstrap-responsive.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="./css/theme/theme-defaults/font.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="./css/theme/theme-defaults/theme.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/normalize.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/bootstrap-responsive.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/font.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/theme.css" rel="stylesheet" type="text/css" media="all" />
 
 	<link href="http://www.professorcloud.com/styles/cloud-zoom.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="./css/theme/theme-defaults/320.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="./css/theme/theme-defaults/480.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="./css/theme/theme-defaults/768.css" rel="stylesheet" type="text/css" media="all" />
-	<script src="./js/theme-defaults/bootstrap.js"></script>
-	<script src="./js/theme-defaults/plugins.js"></script>
-	<script src="./js/theme-defaults/footable.js"></script>
-	<script src="./js/theme-defaults/jquery.scrollpane.js"></script>
-	<script src="./js/theme-defaults/jquery.uniform.js"></script>
-	<script src="./js/theme-defaults/jquery.mousewheel.js"></script>
-	<script src="./js/theme-defaults/modernizr-2.5.3.min.js"></script>
-	<script src="./js/theme-defaults/jquery.carouFredSel-6.2.1.js"></script>
-	<script src="./js/theme-defaults/jquery.touchSwipe.min.js"></script>
-	
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/320.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/480.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/768.css" rel="stylesheet" type="text/css" media="all" />
+	<script src="<%= BaseUrl %>js/theme-defaults/bootstrap.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/plugins.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/footable.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/jquery.scrollpane.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/jquery.uniform.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/jquery.mousewheel.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/modernizr-2.5.3.min.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/jquery.carouFredSel-6.2.1.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/jquery.touchSwipe.min.js"></script>
+	<script src="http://www.jacklmoore.com/colorbox/jquery.colorbox.js"></script>
+
 	<!-- JQuery Slider -->
-	<script src="./js/nivo-slider/jquery.nivo.slider.js"></script>
-	<script src="./js/nivo-slider/jquery.carouFredSel-6.2.1.js"></script>
-	<link href="./js/nivo-slider/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
+	<script src="<%= BaseUrl %>js/nivo-slider/jquery.nivo.slider.js"></script>
+	<script src="<%= BaseUrl %>js/nivo-slider/jquery.carouFredSel-6.2.1.js"></script>
+	<link href="<%= BaseUrl %>js/nivo-slider/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="http://www.jacklmoore.com/colorbox/example1/colorbox.css" rel="stylesheet" type="text/css" media="all" />
 
 
 
 	<!-- Route2Health files by zaib -->
-	<script src="./js/frontend.js"></script>
-	<link href="./css/theme/frontendstyle.css" rel="stylesheet" type="text/css" media="all" />
+	<script src="<%= BaseUrl %>js/frontend.js"></script>
+	<link href="<%= BaseUrl %>css/theme/frontendstyle.css" rel="stylesheet" type="text/css" media="all" />
 
 	<meta property="og:type" content="website" />
 	<link rel="icon" type="image/vnd.microsoft.icon" ng-if="ThemeSettings.theme_settings.favicon" href="{{ThemeSettings.theme_settings.favicon}}"/>	
@@ -68,7 +70,7 @@
  <!-- {{ThemeSettings}} -->
  <!-- <h1>{{SettingGeneral}}</h1> -->
 <!-- <img src="{{ThemeSettings.theme_settings.logo_img}}">	 -->
-<div id="Loader" style="position:fixed;left:0;top:0;padding:5px;">loading...</div>
+<div id="Loader">&nbsp;</div>
 	<div id="wrapp">
 		<div id="wrapp_2">
 			<div class="header_bg">
@@ -141,9 +143,9 @@
 								<div ng-if="User.info.CustomerEmail"> <a class="btn btn-danger" href="javascript:void(0)" ng-click="Logout()"> Logout </a></div>
 
 								<div ng-if="!User.info.CustomerEmail">
-									<!-- <a class="btn btn-info loginBtn" href="./login">Login</a> -->
-									<a class="btn btn-info loginBtn" href="./login">
-										SIGN IN </a> Don't have an account? <a class="btn btn-info loginBtn createNewBtn" href="./signup">CREATE ONE</a>
+									<!-- <a class="btn btn-info loginBtn" href="/login">Login</a> -->
+									<a class="btn btn-info loginBtn" href="/login">
+										SIGN IN </a> Don't have an account? <a class="btn btn-info loginBtn createNewBtn" href="/signup">CREATE ONE</a>
 								</div>
 								<!-- <div ng-if="!User.info.CustomerEmail"> <a class="btn btn-info" href="./signup"> Sign Up </a></div> -->
 							

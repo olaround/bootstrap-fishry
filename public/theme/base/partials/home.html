@@ -16,7 +16,7 @@
 							<ul class="row">
 								<li class="ajax_block_product span3" ng-repeat="products in ListProduct | CustomFilter:{collection:'Frontpage'} | CustomFilter:{collection:collection.collectionName} | filter:Search" ng-class="{clearBoth: ($index + 1)%4 == 0}">
 									<div class="featured_li" ng-controller="GlobalCtrl">
-										<a class="product_image" href="./product/{{products.productName}}" title="{{products.productName}}" rel="tooltip" data-placement="bottom" data-original-title="{{products.productName}}">
+										<a class="product_image" href="/product/{{products.productName}}" title="{{products.productName}}" rel="tooltip" data-placement="bottom" data-original-title="{{products.productName}}">
 											<img ng-if="products.productImage[0].Image == undefined" src="/img/theme/default.jpg" alt="{{products.productName}}" class="main-img">
 											
 											<img ng-if="products.productImage[0].Image != undefined" src="{{products.productImage[0].Image}}" alt="{{products.productName}}" class="main-img">
@@ -29,7 +29,7 @@
 
 										</a>
 										<div ng-controller="GlobalCtrl">
-											<h5><a class="product_link" href="./product/{{products.productName}}" title="">{{products.productName.slice(0,30)}}<span ng-if="products.productName.length > 30">....</span></a>
+											<h5><a class="product_link" href="/product/{{products.productName}}" title="">{{products.productName.slice(0,30)}}<span ng-if="products.productName.length > 30">....</span></a>
 											</h5>
 											<p class="product_desc">
 												<p ng-bind-html="products.productDescription.slice(0,80)"><span ng-if="products.productDescription.length > 80">....</span></p>
@@ -43,7 +43,7 @@
 											<a class="exclusive ajax_add_to_cart_button btn_add_cart"  rel="ajax_id_product_1" href="javascript:void(0)" id="{{products.id}}" ng-click="addToCartEffect();addToCart(products.id,products);">
 												<span>Add to cart</span>
 											</a>
-											<a class="button" href="./product/{{products.productName}}" rel="tooltip" data-placement="bottom">View</a>
+											<a class="button" href="/product/{{products.productName}}" rel="tooltip" data-placement="bottom">View</a>
 											<div class="clearfix"></div>
 										</div>
 									</div>
@@ -66,8 +66,7 @@
 				</div>
 
 				<aside id="right_column" class="span3">
-
-					<section id="manufacturers_block_left" class="block blockmanufacturer column_box" ng-include src="'partials/sidebar.html'">
+					<section id="manufacturers_block_left" class="block blockmanufacturer column_box" ng-include src="'{{BaseUrl}}partials/sidebar.html'">
 					</section>
 				</aside>
 			</div>
