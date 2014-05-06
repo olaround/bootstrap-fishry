@@ -49,7 +49,7 @@ function aeCommerceRouter ($routeProvider,$locationProvider,$provide) {
 			title : 'Signup'
 		 })
 		 .when('/page/:PageUrl', {
-			templateUrl: './partials/page.html',
+			templateUrl: BaseUrl+ 'partials/page.html',
 			controller: 'PageCtrl',
 			title : 'Page Any'
 		 })

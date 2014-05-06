@@ -56,21 +56,21 @@
 								<tfoot>
 									<tr class="cart_total_price ">
 										<td>Total products</td>
-										<td class="price" id="total_product">${{ReturnTotal()}}</td>
+										<td class="price" id="total_product">{{ReturnItems()}}</td>
 									</tr>
-									<tr class="cart_total_price ">
+									<!-- <tr class="cart_total_price ">
 										<td>Total (tax excl.)</td>
 										<td class="price" id="total_price_without_tax">
 											${{ReturnTotal()}}
 										</td>
-									</tr>
-									<tr class="cart_total_tax">
+									</tr> -->
+									<!-- <tr class="cart_total_tax">
 										<td>Total tax</td>
 										<td class="price" id="total_tax">$0.00</td>
-									</tr>
+									</tr> -->
 									<tr class="cart_total_price cart_last_tr">
 										<td class="total_price_container" id="total_price_container">
-											Total
+											Total Amount
 										</td>
 										<td class="price" id="total_price">
 											${{ReturnTotal()}}
@@ -93,7 +93,7 @@
 											<div class="clearfix insset-bottom">
 												<span class="title-th">Unit price:</span>
 												<span class="price" id="product_price_1_0_0">
-													<span style="text-decoration:line-through; display:inline-block; padding-right:5px;">${{Items.productInfo.comparePrice}}</span>
+													<span style="text-decoration:line-through; display:inline-block; padding-right:5px;" ng-if="Items.productInfo.comparePrice">${{Items.productInfo.comparePrice}}</span>
 													${{Items.productInfo.productPrice}}
 												</span>
 											</div>

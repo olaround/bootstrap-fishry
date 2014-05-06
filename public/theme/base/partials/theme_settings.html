@@ -655,6 +655,48 @@
                       </tr>
                     </tbody>
                   </table>
+                  <table class="standard-table">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <!--<input type="button" value="Add Slide" ng-click="addSlide()" >-->
+                        </td>
+                        <td>
+                          Show?
+                        </td>
+                        <td>
+                          Image
+                        </td>
+                        <td>
+                          Links to
+                        </td>
+                        <td>
+                          ALT text
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label>
+                            Promotion Banner
+                          </label>
+                        </td>
+                        <td>
+                          <input  type="checkbox"  ng-model="Theme.promotion_1_show" name="slide_1" value="1">
+                        </td>
+                        <td>
+                          <input class="files" id="Theme.promotion_1_img" type="file" accept="image/*" />
+                          <img src="{{Theme.promotion_1_img}}" ng-show="Theme.promotion_1_img" width="100" />
+                          
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.promotion_1_link" name="promotion_1_link" placeholder="http://www.example.com">
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.promotion_1_alt" name="promotion_1_alt" placeholder="Trees">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                   
                   
                   
