@@ -15,32 +15,46 @@ var formidable = require('formidable');
 
 var app = express();
 app.configure(function () {
+  console.log(process.env.PORT);
   app.use(express.bodyParser({limit: '10mb'}));
+  app.set('port', process.env.PORT || 3000);
+  app.use(function(req, res, next) {
+  req.setMaxListeners(0); 
+  var url = req.protocol + '://' + req.get('host') + req.originalUrl;
+  var BaseUrl = req.get('host').split('.');
+	app.locals.store = '12345';
+	app.locals.ThemeFolder = 'public/themes/'+BaseUrl[0]+'/';
+	app.locals.ThemeFolderPath =  'public/themes/'+BaseUrl[0]+'/active/views/';
+	app.locals.ThemeFolderPathBase =  '/themes/'+BaseUrl[0]+'/active/base/';	
+	app.locals.ThemeFolderPathBaseAdmin =  '/themes/'+BaseUrl[0]+'/active/base/partials/';	
+	app.locals.EjsFilePath = 'themes/'+BaseUrl[0]+'/active/views/';
+	app.locals.storeName = BaseUrl[0];
+  
+  	app.set('views', path.join(__dirname, 'public'));
+	app.use(express.static(path.join(__dirname, 'public')));
+	app.set('view engine', 'ejs');
+	app.use(express.favicon());
+	app.use(express.logger('dev'));
+	app.use(express.json());
+	app.use(express.urlencoded());
+	app.use(express.methodOverride());
+	app.use(app.router);
+  
+  next()
+})
+
 });
 
 
 
 // all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'public/theme/views'));
-app.set('view engine', 'ejs');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public/theme/base')));
+
 
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-app.all('*', function(req, res, next) {
-	app.locals.store = '12345';
-	app.locals.ThemeFolderPathBase =  '/';	
-  next()
-})
+
 app.get('/', routes.index);
 app.get('/product', routes.product);
 app.get('/product/:id', routes.product_any);

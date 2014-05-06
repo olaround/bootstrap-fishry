@@ -1,57 +1,88 @@
-
-/*
- * GET home page.
- */
-
-exports.index = function(req, res){
-  res.render('index', { title: 'Home',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+var express = require('express');
+var request = require('request');
+var app = express();
+var renderApp = function(req, res){	
+	request('http://ae-commerce.azure-mobile.net/api/fishrysdk?store_id='+req.app.locals.storeName, function (error, response, body) {
+	  if (!error && response.statusCode == 200) {
+		  console.log('http://ae-commerce.azure-mobile.net/api/fishrysdk?store_id='+req.app.locals.storeName);
+		var dataBody = JSON.parse(body);
+				app.locals.app_storeId = dataBody.storeID;
+				app.locals.app_theme = dataBody.theme;
+				app.locals.app_settings_general = dataBody.settings_general;
+		var data = {
+			title: 'Home',
+			StoreId: res.app.locals.store,
+			BaseUrl:res.app.locals.ThemeFolderPathBase,
+			storeId:app.locals.app_storeId,		
+			theme:app.locals.app_theme,		
+			settings:app.locals.app_settings_general,		
+			meta: {
+				fragment: "!",
+				keywords: "Fishry, Online, Store, Angular, Azure, Node.js, Express",
+				description: "Fishry Online Store",
+				image: "http://cdn.shopify.com/s/images/admin/no-image-large.gif?87fcfef5f03b1084632f0a98b53e2285f5c5c37e"
+			}
+		};
+		res.render(res.app.locals.EjsFilePath+'index', data);
+		
+	  }
+	})
+}
+exports.index = function(req, res){	
+  renderApp(req,res);
 };
 exports.product = function(req, res){
-  res.render('index', { title: 'Product',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
 exports.product_any = function(req, res){
-  res.render('index', { title: 'Product Detail',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
 exports.product_detail = function(req, res){
-  res.render('index', { title: 'Product Detail',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
 exports.collection_list = function(req, res){
-  res.render('index', { title: 'Collection List',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
 exports.collection = function(req, res){
-  res.render('index', { title: 'Collection',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
 exports.page = function(req, res){
-  res.render('index', { title: 'Page',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
 exports.search_page = function(req, res){
-  res.render('index', { title: 'Search',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
+
 exports.cart = function(req, res){
-  res.render('index', { title: 'Cart',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
+exports.confirm = function(req, res){
+  renderApp(req,res);
+};
+
 exports.login = function(req, res){
-  res.render('index', { title: 'Login',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
 exports.signup = function(req, res){
-  res.render('index', { title: 'Signup',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
 
 exports.account = function(req, res){
-  res.render('index', { title: 'Account',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
 exports.checkout = function(req, res){
-  res.render('index', { title: 'Checkout',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
 exports.confirm_screen = function(req, res){
-  res.render('index', { title: 'Confirm',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
 exports.thankyou = function(req, res){
-  res.render('index', { title: 'Thankyou',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
 exports.notFound = function(req, res){
-  res.render('index', { title: 'Not Founds',StoreId:res.app.locals.store, BaseUrl: res.app.locals.ThemeFolderPathBase });
+  renderApp(req,res);
 };
+
 
 
 
