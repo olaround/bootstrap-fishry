@@ -1,38 +1,45 @@
-				<div class="footer-bg-mob">
-					<footer class="container">
-						<div class="row modules">
-							<!-- Block categories module -->
-							<section class="block block_category_footer span3">
-								<h4>Categories</h4>
-								<ul class="toggle_content list-footer tree dhtml" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
-
-									<li ng-repeat="Nav in Navigation.link_list" ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
-										<a href="{{Nav.commaSeprated}}"><i class="icon-double-angle-right"></i>{{Nav.name}}</a>
+    <hr>
+<div class="row clearfix">
+							<div class="col-md-12 column">
+							  <div class="row clearfix">
+								<div class="col-md-4 column">
+								  <h3>
+									News</h3>
+								  <p><strong><a href="" title="">Latest News</a></strong></p>
+								  <p>This is your store&rsquo;s blog. You can use it to talk about new product launches, experiences, tips or other news you want your customers to read about. You can check...</p>
+								</div>
+								<div class="col-md-4 column">
+								  <h3>
+									Quick Links</h3>
+								  <ul>
+									
+									<li>
+									  <a href="page/about-us">About Us</a>
 									</li>
-								</ul>
+								  </ul>
+								</div>
+								<div class="col-md-4 column">
+								  <h3>
+									Follow Us</h3>
+									<ul>
+									 <li>Fb</li>
+									 <li> Twitter</li>
+								   </ul>
+									<p>&nbsp;</p>
+								</div>
+							  </div>
+							</div>
+						  </div>	
+<div class="row clearfix">
+                        <div class="col-md-12 column" align="center">
+                          <address>
+                          Copyright © 2014 ae-store | <a href="//fishry.com" target="_blank">This website runs on ae-Commerce</a>
+                          </address>
+ </div>
+</div>
+</div>
 
-							</section>
-							<!-- /Block categories module -->
-
-
-							<!-- MODULE Block footer -->
-							<section class="block blockcms_footer span3">
-								<h4 class="toggle">Information</h4>
-								<ul class="toggle_content list-footer tree dhtml" ng-repeat="Navigation in ListNavigation | filter : 'static-pages'">
-
-									<li ng-repeat="Nav in Navigation.link_list" ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}">
-										<a href="{{Nav.commaSeprated}}"><i class="icon-double-angle-right"></i>{{Nav.name}}</a>
-									</li>
-								</ul>
-
-							</section>
-
-
-							<section class="bottom_footer">&copy; 2014 Powered by <a target="_blank" href="www.bramerz.pk">Bramerz</a>&trade;</section>
-						</div>
-					</footer>
-				</div>
-			</div>
-		</div>
-	</body>
+<% include footer_resources %>
+  
+</body>
 </html>

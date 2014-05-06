@@ -1,85 +1,50 @@
-<!--  Route2Health -->
-
-<div class="content_bg">
-	<div id="columns" class="container ">
-		<div class="row">
-			<div class="loader_page">
-				<div id="center_column" class="span9">
-
-					<section class="addhomefeatured" ng-repeat="collection in ListCollection">
-						<section ng-show="(collection.collectionName != 'Frontpage')">
-							<h4 ng-if="ProductCount(collection.collectionName,'Frontpage')">
-								<a href="/collections/{{collection.collectionUrl}}">
-									<span>{{collection.collectionName}}</span>
-								</a>
-							</h4>
-							<ul class="row">
-								<li class="ajax_block_product span3" ng-repeat="products in ListProduct | CustomFilter:{collection:'Frontpage'} | CustomFilter:{collection:collection.collectionName} | filter:Search" ng-class="{clearBoth: ($index + 1)%4 == 0}">
-									<div class="featured_li" ng-controller="GlobalCtrl">
-										<a class="product_image" href="./product/{{products.productName}}" title="{{products.productName}}" rel="tooltip" data-placement="bottom" data-original-title="{{products.productName}}">
-											<img ng-if="products.productImage[0].Image == undefined" src="/img/theme/default.jpg" alt="{{products.productName}}" class="main-img">
-											
-											<img ng-if="products.productImage[0].Image != undefined" src="{{products.productImage[0].Image}}" alt="{{products.productName}}" class="main-img">
-											
-											<img ng-if="products.productImage[1].Image != undefined" src="{{products.productImage[1].Image}}" alt="{{products.productName}}" class="next-img">
-
-											<!-- <img src="{{products.productImage[0].Image}}" ng-mouseenter="mouseEnterItem()" ng-mouseleave="mouseLeaveItem()" ng-if="mouseHover == false" alt="{{products.productName}}" class="main-img"> -->
-											
-											<!-- <img src="{{products.productImage[1].Image}}" ng-if="mouseHover == true" alt="{{products.productName}}" class="main-img"> -->
-
-										</a>
-										<div ng-controller="GlobalCtrl">
-											<h5><a class="product_link" href="./product/{{products.productName}}" title="">{{products.productName.slice(0,30)}}<span ng-if="products.productName.length > 30">....</span></a>
-											</h5>
-											<p class="product_desc">
-												<p ng-bind-html="products.productDescription.slice(0,80)"><span ng-if="products.productDescription.length > 80">....</span></p>
-											</p>
-											<div class="fleft">
-												<span class="price" ng-if="products.productPrice">
-													{{SettingGeneral.settings.currencies_format}}&nbsp;{{products.productPrice}}
-												</span>
-												<span class="price-drop-feacherd" ng-if="products.productPriceCompare">{{SettingGeneral.settings.currencies_format}}&nbsp;{{products.productPriceCompare}}</span>
-											</div>
-											<a class="exclusive ajax_add_to_cart_button btn_add_cart"  rel="ajax_id_product_1" href="javascript:void(0)" id="{{products.id}}" ng-click="addToCartEffect();addToCart(products.id,products);">
-												<span>Add to cart</span>
-											</a>
-											<a class="button" href="./product/{{products.productName}}" rel="tooltip" data-placement="bottom">View</a>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-								</li>
-							</ul>
-
-						</section>
-					</section>
-					<script>
-					$(document).ready(function() {
-						$(this).find(".addhomefeatured ul li .main-img").mouseover(function() {
-							$(this).next(".addhomefeatured ul li .next-img").stop(true, true).fadeIn(600, 'linear');
-						});
-						$(".addhomefeatured ul li .next-img").mouseleave(function() {
-							$(".addhomefeatured ul li .next-img").stop(true, true).fadeOut(600, 'linear');
-						});
-					});
-					</script>
-
-				</div>
-
-				<aside id="right_column" class="span3">
-
-					<section id="manufacturers_block_left" class="block blockmanufacturer column_box" ng-include src="'partials/sidebar.html'">
-					</section>
-				</aside>
-			</div>
-		</div>
-	</div>
-</div>
-
-<script type="text/javascript">
-	$(function(){
-		$('.product_image img').click(function(){
-			console.log('qwerty');
-			// alert('asas');
-		});
-	});
-</script>
+<div class="row clearfix">
+						<div class="col-md-12 column">
+						  <div class="row" ng-repeat="collection in ListCollection">
+						 <div ng-show="(collection.collectionName != 'Frontpage')">
+                          <div class="col-lg-12" ng-if="ProductCount(collection.collectionName,'Frontpage')">
+                            	<h3>{{collection.collectionName}}</h3>
+                          </div>
+							<div class="col-md-4"  ng-repeat="products in ListProduct | CustomFilter:{collection:'Frontpage'} | CustomFilter:{collection:collection.collectionName} | filter:Search">
+							 
+                              <div class="thumbnail">
+								<a href="./product/{{products.productUrl}}"><img alt="{{products.productName}}" src="{{products.productImage[0].Image}}"></a>
+								<div class="caption">
+								  <h4>
+									<a href="./product/{{products.productUrl}}">
+                                    			{{products.productName}}
+                                    </a>
+                                  </h4>                                   
+                                    <h5 ng-if="!products.productMultiOptions">(Rs {{products.productPrice}}) <span  ng-if="products.productPriceCompare"><strike>(Rs {{products.productPriceCompare}})</strike></span></h5>
+                                     <h5 ng-if="products.productMultiOptions">(Rs {{returnPrice(products)}}) <span ng-if="products.productPriceCompare"><strike>(Rs {{products.productPriceCompare}})</strike></span></h5>
+                                   
+								  <p>
+                                 <form name="addtoCart" ng-submit="addToCart(products.id,products);animateCartItem(this,products.productName);">
+                                      <input class="input input-small"  min='1' ng-model="products.productQuantity" type="number" >
+                                      <div ng-if="products.productMultiOptions">
+                                          <div class="section_attribute" style="width:100px;"  ng-repeat="valueSize in products.productMultiOptionsList">
+                                            <select required ng-model="products.productVarientModel[valueSize.name]" name="color" style="width:150px;margin:10px 0;">
+                                              <option value="">Select {{valueSize.name}}</option>
+                                              <option   ng-repeat="parms in valueSize.value" value="{{parms}}" ng-show="parms">{{parms}}</option>
+                                            </select>
+                                          </div>
+                                      </div>
+                                      <input type="submit" value="Add" name="submit" />
+                                  </form>
+								  </p>
+								</div>
+							  </div>
+                              <div class="clearfix"></div>
+							</div>
+                             <div class="clearfix"></div>
+                             
+                             
+                             </div>
+                             
+						  </div>
+                          
+                           
+						</div>
+					  </div>
+                      
+                    

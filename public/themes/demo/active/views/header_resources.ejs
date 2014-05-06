@@ -5,16 +5,16 @@
 
 <!--Angular Resources-->
 <script type="text/javascript" src="<%= BaseUrl %>js/lib/angular/angular.min.js"></script>
-<script type="text/javascript" src="<%= BaseUrl %>js/lib/angular/angular-sanitize.min.js"></script>
-<script type="text/javascript" src="<%= BaseUrl %>js/lib/angular/angular-resource.min.js"></script>
-<script type="text/javascript" src="<%= BaseUrl %>js/lib/angular/angular-cookies.min.js"></script>
 <script type="text/javascript" src="<%= BaseUrl %>js/module.js"></script>
 
-
 <!--Azure Sdk-->
-<script type="text/javascript" src="//fishry.com/js/lib/azure/MobileServices.Web-1.0.0.min.js"></script>
-<script type="text/javascript" src="//fishry.com/js/lib/azure/azure.js"></script>
-<script type="text/javascript" src="//fishry.com/js/lib/azure/ae-sdk.js"></script>
+<script type="text/javascript" src="//fishry.com/frontend/js/lib/azure/MobileServices.Web-1.0.0.min.js"></script>
+<script type="text/javascript" src="//fishry.com/frontend/js/lib/azure/azure.js"></script>
+<!--<script type="text/javascript" src="//fishry.com/frontend/js/lib/azure/ae-sdk.js"></script>-->
+<script type="text/javascript" src="<%= BaseUrl %>js/ae-sdk.js"></script>
+
+
+
 
 <!--Theme Resources Angular JS-->
 <script type="text/javascript" src="<%= BaseUrl %>js/controllers/global.js"></script>
@@ -29,8 +29,12 @@
 <script type="text/javascript" src="<%= BaseUrl %>js/controllers/thank.js"></script>
 <script type="text/javascript" src="<%= BaseUrl %>js/controllers/404.js"></script>
 
+<!--Theme Resources Bootstrap -->
+<link href="//bootswatch.com/united/bootstrap.min.css" rel="stylesheet">
+
+
 <link href="<%= BaseUrl %>css/theme/style.css" rel="stylesheet">
-<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%= BaseUrl %>js/lib/theme/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%= BaseUrl %>js/lib/theme/ui-bootstrap-tpls-0.10.0.min.js"></script>
 
 

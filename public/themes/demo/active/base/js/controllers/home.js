@@ -1,5 +1,5 @@
 // JavaScript Document
-function HomeCtrl($scope,$location,$rootScope,$timeout){
+function HomeCtrl($scope,$location,$rootScope){
 	$rootScope.locationParam = [];
 	var locationsParam = $scope.$location.path().split('/');	
 	$.each(locationsParam,function(index,item){
@@ -7,8 +7,4 @@ function HomeCtrl($scope,$location,$rootScope,$timeout){
 			$rootScope.locationParam.push(item);
 		}
 	});
-
-	$rootScope.addToCartEffect = function(){
-		$("html, body").animate({ scrollTop: $("body").offset().top }, 1000);
-	}
 }

@@ -1,8 +1,9 @@
 // JavaScript Document
 function CollectionCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,$cookies) {	
+   $scope.routeParam = $routeParams.CollectionName;
 	$scope.init = function(){
 		$scope.startFromPage = 0;
-		$scope.pageSize = 4;
+		$scope.pageSize = 2;
 	}
 	$rootScope.locationParam = [];	
 	var locationsParam = $scope.$location.path().split('/');	
@@ -11,12 +12,7 @@ function CollectionCtrl($scope,$location,AzureMobileClient,$rootScope,$routePara
 			$rootScope.locationParam.push(item);
 		}
 	});
-
-	$rootScope.addToCartEffect = function(){
-		$("html, body").animate({ scrollTop: $("body").offset().top }, 1000);
-	}
-
-	$scope.routeParam = $routeParams.CollectionName;
+	
 	console.log('start');
 	$scope.nextPage = function(){
 		$scope.startFromPage = $scope.startFromPage + 1;
