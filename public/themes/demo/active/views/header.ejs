@@ -11,25 +11,28 @@
 " />
         <% } %>
           <% } %>
-            <title ng-bind="title">
-              <%= title %>
+              <title ng-bind="title">
+                 <%= title %>
               </title>
-              <% include header_resources %>
+            
 			  
                <script>
 			  	var StoreID = '<%= StoreId %>';
 				var BaseUrl = '<%= BaseUrl %>';
 				var storeName = '<%= storeName %>';
+				var Theme = false;
+				var SettingGeneral  = false;
 			    
 			  </script> 
-			  <% if(settingsGeneral.settings){ %>
+			  <% if(typeof(settingsGeneral) != "undefined"){
+			  	if(settingsGeneral.settings){ %>
 			   <% googleAnaylitics =  settingsGeneral.settings %>
 			    <% if(googleAnaylitics['analyticsSnippet']){ %>
 			   <%- renderScriptsTags(googleAnaylitics['analyticsSnippet']) %>
 			   <% } %>
-			    <% } %>
+			    <% }} %>
               </head>
-              <body id="index" >
+              <body id="index">
 			  <div id='loadingbar'></div>
 			  <!--<div id="Loader" style="position:fixed;left:0;top:0;padding:5px;">loading...</div>-->
 				<div class="container" style="display:none;">
@@ -47,33 +50,25 @@
                                            <thead> 
                                             <tr>
                                                 <th class="col-md-4">Product Name</th>
-                                                <th class="col-md-4">Orignal Price</th>
-                                                <th class="col-md-4">New Price</th>
+                                                <th class="col-md-4">Price</th>
                                                 <th class="col-md-4">Quantity</th>
                                                 <th class="col-md-4">Total Price</th>
                                                 <th class="col-md-4">Action</th>
                                             </tr>
                                             </thead> 
                                             <tbody ng-repeat="(keyMain,Itemss) in Cart track by $index">
-                                            <tr ng-show="Itemss.productID"> 
-                                                 
+                                            <tr ng-show="Itemss.productID">
                                                 <td class="col-md-4">{{Itemss.productInfo.productName}} </td>
-                                                <td class="col-md-4">Rs. {{Itemss.productInfo.productPrice}}</td>
-                                                <td class="col-md-4" ng-hide="Itemss.productInfo.newPrice"> - </td>
-                                                <td class="col-md-4" ng-show="Itemss.productInfo.newPrice">Rs. {{Itemss.productInfo.newPrice}}</td>
-                                                <td class="col-md-4"><input style="width:62px;"  min='1'  ng-model="Itemss.quantity" type="number" ></td>
-                                                <td class="col-md-4" ng-hide="Itemss.productInfo.newPrice">Rs. {{Itemss.productInfo.productPrice * Itemss.quantity}}</td>
-                                                <td class="col-md-4" ng-show="Itemss.productInfo.newPrice">Rs. {{Itemss.productInfo.newPrice * Itemss.quantity}}</td>
+                                                <td class="col-md-4">Rs. {{itm.price}}</td>
+                                                <td class="col-md-4"><input style="width:62px;" ng-change="changeQuantity()"   min='1'  ng-model="Itemss.quantity" type="number" ></td>
+                                                <td class="col-md-4">Rs. {{Itemss.price * Itemss.quantity}}</td>
                                                 <td><span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Itemss.productID,false)"></span></td>
                                             </tr>
                                             <tr ng-hide="Itemss.productID" ng-repeat="(key,itm) in Itemss track by $index"> 
                                                 <td class="col-md-4">{{itm.productInfo.productName}} - ( {{key}} )</td>
-                                                <td class="col-md-4">Rs. {{itm.productInfo.productPrice}}</td>
-                                                <td class="col-md-4" ng-hide="itm.productInfo.newPrice"> - </td> 
-                                                <td class="col-md-4" ng-show="itm.productInfo.newPrice">Rs. {{itm.productInfo.newPrice}}</td>
-                                                <td class="col-md-4"><input style="width:62px;"  min='1'  ng-model="itm.quantity" type="number" ></td>
-                                                <td class="col-md-4" ng-hide="itm.productInfo.newPrice">Rs. {{itm.productInfo.productPrice * itm.quantity}}</td>
-                                                <td class="col-md-4" ng-show="itm.productInfo.newPrice">Rs. {{itm.productInfo.newPrice * itm.quantity}}</td>
+                                                <td class="col-md-4">Rs. {{itm.price}}</td>
+                                                <td class="col-md-4"><input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="itm.quantity" type="number" ></td>
+                                                <td class="col-md-4">Rs. {{itm.price * itm.quantity}}</td>
                                                 <td>{{}}<span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(itm.productID,key)"></span></td>
                                              </tr>
                                             </tbody>
@@ -97,7 +92,7 @@
 				  <div class="row clearfix">
                           <div class="page-header">
                                  <div class="pull-left">
-                                     <h1> <img width="100" alt="Logo" src="<%= BaseUrl %>img/theme/logo.png">Fishry <small>welcome to demo store</small></h1>
+                                     <h1> <img width="100" alt="Logo" src="<%= BaseUrl %>img/theme/logo.png"> <small>welcome to demo store</small></h1>
                                 </div>
                                  <div class="pull-right">
                                 <span>Customer Info  :</span>

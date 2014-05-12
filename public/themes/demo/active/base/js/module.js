@@ -1,7 +1,7 @@
-var aeCommerce = angular.module('aeCommerce', ['ngCookies','ngResource','ui.bootstrap','ngSanitize','App.filters'])
+var aeCommerce = angular.module('aeCommerce', ['ngCookies','ngResource','ui.bootstrap','ngSanitize','App.filters','compile'])
 	.config(aeCommerceRouter);
 
-function aeCommerceRouter ($routeProvider,$locationProvider,$provide) {
+function aeCommerceRouter ($routeProvider,$locationProvider,$provide,$compileProvider) {
 	console.log($routeProvider);
 	$routeProvider
 		.when('/', {
@@ -59,12 +59,21 @@ function aeCommerceRouter ($routeProvider,$locationProvider,$provide) {
 			controller: '',
 			title : storeName+ ' | Page Not Found'
 		 });
-		 $locationProvider.html5Mode(true).hashPrefix('navigate');		 
+		 $locationProvider.html5Mode(true).hashPrefix('navigate');	
+		 	 	 
 }
 
 aeCommerce.run(['$location', '$rootScope', function($location, $rootScope) {
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-        $rootScope.title = current.$$route.title;
+		var addedTitle = '';
+		if(current.params.CollectionName){
+			addedTitle = ' | '+current.params.CollectionName;
+		}
+		if(current.params.ProductSlug){
+			addedTitle = ' | '+current.params.ProductSlug;
+		}
+		console.log(current);
+        $rootScope.title = current.$$route.title + addedTitle;
     });
 	
 }]);
@@ -107,4 +116,27 @@ aeCommerce.directive('tagInput', function() {
 	}
 });
 
+ var compile = angular.module('compile', [], function($compileProvider) {
+	$compileProvider.directive('compile', function($compile) {
+      // directive factory creates a link function
+      return function(scope, element, attrs) {
+        scope.$watch(
+          function(scope) {
+             // watch the 'compile' expression for changes
+            return scope.$eval(attrs.compile);
+          },
+          function(value) {
+            // when the 'compile' expression changes
+            // assign it into the current DOM
+            element.html(value);
 
+            // compile the new DOM and link it to the current
+            // scope.
+            // NOTE: we only compile .childNodes so that
+            // we don't get into infinite loop compiling ourselves
+            $compile(element.contents())(scope);
+          }
+        );
+      };
+    })
+});

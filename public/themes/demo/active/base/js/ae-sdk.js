@@ -1,9 +1,9 @@
 // JavaScript Document
-window.appInsights={queue:[],applicationInsightsId:null,accountId:null,appUserId:null,configUrl:null,start:function(n){function u(n,t){n[t]=function(){var i=arguments;n.queue.push(function(){n[t].apply(n,i)})}}function f(n){var t=document.createElement("script");return t.type="text/javascript",t.src=n,t.async=!0,t}function r(){i.appendChild(f("//az416426.vo.msecnd.net/scripts/ai.0.js"))}var i,t;this.applicationInsightsId=n;u(this,"logEvent");u(this,"logPageView");i=document.getElementsByTagName("script")[0].parentNode;this.configUrl===null?r():(t=f(this.configUrl),t.onload=r,t.onerror=r,i.appendChild(t));this.start=function(){}}};
+/*window.appInsights={queue:[],applicationInsightsId:null,accountId:null,appUserId:null,configUrl:null,start:function(n){function u(n,t){n[t]=function(){var i=arguments;n.queue.push(function(){n[t].apply(n,i)})}}function f(n){var t=document.createElement("script");return t.type="text/javascript",t.src=n,t.async=!0,t}function r(){i.appendChild(f("//az416426.vo.msecnd.net/scripts/ai.0.js"))}var i,t;this.applicationInsightsId=n;u(this,"logEvent");u(this,"logPageView");i=document.getElementsByTagName("script")[0].parentNode;this.configUrl===null?r():(t=f(this.configUrl),t.onload=r,t.onerror=r,i.appendChild(t));this.start=function(){}}};
 
 appInsights.start("e6755802-e3e3-448c-b682-cbb443f40be5");
-appInsights.logPageView();
-function AECtrl ($rootScope,$location,AzureMobileClient,$routeParams,$cookies) {
+appInsights.logPageView();*/
+function AECtrl ($rootScope,$location,AzureMobileClient,$routeParams,$cookies,$http) {
 	//alert(localStorage.getItem('myFirstKey'));
 	//console.log($routeParams);
 	$rootScope.$location = $location;	
@@ -17,11 +17,15 @@ function AECtrl ($rootScope,$location,AzureMobileClient,$routeParams,$cookies) {
 	$rootScope.SettingShippingCountry = {};
 	$rootScope.SettingShipping = {};
 	$rootScope.BaseUrl = BaseUrl;
+	$rootScope.storeName = storeName;
 	$rootScope.StartLogin = false;
 	$rootScope.StartSignup = false;
 	$rootScope.StartSubmitOrder = false;
 	$rootScope.LoadPositions = 10;
-	$rootScope.Incremetor = 8;
+	$rootScope.Incremetor = 10;
+	$rootScope.dt = new Date();
+	$rootScope.emailBody = '';
+	$rootScope.emailTo = '';
 	
 	$rootScope.Customer = {};
 	$rootScope.ErrorLogin = false;
@@ -48,6 +52,7 @@ function AECtrl ($rootScope,$location,AzureMobileClient,$routeParams,$cookies) {
 	$rootScope.SettingsGeneralTable = 'settings_general';
 	$rootScope.SettingsShippingCountryTable = 'settings_shipping_country';
 	$rootScope.SettingsShippingTable = 'settings_shipping';
+	$rootScope.SettingsNotificationTable = 'settings_notification';
 
 //Main Scopes Names	
 	$rootScope.ThemeSettings = {};
@@ -59,6 +64,7 @@ function AECtrl ($rootScope,$location,AzureMobileClient,$routeParams,$cookies) {
 	$rootScope.ListNavigation = {};
 	$rootScope.ListPaymentGateways = {};
 	$rootScope.ListPaymentMethod = {};
+	$rootScope.ListSettingsNotification = {};
 	
 	
 	
@@ -79,6 +85,11 @@ $rootScope.loadPositionSetter = function(){
 		
 	}
 }
+if(Theme){
+$rootScope.ThemeSettings = Theme;
+console.log($rootScope.ThemeSettings);
+$rootScope.ThemeSettings.theme_settings = JSON.parse($rootScope.ThemeSettings.theme_settings);
+}
 
 $rootScope.GetTheme = function(param){
 		AzureMobileClient.getFilterData($rootScope.ThemeTable,{theme_main:'1'}).then(
@@ -98,14 +109,17 @@ $rootScope.GetSettingShippingCountry = function(param){
 		AzureMobileClient.getFilterData($rootScope.SettingsShippingCountryTable,{}).then(
 			function(data) {
 				if(data.length > 0){
-					$rootScope.SettingsShippingCountryTable = data;
+					$rootScope.SettingsShippingCountry = data;
+					console.log($rootScope.SettingsShippingCountry);
 					AzureMobileClient.getFilterData($rootScope.SettingsShippingTable,{}).then(
 					function(data) {
 						if(data.length > 0){
+							console.log('Shipping');
+							console.log(data);
 							$rootScope.SettingShipping = data;
 							$.each($rootScope.SettingShipping,function(index,item){
 								var countryName = false;
-									$.each($rootScope.SettingsShippingCountryTable,function(ind,itm){
+									$.each($rootScope.SettingsShippingCountry,function(ind,itm){
 											if(item.ShippingCountryID == itm.id){
 												countryName = itm.CountryName;
 											}
@@ -116,8 +130,9 @@ $rootScope.GetSettingShippingCountry = function(param){
 										delete $rootScope.SettingShipping[index];
 									}
 							});
-							//console.log('Strat');
-							//console.log($rootScope.SettingShipping);
+							console.log('Strat');
+							console.log($rootScope.SettingShipping);
+							console.log($rootScope.SettingsShippingCountry);
 						 }
 						 $rootScope.loadPositionSetter();
 						 $rootScope.$apply();
@@ -132,7 +147,10 @@ $rootScope.GetSettingShippingCountry = function(param){
 		});
 	
 };
-
+if(SettingGeneral){
+$rootScope.SettingGeneral = SettingGeneral;
+$rootScope.SettingGeneral.settings = JSON.parse($rootScope.SettingGeneral.settings);
+}
 $rootScope.GetSettingGeneral = function(param){
 		AzureMobileClient.getFilterData($rootScope.SettingsGeneralTable,{}).then(
 			function(data) {
@@ -145,6 +163,32 @@ $rootScope.GetSettingGeneral = function(param){
 		});
 	
 };
+
+// get notification settings
+$rootScope.GetSettingNotification = function(param){
+		AzureMobileClient.getFilterData($rootScope.SettingsNotificationTable,{}).then(
+			function(data) {
+				if(data.length > 0){
+					$rootScope.ListSettingsNotification = data[0];
+					//('#emailBody').append($rootScope.ListSettingsNotification.OrderText);
+					/*console.log('here start');
+					  console.log($rootScope.ListSettingsNotification.OrderText);
+					  console.log('here end');*/
+					//$rootScope.SettingGeneral.settings = JSON.parse($rootScope.SettingGeneral.settings);
+				}
+				$rootScope.loadPositionSetter();
+				 $rootScope.$apply();
+		});
+	
+};
+$rootScope.EmilHtml  = '';
+$rootScope.emailHtml = '';
+$rootScope.addEmailTemplate= function(){
+   $rootScope.EmilHtml = $rootScope.ListSettingsNotification.OrderText;
+   $rootScope.emailHtml = $rootScope.ListSettingsNotification.OrderText;
+   console.log($rootScope.emailHtml);
+   //setTimeout(function(){$rootScope.$apply();alert(1)},3000);
+}
 	
 //Get Collections		
 $rootScope.GetCollection = function(param){
@@ -312,7 +356,7 @@ $rootScope.GetProduct = function(param){
 	});
 };
 
-$rootScope.GetTheme();
+//$rootScope.GetTheme();
 $rootScope.GetCollection();
 $rootScope.GetPaymentGateways();
 $rootScope.GetNavigation();
@@ -320,8 +364,9 @@ $rootScope.GetPage();
 $rootScope.GetProductType();
 $rootScope.GetProductVendor();
 $rootScope.GetProduct();
-$rootScope.GetSettingGeneral();
+//$rootScope.GetSettingGeneral();
 $rootScope.GetSettingShippingCountry();
+$rootScope.GetSettingNotification();
 
 
 
@@ -398,27 +443,29 @@ $rootScope.addToCart = function(productID,productInfo,redirect){
 		
 		if(counters == totalCounts){
 			var nextIds = 0;
-			$.each($rootScope.Cart , function(index,index){
-			})
 			//console.log(productID+varrientArray);
 			
 			if(!$rootScope.Cart[productID]){
 				$rootScope.Cart[productID] = {};
 				$rootScope.Cart[productID][varrientArray] = {};
-				$rootScope.Cart[productID][varrientArray] = {productID:productID,quantity:quantity,productInfo:productInfo};
+				$rootScope.Cart[productID][varrientArray] = {productID:productID,quantity:quantity,productInfo:productInfo,price:itmx.price};
+				console.log(varrientArray);
 				$rootScope.Cart[productID][varrientArray].productInfo.newPrice = itmx.price;
+				
 				//$rootScope.Cart[productID][varrientArray].productInfo.selectedVarients = varrientArray;
 			}else{
 				if($rootScope.Cart[productID][varrientArray]){
 					$rootScope.Cart[productID][varrientArray].quantity = parseInt(productInfo.productQuantity) + parseInt($rootScope.Cart[productID][varrientArray].quantity);
-				}else{
+				}else{					
 					$rootScope.Cart[productID][varrientArray] = {};
-					$rootScope.Cart[productID][varrientArray] = {productID:productID,quantity:quantity,productInfo:productInfo};
+					$rootScope.Cart[productID][varrientArray] = {productID:productID,quantity:quantity,productInfo:productInfo,price:itmx.price};
+					console.log(varrientArray);
 					$rootScope.Cart[productID][varrientArray].productInfo.newPrice = itmx.price;
+					
 					//$rootScope.Cart[productID][varrientArray].productInfo.selectedVarients = varrientArray;
 				}
 			}
-			//console.log($rootScope.Cart);
+			console.log($rootScope.Cart);
 			
 			
 		}
@@ -427,7 +474,7 @@ $rootScope.addToCart = function(productID,productInfo,redirect){
 		
 	}else{
 		if(!$rootScope.Cart[productID]){
-			$rootScope.Cart[productID] = {productID:productID,quantity:quantity,productInfo:productInfo};
+			$rootScope.Cart[productID] = {productID:productID,quantity:quantity,productInfo:productInfo,price:itmx.price};
 		}else{
 			$rootScope.Cart[productID].quantity = parseInt(productInfo.productQuantity)+ parseInt($rootScope.Cart[productID].quantity);
 		}
@@ -472,6 +519,8 @@ $rootScope.IfCart= function(){
 	}else{
 		return true;
 	}
+	
+
 }
 $rootScope.returnPrice = function(product){
 		//console.log('Strat Price return.............');
@@ -540,6 +589,24 @@ $rootScope.ReturnItems= function(){
 	});
 	return length;
 }
+$rootScope.ReturnTax= function(){	
+	var Tax= 0;
+	//console.log($rootScope.Cart);
+	if($rootScope.SettingsShippingCountry){
+		$.each($rootScope.SettingsShippingCountry,function(index,item){
+				if(item.CountryName == $rootScope.Customer.ShippingCountry){
+					if(item.TaxRate){
+						Tax = item.TaxRate;
+					}
+				}
+		});
+	}
+	return Tax;
+	
+}
+$rootScope.changeQuantity = function() {
+      $rootScope.SetLocalStorage('Cart');
+};
 $rootScope.ReturnTotal= function(){	
 	var Amount= 0;
 	//console.log($rootScope.Cart);
@@ -547,16 +614,23 @@ $rootScope.ReturnTotal= function(){
 			if(!item.productID){
 			$.each(item,function(indx, itmx){
 				if(indx != '$$hashKey'){
-					Amount += parseInt(itmx.productInfo.newPrice) * parseInt(itmx.quantity);
+					Amount += parseInt(itmx.price) * parseInt(itmx.quantity);
 				}
 			})
 		  }else{
-			   Amount += parseInt(item.productInfo.productPrice) * parseInt(item.quantity);
+			   Amount += parseInt(item.price) * parseInt(item.quantity);
 		  }
 
 	});
-	
-		 return Amount;
+		if($rootScope.ReturnTax() > 0){
+			var TaxAdd = Amount * $rootScope.ReturnTax() / 100;
+				TaxAdd = TaxAdd.toFixed(2)
+		 	var TotalAmount =  parseFloat(Amount) + parseFloat(TaxAdd);
+				TotalAmount = TotalAmount.toFixed(2);
+				return TotalAmount;
+		}else{
+			return Amount.toFixed(2);
+		}
 	
 }
 $rootScope.RemoveCartItem= function(Productid,keyId){
@@ -588,6 +662,7 @@ $rootScope.GetLocalStorage= function(Index){
 	if(Index == 'User' || Index == ''){
 		if(window.localStorage.getItem('User')){
 			$rootScope.User.info = JSON.parse(window.localStorage.getItem('User'));
+
 			$rootScope.Customer = $rootScope.User.info;
 			//console.log($rootScope.User);
 		}
@@ -682,12 +757,26 @@ $rootScope.SubmitOrder =  function(payment,redirect,clear){
 							paymentInfo: payment,
 							orderTotal:$rootScope.ReturnTotal(),
 							productInfo: JSON.stringify($rootScope.Cart),
+							taxInfo: $rootScope.ReturnTax(),
 						}
 		AzureMobileClient.addData($rootScope.OrderTable, NewOrder).then(
 			function(OrderData) {
 				$rootScope.StartSubmitOrder = false;
-			   $rootScope.OrderInfo = OrderData;
-			   if(!clear){
+			    $rootScope.OrderInfo = OrderData;
+			  console.log('em here order submitted--------');
+			  $rootScope.emailBody =  $('#emailBody').html(); 
+			  $rootScope.emailTo   =  'anum.ishtiaq@bramerz.pk';
+			   //console.log(OrderData);
+			 var dataEmail = {data: $rootScope.emailBody, email: $rootScope.emailTo};
+	         $http({method: 'POST', url: 'https://ae-commerce.azure-mobile.net/api/send_grid', data: dataEmail,		headers: {'Content-Type': 'application/json'}}).
+			success(function(data, status, headers, config) {
+			}).
+			error(function(data, status, headers, config) {
+			  console.log('error start');
+			});
+			
+			console.log('em here order submitted enddd-----');
+			 if(!clear){
 			  	 $rootScope.Cart = {};
 			   	 $rootScope.SetLocalStorage('Cart');
 			   }
@@ -697,8 +786,7 @@ $rootScope.SubmitOrder =  function(payment,redirect,clear){
 					}else{
 						$location.path(redirect);
 					}
-				   	 
-			   });
+				 });
 			},
 			function(error) {
 				//console.log("An error has occurred: " + error.message);
@@ -766,3 +854,4 @@ angular.module('App.filters', []).filter('CustomFilter', [function () {
         }
     };
 }]);
+
