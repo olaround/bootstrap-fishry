@@ -874,7 +874,7 @@
                                             <tbody ng-repeat="(keyMain,Itemss) in Cart track by $index">
                                             <tr ng-show="Itemss.productID">
                                                 <td class="col-md-4">{{Itemss.productInfo.productName}} </td>
-                                                <td class="col-md-4">Rs. {{itm.price}}</td>
+                                                <td class="col-md-4">Rs. {{Itemss.price}}</td>
                                                 <td class="col-md-4"><input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="Itemss.quantity" type="number" ></td>
                                                 <td class="col-md-4">Rs. {{Itemss.price * Itemss.quantity}}</td>
                                                 <td><span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Itemss.productID,false)"></span></td>

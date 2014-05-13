@@ -1,36 +1,17 @@
 <html ng-app="aeCommerce" ng-controller="AECtrl">
   <head>
-  <meta name="fragment" content="!">
+   <meta name="fragment" content="!">
     <base href="/">
 	<% if (typeof(meta) != "undefined") { %>
       <% for (var metaItem in meta) { %>
-		<meta name="
-<%= metaItem %>
-" content="
-<%= meta[metaItem] %>
-" />
+		<meta name="<%= metaItem %>" content="<%= meta[metaItem] %>" />
         <% } %>
           <% } %>
+		 
               <title ng-bind="title">
                  <%= title %>
               </title>
-            
-			  
-               <script>
-			  	var StoreID = '<%= StoreId %>';
-				var BaseUrl = '<%= BaseUrl %>';
-				var storeName = '<%= storeName %>';
-				var Theme = false;
-				var SettingGeneral  = false;
-			    
-			  </script> 
-			  <% if(typeof(settingsGeneral) != "undefined"){
-			  	if(settingsGeneral.settings){ %>
-			   <% googleAnaylitics =  settingsGeneral.settings %>
-			    <% if(googleAnaylitics['analyticsSnippet']){ %>
-			   <%- renderScriptsTags(googleAnaylitics['analyticsSnippet']) %>
-			   <% } %>
-			    <% }} %>
+			   <%- requireServerVars() %>
               </head>
               <body id="index">
 			  <div id='loadingbar'></div>
@@ -59,7 +40,7 @@
                                             <tbody ng-repeat="(keyMain,Itemss) in Cart track by $index">
                                             <tr ng-show="Itemss.productID">
                                                 <td class="col-md-4">{{Itemss.productInfo.productName}} </td>
-                                                <td class="col-md-4">Rs. {{itm.price}}</td>
+                                                <td class="col-md-4">Rs. {{Itemss.price}}</td>
                                                 <td class="col-md-4"><input style="width:62px;" ng-change="changeQuantity()"   min='1'  ng-model="Itemss.quantity" type="number" ></td>
                                                 <td class="col-md-4">Rs. {{Itemss.price * Itemss.quantity}}</td>
                                                 <td><span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Itemss.productID,false)"></span></td>
@@ -92,7 +73,7 @@
 				  <div class="row clearfix">
                           <div class="page-header">
                                  <div class="pull-left">
-                                     <h1> <img width="100" alt="Logo" src="<%= BaseUrl %>img/theme/logo.png"> <small>welcome to demo store</small></h1>
+                                     <h1> <img width="100" alt="Logo" src="{{ThemeSettings.theme_settings.logo_img}}"> <small>{{SettingGeneral.name}}</small></h1>
                                 </div>
                                  <div class="pull-right">
                                 <span>Customer Info  :</span>
@@ -125,14 +106,20 @@
                                 </div>
                                 
                                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								
                                   <ul class="nav navbar-nav" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
-                                    <li ng-repeat="Nav in Navigation.link_list"  ng-class="{active:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
+                                     <li ng-repeat="Nav in Navigation.link_list"  ng-class="{active:  $location.path() == '/'}" ng-show="Nav.optionSelected == 'frontpage'">
+                                      <a href="/"  >
+                                        {{Nav.name}}
+                                      </a>
+                                    </li>
+									<li ng-repeat="Nav in Navigation.link_list"  ng-class="{active:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
                                       <a href="{{Nav.commaSeprated}}"  >
                                         {{Nav.name}}
                                       </a>
                                     </li>
                                     <li ng-repeat="Nav in Navigation.link_list"  ng-class="{active:  $location.path().indexOf('{{Nav.http}}') >= 0}" ng-show="Nav.http">
-                                      <a href="{{Nav.http}}"  >
+                                      <a href="{{Nav.http}}" target="_blank"  >
                                         {{Nav.name}}
                                       </a>
                                     </li>
