@@ -19,7 +19,22 @@ function aeCommerceRouter ($routeProvider,$locationProvider,$provide,$compilePro
 			controller: 'CollectionCtrl',
 			title : storeName+ ' | Collections' 
 		 })
+		 .when('/products/:ProductSlug', {
+			templateUrl: BaseUrl+'partials/product.html',
+			controller: 'ProductCtrl',
+			title : storeName+ ' | Product'
+		 })
+		 .when('/products', {
+			templateUrl: BaseUrl+'partials/product.html',
+			controller: 'ProductCtrl',
+			title : storeName+ ' | Product'
+		 })
 		 .when('/product/:ProductSlug', {
+			templateUrl: BaseUrl+'partials/product.html',
+			controller: 'ProductCtrl',
+			title : storeName+ ' | Product'
+		 })
+		 .when('/product', {
 			templateUrl: BaseUrl+'partials/product.html',
 			controller: 'ProductCtrl',
 			title : storeName+ ' | Product'
@@ -34,6 +49,11 @@ function aeCommerceRouter ($routeProvider,$locationProvider,$provide,$compilePro
 			controller: '',
 			title : storeName+ ' | Confirm Order'
 		 })
+		  .when('/search', {
+			templateUrl: BaseUrl+'partials/search.html',
+			controller: 'SearchCtrl',
+			title : storeName+ ' | Confirm Order'
+		 })
 		 .when('/thankyou', {
 			templateUrl: BaseUrl+'partials/thankyou.html',
 			controller: '',
@@ -41,12 +61,32 @@ function aeCommerceRouter ($routeProvider,$locationProvider,$provide,$compilePro
 		 })
 		 .when('/login', {
 			templateUrl: BaseUrl+'partials/login.html',
-			controller: '',
+			controller: 'LoginCtrl',
+			title : storeName+ ' | Login'
+		 })
+		 .when('/forgot_password', {
+			templateUrl: BaseUrl+'partials/forgot_password.html',
+			controller: 'ForgotCtrl',
+			title : storeName+ ' | Login'
+		 })
+		 .when('/reset_password', {
+			templateUrl: BaseUrl+'partials/reset_password.html',
+			controller: 'ResetCtrl',
+			title : storeName+ ' | Login'
+		 })
+		  .when('/account_info', {
+			templateUrl: BaseUrl+'partials/account_info.html',
+			controller: 'AccountCtrl',
+			title : storeName+ ' | Login'
+		 })
+		  .when('/orders', {
+			templateUrl: BaseUrl+'partials/orders.html',
+			controller: 'OrdersCtrl',
 			title : storeName+ ' | Login'
 		 })
 		 .when('/signup', {
 			templateUrl: BaseUrl+'partials/signup.html',
-			controller: '',
+			controller: 'SignupCtrl',
 			title : storeName+ ' | Signup'
 		 })
 		 .when('/page/:PageUrl', {

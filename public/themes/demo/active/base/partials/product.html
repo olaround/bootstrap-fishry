@@ -1,5 +1,5 @@
 <div class="row clearfix">
-		<div class="col-md-12 column" ng-repeat="(key,product) in ListProduct | CustomFilter:{productUrl : routeParam}">
+		<div class="col-md-12 column" ng-animate="'animate'" ng-repeat="(key,product) in ListProduct | CustomFilter:{productUrl : routeParam}">
             <h3>
 				{{product.productName}}
 			</h3>
@@ -28,16 +28,18 @@
                 <div class="col-md-6 column">
                 <h1>Buy Product</h1>
                 <hr />
+               
+                <h5 ng-if="!product.productMultiOptions">(Rs {{product.productPrice}}) <span  ng-if="product.productPriceCompare"><strike>(Rs {{product.productPriceCompare}})</strike></span></h5>
+                <h5 ng-if="product.productMultiOptions">(Rs {{returnPrice(product)}}) <span ng-if="product.productPriceCompare"><strike>(Rs {{product.productPriceCompare}})</strike></span></h5>
+                                          
                 <form name="addtoCart" ng-submit="addToCart(product.id,product)">
                   <label>Select Quantity</label><br />
                   <input class="input input-small"  min='1' ng-model="product.productQuantity" type="number" >
                   <div ng-if="product.productMultiOptions">
                       <div class="section_attribute" style="width:100px;"  ng-repeat="valueSize in product.productMultiOptionsList">
-                        <select required ng-model="product.productVarientModel[valueSize.name]" name="color" style="width:150px;margin:10px 0;" >
+                        <select ng-options="parms as parms for parms in valueSize.value" required ng-model="product.productVarientModel[valueSize.name]" name="color" style="width:150px;margin:10px 0;" >
                            <option  value=""> Select {{valueSize.name}} </option>
-                          <option ng-repeat="parms in valueSize.value" value="{{parms}}">
-                            {{parms}} 
-                          </option>
+                         <!-- <option ng-repeat="parms in valueSize.value" value="{{parms}}">{{parms}} </option>-->
                         </select>
                       </div>
                   </div>

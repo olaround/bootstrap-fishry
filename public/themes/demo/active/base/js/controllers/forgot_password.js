@@ -1,5 +1,5 @@
 // JavaScript Document
-function SignupCtrl($scope,$location,$rootScope){
+function LoginCtrl($scope,$location,$rootScope){
 	$rootScope.locationParam = [];
 	var locationsParam = $scope.$location.path().split('/');	
 	$.each(locationsParam,function(index,item){
@@ -8,4 +8,3 @@ function SignupCtrl($scope,$location,$rootScope){
 		}
 	});
 }
-

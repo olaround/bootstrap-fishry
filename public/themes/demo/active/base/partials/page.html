@@ -1,5 +1,5 @@
 <div class="row clearfix">
-		<div class="col-md-12 column" ng-repeat="page in ListPage | CustomFilter:{pageUrl : routeParam}">
+		<div class="col-md-12 column" ng-animate="'animate'" ng-repeat="page in ListPage | CustomFilter:{pageUrl : routeParam}">
 			<div class="jumbotron">
 				<h1>
 					{{page.pageName}}

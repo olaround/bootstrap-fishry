@@ -1,4 +1,4 @@
-<div class="row clearfix" ng-init="addEmailTemplate()">
+<div class="row clearfix"> 
 		<div class="col-md-12 column" ng-show="IfCart()">
                    <form role="form" ng-submit="SubmitOrder(PaymentMethod,'/thankyou')">
                                      <div class="col-md-6">  
@@ -59,9 +59,8 @@
                                     </div>
                                     <div class="form-group">
                                          <label >Country <small>(Price may vary on shipping country as it can change taxation) </small></label>
-                                         <select  ng-model="Customer.ShippingCountry"   class="form-control" >
+                                         <select ng-options="country.CountryName as country.CountryName for country in SettingsShippingCountry"  ng-model="Customer.ShippingCountry"   class="form-control" >
                                             <option  value="">Select Country</option>
-                                            <option ng-repeat="country in SettingsShippingCountry" value="{{country.CountryName}}">{{country.CountryName}}</option>
                                          </select>
                                     </div>
                                      <div class="form-group">
@@ -835,25 +834,29 @@
                                                     <option value="">Payment Method</option>
                                                     <option ng-repeat="payment in ListPaymentMethod">{{payment.name}}</option>
                                                 </select>
+                                       </div>
+                                       <div class="form-group" ng-if="PaymentMethod && returnpaymentDescription(PaymentMethod)">
+                                         <label for="PaymentMethod">{{PaymentMethod}} Description</label>
+                                                <p>{{returnpaymentDescription(PaymentMethod)}}</p>
                                        </div>                                     
                                      
                                      </div>
                                      <div class="col-md-6">
                                             <div class="col-md-12" ng-if="ListPaymentGateways.refund_policy">
                                                 <div class="page-header">
-                                                                       <h1>Refund Policy</h1>
+                                                  <h1>Refund Policy</h1>
                                                </div>
                                                 <p>{{ListPaymentGateways.refund_policy}}</p>
                                             </div>
                                             <div class="col-md-12" ng-if="ListPaymentGateways.privacy_policy">
                                                 <div class="page-header">
-                                                                       <h1>Privacy Policy</h1>
+                                                  <h1>Privacy Policy</h1>
                                                </div>
                                                 <p>{{ListPaymentGateways.privacy_policy}}</p>
                                             </div>
                                             <div class="col-md-12" ng-if="ListPaymentGateways.terms_of_service">
                                                 <div class="page-header">
-                                                                       <h1>Terms of Service</h1>
+                                                  <h1>Terms of Service</h1>
                                                </div>
                                                 <p>{{ListPaymentGateways.terms_of_service}}</p>
                                             </div>
@@ -861,46 +864,84 @@
                                       <hr />
                                      <div class="col-md-12">
                                      <h1>Order Details</h1>
-                                        <table class="table">
-                                        <thead> 
+                                      <div>
+                                        <table ng-show="IfCart()" class="table">
+                                          <thead>
                                             <tr>
-                                                <th class="col-md-4">Product Name</th>
-                                                <th class="col-md-4">Price</th>
-                                                <th class="col-md-4">Quantity</th>
-                                                <th class="col-md-4">Total Price</th>
-                                                <th class="col-md-4">Action</th>
+                                              <th class="col-md-4">
+                                                Product
+                                              </th>
+                                              <th class="col-md-4">
+                                                Price
+                                              </th>
+                                              <th class="col-md-4">
+                                                Quantity
+                                              </th>
+                                              <th class="col-md-4 min200">
+                                                Total Price
+                                              </th>
+                                              <th class="col-md-4">
+                                                Action
+                                              </th>
                                             </tr>
-                                            </thead> 
-                                            <tbody ng-repeat="(keyMain,Itemss) in Cart track by $index">
+                                          </thead>
+                                          
+                                          <tbody ng-repeat="(keyMain,Itemss) in Cart track by $index">
                                             <tr ng-show="Itemss.productID">
-                                                <td class="col-md-4">{{Itemss.productInfo.productName}} </td>
-                                                <td class="col-md-4">Rs. {{Itemss.price}}</td>
-                                                <td class="col-md-4"><input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="Itemss.quantity" type="number" ></td>
-                                                <td class="col-md-4">Rs. {{Itemss.price * Itemss.quantity}}</td>
-                                                <td><span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Itemss.productID,false)"></span></td>
+                                              <td class="col-md-4">
+                                                {{Itemss.productInfo.productName}} 
+                                              </td>
+                                              <td class="col-md-4">
+                                                Rs. {{Itemss.price}}
+                                              </td>
+                                              <td class="col-md-4">
+                                                <input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="Itemss.quantity" type="number" >
+                                              </td>
+                                              <td class="col-md-4">
+                                                Rs. {{Itemss.price * Itemss.quantity}}
+                                              </td>
+                                              <td>
+                                                <span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Itemss.productID,false)">
+                                                </span>
+                                              </td>
                                             </tr>
-                                            <tr ng-hide="Itemss.productID" ng-repeat="(key,itm) in Itemss track by $index"> 
-                                                <td class="col-md-4">{{itm.productInfo.productName}} - ( {{key}} )</td>
-                                                <td class="col-md-4">Rs. {{itm.price}}</td>
-                                                <td class="col-md-4"><input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="itm.quantity" type="number" ></td>
-                                                <td class="col-md-4">Rs. {{itm.price * itm.quantity}}</td>
-                                                <td>{{}}<span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(itm.productID,key)"></span></td>
-                                             </tr>
-                                            </tbody>
+                                            <tr ng-hide="Itemss.productID" ng-repeat="(key,itm) in Itemss track by $index">
+                                              <td class="col-md-4">
+                                                {{itm.productInfo.productName}} - ( {{key}} )
+                                              </td>
+                                              <td class="col-md-4">
+                                                Rs. {{itm.price}}
+                                              </td>
+                                              <td class="col-md-4">
+                                                <input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="itm.quantity" type="number" >
+                                              </td>
+                                              <td class="col-md-4">
+                                                Rs. {{itm.price * itm.quantity}}
+                                              </td>
+                                              <td>
+                                                {{}}
+                                                <span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(itm.productID,key)">
+                                                </span>
+                                              </td>
+                                            </tr>
+                                          </tbody>
                                         </table>
+                                        </div>
                                         <div class="clearfix"></div>
                                         <hr />                                    
-                                         <div class="col-md-12"  align="right">
-                                            <h2  align="right">Tax : {{ReturnTax()}} %</h2>
+                                         <div class="col-md-12"  align="right"   ng-if="ReturnTax()">
+                                            <h2  align="right">Tax : Rs. {{ReturnTaxPrice()}} </h2>
                                             <span> Tax are dependent on shipping country</span>
+                                             <hr />   
                                         </div>
                                          <div class="clearfix"></div>
-                                         <hr />   
+                                        
                                          <div class="col-md-12"  align="right">
                                                 <h2>Total :  Rs. {{ReturnTotal()}}</h2>
+                                                 <hr /> 
                                          </div>
                                           <div class="clearfix"></div>
-                                          <hr /> 
+                                         
                                           
                                            <div class="form-group">
                                                 <a class="btn btn-info pull-left"  href="./">Continue Shopping</a>
@@ -910,13 +951,7 @@
                      </form>
         </div>
         <div class="col-md-12" ng-hide="IfCart()">
-        		<h6 align="center">No Item Found</h6>
-        </div>
-        
-	</div>
-    
+         <h6 align="center">No Item Found</h6>
+       </div>
+   </div>    
 <div> 
-
-
-<div id="emailBody" compile="emailHtml" style="display:none"></div>
-

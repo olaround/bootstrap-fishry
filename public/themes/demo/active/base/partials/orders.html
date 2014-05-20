@@ -1,0 +1,47 @@
+
+<div class="row clearfix" ng-init="LoadOrders();">
+  <div class="col-md-12 column">
+    <h1>
+      My orders
+    </h1>
+    <table ng-show="Orders" class="table">
+      <thead>
+        <tr>
+          <th class="col-md-4">
+           Order Id
+          </th>
+           <th class="col-md-4">
+           Order Total
+          </th>
+          <th class="col-md-4">
+           Payment Method 
+          </th>
+          <th class="col-md-4">
+            Status
+          </th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="(keyMain,Itemss) in Orders track by $index">
+        <tr>
+          <td class="col-md-4">
+            {{Itemss.id}} 
+          </td>
+          <td class="col-md-4">
+            Rs. {{Itemss.orderTotal}}
+          </td>
+           <td class="col-md-4">
+            Rs. {{Itemss.paymentInfo}}
+          </td>
+          <td class="col-md-4">
+            <span ng-show="Itemss.payment">Not Fullfilled</span>
+            <span ng-hide="Itemss.payment">Fullfilled</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h6 ng-hide="Orders" align="center">
+    No Order Found
+  </h6>
+</div>
+</div>

@@ -1,10 +1,6 @@
 // JavaScript Document
 function CollectionCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,$cookies) {	
-   $scope.routeParam = $routeParams.CollectionName;
-	$scope.init = function(){
-		$scope.startFromPage = 0;
-		$scope.pageSize = 2;
-	}
+    $scope.routeParam = $routeParams.CollectionName;
 	$rootScope.locationParam = [];	
 	var locationsParam = $scope.$location.path().split('/');	
 	$.each(locationsParam,function(index,item){

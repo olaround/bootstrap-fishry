@@ -2,10 +2,16 @@
   <head>
    <meta name="fragment" content="!">
     <base href="/">
-	<% if (typeof(meta) != "undefined") { %>
-      <% for (var metaItem in meta) { %>
-		<meta name="<%= metaItem %>" content="<%= meta[metaItem] %>" />
-        <% } %>
+		<% if (typeof(meta) != "undefined") { %>
+			  <% for (var metaItem in meta) { %>
+				<meta name="<%= metaItem %>" content="<%= meta[metaItem] %>" />
+				<% } %>
+          <% } %>
+		  
+		  <% if (typeof(og) != "undefined") { %>
+			  <% for (var ogItem in og) { %>
+				<meta property="<%= ogItem %>" content="<%= og[ogItem] %>" />
+				<% } %>
           <% } %>
 		 
               <title ng-bind="title">
@@ -27,44 +33,87 @@
                                                         <br>
                                     </button>
                                     <div collapse="isCollapsed" class="max-width">
-                                        <table ng-show="IfCart()"  class="table">
-                                           <thead> 
-                                            <tr>
-                                                <th class="col-md-4">Product Name</th>
-                                                <th class="col-md-4">Price</th>
-                                                <th class="col-md-4">Quantity</th>
-                                                <th class="col-md-4">Total Price</th>
-                                                <th class="col-md-4">Action</th>
-                                            </tr>
-                                            </thead> 
-                                            <tbody ng-repeat="(keyMain,Itemss) in Cart track by $index">
-                                            <tr ng-show="Itemss.productID">
-                                                <td class="col-md-4">{{Itemss.productInfo.productName}} </td>
-                                                <td class="col-md-4">Rs. {{Itemss.price}}</td>
-                                                <td class="col-md-4"><input style="width:62px;" ng-change="changeQuantity()"   min='1'  ng-model="Itemss.quantity" type="number" ></td>
-                                                <td class="col-md-4">Rs. {{Itemss.price * Itemss.quantity}}</td>
-                                                <td><span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Itemss.productID,false)"></span></td>
-                                            </tr>
-                                            <tr ng-hide="Itemss.productID" ng-repeat="(key,itm) in Itemss track by $index"> 
-                                                <td class="col-md-4">{{itm.productInfo.productName}} - ( {{key}} )</td>
-                                                <td class="col-md-4">Rs. {{itm.price}}</td>
-                                                <td class="col-md-4"><input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="itm.quantity" type="number" ></td>
-                                                <td class="col-md-4">Rs. {{itm.price * itm.quantity}}</td>
-                                                <td>{{}}<span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(itm.productID,key)"></span></td>
-                                             </tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>Total</td>
-                                                    <td>Rs. {{ReturnTotal()}}</td>
-                                                    <td><a class="btn btn-info" ng-click="isCollapsed = true" href="./cart">Checkout</a></td>
-                                                    
-                                                    
-                                                </tr>
-                                            </tfoot>							
-                                        </table>
+                                       <table ng-show="IfCart()" class="table">
+										  <thead>
+											<tr>
+											  <th class="col-md-4">
+												Product
+											  </th>
+											  <th class="col-md-4">
+												Price
+											  </th>
+											  <th class="col-md-4">
+												Quantity
+											  </th>
+											  <th class="col-md-4 min200">
+												Total Price
+											  </th>
+											  <th class="col-md-4">
+												Action
+											  </th>
+											</tr>
+										  </thead>
+										  
+										  <tbody ng-repeat="(keyMain,Itemss) in Cart track by $index">
+											<tr ng-show="Itemss.productID">
+											  <td class="col-md-4">
+												{{Itemss.productInfo.productName}} 
+											  </td>
+											  <td class="col-md-4">
+												Rs. {{Itemss.price}}
+											  </td>
+											  <td class="col-md-4">
+												<input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="Itemss.quantity" type="number" >
+											  </td>
+											  <td class="col-md-4">
+												Rs. {{Itemss.price * Itemss.quantity}}
+											  </td>
+											  <td>
+												<span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Itemss.productID,false)">
+												</span>
+											  </td>
+											</tr>
+											<tr ng-hide="Itemss.productID" ng-repeat="(key,itm) in Itemss track by $index">
+											  <td class="col-md-4">
+												{{itm.productInfo.productName}} - ( {{key}} )
+											  </td>
+											  <td class="col-md-4">
+												Rs. {{itm.price}}
+											  </td>
+											  <td class="col-md-4">
+												<input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="itm.quantity" type="number" >
+											  </td>
+											  <td class="col-md-4">
+												Rs. {{itm.price * itm.quantity}}
+											  </td>
+											  <td>
+												{{}}
+												<span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(itm.productID,key)">
+												</span>
+											  </td>
+											</tr>
+										  </tbody>
+										</table>
+										
+										<div ng-show="IfCart()">
+										  <div class="clearfix"></div>
+										  <div class="col-md-12"  align="right">
+										   <a class="btn btn-info pull-left" ng-click="isCollapsed = true" href="./cart">Checkout</a> 
+											<h2  align="right" ng-if="ReturnTax()">
+											  Tax : Rs. {{ReturnTaxPrice()}}
+											</h2>
+											<span   ng-if="ReturnTax()">
+											  Tax are dependent on shipping country
+											</span>
+										  </div>
+										  <div class="col-md-12"  align="right">
+											<h2>
+											  Total :  Rs. {{ReturnTotal()}}
+											</h2>
+										  </div>
+										  <div class="clearfix col-md-12">
+										  </div>
+										</div>
                                         <h6 ng-hide="IfCart()" align="center">No Item Found</h6>
                                     </div>
                                 </div>
@@ -79,7 +128,10 @@
                                 <span>Customer Info  :</span>
                                                     <span ng-if="User.info.CustomerEmail"> Welcome {{User.info.CustomerFirstName}}</span>
                                                     <span ng-if="User.info.CustomerEmail"> <a class="btn btn-danger" href="javascript:void(0)" ng-click="Logout()"> Logout </a></span>
-                                                    <span ng-if="!User.info.CustomerEmail && ListPaymentGateways.accountsDisabled != 'disabled'"> <a class="btn btn-info" href="./login"> Login </a></span>
+													<span ng-if="User.info.CustomerEmail && !User.info.GuestAuth"> <a class="btn btn-danger" href="/reset_password"> Reset password </a></span>
+													<span ng-if="User.info.CustomerEmail && !User.info.GuestAuth"> <a class="btn btn-danger" href="/account_info"> Update Account Info </a></span>
+													<span ng-if="User.info.CustomerEmail && !User.info.GuestAuth"> <a class="btn btn-danger" href="/orders">My orders </a></span>
+                                                    <span ng-if="!User.info.CustomerEmail"> <a class="btn btn-info" href="./login"> Login </a></span>
                                                     <span ng-if="!User.info.CustomerEmail  && ListPaymentGateways.accountsDisabled == 'optional'"> <a class="btn btn-info" href="./signup"> Sign Up </a></span>
         
                             </div>
@@ -126,7 +178,7 @@
                                   </ul>
                                 </div>
                               </nav>
-                              <ul class="col-lg-9 breadcrumb" ng-controller="GlobalCtrl">
+                              <ul class="col-lg-12 breadcrumb" ng-controller="GlobalCtrl">
                                 <li>
                                   <a href="#">
                                     Home
@@ -147,12 +199,17 @@
                                   </a>
                                 </li>
                               </ul>
-                              <form class="navbar-form navbar-right" role="search">
+                              <form class="navbar-form navbar-left" role="search"   ng-hide="locationParam[0] == 'search'">
                                     <div class="form-group">
-                                      <input placeholder="Search..." ng-model="Search" type="text" class="form-control">
+											<input placeholder="Search By Title..." ng-model="SearchTitle" type="text" class="form-control">
+											<input placeholder="Search By Collection..." ng-model="SearchCollection" type="text" class="form-control">
+											<input placeholder="Search By Vendor..." ng-model="SearchVendor" type="text" class="form-control">
+											<input placeholder="Search By Type..." ng-model="SearchType" type="text" class="form-control">
+											<input placeholder="Search By Tags..." ng-model="SearchTags" type="text" class="form-control">
+											
                                     </div>
-                                    <button ng-click="Search = ''" class="btn btn-default">
-                                      Reset
+                                    <button ng-click="SearchTitle = '';SearchCollection = '';SearchVendor = '';SearchType = '';SearchTags = '';" class="btn btn-default">
+                                      Reset All
                                     </button>
                                   </form>
                             </div>

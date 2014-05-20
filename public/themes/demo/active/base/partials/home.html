@@ -1,19 +1,23 @@
 <div class="row clearfix">
 
 						<div class="col-md-12 column">
-						  <div class="row" ng-repeat="collection in ListCollection">
+						  <div class="row" ng-repeat="collection in ListCollection | filter:{collectionName:SearchCollection}">
 						 <div ng-show="(collection.collectionName != 'Frontpage')">
                           <div class="col-lg-12" ng-if="ProductCount(collection.collectionName,'Frontpage')">
                             	<h1>{{collection.collectionName}}</h1>
                                 <hr />
                           </div>
-							<div class="col-md-4"  ng-repeat="products in ListProduct | CustomFilter:{collection:'Frontpage'} | CustomFilter:{collection:collection.collectionName} | filter:Search">
-							 
-                              <div class="thumbnail">
-								<a href="./product/{{products.productUrl}}"><img alt="{{products.productName}}" src="{{products.productImage[0].Image}}"></a>
+							<div class="col-md-4" ng-animate="'animate'"  ng-repeat="products in ListProduct | CustomFilter:{collection:'Frontpage'} | CustomFilter:{collection:collection.collectionName} | filter:{productName:SearchTitle} | filter:{ProductVendorName:SearchVendor} | filter:{ProductTypeName:SearchType} | filter:{productTags:SearchTags} ">
+							 <div class="thumbnail">
+								<a href="./products/{{products.productUrl}}">
+                               			
+                                        <img ng-if="products.productImage[0].Image" alt="{{products.productName}}" src="{{products.productImage[0].Image}}">
+                                        <span class="no-image-span"  ng-if="!products.productImage[0].Image"><i  class="glyphicon glyphicon-camera"></i></span>
+                                </a>
+                                
 								<div class="caption">
 								  <h4>
-									<a href="./product/{{products.productUrl}}">
+									<a href="./products/{{products.productUrl}}">
                                     			{{products.productName}}
                                     </a>
                                   </h4>                                   
@@ -21,13 +25,13 @@
                                      <h5 ng-if="products.productMultiOptions">(Rs {{returnPrice(products)}}) <span ng-if="products.productPriceCompare"><strike>(Rs {{products.productPriceCompare}})</strike></span></h5>
                                    
 								  <p>
-                                 <form name="addtoCart" ng-submit="addToCart(products.id,products);animateCartItem(this,products.productName);">
+                                 <form name="addtoCart" ng-submit="addToCart(products.id,products);">
                                       <input class="input input-small"  min='1' ng-model="products.productQuantity" type="number" >
                                       <div ng-if="products.productMultiOptions">
                                           <div class="section_attribute" style="width:100px;"  ng-repeat="valueSize in products.productMultiOptionsList">
-                                            <select required ng-model="products.productVarientModel[valueSize.name]" name="color" style="width:150px;margin:10px 0;">
+                                            <select ng-options="parms as parms for parms in valueSize.value" required ng-model="products.productVarientModel[valueSize.name]" name="color" style="width:150px;margin:10px 0;">
                                               <option value="">Select {{valueSize.name}}</option>
-                                              <option   ng-repeat="parms in valueSize.value" value="{{parms}}" ng-show="parms">{{parms}}</option>
+                                             <!-- <option ng-repeat="parms in valueSize.value" value="{{parms}}" ng-show="parms">{{parms}}</option>-->
                                             </select>
                                           </div>
                                       </div>
