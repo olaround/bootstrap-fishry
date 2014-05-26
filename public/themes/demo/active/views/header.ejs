@@ -2,21 +2,24 @@
   <head>
    <meta name="fragment" content="!">
     <base href="/">
-		<% if (typeof(meta) != "undefined") { %>
-			  <% for (var metaItem in meta) { %>
-				<meta name="<%= metaItem %>" content="<%= meta[metaItem] %>" />
-				<% } %>
-          <% } %>
-		  
-		  <% if (typeof(og) != "undefined") { %>
-			  <% for (var ogItem in og) { %>
-				<meta property="<%= ogItem %>" content="<%= og[ogItem] %>" />
-				<% } %>
-          <% } %>
-		 
-              <title ng-bind="title">
+	 <title ng-bind="title">
                  <%= title %>
               </title>
+		<% if (typeof(meta) != "undefined") { %>
+			  <% for (var metaItem in meta) { %>
+			  <% if (meta[metaItem] && metaItem) { %>
+				<meta name="<%= metaItem %>" content="<%= meta[metaItem] %>" />
+				<% } %>
+				<% } %>
+          <% } %>
+		  <% if (typeof(og) != "undefined") { %>
+			  <% for (var ogItem in og) { %>
+			   <% if (og[ogItem] && ogItem) { %>
+				<meta property="<%= ogItem %>" content="<%= og[ogItem] %>" />
+				<% } %>
+				<% } %>
+          <% } %>
+             
 			   <%- requireServerVars() %>
               </head>
               <body id="index">
@@ -33,7 +36,9 @@
                                                         <br>
                                     </button>
                                     <div collapse="isCollapsed" class="max-width">
-                                       <table ng-show="IfCart()" class="table">
+                                      
+										
+										<table ng-show="IfCart()" class="table">
 										  <thead>
 											<tr>
 											  <th class="col-md-4">
@@ -60,13 +65,13 @@
 												{{Itemss.productInfo.productName}} 
 											  </td>
 											  <td class="col-md-4">
-												Rs. {{Itemss.price}}
+												{{SettingGeneral.settings.currencies_format}}. {{Itemss.price}}
 											  </td>
 											  <td class="col-md-4">
 												<input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="Itemss.quantity" type="number" >
 											  </td>
 											  <td class="col-md-4">
-												Rs. {{Itemss.price * Itemss.quantity}}
+												{{SettingGeneral.settings.currencies_format}}. {{Itemss.price * Itemss.quantity}}
 											  </td>
 											  <td>
 												<span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Itemss.productID,false)">
@@ -78,13 +83,13 @@
 												{{itm.productInfo.productName}} - ( {{key}} )
 											  </td>
 											  <td class="col-md-4">
-												Rs. {{itm.price}}
+												{{SettingGeneral.settings.currencies_format}}. {{itm.price}}
 											  </td>
 											  <td class="col-md-4">
 												<input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="itm.quantity" type="number" >
 											  </td>
 											  <td class="col-md-4">
-												Rs. {{itm.price * itm.quantity}}
+												{{SettingGeneral.settings.currencies_format}}. {{itm.price * itm.quantity}}
 											  </td>
 											  <td>
 												{{}}
@@ -94,26 +99,42 @@
 											</tr>
 										  </tbody>
 										</table>
-										
-										<div ng-show="IfCart()">
-										  <div class="clearfix"></div>
-										  <div class="col-md-12"  align="right">
-										   <a class="btn btn-info pull-left" ng-click="isCollapsed = true" href="./cart">Checkout</a> 
-											<h2  align="right" ng-if="ReturnTax()">
-											  Tax : Rs. {{ReturnTaxPrice()}}
-											</h2>
-											<span   ng-if="ReturnTax()">
-											  Tax are dependent on shipping country
-											</span>
-										  </div>
-										  <div class="col-md-12"  align="right">
-											<h2>
-											  Total :  Rs. {{ReturnTotal()}}
-											</h2>
-										  </div>
-										  <div class="clearfix col-md-12">
-										  </div>
-										</div>
+  										  <div ng-show="IfCart()">
+											  <div class="clearfix">
+											  </div>
+											  <div class="form-group">
+												<a class="btn btn-info pull-left" ng-click="isCollapsed = true" href="./cart">Checkout</a>
+											  </div>
+											  <hr />
+											   <div class="col-md-12"  align="right">
+												<h2  align="right" ng-if="ReturnTax()">
+												  Total : {{ReturnTotal()- ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}}
+												</h2>
+											  </div>
+											   <hr /> 
+											  <div class="col-md-12"  align="right"  ng-if="ReturnTax()">
+												<h2  align="right">
+												  Tax : {{ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}} 
+												</h2>
+												<span>
+												  Tax are dependent on shipping country
+												</span>
+												<hr />
+											  </div>
+											  <div class="clearfix">
+											  </div>
+											  
+											  
+											  <div class="col-md-12"  align="right">
+												<h2>
+												  Total : {{ReturnTotal()| currency:SettingGeneral.settings.currencies_format+' '}}
+												</h2>
+												 <hr />
+											  </div>
+											  <div class="clearfix">
+											  </div>											  
+											  
+											</div>
                                         <h6 ng-hide="IfCart()" align="center">No Item Found</h6>
                                     </div>
                                 </div>

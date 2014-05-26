@@ -31,13 +31,13 @@
             {{Itemss.productInfo.productName}} 
           </td>
           <td class="col-md-4">
-            Rs. {{Itemss.price}}
+            {{SettingGeneral.settings.currencies_format}}. {{Itemss.price}}
           </td>
           <td class="col-md-4">
             <input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="Itemss.quantity" type="number" >
           </td>
           <td class="col-md-4">
-            Rs. {{Itemss.price * Itemss.quantity}}
+            {{SettingGeneral.settings.currencies_format}}. {{Itemss.price * Itemss.quantity}}
           </td>
           <td>
             <span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Itemss.productID,false)">
@@ -49,13 +49,13 @@
             {{itm.productInfo.productName}} - ( {{key}} )
           </td>
           <td class="col-md-4">
-            Rs. {{itm.price}}
+            {{SettingGeneral.settings.currencies_format}}. {{itm.price}}
           </td>
           <td class="col-md-4">
             <input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="itm.quantity" type="number" >
           </td>
           <td class="col-md-4">
-            Rs. {{itm.price * itm.quantity}}
+            {{SettingGeneral.settings.currencies_format}}. {{itm.price * itm.quantity}}
           </td>
           <td>
             {{}}
@@ -69,10 +69,15 @@
       <div class="clearfix">
       </div>
       <hr />
-      
+       <div class="col-md-12"  align="right">
+        <h2  align="right" ng-if="ReturnTax()">
+          Total : {{ReturnTotal()- ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}}
+        </h2>
+      </div>
+       <hr /> 
       <div class="col-md-12"  align="right"  ng-if="ReturnTax()">
         <h2  align="right">
-          Tax : Rs. {{ReturnTaxPrice()}} 
+          Tax : {{ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}} 
         </h2>
         <span>
           Tax are dependent on shipping country
@@ -85,7 +90,7 @@
       
       <div class="col-md-12"  align="right">
         <h2>
-          Total :  Rs. {{ReturnTotal()}}
+          Total : {{ReturnTotal()| currency:SettingGeneral.settings.currencies_format+' '}}
         </h2>
          <hr />
       </div>

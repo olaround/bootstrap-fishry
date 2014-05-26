@@ -191,6 +191,7 @@ $rootScope.GetSettingShippingCountry = function(param){
 };
 if(SettingGeneral){
 	$rootScope.SettingGeneral = SettingGeneral;
+	console.log($rootScope.SettingGeneral);
 	//$rootScope.SettingGeneral.settings = JSON.parse($rootScope.SettingGeneral.settings);
 }
 $rootScope.GetSettingGeneral = function(param){
@@ -392,10 +393,13 @@ $rootScope.GetProduct = function(param){
 								}
 							})
 				});
+				console.log('---------------Starts------------');
+				console.log(mutiListOptions);
+				console.log('---------------Wnds------------');
 				$.each(item.productMultiOptionsList,function(indx,itmx){
 						   $rootScope.ListProduct[index].productMultiOptionsList[indx].value = itmx.value.split(',');
-						   if(mutiListOptions[index]){
-						   		$rootScope.ListProduct[index].productMultiOptionsList[indx].value = mutiListOptions[index];
+						   if(mutiListOptions[indx]){
+						   		$rootScope.ListProduct[index].productMultiOptionsList[indx].value = mutiListOptions[indx];
 						   }else{
 						   		$rootScope.ListProduct[index].productMultiOptionsList[indx].value = [];
 						   }
@@ -974,8 +978,14 @@ $rootScope.UpdateUserInfo = function(redirect){
 }
 
 $rootScope.Logout = function(){
+	var shippingCountry  = $rootScope.Customer.ShippingCountry;
 	delete $rootScope.User.info;
+	delete $rootScope.Customer;
 	window.localStorage.removeItem('User');
+	$rootScope.User.info = {};
+	$rootScope.Customer = {};
+	$rootScope.Customer.ShippingCountry = shippingCountry;
+	$rootScope.SetLocalStorage('User');
 }
 $rootScope.returnpaymentDescription = function (method){
 	var paymentdescription = '';
@@ -1015,6 +1025,9 @@ $rootScope.SubmitOrder =  function(payment,redirect,clear){
 		//$rootScope.User.info.Country = $rootScope.Customer.Country;
 	}
 	//console.log($rootScope.User.info.id); return true;
+	if(!$rootScope.SettingGeneral.settings.currencies_format){
+		$rootScope.SettingGeneral.settings.currencies_format = 'PKR';
+	}
 	if($rootScope.User.info.id){
 		var NewOrder = {
 							userInfo: JSON.stringify($rootScope.User.info),
@@ -1025,6 +1038,7 @@ $rootScope.SubmitOrder =  function(payment,redirect,clear){
 							taxInfo: $rootScope.ReturnTax(),
 							orderCartHtml: $rootScope.CreatCartHTML(),
 							orderedproducts: $rootScope.CreatCartHTML(),
+							orderCurrency: $rootScope.SettingGeneral.settings.currencies_format
 						}
 	}else{
 		var NewOrder = {
@@ -1036,6 +1050,7 @@ $rootScope.SubmitOrder =  function(payment,redirect,clear){
 							taxInfo: $rootScope.ReturnTax(),
 							orderCartHtml: $rootScope.CreatCartHTML(),
 							orderedproducts: $rootScope.CreatCartHTML(),
+							orderCurrency: $rootScope.SettingGeneral.settings.currencies_format
 						}
 	}
 						
@@ -1059,23 +1074,6 @@ $rootScope.SubmitOrder =  function(payment,redirect,clear){
 			function(error) {
 				//console.log("An error has occurred: " + error.message);
 			});
-}
-
-$rootScope.SendConfirmOrderEmail = function (){
-	    console.log('new order submitted starttt-----');
-		console.log($rootScope.submitedOrder);
-		$rootScope.emailTo =  $rootScope.subscriptionEmails;
-		$rootScope.byFrom = 'talk@fishry.com';
-		$rootScope.toBCC = '';
-		if($rootScope.submitedOrder.userInfoCustomerEmail != $rootScope.GuestEmail ){
-		$rootScope.subjectEmail = $rootScope.storeName +' Order '+ $rootScope.submitedOrder.id + ' placed by '+$rootScope.submitedOrder.userInfo.FirstName +' '+$rootScope.submitedOrder.userInfo.LastName;  
-		}else{
-			$rootScope.subjectEmail = $rootScope.storeName +' Order '+ $rootScope.submitedOrder.id + ' placed by '+$rootScope.submitedOrder.userInfo.CustomerFirstName +' '+$rootScope.submitedOrder.userInfo.CustomerLastName;  
-		}
-		$rootScope.emailBody =  $('#newOrderTemplate').html();
-		var dataEmail = {data: $rootScope.emailBody, email: $rootScope.emailTo, subject: $rootScope.subjectEmail, toBCC: $rootScope.toBCC, byFrom: $rootScope.byFrom};
-		$rootScope.sendEmail(dataEmail);
-		console.log('new order submitted enddd-----');
 }
 
 $rootScope.SendConfirmEmail = function (OrderData){

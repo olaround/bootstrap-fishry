@@ -7,97 +7,97 @@ function aeCommerceRouter ($routeProvider,$locationProvider,$provide,$compilePro
 		.when('/', {
 			templateUrl: BaseUrl+'partials/home.html',
 			controller: 'HomeCtrl',
-			title : storeName+ ' | Home'
+			title : storeNameMeta,
 		 })
 		 .when('/collections', {
 			templateUrl: BaseUrl+'partials/collections.html',
 			controller: 'CollectionCtrl',
-			title : storeName+ ' | Collections'
+			title : storeNameMeta,
 		 })
 		 .when('/collections/:CollectionName', {
 			templateUrl: BaseUrl+'partials/collections.html',
 			controller: 'CollectionCtrl',
-			title : storeName+ ' | Collections' 
+			title : storeNameMeta, 
 		 })
 		 .when('/products/:ProductSlug', {
 			templateUrl: BaseUrl+'partials/product.html',
 			controller: 'ProductCtrl',
-			title : storeName+ ' | Product'
+			title : storeNameMeta,
 		 })
 		 .when('/products', {
 			templateUrl: BaseUrl+'partials/product.html',
 			controller: 'ProductCtrl',
-			title : storeName+ ' | Product'
+			title : storeNameMeta,
 		 })
 		 .when('/product/:ProductSlug', {
 			templateUrl: BaseUrl+'partials/product.html',
 			controller: 'ProductCtrl',
-			title : storeName+ ' | Product'
+			title : storeNameMeta,
 		 })
 		 .when('/product', {
 			templateUrl: BaseUrl+'partials/product.html',
 			controller: 'ProductCtrl',
-			title : storeName+ ' | Product'
+			title : storeNameMeta,
 		 })
 		 .when('/cart', {
 			templateUrl: BaseUrl+'partials/cart.html',
 			controller: '',
-			title : storeName+ ' | Products'
+			title : 'Cart - '+storeNameMeta,
 		 })
 		 .when('/confirm', {
 			templateUrl: BaseUrl+'partials/confirm.html',
 			controller: '',
-			title : storeName+ ' | Confirm Order'
+			title : 'Confirm Order - '+storeNameMeta,
 		 })
 		  .when('/search', {
 			templateUrl: BaseUrl+'partials/search.html',
 			controller: 'SearchCtrl',
-			title : storeName+ ' | Confirm Order'
+			title : 'Search - '+storeNameMeta,
 		 })
 		 .when('/thankyou', {
 			templateUrl: BaseUrl+'partials/thankyou.html',
 			controller: '',
-			title : storeName+ ' | Thankyou'
+			title : storeNameMeta+ ' | Thankyou'
 		 })
 		 .when('/login', {
 			templateUrl: BaseUrl+'partials/login.html',
 			controller: 'LoginCtrl',
-			title : storeName+ ' | Login'
+			title : 'Login - '+storeNameMeta,
 		 })
 		 .when('/forgot_password', {
 			templateUrl: BaseUrl+'partials/forgot_password.html',
 			controller: 'ForgotCtrl',
-			title : storeName+ ' | Login'
+			title : 'Forgot Password - '+storeNameMeta,
 		 })
 		 .when('/reset_password', {
 			templateUrl: BaseUrl+'partials/reset_password.html',
 			controller: 'ResetCtrl',
-			title : storeName+ ' | Login'
+			title : 'Reset Password - '+storeNameMeta,
 		 })
 		  .when('/account_info', {
 			templateUrl: BaseUrl+'partials/account_info.html',
 			controller: 'AccountCtrl',
-			title : storeName+ ' | Login'
+			title : storeNameMeta+ ' | Login'
 		 })
 		  .when('/orders', {
 			templateUrl: BaseUrl+'partials/orders.html',
 			controller: 'OrdersCtrl',
-			title : storeName+ ' | Login'
+			title : 'Orders - '+storeNameMeta,
 		 })
 		 .when('/signup', {
 			templateUrl: BaseUrl+'partials/signup.html',
 			controller: 'SignupCtrl',
-			title : storeName+ ' | Signup'
+			title : 'Signup - '+storeNameMeta,
 		 })
 		 .when('/page/:PageUrl', {
 			templateUrl: BaseUrl+'partials/page.html',
 			controller: 'PageCtrl',
-			title : storeName+ ' | Page Any'
+			title : storeNameMeta,
 		 })
 		 .when('/:any', {
 			templateUrl: BaseUrl+'partials/404.html',
 			controller: '',
-			title : storeName+ ' | Page Not Found'
+			title : '404 Not Found - '+storeNameMeta,
 		 });
 		 $locationProvider.html5Mode(true).hashPrefix('navigate');	
 		 	 	 
@@ -107,13 +107,13 @@ aeCommerce.run(['$location', '$rootScope', function($location, $rootScope) {
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
 		var addedTitle = '';
 		if(current.params.CollectionName){
-			addedTitle = ' | '+current.params.CollectionName;
+			addedTitle = current.params.CollectionName+' - ';
 		}
 		if(current.params.ProductSlug){
-			addedTitle = ' | '+current.params.ProductSlug;
+			addedTitle = current.params.ProductSlug+' - ';
 		}
 		console.log(current);
-        $rootScope.title = current.$$route.title + addedTitle;
+        $rootScope.title =  addedTitle + current.$$route.title;
     });
 	
 }]);

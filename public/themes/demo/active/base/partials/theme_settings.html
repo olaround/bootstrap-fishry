@@ -530,9 +530,9 @@
                           </small>
                         </th>
                         <td>
-                          <select ng-model="Theme.featuredproduct">
-                          	<option value="">Select Featured Product</option>
-                          	<option ng-repeat="product in Product" value="{{product.id}}">{{product.productName}}</option>
+                          <select ng-options="collection.id as collection.collectionName for collection in Collections" ng-model="Theme.featuredproduct">
+                          	<option value="">Select Featured Product Collection</option>
+                          <!--	<option ng-repeat="collection in Collections" value="{{collection.id}}">{{collection.collectionName}}</option>-->
                           </select>
                         </td>
                       </tr>

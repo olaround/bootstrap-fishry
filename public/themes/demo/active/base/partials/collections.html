@@ -19,8 +19,8 @@
                                                         {{products.productName}}
                                             </a>
                                           </h4>                                   
-                                            <h5 ng-if="!products.productMultiOptions">(Rs {{products.productPrice}}) <span  ng-if="products.productPriceCompare"><strike>(Rs {{products.productPriceCompare}})</strike></span></h5>
-                                             <h5 ng-if="products.productMultiOptions">(Rs {{returnPrice(products)}}) <span ng-if="products.productPriceCompare"><strike>(Rs {{products.productPriceCompare}})</strike></span></h5>
+                                            <h5 ng-if="!products.productMultiOptions">({{SettingGeneral.settings.currencies_format}} {{products.productPrice}}) <span  ng-if="products.productPriceCompare"><strike>({{SettingGeneral.settings.currencies_format}} {{products.productPriceCompare}})</strike></span></h5>
+                                             <h5 ng-if="products.productMultiOptions">({{SettingGeneral.settings.currencies_format}} {{returnPrice(products)}}) <span ng-if="products.productPriceCompare"><strike>({{SettingGeneral.settings.currencies_format}} {{products.productPriceCompare}})</strike></span></h5>
                                            
                                           <p>
                                          <form name="addtoCart" ng-submit="addToCart(products.id,products)">

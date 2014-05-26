@@ -27,14 +27,20 @@
             {{Itemss.id}} 
           </td>
           <td class="col-md-4">
-            Rs. {{Itemss.orderTotal}}
+            {{SettingGeneral.settings.currencies_format}}. {{Itemss.orderTotal}}
           </td>
            <td class="col-md-4">
-            Rs. {{Itemss.paymentInfo}}
+            {{SettingGeneral.settings.currencies_format}}. {{Itemss.paymentInfo}}
           </td>
           <td class="col-md-4">
-            <span ng-show="Itemss.payment">Not Fullfilled</span>
-            <span ng-hide="Itemss.payment">Fullfilled</span>
+         
+          <div ng-hide="Itemss.paymentStatus">
+            <span ng-show="Itemss.payment">Fullfilled</span>
+            <span ng-hide="Itemss.payment">Not Fullfilled</span>
+         </div>
+          <div ng-show="Itemss.paymentStatus">
+            <span>Canceled</span>
+         </div>
           </td>
         </tr>
       </tbody>

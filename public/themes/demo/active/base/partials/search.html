@@ -11,7 +11,7 @@
                                                       <option   ng-repeat="collections in ListCollection" value="{{collections.collectionName}}">{{collections.collectionName}}</option>
                                                     </select><br>
                                         <label>Vendor</label>
-                                         <select ng-model="SearchVendorSearch"  class="form-control">
+                                         <select ng-model="SearchVendorsearch"  class="form-control">
                                                       <option value="">Select Vendor</option>
                                                       <option   ng-repeat="vendors in ListProductVendor" value="{{vendors.productVendorName}}">{{vendors.productVendorName}}</option>
                                                     </select><br>
@@ -33,7 +33,7 @@
                                  <hr />
                           </div>
 							<div ng-if="routeParam == collection.collectionUrl || routeParam == 'all'  || !routeParam">
-                                    <div class="col-md-4" ng-animate="'animate'"  ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} |  filter:{productName:SearchTitleSearch} | filter:{ProductVendorName:SearchVendorSearch} | filter:{ProductTypeName:SearchTypeSearch} | filter:{productTags:SearchTagsSearch} | returnTotals:products | startFrom:startFromPage | limitTo:pageLimit ">
+                                    <div class="col-md-4" ng-animate="'animate'"  ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} |  filter:{productName:SearchTitleSearch} | filter:{ProductVendorName:SearchVendorsearch} | filter:{ProductTypeName:SearchTypeSearch} | filter:{productTags:SearchTagsSearch} | returnTotals:products | startFrom:startFromPage | limitTo:pageLimit ">
                                       <div class="thumbnail">
                                         <a href="./products/{{products.productUrl}}" ng-if="products.productName">
                                         	<img ng-if="products.productImage[0].Image" alt="{{products.productName}}" src="{{products.productImage[0].Image}}">
@@ -45,8 +45,8 @@
                                                         {{products.productName}}
                                             </a>
                                           </h4>                                   
-                                            <h5 ng-if="!products.productMultiOptions">(Rs {{products.productPrice}}) <span  ng-if="products.productPriceCompare"><strike>(Rs {{products.productPriceCompare}})</strike></span></h5>
-                                             <h5 ng-if="products.productMultiOptions">(Rs {{returnPrice(products)}}) <span ng-if="products.productPriceCompare"><strike>(Rs {{products.productPriceCompare}})</strike></span></h5>
+                                            <h5 ng-if="!products.productMultiOptions">({{SettingGeneral.settings.currencies_format}} {{products.productPrice}}) <span  ng-if="products.productPriceCompare"><strike>({{SettingGeneral.settings.currencies_format}} {{products.productPriceCompare}})</strike></span></h5>
+                                             <h5 ng-if="products.productMultiOptions">({{SettingGeneral.settings.currencies_format}} {{returnPrice(products)}}) <span ng-if="products.productPriceCompare"><strike>({{SettingGeneral.settings.currencies_format}} {{products.productPriceCompare}})</strike></span></h5>
                                            
                                           <p>
                                          <form name="addtoCart" ng-submit="addToCart(products.id,products)">

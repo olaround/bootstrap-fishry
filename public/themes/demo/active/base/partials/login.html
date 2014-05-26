@@ -19,15 +19,15 @@
                     <a  href="forgot_password">Forgot password</a>
                 </div>
                 
-				<div class="checkbox">
+				<div class="checkbox" >
 				</div> <button type="submit" class="btn btn-default">Login</button>
-                <div class="col-md-4 pull-right">
+                <div class="col-md-4 pull-right" ng-if="!User.info.CustomerEmail && (ListPaymentGateways.accountsDisabled != 'required' || ListPaymentGateways.accountsDisabled == 'optional')">
             		<a class="btn btn-info" ng-click="GuestLogin('confirm')">Continue as Guest login</a>
            		</div>
                 
 			</form>
 		</div>
-        <div class="col-md-6 column">
+        <div class="col-md-6 column" ng-if="!User.info.CustomerEmail && (ListPaymentGateways.accountsDisabled != 'required' || ListPaymentGateways.accountsDisabled == 'optional')">
             <div class="col-md-6">
             		<a href="./signup" class="btn btn-info">Sign Up</a>
             </div>
