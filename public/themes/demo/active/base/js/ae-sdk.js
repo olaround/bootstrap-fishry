@@ -623,15 +623,34 @@ $rootScope.IfCart= function(){
 	}
 
 }
-
+$rootScope.selectedVarients = function(item){
+	var selectedCount = 0;
+	$.each(item, function(indx, itmx){
+			 if(itmx){
+			 	selectedCount++;
+			 }
+		 });
+		 return  selectedCount;
+}
 $rootScope.returnPrice = function(product){
 		//console.log('Strat Price return.............');
 		var count = 1;
-		var returnPrice = product.productPrice;
+		if(product.productMultiOptions){
+		var returnPrice = 0;
 		var requiredCount = 0;
+		var selectedCount = 0;
 		$.each(product.productMultiOptionsList,function(index,item){
 			requiredCount++;
-		})
+		});
+		 $.each(product.productVarientModel, function(indx, itmx){
+			 if(itmx){
+			 	selectedCount++;
+			 }
+		 });
+		 console.log('-----required--------');
+		 console.log(product.productVarientModel);
+		 console.log(requiredCount);
+		 console.log(selectedCount);
 				var varient = product.productVarientModel;
 				
 				var totalCounts = 0;
@@ -642,6 +661,7 @@ $rootScope.returnPrice = function(product){
 				//console.log(quantity);
 				//return true;
 				if(totalCounts > 0){
+					//console.log(product.productVarients);
 				  $.each(product.productVarients, function(indx, itmx){
 					var varrientArray = '';
 					var counters = 0;
@@ -662,14 +682,20 @@ $rootScope.returnPrice = function(product){
 						});
 					
 					if(counters == requiredCount){
-						//console.log('End Price return 2.............'+itmx.price);
+						console.log('End Price return '+requiredCount+'......'+counters+'.......'+itmx.price);
 						returnPrice =  itmx.price;
+					}else if(selectedCount < requiredCount){
+						console.log('----------less----------');
+						returnPrice =  -1;
 					}
 				});
 			  });
 					
 				}
 				
+		}else{
+			var returnPrice = product.productPrice;
+		}
 				return returnPrice;
 	}
 $rootScope.ReturnItems= function(){	

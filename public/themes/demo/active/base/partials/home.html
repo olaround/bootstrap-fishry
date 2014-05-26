@@ -21,9 +21,9 @@
                                     			{{products.productName}}
                                     </a>
                                   </h4>                                   
-                                    <h5 ng-if="!products.productMultiOptions">({{SettingGeneral.settings.currencies_format}} {{products.productPrice}}) <span  ng-if="products.productPriceCompare"><strike>({{SettingGeneral.settings.currencies_format}} {{products.productPriceCompare}})</strike></span></h5>
-                                     <h5 ng-if="products.productMultiOptions">({{SettingGeneral.settings.currencies_format}} {{returnPrice(products)}}) <span ng-if="products.productPriceCompare"><strike>({{SettingGeneral.settings.currencies_format}} {{products.productPriceCompare}})</strike></span></h5>
-                                   
+                                  <h5 ng-if="!products.productMultiOptions">({{SettingGeneral.settings.currencies_format}} {{products.productPrice}}) <span  ng-if="products.productPriceCompare"><strike>({{SettingGeneral.settings.currencies_format}} {{products.productPriceCompare}})</strike></span></h5>
+                                  <h5 ng-if="products.productMultiOptions && selectedVarients(products.productVarientModel) && returnPrice(products) && returnPrice(products) >= 0 ">({{SettingGeneral.settings.currencies_format}} {{returnPrice(products)}}) <span ng-if="products.productPriceCompare"><strike>({{SettingGeneral.settings.currencies_format}} {{products.productPriceCompare}})</strike></span></h5>
+                                  
 								  <p>
                                  <form name="addtoCart" ng-submit="addToCart(products.id,products);">
                                       <input class="input input-small"  min='1' ng-model="products.productQuantity" type="number" >
@@ -35,7 +35,15 @@
                                             </select>
                                           </div>
                                       </div>
-                                      <input type="submit" value="Add" name="submit" />
+                                      <div  ng-if="products.productMultiOptions && selectedVarients(products.productVarientModel)">
+                                   		 <h4 ng-if="!returnPrice(products)" class="label label-danger">Not Avalible</h4>
+                                   	 </div>
+                                      <div ng-if="!products.productMultiOptions">
+                                    		  <input class="btn"  type="submit" value="Add" name="submit" />
+                                      </div>
+                                      <div ng-if="products.productMultiOptions && selectedVarients(products.productVarientModel) && returnPrice(products) && returnPrice(products) >= 0">
+                                    		  <input class="btn"  type="submit" value="Add" name="submit" />
+                                      </div>
                                   </form>
 								  </p>
 								</div>
