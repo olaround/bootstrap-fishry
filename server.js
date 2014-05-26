@@ -21,7 +21,7 @@ app.configure(function () {
 
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8000);
 app.set('views', path.join(__dirname, 'public/theme/views'));
 app.set('view engine', 'ejs');
 app.use(express.favicon());
@@ -37,11 +37,13 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 app.all('*', function(req, res, next) {
-	app.locals.store = '12345';
+	app.locals.store = '306628C1-65EB-46D4-B5FF-5195C4D4A1E1';
+	app.locals.ThemeFolderPathBase =  '/';	
   next()
 })
 app.get('/', routes.index);
 app.get('/product', routes.product);
+app.get('/products', routes.product);
 app.get('/product/:id', routes.product_any);
 app.get('/collection-list', routes.collection_list);
 app.get('/collections', routes.collection);

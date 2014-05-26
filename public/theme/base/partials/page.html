@@ -1,12 +1,4 @@
-<!-- <div class="row clearfix">
-    <div class="col-md-12 column" ng-repeat="page in ListPage | CustomFilter:{pageUrl : routeParam}">
-        <div class="jumbotron">
-            <h1>
-                {{page.pageName}}
-            </h1>
-            <p ng-bind-html="page.pageDescription"></p>
-        </div>
-    </div> -->
+
 
 <div id="pageFrame" ng-repeat="page in ListPage | CustomFilter:{pageUrl : routeParam}">
     <div id="pageHeader">
@@ -15,7 +7,7 @@
                 <div id="notch">
                     <img src="https://cache.dominos.com/nolo/us/en/013167/assets/build/images/img/logoNotch.gif" alt="Domino's Pizza" />
                 </div>
-                <a href="./" class="logo">Domino's Pizza</a>
+                <a href="/" class="logo">Domino's Pizza</a>
                 <div id="js-subNavigationPage">
                     <ul id="legalSubNav">
                         <li><a href="/page/{{page.pageUrl}}" class="active"> {{page.pageName}}</a>

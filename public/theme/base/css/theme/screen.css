@@ -126,7 +126,7 @@
 .btn.btnLarge {
     padding-top:.1875em;
     padding-bottom:.125em;
-    font-size:2em
+    font-size:24px;
 }
 .btn.btnXlarge {
     padding-top:.125em;
@@ -432,7 +432,8 @@ label input {
 #pageBody {
     border:5px solid #0078ae;
     border-width:0 5px 5px;
-    border-radius:0 0 10px 10px
+    border-radius:0 0 10px 10px;
+    min-height: 300px;
 }
 #pageContent {
     padding:10px;
@@ -448,7 +449,10 @@ label input {
 .pageRightColumn {
     float:right;
     width:229px;
-    top: 136px;
+}
+#top{
+    float:right;
+    width:229px;
 }
 
 .pageHeading {
@@ -508,8 +512,24 @@ label input {
     cursor: pointer;
 }
 .dominosColor2, a:hover {
-    color:#fa001f
+    color:white;
 }
+.dominosColororder{
+color:#fa001f;
+}
+.cancel a:hover {
+    color:#0078ae;
+}
+.overlayContent a:hover {
+    color:#0078ae;
+}
+li a:hover {
+    color:#fa001f;
+}
+h3 a:hover {
+    color:#fa001f;
+}
+
 .centeringContainer {
     text-align:center;
     overflow:hidden;
@@ -525,7 +545,7 @@ label input {
     overflow:hidden
 }
 .formArea input {
-    height:16px;
+    height:19px;
     border:1px solid #aaa;
     padding:1px 0 1px 6px
 }
@@ -540,13 +560,6 @@ label input {
 }
 .formArea input[type="radio"] {
     border:0
-}
-.formArea input.focus, .formArea input:focus, .formArea select.focus, .formArea select:focus {
-    border-color:#4d90fe;
-    border-width:1px 1px 1px 4px;
-    box-shadow:0 1px 2px rgba(0, 0, 0, 0.3) inset;
-    padding-left:3px;
-    outline:0
 }
 .formArea .mini, .formArea .small, .formArea .medium, .formArea .large, .formArea .xlarge {
     float:left;
@@ -630,7 +643,7 @@ label input {
     margin:0
 }
 .formArea.horizontal label {
-    margin:0 8px 0 0;
+    margin:0 8px 0 8px;
     text-align:right
 }
 .formArea.horizontal label.noMargin {
@@ -761,7 +774,8 @@ label input {
     border:1px solid #d9d9d9;
     padding:10px;
     border-radius:0 0 5px 5px;
-    box-shadow:0 1px 5px #d9d9d9
+    box-shadow:0 1px 5px #d9d9d9;
+    padding-bottom: 16px;
 }
 .table .td {
     float:left;
@@ -1002,7 +1016,7 @@ button::-moz-focus-inner, button.imgButton {
     font-size:12px;
     text-transform:uppercase;
     padding:4px 0 0 25px;
-    background:url(../images/bkg/icons/login-icon.jpg) no-repeat left center
+    background:url(../../img/theme/login-icon.jpg) no-repeat left center
 }
 .headerProfile .signInLink:after {
     content:"\25B6";
@@ -1061,11 +1075,12 @@ button::-moz-focus-inner, button.imgButton {
     margin:0 0 0 75px
 }
 #genericHeader .subNavigation ul li {
-    font-family:DominosFont, Arial, Helvetica, sans-serif;
-    font-size: 22px;
-    margin:17px 0 0 0;
-    float:left;
-    color:#fff
+    font-family: DominosFont, Arial, Helvetica, sans-serif;
+font-size: 19px;
+margin: 17px 0 0 0;
+float: left;
+color: #fff;
+font-weight: 100;
 }
 #genericHeader .subNavigation ul li a {
     color:#fff;
@@ -1175,14 +1190,13 @@ html[lang=es] #promoInColumn .content {
 #hotDealsInColumn .sectionHeading span {
     display:block;
     padding-left:20px;
-    background:url(../images/bkg/icons/bkg-oloColumnBox-icons.png) no-repeat 0 -17px
+    background:url(../../img/theme/bkg-oloColumnBox-icons-deals.png) no-repeat 0 -17px
 }
 #hotDealsInColumn .content {
     padding-top:5px;
     padding-bottom:5px
 }
 #hotDealsInColumn li {
-    border-bottom:1px solid #9bc1d9;
     padding-bottom:5px;
     line-height:1.25;
     font-weight:bold
@@ -1194,7 +1208,7 @@ html[lang=es] #promoInColumn .content {
 #orderDetailsInColumn .sectionHeading span, #myProfileInCheckout .sectionHeading span {
     display:block;
     padding-left:20px;
-    background:url(../images/bkg/icons/bkg-oloColumnBox-icons.png) no-repeat 0 -34px
+    background:url(../../img/theme/bkg-oloColumnBox-icons-order.png) no-repeat 0 -34px
 }
 #orderDetailsInColumn h3, #myProfileInCheckout h3 {
     font-size:14px;
@@ -1249,7 +1263,7 @@ html[lang=es] #promoInColumn .content {
     margin:4px 14px
 }
 .formArea .entryGroup.iconsTemplate input {
-    display:none
+    opacity: 0;
 }
 .serviceType .squareIcon, .addressType .squareIcon {
     display:inline-block;
@@ -1262,7 +1276,8 @@ html[lang=es] #promoInColumn .content {
     cursor:pointer
 }
 .serviceType .squareIcon {
-    background:url(../../img/theme/bkg-service-type.png) no-repeat top left
+    background:url(../../img/theme/bkg-service-type.png) no-repeat top left;
+	height: 13px;
 }
 .serviceType .Delivery {
     background-position:0 0
@@ -1823,7 +1838,7 @@ html[lang=es] #promoInColumn .content {
     overflow:hidden
 }
 #entreesPage .header p {
-    color:#666
+    /*color:#666*/
 }
 #entreesPage .header {
     position:relative;
@@ -1839,7 +1854,7 @@ html[lang=es] #promoInColumn .content {
 #entreesPage .header h2 {
     font-family:DominosFont, Arial, Helvetica, sans-serif;
     font-size:24px;
-    color:#0078ae
+   
 }
 #entreesPage .header p {
     margin-top:5px
@@ -2007,7 +2022,7 @@ html[lang=es] #promoInColumn .content {
     padding-right:10px
 }
 #builderDefaultPage .buttons .cancel a, #chickenBuilderPage .buttons .cancel a, #pizzaBuilderPage .buttons .cancel a {
-    font-size: 15px;
+    font-size: 12px;
 text-transform: none;
 }
 #builderDefaultPage .detailsServingOptions, #chickenBuilderPage .detailsServingOptions, #pizzaBuilderPage .detailsServingOptions {
@@ -2017,8 +2032,7 @@ text-transform: none;
   width: 33%;
 }
 #builderDefaultPage .variantTable .tdName, #chickenBuilderPage .variantTable .tdName, #pizzaBuilderPage .variantTable .tdName {
-    width: 30%;
-text-align: center;
+    width: 38%;
 }
 #chickenBuilderPage .variantSection .thead .td, #pizzaBuilderPage .variantSection .thead .td {
     padding-top:5px
@@ -3193,8 +3207,8 @@ text-align: center;
 .orderSummaryContent .miniLineItem {
     width:100%;
     margin:10px 0 0;
-    border-bottom:1px solid #9bc1d9;
-    padding:4px 0 0 4px
+    padding:4px 0 0 4px;
+    padding-bottom: 1px;
 }
 .orderSummaryContent .miniLineItem.new {
     background-color:#f99
@@ -3213,6 +3227,7 @@ text-align: center;
 .orderSummaryContent .miniLineItem .price {
     padding-left: 8px;
     font-weight:bold;
+    margin-left: 130px;
 }
 .orderSummaryContent .fullLineItem {
     width:100%;
@@ -3226,14 +3241,14 @@ text-align: center;
     vertical-align:top
 }
 .orderSummaryContent .fullLineItem .price {
-    width:50px;
+ 
     padding-right:10px;
     text-align:right;
-    font-weight:bold
+    font-weight:bold;
+    width: 56px;
 }
 .orderSummaryContent .fullLineItem .qty {
     width:50px;
-    text-align:right
 }
 .orderSummaryContent .fullLineItem .itemHeader, .orderSummaryContent .miniLineItem .itemHeader {
     background-color:#ddd;
@@ -3242,8 +3257,9 @@ text-align: center;
     border-top:1px solid #d9d9d9
 }
 .orderSummaryContent .fullLineItem h3, .orderSummaryContent .miniLineItem h3 {
-    font-size:13px;
-    font-weight:bold
+    font-size:12px;
+    font-weight:bold;
+    margin-left: 8px;
 }
 .orderSummaryContent .fullLineItem .itemList, .orderSummaryContent .miniLineItem .itemList {
     margin-top:5px
@@ -3272,8 +3288,7 @@ text-align: center;
     background-color:#e5edf3
 }
 .orderSummaryContent .orderTotals .finalizedTotal {
-    font-size:16px;
-    border-top-width:5px
+    font-size:14px;
 }
 .orderSummaryContent .productImage {
     padding:2px;
@@ -3349,7 +3364,7 @@ text-align: center;
 #orderSummaryInColumn .sectionHeading span {
     display:block;
     padding-left:20px;
-    background:url(../images/bkg/icons/bkg-oloColumnBox-icons.png) no-repeat 0 0
+    background:url(../../img/theme/bkg-oloColumnBox-icons.png) no-repeat 0 0
 }
 #orderSummaryInColumn .discount {
     border-color:#9bc1d9
@@ -3386,7 +3401,7 @@ text-align: center;
 #orderCheckoutPage .pageLeftColumn .sectionHeading span {
     display:block;
     padding-left:20px;
-    background:url(../images/bkg/icons/bkg-oloColumnBox-icons.png) no-repeat 0 0
+    background:url(../../img/theme/bkg-oloColumnBox-icons.png) no-repeat 0 0
 }
 #orderCheckoutPage .subSectionHeading {
     color:#888;
@@ -3491,7 +3506,8 @@ text-align: center;
 }
 #orderCheckoutPage .beverageUpsells .productTitle .name {
     position:absolute;
-    bottom:0
+    bottom:0;
+    right: 6px;
 }
 #orderCheckoutPage .beverageUpsells .pointer {
     cursor:pointer
@@ -3499,7 +3515,7 @@ text-align: center;
 #orderCheckoutPage .beverageUpsells .name {
     font-size:12px;
     margin-bottom:4px;
-    width:85px
+    width:80px
 }
 #orderCheckoutPage .beverageUpsells .select {
     font-size:12px;
@@ -3568,10 +3584,12 @@ text-align: center;
 #orderPaymentPage .detailItems {
     background-color:#fff;
     border:1px solid #d9d9d9;
-    padding:0 10px
+    padding:0 10px;
+    height: 80px;
 }
 #orderPaymentPage .detailItems p {
-    margin:10px 0
+    margin:10px 0;
+
 }
 #orderPaymentPage .detailItems strong {
     font-weight:bold;
@@ -3702,7 +3720,7 @@ text-align: center;
 }
 #orderPaymentPage .changeOrderButton {
     float:left;
-    margin: 40px 0 0 1px;
+    margin: 40px 6px 6px 1px;
 }
 #orderPaymentPage .submitButton {
     float:right;
@@ -3967,8 +3985,7 @@ width: 137px;
 float: left;
 margin-right: 8px;
 margin-top: 20px;
-margin-bottom: 20px;
-min-height: 236px;
+min-height: 260px;
 margin-left: 6px;
 }
 #genericMenuPage .productImage {
@@ -6030,9 +6047,10 @@ display: inline-block;
     font-size:1.1em
 }
 #entreesPage .generalMarket .promotions #fiftyPercentOff {
-    background:url('../../img/theme/DPZ_N1_GM_OP_50off.jpg') no-repeat 0 0;
+    background:url('../../img/theme/noimage.png') no-repeat 0 0;
     margin-right:12px;
-    width:605px
+    width:605px;
+    background-size: cover;
 }
 #entreesPage .generalMarket .promotions #fiftyPercentOff a {
     display:block;
@@ -6591,10 +6609,10 @@ padding-right: 50px;
 text-decoration: underline;
 }
 .js-productQuantity{
-width:50%;	
+width:75%;	
 }
 #ngviewcontainer{
-min-height: 278px;	
+min-height: 370px;	
 }
 .thankyou-page{
 margin: 0 auto;
@@ -6623,4 +6641,129 @@ padding-left: 90px;
 }
 .big-text{
 height:50px;	
+}
+.login-signup{
+color: #fa001f;
+font-weight: bolder;
+margin-top: 4%;
+margin-left: 2%;
+font-size: 20PX;	
+}
+.remove{
+color: #0078ae;
+font-weight: bold;
+margin-top: 4px;
+font-size: 11px;
+cursor: pointer;
+text-decoration: underline;
+}
+.hotdeal{
+margin-bottom: 20px;
+margin-left: 10px;
+margin-right: 10px;
+}
+.hotdeal-image{
+width: 216px;
+display: inline-block;
+margin-top: 20PX;
+margin-left: 48px;
+}
+.btn.btnBounce.btnShimmer.js-CTA.order-btn{
+position: relative;
+bottom: 46px;
+display: inline-block;
+
+left:48px;
+}
+.entry-title {
+border-bottom: 1px solid #ED1C24;
+color: #ED1C24;
+float: left;
+font-size: 34px;
+line-height: normal;
+margin-bottom: 0;
+padding-left: 20px;
+padding-top: 11px;
+text-align: left;
+text-transform: uppercase;
+width: 280px;
+}
+.entry-title span {
+float: left;
+font-family: kavaler_kursiveregular;
+line-height: 25px;
+padding-left: 15px;
+text-transform: lowercase;
+width: 100%;
+}
+.entry-content, .entry-summary {
+clear: both;
+padding: 12px 0 0 0;
+}
+#leftdiv {
+color: #4D4D4F !important;
+float: left;
+font-family: helvetica-condensedlightRg;
+font-size: 15px;
+line-height: 20px;
+text-align: justify;
+width: 300px;
+}
+ #leftdiv h3 {
+border-bottom: 1px solid #ED1C24;
+color: #007DAD;
+font-family: helvetica-condensedboldRg;
+font-size: 28px;
+margin: 20px 0 0;
+text-align: left;
+text-transform: uppercase;
+}
+.entryLabel.shipping{
+
+}
+.serviceType .Deliver.active {
+background-position: 0px -72px;
+}
+.fourofour{	
+}
+.dominosColorok{
+color: rgb(23, 168, 23);	
+}
+#entreesPage .header:hover{
+background-color: #0078ae;
+}
+#entreesPage .header:hover #entreesPage .header h2{
+color: white;
+}
+ul.genericList.border{
+border-bottom: 1px solid #ddd;
+}
+.content ul.genericList.border:last-child{
+border-bottom: none;
+}
+.order-summary__totals td {
+padding: 10px;
+border: 1px solid #d9d9d9;
+border-width: 0 0 1px 0;
+text-align: right;
+font-weight: bold;
+}
+.pageBox .order-summary__totals {
+float: right;
+background-color: #fff;
+border: 1px solid #d9d9d9;
+border-width: 0 1px 0;
+margin-bottom: 20px;
+}
+.js-changeLoginState a:hover{
+color:#fa001f;	
+}
+.formEntry.entryGroup.leftAlign a:hover{
+color: #0078ae;	
+}
+.builderWrapper .tbody.variants-border{
+border-bottom: 1px solid rgb(213, 206, 206);	
+}
+.builderWrapper .tbody.variants-border:last-child{
+border-bottom: none;	
 }

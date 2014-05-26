@@ -1,52 +1,3 @@
-<!-- <div class="row clearfix">
-    <div class="col-md-12 column">
-        <h1>Cart</h1>
-        <table ng-show="IfCart()" class="table">
-            <thead>
-                <tr>
-                    <th width="226" class="col-md-4">Product Name</th>
-                    <th width="242" class="col-md-4">Item Price</th>
-                    <th width="94" class="col-md-4">Quantity</th>
-                    <th width="335" class="col-md-4">Total Price</th>
-                    <th width="64" class="col-md-4">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="Items in Cart">
-                    <td class="col-md-4">{{Items.productInfo.productName}}</td>
-                    <td class="col-md-4">Rs. {{Items.productInfo.productPrice}}</td>
-                    <td class="col-md-4">
-                        <input style="width:62px;" min='1' ng-model="Items.quantity" type="number">
-                    </td>
-                    <td class="col-md-4">Rs. {{Items.productInfo.productPrice * Items.quantity}}</td>
-                    <td>
-                        <span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Items.productID)"></span>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td><a class="btn btn-info" href="./">Continue Shopping</a>
-                    </td>
-                    <td></td>
-                    <td>&nbsp;</td>
-                    <td>
-                        <strong>Total Rs. {{ReturnTotal()}}</strong>
-                    </td>
-                    <td>
-                        <a ng-if="!User.info.CustomerEmail" class="btn btn-info" href="./login">Checkout</a>
-                        <a ng-if="User.info.CustomerEmail" class="btn btn-info" href="./confirm">Checkout</a>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-        <h6 ng-hide="IfCart()" align="center">No Item Found</h6>
-    </div>
-</div> -->
-
-
-
-
 <div id="pageFrame">
     <div id="pageHeader">
         <div id="genericHeader">
@@ -54,7 +5,7 @@
                 <div id="notch">
                     <img src="https://cache.dominos.com/nolo/us/en/013167/assets/build/images/img/logoNotch.gif" alt="Domino's Pizza">
                 </div>
-                <a href="index.html" class="logo">Domino's Pizza</a>
+                <a href="/" class="logo">Domino's Pizza</a>
                 <div id="js-subNavigationPage"></div>
             </div>
         </div>
@@ -71,146 +22,293 @@
                                         <span>Review Order Settings</span>
                                     </h2>
                                     <div class="content">
-                                        <h3 class="dominosColor2">My Location <a class="buttonType5" href="#/locations/search/">Change</a>
-                                        </h3>
+                                        <h3 class="dominoscolorok">Service Type</h3>
                                         <ul class="genericList">
-                                            <li>350 5TH AVE</li>
-                                            <li>NEW YORK, NY 10118-0110</li>
+                                            <li id="savedPayment"></li>
                                         </ul>
                                         <div class="divider">
                                             <!-- -->
                                         </div>
-                                        <h3 class="dominosColor2">My Store <a class="buttonType5" href="#/locations/results/?type=all&amp;c=NEW%20YORK%2C%20NY%2010118-0110&amp;s=350%205TH%20AVE&amp;locationName=">Change</a>
-                                        </h3>
+                                        <h3 class="dominoscolorok">My City</h3>
+
                                         <ul class="genericList">
-                                            <li>Store #3685</li>
-                                            <li>148 W 72nd St</li>
-                                            <li>New York, NY</li>
-                                            <li>(212) 501-0200</li>
+                                            <li id="savedCity"></li>
                                         </ul>
                                         <div class="divider">
                                             <!-- -->
                                         </div>
-                                        <h3 class="dominosColor2">Service Method <a class="buttonType5 js-serviceMethodChange" href="#/locations/">Change</a>
-                                        </h3>
-                                        <ul class="genericList serviceMethodList">
-                                            <li class="">
-                                                <table cellpadding="0" cellspacing="0">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td width="1%">
-                                                                <input type="radio" name="Service_Method_Checkout" id="Service_Method_Carryout_Checkout" value="Carryout" class="js-serviceMethod" checked="checked">
-                                                            </td>
-                                                            <td>
-                                                                <label for="Service_Method_Carryout_Checkout">Carryout</label>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </li>
+
+                                        <h3 class="dominoscolorok">My Locality</h3>
+                                        <ul class="genericList">
+                                            <li id="savedLocality"></li>
                                         </ul>
                                         <div class="divider">
                                             <!-- -->
                                         </div>
-                                        <h3 class="dominosColor2">Order Timing <a href="#/order/time/" class="buttonType5 js-changeTiming">Change</a>
-                                        </h3>
+
+                                        <h3 class="dominoscolorok">My Area</h3>
                                         <ul class="genericList">
-                                            <li>03/21/2014 10:30 am</li>
+                                            <li id="savedArea"></li>
                                         </ul>
+                                        <div class="divider">
+                                            <!-- -->
+                                        </div>
+
+
+                                        <h3 class="dominoscolorok">My Outlet</h3>
+                                        <ul class="genericList">
+                                            <li id="savedOutlet"></li>
+                                        </ul>
+                                        
+
+
+
                                     </div>
-                                </div> <a class="btn btnLarge submitButton qa-OrCheck" ng-if="!User.info.CustomerEmail" href="/login">Continue Checkout</a>
-                                <a class="btn btnLarge submitButton qa-OrCheck" ng-if="User.info.CustomerEmail" href="/confirm">Continue Checkout</a> 
-                                
+                                </div> <a class="btn btnLarge submitButton qa-OrCheck" ng-if="!User.info.CustomerEmail && IfCart()" href="/login" title="Continue Checkout">Continue Checkout</a>
+                                <a class="btn btnLarge submitButton qa-OrCheck" ng-if="User.info.CustomerEmail && IfCart()" href="/confirm" title="Continue Checkout">Continue Checkout</a> 
+                                <a class="btn btnLarge submitButton qa-OrCheck" ng-if="!IfCart()" href="javascript:void(0)" title="Please First Choose the Items you want to Order" style="opacity:0.5;">Continue Checkout</a> 
+                                 <a  class="btn btnLarge submitButton qa-OrCheck" href="collections/all" style="background:#0078ae;">Add More Items</a> 
                             </div>
                             <div class="pageLeftColumn">
                                 <div class="foodAndDrinkDetails">
                                     <h2 class="sectionHeading">
                                         <span>Food &amp; Drink Details</span>
                                     </h2>
-                                    <div class="pageBox" ng-show="IfCart()">
+                                    <div class="pageBox">
                                         <div class="orderSummaryContent">
-                                            <h3 class="subSectionHeading">Review and modify your items here.</h3> <a id="backToMenu" class="btn btnSecondary fr js-addMoreItems" href="collections/all">Add More Items</a> 
-                                            <div class="clr">
-                                                <!-- -->
-                                            </div>
-                                            <table class="fullLineItem" cellpadding="0" cellspacing="0">
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="itemHeader js-orderSummaryTableHeader">
-                                                            <span class="none">Item</span>
-                                                            <span>Step 1: Confirm Your Selections
-                                                                <span></span>
-                                                            </span>
-                                                        </td>
-                                                        <td class="itemHeader qty">Quantity</td>
-                                                        <td class="itemHeader price">Price</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <table class="fullLineItem" cellpadding="0" cellspacing="0" ng-repeat="Items in Cart">
-                                                <tbody>
-                                                    <tr>
-                                                        <td width="1%">
-                                                            <div class="productImage">
-                                                                <a href="#/order/variant/6/">
-                                                                    <img src="{{Items.productInfo.productImage[0].Image}}">
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h3><a href="#/order/variant/6/">{{Items.productInfo.productName}}</a>
-                                                            </h3>
-                                                            <div class="itemList"></div>
-                                                            <div class="sizeUpsell $[upsellClass]">
-                                                                <span class="message">Make this a $[variantSize] for $[variantPrice] more?</span>
-                                                                <a href="#/order/variant/6/update$[variantParams]&amp;checkout=1" class="btn btnSmall js-sizeUpsell">
-                                                                    <span>Yes</span>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td class="qty">
-                                                            <select name="6|Quantity" ng-model="Items.quantity">
-                                                                <!-- -->
-                                                                <option selected="" value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                                <option value="6">6</option>
-                                                                <option value="7">7</option>
-                                                                <option value="8">8</option>
-                                                                <option value="9">9</option>
-                                                                <option value="10">10</option>
-                                                                <option value="11">11</option>
-                                                                <option value="12">12</option>
-                                                                <option value="13">13</option>
-                                                                <option value="14">14</option>
-                                                                <option value="15">15</option>
-                                                                <option value="16">16</option>
-                                                                <option value="17">17</option>
-                                                                <option value="18">18</option>
-                                                                <option value="19">19</option>
-                                                                <option value="20">20</option>
-                                                                <option value="21">21</option>
-                                                                <option value="22">22</option>
-                                                                <option value="23">23</option>
-                                                                <option value="24">24</option>
-                                                                <option value="25">25</option>
-                                                            </select>
-                                                        </td>
-                                                        <td class="price">Rs. {{Items.productInfo.productPrice * Items.quantity}}</td>
+                                            <div ng-show="IfCart()">
+                                                <h3 class="subSectionHeading">Review and modify your items here.</h3> <a id="backToMenu" class="btn btnSecondary fr js-addMoreItems" href="collections/all">Add More Items</a> 
+                                                <div class="clr">
+                                                    <!-- -->
+                                                </div>
+                                                <table class="fullLineItem" cellpadding="0" cellspacing="0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="itemHeader js-orderSummaryTableHeader">
+                                                                <span class="none">Item</span>
+                                                                <span>Step 1: Confirm Your Selections
+                                                                    <span></span>
+                                                                </span>
+                                                            </td>
+                                                            <td class="itemHeader qty">Quantity</td>
+                                                            <td class="itemHeader price">Price</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table class="fullLineItem" cellpadding="0" cellspacing="0">
+                                                    <tbody ng-repeat="(keyMain,Itemss) in Cart track by $index">
+                                                        <tr ng-show="Itemss.productID">
+                                                            <td width="1%">
+                                                                <div class="productImage">
+                                                                    <a href="" ng-if="Itemss.productInfo.productImage[0].Image">
+                                                                        <img src="{{Itemss.productInfo.productImage[0].Image}}" title="{{Itemss.productInfo.productName}}">
+                                                                    </a>
 
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                                    <a href="" ng-if="!Itemss.productInfo.productImage[0].Image">
+                                                                        <img src="{{BaseUrl}}img/theme/default.png" style="background-color: rgb(235, 232, 232);">
+                                                                    </a>
+
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <h3><a href="">{{Itemss.productInfo.productName}}</a>
+                                                                </h3>
+
+                                                            </td>
+
+                                                            <td class="qty">
+                                                                <select name="6|Quantity" min='1' ng-change="changeQuantity()" ng-model="Itemss.quantity" type="number">
+                                                                    <!-- -->
+                                                                    <option selected="" value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="6">6</option>
+                                                                    <option value="7">7</option>
+                                                                    <option value="8">8</option>
+                                                                    <option value="9">9</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                    <option value="13">13</option>
+                                                                    <option value="14">14</option>
+                                                                    <option value="15">15</option>
+                                                                    <option value="16">16</option>
+                                                                    <option value="17">17</option>
+                                                                    <option value="18">18</option>
+                                                                    <option value="19">19</option>
+                                                                    <option value="20">20</option>
+                                                                    <option value="21">21</option>
+                                                                    <option value="22">22</option>
+                                                                    <option value="23">23</option>
+                                                                    <option value="24">24</option>
+                                                                    <option value="25">25</option>
+                                                                </select>
+                                                                <div class="remove" ng-click="RemoveCartItem(Itemss.productID,false)">remove</div>
+                                                            </td>
+                                                            <td class="price">PKR {{Itemss.price * Itemss.quantity}}</td>
+
+                                                        </tr>
+
+                                                        <tr ng-hide="Itemss.productID" ng-repeat="(key,itm) in Itemss track by $index">
+                                                            <td width="1%">
+                                                                <div class="productImage">
+                                                                    <a href="">
+                                                                        <img src="{{itm.productInfo.productImage[0].Image}}" title="{{itm.productInfo.productName}}">
+                                                                    </a>
+
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <h3><a href="">{{itm.productInfo.productName}} {{key}}</a>
+                                                                </h3>
+
+
+                                                            </td>
+                                                            <td class="qty">
+                                                                <select name="6|Quantity" min='1' ng-change="changeQuantity()" ng-model="itm.quantity" type="number">
+                                                                    <!-- -->
+                                                                    <option selected="" value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="6">6</option>
+                                                                    <option value="7">7</option>
+                                                                    <option value="8">8</option>
+                                                                    <option value="9">9</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                    <option value="13">13</option>
+                                                                    <option value="14">14</option>
+                                                                    <option value="15">15</option>
+                                                                    <option value="16">16</option>
+                                                                    <option value="17">17</option>
+                                                                    <option value="18">18</option>
+                                                                    <option value="19">19</option>
+                                                                    <option value="20">20</option>
+                                                                    <option value="21">21</option>
+                                                                    <option value="22">22</option>
+                                                                    <option value="23">23</option>
+                                                                    <option value="24">24</option>
+                                                                    <option value="25">25</option>
+                                                                </select>
+                                                                <div class="remove" ng-click="RemoveCartItem(itm.productID,key)">remove</div>
+                                                            </td>
+                                                            <td class="price">PKR {{itm.price * itm.quantity}}</td>
+                                                        </tr>
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+
+                                            <div>
+                                                <h6 ng-hide="IfCart()" align="center" style="float: left;margin-left: 20px;margin-top: 20px;color: #fa001f;font-weight: 700;font-size: 16px;margin-bottom: 20px;">No Item Found</h6>
+                                            </div>
+                                            <table cellpadding="0" cellspacing="0" class="order-summary__totals">
+                                            <tbody>
+
+                                                <tr ng-if="SettingsShippingCountry[0].TaxRate">
+                                                    <td class="name">Food & Drinks:</td>
+                                                    <td class="js-total">{{ReturnTotal()-ReturnTaxPrice() | currency:"PKR "}}</td>
+                                                </tr>
+                                        
+                                                <tr ng-if="SettingsShippingCountry[0].TaxRate">
+                                                    <td class="name">Taxes:</td>
+                                                    <td class="js-total">{{ReturnTaxPrice() | currency:"PKR "}}</td>
+                                                </tr>
+                                                
+                                               
+                                                <tr>
+                                                    <td class="finalizedTotal name" style="font-size:14px;">Order Total:</td>
+                                                    <td class="finalizedTotal js-total" style="font-size:14px;">{{ReturnTotal() | currency:"PKR "}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                            <div id="beverageUpsell" ng-hide="ifdrinks()">
+                                                <table class="fullLineItem" cellpadding="0" cellspacing="0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="itemHeader">Step 2: Choose Your Drinks</td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                                <table class="beverageUpsells fullLineItem" cellpadding="0" cellspacing="0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="product js-beverageUpsellProduct" ng-repeat="products in ListProduct | CustomFilter:{collection:'Drinks'}">
+                                                                    <div class="productTitle">
+                                                                        <a href="./product/{{products.productUrl}}">
+                                                                            <h3 class="name dominosColor1 pointer">{{products.productName}}</h3>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="productImage pointer">
+                                                                        <a ng-if="products.productImage[0].Image" href="./product/{{products.productUrl}}">
+                                                                            <img ng-src="{{products.productImage[0].Image}}" title="{{products.productName}}" style="background:url({{BaseUrl}}img/theme/load.gif) no-repeat center;z-index: 9999;">
+                                                                        </a>
+                                                                        <a ng-if="!products.productImage[0].Image" href="./product/{{products.productUrl}}">
+                                                                            <img src="{{BaseUrl}}img/theme/default.png" alt="Drinks">
+                                                                        </a>
+
+                                                                    </div>
+                                                                    <div class="js-beverageRadio" style="display: block;margin-left: -6px;">
+                                                                        <a href="./product/{{products.productUrl}}">
+                                                                            <h3 class="name select dominosColor1 pointer">select</h3>
+                                                                            <input type="radio" name="Beverage_Selection" class="pointer">
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
                                         </div>
+                                        
                                     </div>
-                                    <h6 ng-hide="IfCart()" align="center" style="float: left;margin-left: 20px;margin-top: 20px;float: left;margin-left: 20px;margin-top: 20px;color: #fa001f;font-weight: 700;font-size: 16px;">No Item Found</h6>
+
                                 </div>
                                 <div class="clr">
                                     <!-- -->
                                 </div>
+
+                                <div class="crossSells">
+                                    <h2 class="sectionHeading">You Might Also Enjoy</h2>
+                                    <div class="products">
+                                        <div class="product  js-crossSell" style="height: 199px;margin-left: 6px;
+                                            margin-right: 4px;" ng-repeat="products in ListProduct | CustomFilter:{collection:'Sidelines'}">
+                                            <div class="productImage">
+                                                <a ng-if="products.productImage[0].Image" href="./product/{{products.productUrl}}">
+                                                    <span class="dogEar "></span>
+                                                    <img ng-src="{{products.productImage[0].Image}}" title="{{products.productName}}" style="background:url({{BaseUrl}}img/theme/load.gif) no-repeat center;z-index: 9999;">
+                                                </a>
+                                                <a ng-if="!products.productImage[0].Image" href="./product/{{products.productUrl}}">
+                                                    <span class="dogEar "></span>
+                                                    <img src="{{BaseUrl}}img/theme/default.png">
+                                                </a>
+                                            </div>
+                                            <a class="btn fullWidth" href="./product/{{products.productUrl}}">
+                                                <span>Order</span>
+                                            </a>
+                                            <h3 class="dominosColor1"><a href="./product/{{products.productUrl}}">{{products.productName}}</a>
+                                            </h3>
+                                            <p class="description"></p>
+                                            <p class="description"></p>
+                                        </div>
+                                        <div class="clr">
+                                            <!-- -->
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="clr">
                                 <!-- -->
                             </div>
@@ -221,3 +319,19 @@
         </div>
     </div>
 </div>
+
+
+<script>
+$(document).ready(function() {
+
+    $('#savedCity').html(localStorage.getItem('City'));
+
+    $('#savedLocality').html(localStorage.getItem('Locality'));
+
+    $('#savedOutlet').html(localStorage.getItem('Outlet'));
+
+    $('#savedPayment').html(localStorage.getItem('Pay'));
+
+    $('#savedArea').html(localStorage.getItem('Area'));
+});
+</script>

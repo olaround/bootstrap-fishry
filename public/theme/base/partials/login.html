@@ -1,47 +1,3 @@
-<!-- <div class="row clearfix" ng-if="!User.info.CustomerEmail && ListPaymentGateways.accountsDisabled != 'disabled'">
-    <div class="col-md-6 column">
-        <form role="form" ng-submit="CheckLogin('cart')">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input required="required" type="email" class="form-control" ng-model="Customer.email" />
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input required="required" type="password" class="form-control" ng-model="Customer.password" />
-            </div>
-            <h4 id="error" style="display:none; color:red;">Please enter valid login info</h4>
-            <div class="checkbox">
-            </div>
-            <button type="submit" class="btn btn-default">Login</button>
-            <div class="col-md-4 pull-right">
-                <a class="btn btn-info" ng-click="GuestLogin('cart')">Continue as Guest login</a>
-            </div>
-        </form>
-    </div>
-    <div class="col-md-6 column">
-        <div class="col-md-6">
-            <a href="./signup" class="btn btn-info">Sign Up</a>
-        </div>
-    </div>
-</div>
-
-
-<div class="row clearfix" ng-if="User.info.CustomerEmail || ListPaymentGateways.accountsDisabled == 'disabled'">
-    <div class="col-md-6 column" ng-if="User.info.CustomerEmail && ListPaymentGateways.accountsDisabled != 'disabled'">
-        <h4>You are already logged in</h4>
-    </div>
-    <div class="col-md-6 column" ng-if="!User.info.CustomerEmail && ListPaymentGateways.accountsDisabled == 'disabled'">
-        <h4>Login is disabled</h4>
-    </div>
-    <div class="col-md-6 column" ng-if="User.info.CustomerEmail && ListPaymentGateways.accountsDisabled == 'disabled'">
-        <h4>Login is disabled</h4>
-    </div>
-</div> -->
-
-
-
-
-
 
 <div id="pageFrame">
     <div id="genericheader">
@@ -83,7 +39,7 @@
                                     <h4 id="error" style="display:none; color:red;font-weight: bolder;">Please enter valid login info</h4>
                                     <div class="formEntry actions js-formActions">
                                         <div>
-                                            <button class="btn btnSmall js-loginSubmit" type="submit">
+                                            <button class="btn btnSmall js-loginSubmit" type="submit" title="Click to Sign in">
                                                 <span>Sign In</span>
                                             </button> <a class="buttonType5 hint inline js-toggleLogin js-resetPassword" href="#">Forgot your password?</a> 
                                         </div>
@@ -98,7 +54,7 @@
                         </div>
                         <div class="fl">
                             <p class="profileMsg center">Order as a guest.</p>
-                            <a class="btn" ng-click="GuestLogin('cart')">
+                            <a class="btn" ng-click="GuestLogin('confirm')" title="Order as a guest">
                                 <span>Continue Your Order</span>
                             </a>
                         </div>
@@ -109,13 +65,13 @@
                 </div>
             </div>
             <div class="row clearfix" ng-if="User.info.CustomerEmail || ListPaymentGateways.accountsDisabled == 'disabled'">
-                <div class="col-md-6 column" ng-if="User.info.CustomerEmail && ListPaymentGateways.accountsDisabled != 'disabled'">
+                <div class="col-md-6 login-signup" ng-if="User.info.CustomerEmail && ListPaymentGateways.accountsDisabled != 'disabled'">
                     <h4>You are already logged in</h4>
                 </div>
-                <div class="col-md-6 column" ng-if="!User.info.CustomerEmail && ListPaymentGateways.accountsDisabled == 'disabled'">
+                <div class="col-md-6 login-signup" ng-if="!User.info.CustomerEmail && ListPaymentGateways.accountsDisabled == 'disabled'">
                     <h4>Login is disabled</h4>
                 </div>
-                <div class="col-md-6 column" ng-if="User.info.CustomerEmail && ListPaymentGateways.accountsDisabled == 'disabled'">
+                <div class="col-md-6 login-signup" ng-if="User.info.CustomerEmail && ListPaymentGateways.accountsDisabled == 'disabled'">
                     <h4>Login is disabled</h4>
                 </div>
             </div>

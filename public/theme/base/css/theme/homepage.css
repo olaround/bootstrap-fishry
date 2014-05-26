@@ -130,7 +130,9 @@
     text-indent:-9999em
 }
 #homePage.generalMarket #sectionMain .hero.panPizza-hero {
-    background:url('../../img/theme/DPZ_N1_GM_HP_hero_panPizza.jpg') no-repeat 0 0
+    background:url('../../img/theme/noimage.png') no-repeat 0 0;
+    display: block;
+    background-size: cover;
 }
 #homePage.generalMarket #sectionMain .hero.panPizza-hero.noPrice {
     background:url('../images/promo/DPZ_N1_GM_HP_hero_panPizza_noprice.jpg') no-repeat 0 0
@@ -176,8 +178,10 @@
     padding:3px
 }
 #homePage.generalMarket #asideMain #mixnMatch a {
-    background:url('../../img/theme/DPZ_N5_GM_HP_mixnmatch_599.jpg') no-repeat 0 0;
-    text-decoration:none
+    background:url('../../img/theme/noimage.png') no-repeat 0 0;
+    text-decoration:none;;
+    background-size: cover;
+    background-size: cover;
 }
 #homePage.generalMarket #asideMain #mixnMatch.noPrice a {
     background:url('../images/promo/DPZ_N1_GM_HP_mixnmatch_599_noprice.jpg') no-repeat 0 0
@@ -277,8 +281,9 @@
     padding:2px 0 0
 }
 #homePage.generalMarket #asideMain #fiftyPercentOff a {
-    background:url('../../img/theme/DPZ_N1_GM_HP_50off.jpg') no-repeat 0 0;
-    text-decoration:none
+    background:url('../../img/theme/noimage.png') no-repeat 0 0;
+    text-decoration:none;
+    background-size: cover;
 }
 #homePage.generalMarket #asideMain #fiftyPercentOff #fiftyPercentOffCTA {
     border:2px solid #fff;
@@ -357,7 +362,7 @@
     width:139px
 }
 #homePage.generalMarket #footerMain #pizzaMakersBottom a {
-    background:url('../images/promo/DPZ_N1_GM_HP_pizzamakers_bottom.jpg') no-repeat 0 0;
+    background:url('../../img/theme/DPZ_N1_GM_HP_pizzamakers_bottom.jpg') no-repeat 0 0;
     text-decoration:none;
     height:141px
 }

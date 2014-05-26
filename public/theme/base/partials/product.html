@@ -1,81 +1,64 @@
-<!-- <div class="row clearfix">
-    <div class="col-md-12 column" ng-repeat="product in ListProduct | CustomFilter:{productName : routeParam}">
-        <h3>
-            {{product.productName}}
-        </h3>
-        <a class="btn btn-primary" href="javascript:void(0)" ng-click="addToCart(product.id,product)"> Add</a>
-        <hr />
-        <div class="row clearfix">
-            <div class="col-md-6 column">
-                
-
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                  
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" ng-class="{active:$index == 0}" data-slide-to="{{$index}}" ng-repeat="ProdImage in product.productImage"></li>
-                    </ol>
-
-                    
-                    <div class="carousel-inner">
-                        <div class="item" ng-class="{active:$index == 0}" ng-repeat="ProdImage in product.productImage">
-                            <img alt="" src="{{ProdImage.Image}}" />
-                        </div>
-                    </div>
-
-                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-6 column">
-                <p ng-bind-html="product.productDescription">
-                </p>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-
-
-
-
-
 <div id="genericOverlay" style="position: absolute; left: 0px; top: 60px;">
     <div class="overlayContentFrame">
-        <div class="overlayContent"> <a class="closeButton js-closeButton" onClick="window.history.back()">×</a> 
-            <div id="builderDefaultPage" ng-repeat="product in ListProduct | CustomFilter:{productName : routeParam}">
+        <div class="overlayContent"> <a class="closeButton js-closeButton" ng-click="postcollection();">×</a> 
+            <div id="builderDefaultPage" ng-repeat="(key,product) in ListProduct | CustomFilter:{productUrl : routeParam}">
                 <h1 class="pageHeading">{{product.productName}}</h1>
                 <div class="visualWrapper">
                     <div class="productImage">
-                        <span class="dogEar ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} | CustomFilter:{collection:routeParam} | filter:Search""></span>
-                        <img src="{{product.productImage[0].Image}}">
+                        <!-- <span>{{product.productImage[0].Image}}</span> -->
+                        <a ng-if="product.productImage[0].Image">
+                            <img ng-src="{{product.productImage[0].Image}}" title="{{product.productName}}" style="background:url({{BaseUrl}}img/theme/load.gif) no-repeat center;z-index: 9999;">
+                        </a>
+                        <a ng-if="!product.productImage[0].Image">
+                            <img src="{{BaseUrl}}img/theme/default.png" alt="abc" style="background-color: rgb(235, 232, 232);" />
+                        </a>
                     </div>
-                    <p class="productDescription">{{product.productDescription}}</p>
+                    <p class="productDescription" ng-bind-html="product.productDescription | cut:true:80:' ...'"></p>
                 </div>
                 <div class="builderWrapper">
-                    <form method="POST">
+                    <form name="addtoCart" ng-submit="addToCart(product.id,product,postcollection())">
                         <h2 class="sectionHeading">Serving Options</h2>
-                        <div class="detailsContent detailsServingOptions">
-                            <div class="table variantTable variantSection">
-                                <div class="thead">
-                                    <div class="row">
 
-                                        <div class="td tdName">Size</div>
-                                
-                                        <div class="td">Color</div>
-                                        <div class="td">Quantity</div>
-                                        <div class="clr">
-                                            <!-- -->
-                                        </div>
+                        <div class="detailsContent detailsServingOptions">
+                            <div class="table variantTable variantSection" ng-if="product.productMultiOptions">
+                                <div class="tbody variants-border" ng-repeat="valueSize in product.productMultiOptionsList" ng-model="product.productVarientModel[valueSize.name]">
+
+
+
+                                    <div class="td tdName" ng-repeat="parms in valueSize.value" value="{{parms}}" style="width: 18%;text-align:none;margin-left:20px;">
+
+                                        <label>
+                                            <input type="radio" value="{{parms}}" required ng-model="product.productVarientModel[valueSize.name]" name="{{valueSize.name}}" style="margin-right: 2px;">{{parms}}
+                                        </label>
+                                    </div>
+
+                                    <div class="clr">
+                                        <!-- -->
                                     </div>
                                 </div>
-                                <div class="tbody">
-                                    <label for="20BCOKE" class="row">
-                                        <div class="td tdName"><select class="js-productQuantity" name="F_COKE|Quantity">
-                                           
+
+                            </div>
+
+                        </div>
+                        
+                            
+                                    <span class="cancel" ng-repeat="valueSize in product.productMultiOptionsList" style="padding-top: 20px;display: inline-block;float: left;"><a class="buttonType5" ng-if="!product.productMultiOptions && product.productPrice != null" style="color: black;font-size: 13px;margin-left: 6px;">PKR {{product.productPrice}}</a>
+                                        <a class="buttonType5" ng-if="product.productVarientModel[valueSize.name] && product.productMultiOptions && product.productPrice != null " style="color: black;font-size: 13px;margin-left: 6px;">PKR {{returnPrice(product)}} </a>
+                                    </span>
+                               
+                        
+
+                        <table cellpadding="0" cellspacing="0" class="buttons">
+                            <tbody>
+                                <tr>
+
+                                    <td class="cancel"><a ng-click="postcollection();" class="buttonType5 js-cancel">Cancel</a>
+                                    </td>
+
+                                    <td class="qty" style="font-weight:bold;">Quantity:
+
+                                        <select class="js-productQuantity" style="width:44px;" min='1' ng-model="product.productQuantity" type="number">
+                                            <!-- -->
                                             <option selected="" value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -101,34 +84,13 @@
                                             <option value="23">23</option>
                                             <option value="24">24</option>
                                             <option value="25">25</option>
-                                        </select></div>
-                                        
-                                        <div class="td"><select class="js-productQuantity" name="F_COKE|Quantity">
-                                           
-                                            <option selected="" value="1">red</option>
-                                            <option  value="2">yellow</option>
-                                            <option  value="3">green</option>
-                                            
-                                        </select></div>
-                                        <div class="td"> 
-                                            <td class="qty"><input style="width:62px;margin-right: 28px;" min='1' ng-model="Items.quantity" type="number"></td>
-                                        </div>
-                                        <div class="clr">
-                                            <!-- -->
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sideWrapper"></div>
-                        <table cellpadding="0" cellspacing="0" class="buttons">
-                            <tbody>
-                                <tr>
-                                    <td class="cancel"><a class="buttonType5">Price: Rs {{product.productPrice}}</a>
+                                        </select>
+
                                     </td>
-                                  
+
+
                                     <td>
-                                        <button class="btn js-isNew"  onClick="window.history.back()" ng-click="addToCart(product.id,product)">Add To Order</button>
+                                        <input type="submit" value="Add To Order" title="Click To Add To Cart" />
                                     </td>
                                 </tr>
                             </tbody>
@@ -137,6 +99,7 @@
                             <!-- -->
                         </div>
                     </form>
+
                 </div>
                 <div class="clr">
                     <!-- -->
