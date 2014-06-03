@@ -865,66 +865,85 @@
                                      <h1>Order Details</h1>
                                      
                                         <table ng-show="IfCart()" class="table">
-      <thead>
-        <tr>
-          <th class="col-md-4">
-            Product
-          </th>
-          <th class="col-md-4">
-            Price
-          </th>
-          <th class="col-md-4">
-            Quantity
-          </th>
-          <th class="col-md-4 min200">
-            Total Price
-          </th>
-          <th class="col-md-4">
-            Action
-          </th>
-        </tr>
-      </thead>
-      
-      <tbody ng-repeat="(keyMain,Itemss) in Cart track by $index">
-        <tr ng-show="Itemss.productID">
-          <td class="col-md-4">
-            {{Itemss.productInfo.productName}} 
-          </td>
-          <td class="col-md-4">
-            {{SettingGeneral.settings.currencies_format}}. {{Itemss.price}}
-          </td>
-          <td class="col-md-4">
-            <input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="Itemss.quantity" type="number" >
-          </td>
-          <td class="col-md-4">
-            {{SettingGeneral.settings.currencies_format}}. {{Itemss.price * Itemss.quantity}}
-          </td>
-          <td>
-            <span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Itemss.productID,false)">
-            </span>
-          </td>
-        </tr>
-        <tr ng-hide="Itemss.productID" ng-repeat="(key,itm) in Itemss track by $index">
-          <td class="col-md-4">
-            {{itm.productInfo.productName}} - ( {{key}} )
-          </td>
-          <td class="col-md-4">
-            {{SettingGeneral.settings.currencies_format}}. {{itm.price}}
-          </td>
-          <td class="col-md-4">
-            <input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="itm.quantity" type="number" >
-          </td>
-          <td class="col-md-4">
-            {{SettingGeneral.settings.currencies_format}}. {{itm.price * itm.quantity}}
-          </td>
-          <td>
-            {{}}
-            <span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(itm.productID,key)">
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+                                          <thead>
+                                            <tr>
+                                              <th class="col-md-4">
+                                                Product
+                                              </th>
+                                              <th class="col-md-4">
+                                                Price
+                                              </th>
+                                              <th class="col-md-4">
+                                                Sku
+                                              </th>
+                                              <th class="col-md-4">
+                                                Barcode
+                                              </th>
+                                              <th class="col-md-4">
+                                                Quantity
+                                              </th>
+                                              <th class="col-md-4 min200">
+                                                Total Price
+                                              </th>
+                                              <th class="col-md-4">
+                                                Action
+                                              </th>
+                                            </tr>
+                                          </thead>
+                                          
+                                          <tbody ng-repeat="(keyMain,Itemss) in Cart track by $index">
+                                            <tr ng-show="Itemss.productID">
+                                              <td class="col-md-4">                                              
+                                                {{Itemss.productInfo.productName}} 
+                                              </td>
+                                              <td class="col-md-4">
+                                                {{SettingGeneral.settings.currencies_format}}. {{Itemss.price}}
+                                              </td>
+                                               <td class="col-md-4">
+                                                {{Itemss.sku}}
+                                              </td>
+                                              <td class="col-md-4">
+                                                {{Itemss.barcode}}
+                                              </td>
+                                              
+                                              <td class="col-md-4">
+                                                <input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="Itemss.quantity" type="number" >
+                                              </td>
+                                              <td class="col-md-4">
+                                                {{SettingGeneral.settings.currencies_format}}. {{Itemss.price * Itemss.quantity}}
+                                              </td>
+                                              <td>
+                                                <span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(Itemss.productID,false)">
+                                                </span>
+                                              </td>
+                                            </tr>
+                                            <tr ng-hide="Itemss.productID" ng-repeat="(key,itm) in Itemss track by $index">
+                                              <td class="col-md-4">
+                                                {{itm.productInfo.productName}} - ( {{key}} )
+                                              </td>
+                                              <td class="col-md-4">
+                                                {{SettingGeneral.settings.currencies_format}}. {{itm.price}}
+                                              </td>
+                                              <td class="col-md-4">
+                                                {{itm.sku}}
+                                              </td>
+                                              <td class="col-md-4">
+                                                {{itm.barcode}}
+                                              </td>
+                                              <td class="col-md-4">
+                                                <input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="itm.quantity" type="number" >
+                                              </td>
+                                              <td class="col-md-4">
+                                                {{SettingGeneral.settings.currencies_format}}. {{itm.price * itm.quantity}}
+                                              </td>
+                                              <td>
+                                                {{}}
+                                                <span class="glyphicon glyphicon-remove" ng-click="RemoveCartItem(itm.productID,key)">
+                                                </span>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
    										<div ng-show="IfCart()">
                                           <div class="clearfix">
                                           </div>
@@ -960,18 +979,15 @@
                                           
                                         </div>
                                      
-                                        
-                                         
-                                          
-                                           <div class="form-group">
-                                                <a class="btn btn-info pull-left"  href="./">Continue Shopping</a>
-                                               <button  class="btn btn-info  pull-right" type="submit">Submit Order</button>
-                                         </div>
-                                     </div>
+                      <div class="form-group">
+                        <a class="btn btn-info pull-left"  href="./">Continue Shopping</a>
+                        <button  class="btn btn-info  pull-right" type="submit">Submit Order</button>
+                      </div>
+                  </div>
                      </form>
-        </div>
+       				 </div>
         <div class="col-md-12" ng-hide="IfCart()">
          <h6 align="center">No Item Found</h6>
        </div>
    </div>    
-<div> 
+<div>  

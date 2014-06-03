@@ -1,14 +1,14 @@
 function AECtrl ($rootScope,$location,AzureMobileClient,$routeParams,$cookies,$http,$compile) {
 	//alert(localStorage.getItem('myFirstKey'));
-	//console.log($routeParams);
+	////console.log($routeParams);
 	$rootScope.$location = $location;	
 	$rootScope.Cart = {};
 	$rootScope.User = {};
 	$rootScope.User.info = {};
 	$rootScope.isCollapsed = true;
 	$rootScope.OrderInfo = true;
-	$rootScope.PaymentMethod = '';
 	$rootScope.SettingGeneral = '';
+	$rootScope.paymentInfo = '';
 	$rootScope.SettingShippingCountry = {};
 	$rootScope.SettingShipping = {};
 	$rootScope.BaseUrl = BaseUrl;
@@ -71,7 +71,7 @@ $rootScope.loadPositionSetter = function(){
 	$('#loadingbar').show();
 	$rootScope.LoadPositions = $rootScope.Incremetor  + $rootScope.LoadPositions;
 	$('#loadingbar').width($rootScope.LoadPositions+'%');
-	console.log($rootScope.LoadPositions);
+	//console.log($rootScope.LoadPositions);
 	if($rootScope.LoadPositions >= 90){		
 			$rootScope.LoadPositions = 100;
 			$('#loadingbar').width($rootScope.LoadPositions+'%');
@@ -83,9 +83,14 @@ $rootScope.loadPositionSetter = function(){
 	}
 }
 if(Theme){
+	console.log(Theme);
 	$rootScope.ThemeSettings = Theme;
-	//console.log($rootScope.ThemeSettings);
-	$rootScope.ThemeSettings.theme_settings = JSON.parse($rootScope.ThemeSettings.theme_settings);
+	console.log($rootScope.ThemeSettings);
+	if($rootScope.ThemeSettings.theme_settings){
+		if(typeof($rootScope.ThemeSettings.theme_settings != 'object')){
+			$rootScope.ThemeSettings.theme_settings = JSON.parse($rootScope.ThemeSettings.theme_settings);
+		}
+	}
 }
 
 $rootScope.GetTheme = function(param){
@@ -111,7 +116,7 @@ $rootScope.GetSettingNotificationOrder = function(param){
 					$.each($rootScope.ListSettingsNotificationOrder, function(index, item){
 						$rootScope.subscriptionEmails.push(item.subscriptionEmail);
 					});
-						console.log($rootScope.subscriptionEmails);
+						//console.log($rootScope.subscriptionEmails);
 						$rootScope.loadPositionSetter();
 						$rootScope.$apply();
 		});
@@ -127,18 +132,18 @@ $rootScope.GetSettingNotification = function(param){
 					$rootScope.newOrderTitle =  $rootScope.ListSettingsNotification.NewOrderTitle;
 					$rootScope.orderTitle =  $rootScope.ListSettingsNotification.OrderTitle;
 					if($rootScope.ListSettingsNotification.OrderPlainText == true){
-						console.log('plain text');
+						//console.log('plain text');
 						$rootScope.orderConfirmationTemplate = $rootScope.ListSettingsNotification.OrderText;
 					}else if($rootScope.ListSettingsNotification.OrderPlainText == false){
-						console.log('html text');
+						//console.log('html text');
 						$rootScope.orderConfirmationTemplate = $rootScope.ListSettingsNotification.OrderHTML;
 					}
 					
 					if($rootScope.ListSettingsNotification.NewOrderPlainText == true){
-						console.log('new order plain text');
+						//console.log('new order plain text');
 						$rootScope.newOrderTemplate = $rootScope.ListSettingsNotification.NewOrderText;
 					}else if($rootScope.ListSettingsNotification.NewOrderPlainText == false){
-						console.log('new order html text');
+						//console.log('new order html text');
 						$rootScope.newOrderTemplate = $rootScope.ListSettingsNotification.NewOrderHTML;
 					}
 				}
@@ -154,12 +159,12 @@ $rootScope.GetSettingShippingCountry = function(param){
 				if(data.length > 0){
 					$rootScope.SettingsShippingCountry = data;
 					$rootScope.Customer.ShippingCountry = data[0].CountryName;
-					console.log($rootScope.SettingsShippingCountry);
+					//console.log($rootScope.SettingsShippingCountry);
 					AzureMobileClient.getFilterData($rootScope.SettingsShippingTable,{}).then(
 					function(data) {
 						if(data.length > 0){
-							console.log('Shipping');
-							console.log(data);
+							//console.log('Shipping');
+							//console.log(data);
 							$rootScope.SettingShipping = data;
 							
 							$.each($rootScope.SettingShipping,function(index,item){
@@ -175,9 +180,9 @@ $rootScope.GetSettingShippingCountry = function(param){
 										delete $rootScope.SettingShipping[index];
 									}
 							});
-							console.log('Strat');
-							console.log($rootScope.SettingShipping);
-							console.log($rootScope.SettingsShippingCountry);
+							//console.log('Strat');
+							//console.log($rootScope.SettingShipping);
+							//console.log($rootScope.SettingsShippingCountry);
 						 }
 						 $rootScope.loadPositionSetter();
 						 
@@ -191,8 +196,10 @@ $rootScope.GetSettingShippingCountry = function(param){
 };
 if(SettingGeneral){
 	$rootScope.SettingGeneral = SettingGeneral;
-	console.log($rootScope.SettingGeneral);
-	//$rootScope.SettingGeneral.settings = JSON.parse($rootScope.SettingGeneral.settings);
+	//console.log($rootScope.SettingGeneral);
+	if(typeof($rootScope.SettingGeneral.settings) != 'object'){
+		$rootScope.SettingGeneral.settings = JSON.parse($rootScope.SettingGeneral.settings);
+	}
 }
 $rootScope.GetSettingGeneral = function(param){
 		AzureMobileClient.getFilterData($rootScope.SettingsGeneralTable,{}).then(
@@ -223,17 +230,17 @@ $rootScope.CreatCartHTML = function() {
 	if(item.productID){
 		$rootScope.HTML += '<tr class="col-md-4">';
 		$rootScope.HTML += '<td class="col-md-4">'+item.productInfo.productName+'</td>';
-		$rootScope.HTML += '<td class="col-md-4">Rs. '+item.price+'</td>';
+		$rootScope.HTML += '<td class="col-md-4">'+$rootScope.SettingGeneral.settings.currencies_format+' '+item.price+'</td>';
 		$rootScope.HTML += '<td class="col-md-4">'+item.quantity+'</td>';
-		$rootScope.HTML += '<td class="col-md-4">Rs. '+item.price * item.quantity+'</td>';
+		$rootScope.HTML += '<td class="col-md-4">'+$rootScope.SettingGeneral.settings.currencies_format+' '+item.price * item.quantity+'</td>';
 		$rootScope.HTML += '<tr>';
 		}else if(!item.productID){
 			$.each(item, function (ind, itm){
 				$rootScope.HTML += '<tr>';
 				$rootScope.HTML += '<td class="col-md-4" style="width:25%">'+itm.productInfo.productName+'</td>';
-				$rootScope.HTML += '<td class="col-md-4" style="width:25%">Rs. '+itm.price+'</td>';
+				$rootScope.HTML += '<td class="col-md-4" style="width:25%">'+$rootScope.SettingGeneral.settings.currencies_format+' '+itm.price+'</td>';
 				$rootScope.HTML += '<td class="col-md-4" style="width:25%">'+itm.quantity+'</td>';
-				$rootScope.HTML += '<td class="col-md-4" style="width:25%">Rs. '+itm.price * itm.quantity+'</td>';
+				$rootScope.HTML += '<td class="col-md-4" style="width:25%">'+$rootScope.SettingGeneral.settings.currencies_format+' '+itm.price * itm.quantity+'</td>';
 				$rootScope.HTML += '<tr>';
 			});
 		} 
@@ -258,6 +265,51 @@ $rootScope.getOrderConfirmationTemplate = function(){
 $rootScope.getnewOrderTemplate = function(){
 	return $rootScope.newOrderTemplate;
 }
+$rootScope.RenderOnDemand = function(VarienModel,product,myVal){
+	//if(myVal == 'soft'){
+	console.log(product);
+	console.log(VarienModel);
+	console.log(myVal);
+	var vrCount = 1;
+	$.each(VarienModel,function(index,item){
+		vrCount++;
+	});
+	var hasIndex = false;
+	$.each(product.productVarients,function(index,item){
+		var hasInnerOne = false;
+		var counterFound = 0;
+		$.each(item.name,function(indexInner,itemInner){
+			if(itemInner == myVal){
+				hasInnerOne = true;
+				counterFound++;
+			}
+		});
+		if(hasInnerOne){
+				$.each(item.name,function(indexInner,itemInner){
+					$.each(VarienModel,function(index,item){
+						if(itemInner == item){				
+							counterFound++;
+						}
+					})
+				});
+		}
+		if(counterFound >= vrCount){
+			hasIndex = true;
+		}
+		
+	});
+	console.log('==========Has===========');
+	console.log(hasIndex);
+	console.log(vrCount);
+	if(hasIndex || vrCount == 1){
+		return false;
+	}else{
+		return true;
+	}
+	/*}else{
+		return false;
+	}*/
+}
 
 //Get Collections		
 $rootScope.GetCollection = function(param){
@@ -276,7 +328,7 @@ $rootScope.GetPaymentGateways = function(param){
 				$rootScope.ListPaymentGateways = data[0];
 				$rootScope.ListPaymentGateways.payment_method = JSON.parse($rootScope.ListPaymentGateways.payment_method);
 				$rootScope.ListPaymentMethod= $rootScope.ListPaymentGateways.payment_method;
-				//console.log($rootScope.ListPaymentMethod);
+				////console.log($rootScope.ListPaymentMethod);
 				$rootScope.loadPositionSetter();
 				 $rootScope.$apply();
 				//$rootScope.GetNavigation();
@@ -290,7 +342,7 @@ $rootScope.GetNavigation = function(param){
 				$.each($rootScope.ListNavigation ,function(index,item){
 					$rootScope.ListNavigation[index].link_list = JSON.parse($rootScope.ListNavigation[index].link_list);
 				});
-				//console.log($rootScope.ListNavigation);
+				////console.log($rootScope.ListNavigation);
 				$rootScope.loadPositionSetter();
 				 $rootScope.$apply();
 				//$rootScope.GetPage();
@@ -350,8 +402,8 @@ $rootScope.GetProduct = function(param){
 				
 		   		angular.forEach($rootScope.ListCollection, function (collections) {
 					angular.forEach($rootScope.ListProduct[index]['productCollections'], function (productCollection,ind) {
-						//console.log(productCollection);
-						//console.log(ind);
+						////console.log(productCollection);
+						////console.log(ind);
 						if(productCollection.id == collections.id){
 							$rootScope.ListProduct[index]['productCollections'][ind].urlParam = collections.collectionUrl;
 						}
@@ -359,8 +411,8 @@ $rootScope.GetProduct = function(param){
 				});
 		   		angular.forEach($rootScope.ListCollection, function (collections) {
 					angular.forEach($rootScope.ListProduct[index]['productCollections'], function (productCollection,ind) {
-						//console.log(productCollection);
-						//console.log(ind);
+						////console.log(productCollection);
+						////console.log(ind);
 						if(productCollection.id == collections.id){
 							$rootScope.ListProduct[index]['productCollections'][ind].urlParam = collections.collectionUrl;
 						}
@@ -393,9 +445,9 @@ $rootScope.GetProduct = function(param){
 								}
 							})
 				});
-				console.log('---------------Starts------------');
-				console.log(mutiListOptions);
-				console.log('---------------Wnds------------');
+				//console.log('---------------Starts------------');
+				//console.log(mutiListOptions);
+				//console.log('---------------Wnds------------');
 				$.each(item.productMultiOptionsList,function(indx,itmx){
 						   $rootScope.ListProduct[index].productMultiOptionsList[indx].value = itmx.value.split(',');
 						   if(mutiListOptions[indx]){
@@ -403,28 +455,28 @@ $rootScope.GetProduct = function(param){
 						   }else{
 						   		$rootScope.ListProduct[index].productMultiOptionsList[indx].value = [];
 						   }
-						   //console.log($rootScope.varientsTypes[itmx.optionSelected]);
+						   ////console.log($rootScope.varientsTypes[itmx.optionSelected]);
 							if($rootScope.varientsTypes[itmx.optionSelected]){
 								$rootScope.ListProduct[index].productMultiOptionsList[indx].name = $rootScope.varientsTypes[itmx.optionSelected];
 							}else{
-								//console.log($rootScope.ListProduct[index].productMultiOptionsList[indx].custom);
+								////console.log($rootScope.ListProduct[index].productMultiOptionsList[indx].custom);
 								$rootScope.ListProduct[index].productMultiOptionsList[indx].name = $rootScope.ListProduct[index].productMultiOptionsList[indx].custom;
 							}
-						//console.log(item);
+						////console.log(item);
 				});
 				
-				//console.log('------------bdas');
-				//console.log(mutiListOptions);
+				////console.log('------------bdas');
+				////console.log(mutiListOptions);
 				 //var countersd = 0;
 				/*$.each(item.productMultiOptionsList,function(indx,itmx){
-						console.log(itmx);
+						//console.log(itmx);
 						if(item.productVarients && typeof(item.productVarients) == 'object'){
 							$.each(item.productVarients,function(indss,itmxss){
 								var hasIten = false;
-								//console.log(itmxss);
+								////console.log(itmxss);
 								$.each((itmx.value),function(id,it){
-									console.log(itmxss.name[countersd]);
-									console.log(it);
+									//console.log(itmxss.name[countersd]);
+									//console.log(it);
 									if(itmxss.name[countersd] && it){
 										if(itmxss.name[countersd] == it){
 											hasIten = true;
@@ -433,7 +485,7 @@ $rootScope.GetProduct = function(param){
 								});
 								if(!hasIten){
 									/*if(itmxss.name[countersd]){
-										console.log(itmxss.name[countersd]);
+										//console.log(itmxss.name[countersd]);
 									}
 								}
 							
@@ -445,7 +497,7 @@ $rootScope.GetProduct = function(param){
 				
 		   });
 		    $rootScope.loadPositionSetter();
-			console.log($rootScope.ListProduct);
+			//console.log($rootScope.ListProduct);
 			$rootScope.$apply(function(){
 				$('#Loader').hide();
 			});
@@ -482,11 +534,11 @@ $rootScope.ProductCount = function(collectionName,pageName){
 			count++;
 		}
 	});
-	//console.log(count);
+	////console.log(count);
 	return count;
 }
 $rootScope.GuestLogin = function(redirect){
-	//console.log(redirect);
+	////console.log(redirect);
 	$rootScope.User.info = {};
 	$rootScope.User.info.CustomerEmail = $rootScope.GuestEmail;
 	$rootScope.User.info.CustomerFirstName = $rootScope.GuestFirstName;
@@ -497,7 +549,7 @@ $rootScope.GuestLogin = function(redirect){
 }
 //Add to cart
 $rootScope.addToCart = function(productID,productInfo,redirect){	
-	//console.log(productInfo);
+	////console.log(productInfo);
 
 	var count = 1;
 	$rootScope.varientSelected = productInfo.productVarientModel;
@@ -508,17 +560,17 @@ $rootScope.addToCart = function(productID,productInfo,redirect){
 	$.each($rootScope.varientSelected,function(ind,itm){
 		totalCounts++;
 	})
-	//console.log(quantity);
+	////console.log(quantity);
 	//return true;
 	if(totalCounts > 0){
 		
 	var quantity = parseInt(productInfo.productQuantity);
-	//console.log(productID+varrientArray);
+	////console.log(productID+varrientArray);
 	  $.each(productInfo.productVarients, function(indx, itmx){
 		var varrientArray = '';
 		var counters = 0;
 		$.each($rootScope.varientSelected,function(index, item) {
-	    //console.log($rootScope.varientSelected);
+	    ////console.log($rootScope.varientSelected);
 	 	var varientItem = $rootScope.varientSelected[index];
 			$.each(itmx.name,function(ind,itm){
 			  if(itm == varientItem){
@@ -536,20 +588,20 @@ $rootScope.addToCart = function(productID,productInfo,redirect){
 			/*$.each(varientItem,function(ind,itm){
 				varrientArray += '|'+itm;
 			});*/
-			//console.log(varrientArray);
+			////console.log(varrientArray);
 			//return true;
 			//productID = productID+varrientArray;
-		//console.log(varrientArray);
+		////console.log(varrientArray);
 		
 		if(counters == totalCounts){
 			var nextIds = 0;
-			//console.log(productID+varrientArray);
+			////console.log(productID+varrientArray);
 			
 			if(!$rootScope.Cart[productID]){
 				$rootScope.Cart[productID] = {};
 				$rootScope.Cart[productID][varrientArray] = {};
-				$rootScope.Cart[productID][varrientArray] = {productID:productID,quantity:quantity,productInfo:productInfo,price:itmx.price};
-				console.log(varrientArray);
+				$rootScope.Cart[productID][varrientArray] = {productID:productID,quantity:quantity,productInfo:productInfo,price:itmx.price,sku:itmx.sku,barcode:itmx.barcode};
+				//console.log(varrientArray);
 				$rootScope.Cart[productID][varrientArray].productInfo.newPrice = itmx.price;
 				
 				//$rootScope.Cart[productID][varrientArray].productInfo.selectedVarients = varrientArray;
@@ -558,14 +610,14 @@ $rootScope.addToCart = function(productID,productInfo,redirect){
 					$rootScope.Cart[productID][varrientArray].quantity = parseInt(productInfo.productQuantity) + parseInt($rootScope.Cart[productID][varrientArray].quantity);
 				}else{					
 					$rootScope.Cart[productID][varrientArray] = {};
-					$rootScope.Cart[productID][varrientArray] = {productID:productID,quantity:quantity,productInfo:productInfo,price:itmx.price};
-					console.log(varrientArray);
+					$rootScope.Cart[productID][varrientArray] = {productID:productID,quantity:quantity,productInfo:productInfo,price:itmx.price,sku:itmx.sku,barcode:itmx.barcode};
+					//console.log(varrientArray);
 					$rootScope.Cart[productID][varrientArray].productInfo.newPrice = itmx.price;
 					
 					//$rootScope.Cart[productID][varrientArray].productInfo.selectedVarients = varrientArray;
 				}
 			}
-			console.log($rootScope.Cart);
+			//console.log($rootScope.Cart);
 			
 			
 		}
@@ -575,15 +627,15 @@ $rootScope.addToCart = function(productID,productInfo,redirect){
 	
 	}else{
 		if(!$rootScope.Cart[productID]){
-			$rootScope.Cart[productID] = {productID:productID,quantity:quantity,productInfo:productInfo,price:productInfo.productPrice};
+			$rootScope.Cart[productID] = {productID:productID,quantity:quantity,productInfo:productInfo,price:productInfo.productPrice,sku:productInfo.sku,barcode:productInfo.barcode};
 		}else{
 			$rootScope.Cart[productID].quantity = parseInt(productInfo.productQuantity)+ parseInt($rootScope.Cart[productID].quantity);
 		}
 		
 	}
 	
-	//console.log(productInfo);
-	//console.log($rootScope.Cart[productID]);
+	////console.log(productInfo);
+	////console.log($rootScope.Cart[productID]);
 
 	$rootScope.SetLocalStorage('Cart');
 	if(redirect){
@@ -597,11 +649,11 @@ $rootScope.addToCart = function(productID,productInfo,redirect){
 $rootScope.IfCart= function(){	
 	var length= 0;
 	$.each($rootScope.Cart,function(index,item){
-		   //console.log('-----bda=========');
-	      // console.log(item);
-	     //console.log('-----bda=========');
-		 //console.log(item.productID);
-		//console.log(item.productID);
+		   ////console.log('-----bda=========');
+	      // //console.log(item);
+	     ////console.log('-----bda=========');
+		 ////console.log(item.productID);
+		////console.log(item.productID);
 		if(item.productID){
 			length++
 		}else{
@@ -633,7 +685,7 @@ $rootScope.selectedVarients = function(item){
 		 return  selectedCount;
 }
 $rootScope.returnPrice = function(product){
-		//console.log('Strat Price return.............');
+		////console.log('Strat Price return.............');
 		var count = 1;
 		if(product.productMultiOptions){
 		var returnPrice = 0;
@@ -647,10 +699,10 @@ $rootScope.returnPrice = function(product){
 			 	selectedCount++;
 			 }
 		 });
-		 console.log('-----required--------');
-		 console.log(product.productVarientModel);
-		 console.log(requiredCount);
-		 console.log(selectedCount);
+		 //console.log('-----required--------');
+		 //console.log(product.productVarientModel);
+		 //console.log(requiredCount);
+		 //console.log(selectedCount);
 				var varient = product.productVarientModel;
 				
 				var totalCounts = 0;
@@ -658,15 +710,15 @@ $rootScope.returnPrice = function(product){
 				$.each(varient,function(ind,itm){
 					totalCounts++;
 				})
-				//console.log(quantity);
+				////console.log(quantity);
 				//return true;
 				if(totalCounts > 0){
-					//console.log(product.productVarients);
+					////console.log(product.productVarients);
 				  $.each(product.productVarients, function(indx, itmx){
 					var varrientArray = '';
 					var counters = 0;
 					$.each(varient,function(index, item) {
-					//console.log($rootScope.varientSelected);
+					////console.log($rootScope.varientSelected);
 					var varientItem = varient[index];
 						$.each(itmx.name,function(ind,itm){
 						  if(itm == varientItem){
@@ -682,10 +734,10 @@ $rootScope.returnPrice = function(product){
 						});
 					
 					if(counters == requiredCount){
-						console.log('End Price return '+requiredCount+'......'+counters+'.......'+itmx.price);
+						//console.log('End Price return '+requiredCount+'......'+counters+'.......'+itmx.price);
 						returnPrice =  itmx.price;
 					}else if(selectedCount < requiredCount){
-						console.log('----------less----------');
+						//console.log('----------less----------');
 						returnPrice =  -1;
 					}
 				});
@@ -720,7 +772,7 @@ $rootScope.ReturnItems= function(){
 
 $rootScope.ReturnTax= function(){	
 	var Tax= 0;
-	//console.log($rootScope.Cart);
+	////console.log($rootScope.Cart);
 	if($rootScope.SettingsShippingCountry){
 		$.each($rootScope.SettingsShippingCountry,function(index,item){
 				if(item.CountryName == $rootScope.Customer.ShippingCountry){
@@ -735,7 +787,7 @@ $rootScope.ReturnTax= function(){
 }
 $rootScope.ReturnTaxPrice= function(){	
 	var Amount= 0;
-	//console.log($rootScope.Cart);
+	////console.log($rootScope.Cart);
 	$.each($rootScope.Cart,function(index,item){
 			if(!item.productID){
 			$.each(item,function(indx, itmx){
@@ -766,7 +818,7 @@ $rootScope.changeQuantity = function() {
 
 $rootScope.ReturnTotal= function(){	
 	var Amount= 0;
-	//console.log($rootScope.Cart);
+	////console.log($rootScope.Cart);
 	$.each($rootScope.Cart,function(index,item){
 			if(!item.productID){
 			$.each(item,function(indx, itmx){
@@ -795,7 +847,7 @@ $rootScope.RemoveCartItem= function(Productid,keyId){
 	if(keyId){
 		delete $rootScope.Cart[Productid][keyId];
 	}else{
-		//console.log(Productid);	
+		////console.log(Productid);	
 		delete $rootScope.Cart[Productid];
 	}
 	$rootScope.SetLocalStorage('Cart');
@@ -804,16 +856,16 @@ $rootScope.RemoveCartItem= function(Productid,keyId){
 $rootScope.SetLocalStorage= function(Index){
 	if(Index == 'Cart' || Index == ''){
 		window.localStorage.setItem('Cart',JSON.stringify($rootScope.Cart));
-		//console.log(window.localStorage.getItem('Cart'));
+		////console.log(window.localStorage.getItem('Cart'));
 	}
 	if(Index == 'User' || Index == ''){
 		window.localStorage.setItem('User',JSON.stringify($rootScope.User.info));
-		//console.log(window.localStorage.getItem('User'));
+		////console.log(window.localStorage.getItem('User'));
 	}
 }
 
 $rootScope.GetLocalStorage= function(Index){
-	//console.log($rootScope.User.info);
+	////console.log($rootScope.User.info);
 	if(Index == 'Cart' || Index == ''){
 		if(window.localStorage.getItem('Cart')){
 			$rootScope.Cart = JSON.parse(window.localStorage.getItem('Cart'));
@@ -824,7 +876,7 @@ $rootScope.GetLocalStorage= function(Index){
 			$rootScope.User.info = JSON.parse(window.localStorage.getItem('User'));
 
 			$rootScope.Customer = $rootScope.User.info;
-			//console.log($rootScope.User);
+			////console.log($rootScope.User);
 		}
 	}
 }
@@ -836,7 +888,7 @@ $rootScope.CheckLogin = function(redirect){
 	$('#error').hide();
 	AzureMobileClient.getFilterData($rootScope.CustomerTable,{CustomerEmail:$rootScope.Customer.email,CustomerPassword:$rootScope.Customer.password}).then(
 		function(data) {
-			//console.log(data);
+			////console.log(data);
 			if(data.length > 0){
 				$rootScope.StartLogin = false;
 				$rootScope.User.info = {};
@@ -871,7 +923,7 @@ $rootScope.ForgotPassword = function(redirect){
 	$rootScope.ForgotEmail = false;
 	AzureMobileClient.getFilterData($rootScope.CustomerTable,{CustomerEmail:$rootScope.Customer.forgotEmail}).then(
 		function(data) {
-			//console.log(data);
+			////console.log(data);
 			if(data.length > 0){
 				$rootScope.ForgotEmail = true;
 				$rootScope.StartForgotPassword = false;
@@ -895,7 +947,7 @@ $rootScope.ResetPassword = function(redirect){
 	$rootScope.ResetPasswordDone = false;
 	AzureMobileClient.getFilterData($rootScope.CustomerTable,{CustomerEmail:$rootScope.Customer.CustomerEmail,CustomerPassword:$rootScope.Customer.OldPassword}).then(
 		function(data) {
-			//console.log(data);
+			////console.log(data);
 			if(data.length > 0){
 				var UpdateDataReset = {
 							id: data[0].id,
@@ -940,12 +992,12 @@ $rootScope.SignUp = function(redirect){
 							Zip:$rootScope.Customer.PostCode,
 							Country:$rootScope.Customer.Country
 				  }
-		//console.log(NewUser);
+		////console.log(NewUser);
 		AzureMobileClient.addData($rootScope.CustomerTable, NewUser).then(
 			function(UserData) {
 				$rootScope.DuplicateEmailError = false;
 				$rootScope.StartSignup = false;
-			   //console.log(UserData);
+			   ////console.log(UserData);
 			   $rootScope.User.info = UserData;
 			   $rootScope.User.info.GuestAuth = false;
 			   $rootScope.SetLocalStorage('User');
@@ -960,7 +1012,7 @@ $rootScope.SignUp = function(redirect){
 			},
 			function(error) {
 				var responce  = JSON.parse(error.request.responseText);
-				console.log(responce);
+				//console.log(responce);
 				if(responce.status == 'Already Customer'){
 					$rootScope.DuplicateEmailError = true;
 					$rootScope.$apply();
@@ -983,7 +1035,7 @@ $rootScope.UpdateUserInfo = function(redirect){
 							Zip:$rootScope.Customer.PostCode,
 							Country:$rootScope.Customer.Country
 				  }
-		//console.log(NewUser);
+		////console.log(NewUser);
 		AzureMobileClient.updateData($rootScope.CustomerTable, UpdateRow).then(
 			function(UserData) {
 				$rootScope.StartUpdateUserInfo = false;
@@ -1039,6 +1091,8 @@ $rootScope.LoadOrders = function(){
 		});
 	}
 }
+
+
 $rootScope.SubmitOrder =  function(payment,redirect,clear){
 	$rootScope.CreatCartHTML();
 	$rootScope.applyDivOrderConfirmationTemplate();
@@ -1050,7 +1104,7 @@ $rootScope.SubmitOrder =  function(payment,redirect,clear){
 		})
 		//$rootScope.User.info.Country = $rootScope.Customer.Country;
 	}
-	//console.log($rootScope.User.info.id); return true;
+	////console.log($rootScope.User.info.id); return true;
 	if(!$rootScope.SettingGeneral.settings.currencies_format){
 		$rootScope.SettingGeneral.settings.currencies_format = 'PKR';
 	}
@@ -1063,8 +1117,8 @@ $rootScope.SubmitOrder =  function(payment,redirect,clear){
 							productInfo: JSON.stringify($rootScope.Cart),
 							taxInfo: $rootScope.ReturnTax(),
 							orderCartHtml: $rootScope.CreatCartHTML(),
-							orderedproducts: $rootScope.CreatCartHTML(),
-							orderCurrency: $rootScope.SettingGeneral.settings.currencies_format
+							orderCurrency: $rootScope.SettingGeneral.settings.currencies_format,
+							orderid: ''
 						}
 	}else{
 		var NewOrder = {
@@ -1075,8 +1129,8 @@ $rootScope.SubmitOrder =  function(payment,redirect,clear){
 							productInfo: JSON.stringify($rootScope.Cart),
 							taxInfo: $rootScope.ReturnTax(),
 							orderCartHtml: $rootScope.CreatCartHTML(),
-							orderedproducts: $rootScope.CreatCartHTML(),
-							orderCurrency: $rootScope.SettingGeneral.settings.currencies_format
+							orderCurrency: $rootScope.SettingGeneral.settings.currencies_format,
+							orderid: ''
 						}
 	}
 						
@@ -1098,36 +1152,39 @@ $rootScope.SubmitOrder =  function(payment,redirect,clear){
 				 });
 			},
 			function(error) {
-				//console.log("An error has occurred: " + error.message);
+				////console.log("An error has occurred: " + error.message);
 			});
 }
 
 $rootScope.SendConfirmEmail = function (OrderData){
-	    console.log('em here order submitted starttt-----');
+	    //console.log('em here order submitted starttt-----');
 		$rootScope.submitedOrder = OrderData;
 		$rootScope.submitedOrder.userInfo = JSON.parse($rootScope.submitedOrder.userInfo);
 		$rootScope.submitedOrder.productInfo = JSON.parse($rootScope.submitedOrder.productInfo);
-		console.log($rootScope.submitedOrder.userInfo);
-	    $rootScope.emailTo   = $rootScope.submitedOrder.userInfo.Email;
+		$rootScope.paymentInfo = $rootScope.submitedOrder.paymentInfo;
+		$('#paymentInfomation').append($rootScope.paymentInfo);
+		  $rootScope.emailTo   = $rootScope.submitedOrder.userInfo.Email;
 		$rootScope.byFrom = $rootScope.SettingGeneral.contactEmail;
 		$rootScope.toBCC = '';
 		$rootScope.subjectEmail = 'Order confirmation for order '+$rootScope.submitedOrder.id;  
 		$rootScope.emailBody =  $('#orderConfirmation').html();
 		var dataEmail = {data: $rootScope.emailBody, email: $rootScope.emailTo, subject: $rootScope.subjectEmail, toBCC: $rootScope.toBCC, byFrom: $rootScope.byFrom, fromName: $rootScope.storeName};
 		$rootScope.sendEmail(dataEmail);
-		console.log('em here order submitted enddd-----');
+		//console.log('em here order submitted enddd-----');
 		
 		
-	    console.log('new order submitted starttt-----');
-		console.log($rootScope.submitedOrder);
+	    //console.log('new order submitted starttt-----');
+		//console.log($rootScope.submitedOrder);
 		$rootScope.emailTo =  $rootScope.subscriptionEmails;
 		$rootScope.byFrom = $rootScope.SettingGeneral.contactEmail;
 		$rootScope.toBCC = '';
 		$rootScope.subjectEmail = $rootScope.storeName +' Order '+ $rootScope.submitedOrder.id + ' placed by '+$rootScope.submitedOrder.userInfo.FirstName +' '+$rootScope.submitedOrder.userInfo.LastName;  
 		$rootScope.emailBody =  $('#newOrderTemplate').html();
+		//console.log('----------------------------------------');
+		//console.log($rootScope.emailBody);
 		var dataEmail = {data: $rootScope.emailBody, email: $rootScope.emailTo, subject: $rootScope.subjectEmail, toBCC: $rootScope.toBCC, byFrom: $rootScope.byFrom, fromName: $rootScope.storeName};
 		$rootScope.sendEmail(dataEmail);
-		console.log('new order submitted enddd-----');		
+		//console.log('new order submitted enddd-----');		
 }
 
 $rootScope.$on('$routeChangeSuccess', function () {
@@ -1147,10 +1204,10 @@ $('#loadingbar').width($rootScope.LoadPositions+'%');
  $rootScope.sendEmail = function(dataEmail){
 	$http({method: 'POST', url: 'https://ae-commerce.azure-mobile.net/api/send_grid', data: dataEmail, headers: {'Content-Type': 'application/json'}}).
 		success(function(data, status, headers, config) {
-		  console.log(data);
+		  //console.log(data);
 		}).
 		error(function(data, status, headers, config) {
-		  console.log('error start');
+		  //console.log('error start');
 		});
 		
 		
@@ -1163,15 +1220,15 @@ $('#loadingbar').width($rootScope.LoadPositions+'%');
 
 angular.module('App.filters', []).filter('CustomFilter', [function () {
     return function (items, filterType) {
-		//console.log(items);
-		//console.log(filterType);
+		////console.log(items);
+		////console.log(filterType);
         if (!angular.isUndefined(items) && !angular.isUndefined(filterType)) {
             var tempItems = [];
 			if(filterType.collection){
                 angular.forEach(items, function (item) {
 					 var addCollection = false;
 					 angular.forEach(item.productCollections, function (collection) {
-                        if(filterType.collection == collection.name || filterType.collection == 'all' || filterType.collection == collection.urlParam){
+                        if(filterType.collection == collection.name || filterType.collection == 'all' || filterType.collection == collection.urlParam || filterType.collection == collection.id){
 							addCollection = true;
 						}
                 	});
@@ -1210,4 +1267,5 @@ angular.module('App.filters', []).filter('CustomFilter', [function () {
         }
     };
 }]);
+
 
