@@ -1,4 +1,10 @@
 <div class="row clearfix">
+<style>
+.deactivate{
+	opacity:0.5;
+}
+	
+</style>
 
 						<div class="col-md-12 column">
 						  <div class="row" ng-repeat="collection in ListCollection | filter:{collectionName:SearchCollection}">
@@ -29,27 +35,28 @@
                                       <input class="input input-small"  min='1' ng-model="products.productQuantity" type="number" >
                                       <div ng-if="products.productMultiOptions">
                                       	<a ng-click="products.productVarientModel = {}" href="javascript:void(0)">Reset All</a>
-                                          <div class="section_attribute"  ng-repeat="valueSize in products.productMultiOptionsList"  ng-show="RenderOnDemand(products.productVarientModel,products,parms) || $index == 0">  
-                                                 <div ng-if="$index == 0">
-                                                  <h4 style="font-size: 14px;font-weight: bold;text-align: left;margin: 17px;margin-bottom: 0;margin-left: 0;color: rgb(156, 156, 156);">Select {{valueSize.name}}</h4>
-                                                  <hr style="margin:0; margin-bottom:20px;" />
-                                                    <span ng-repeat="parms in valueSize.value" class="radio">
-                                                        <label>
-                                                        <input ng-click="ResetVariendsModelBase(valueSize.name,parms,prodID)"  type="radio" value="{{parms}}"  required ng-model="products.productVarientModel[valueSize.name]" name="{{products.id}}{{valueSize.name}}" >
-                                                        {{parms}}
-                                                         </label>
-                                                   </span>
-                                               </div>
-                                                <div ng-if="$index != 0 && ((returnLengthVarientList(prodID) >= 1 && $index == 1) || (returnLengthVarientList(prodID) >= 2 && $index == 2))">
+                                          <div class="section_attribute"  ng-repeat="valueSize in products.productMultiOptionsList"> 
+                                                <div>
                                                  <h4 style="font-size: 14px;font-weight: bold;text-align: left;margin: 17px;margin-bottom: 0;margin-left: 0;color: rgb(156, 156, 156);">Select {{valueSize.name}}</h4>
                                                   <hr style="margin:0; margin-bottom:20px;" />
-                                                   <span ng-repeat="parms in valueSize.value" class="radio"  ng-hide="RenderOnDemand(products.productVarientModel,products,parms)">
-                                                        <label>
-                                                        <input ng-disabled="RenderOnDemand(products.productVarientModel,products,parms)" type="radio" value="{{parms}}"  required ng-model="products.productVarientModel[valueSize.name]" name="{{products.id}}{{valueSize.name}}" >
+                                                   <span ng-repeat="parms in valueSize.value" class="radio">
+                                                        <label ng-class="{'deactivate':RenderOnDemand(products.productVarientModel,products,parms)}">
+                                                       
+                                                        <input ng-click="ResetVariendsModelBase(valueSize.name,parms,products.productVarientModel,prodID)"   ng-disabled="RenderOnDemand(products.productVarientModel,products,parms)" type="checkbox" value="{{parms}}"  required  >
                                                         {{parms}}
                                                          </label>
                                                    </span>
                                                </div>
+                                               <!--<div ng-if="!products.productVarientModelParent || products.productVarientModelParent == valueSize.name">
+                                                 <h4 style="font-size: 14px;font-weight: bold;text-align: left;margin: 17px;margin-bottom: 0;margin-left: 0;color: rgb(156, 156, 156);">Select {{valueSize.name}}</h4>
+                                                  <hr style="margin:0; margin-bottom:20px;" />
+                                                   <span ng-repeat="parms in valueSize.value" class="radio">
+                                                        <label>
+                                                        <input ng-click="ResetVariendsModelBase(valueSize.name,parms,prodID)"    type="radio" value="{{parms}}"  required ng-model="products.productVarientModel[valueSize.name]" name="{{products.id}}{{valueSize.name}}" >
+                                                        {{parms}}
+                                                         </label>
+                                                   </span>
+                                               </div>-->
                                                
                                                
                                                

@@ -265,9 +265,21 @@ $rootScope.getOrderConfirmationTemplate = function(){
 $rootScope.getnewOrderTemplate = function(){
 	return $rootScope.newOrderTemplate;
 }
-$rootScope.ResetVariendsModelBase = function(Vname,Vvalue,prodID){
-	$rootScope.ListProduct[prodID]['productVarientModel'] = {};
-	$rootScope.ListProduct[prodID]['productVarientModel'][Vname] = Vvalue;
+$rootScope.ResetVariendsModelBase = function(Vname,Vvalue,ListLoop,prodID){
+	var hasElement  = false;
+	$.each(ListLoop,function(index,item){
+		if(index == Vname){
+			hasElement = true;
+		}
+	})
+	if(!hasElement){
+		//$rootScope.ListProduct[prodID]['productVarientModel'] = {};
+		$rootScope.ListProduct[prodID]['productVarientModel'][Vname] = Vvalue;
+		//$rootScope.ListProduct[prodID]['productVarientModelParent'] = Vname;
+	}else{
+		delete $rootScope.ListProduct[prodID]['productVarientModel'][Vname];
+	}
+	console.log($rootScope.ListProduct[prodID]['productVarientModel']);
 }
 $rootScope.returnLengthVarientList = function(prodID){
 	var length = 0;
@@ -281,10 +293,10 @@ $rootScope.returnLengthVarientList = function(prodID){
 }
 $rootScope.RenderOnDemand = function(VarienModel,product,myVal){
 	//if(myVal == 'soft'){
-	console.log('------------Staart---------------');
-	console.log(product);
-	console.log(VarienModel);
-	console.log(myVal);
+	//console.log('------------Staart---------------');
+	//console.log(product);
+	//console.log(VarienModel);
+	//console.log(myVal);
 	var vrCount = 1;
 	$.each(VarienModel,function(index,item){
 		vrCount++;
@@ -313,9 +325,9 @@ $rootScope.RenderOnDemand = function(VarienModel,product,myVal){
 		}
 		
 	});
-	console.log('==========Has===========');
-	console.log(hasIndex);
-	console.log(vrCount);
+	//console.log('==========Has===========');
+	//console.log(hasIndex);
+	//console.log(vrCount);
 	if(hasIndex || vrCount == 1){
 		return false;
 	}else{
