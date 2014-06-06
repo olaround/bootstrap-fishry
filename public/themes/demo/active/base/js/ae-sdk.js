@@ -265,8 +265,23 @@ $rootScope.getOrderConfirmationTemplate = function(){
 $rootScope.getnewOrderTemplate = function(){
 	return $rootScope.newOrderTemplate;
 }
+$rootScope.ResetVariendsModelBase = function(Vname,Vvalue,prodID){
+	$rootScope.ListProduct[prodID]['productVarientModel'] = {};
+	$rootScope.ListProduct[prodID]['productVarientModel'][Vname] = Vvalue;
+}
+$rootScope.returnLengthVarientList = function(prodID){
+	var length = 0;
+	$.each($rootScope.ListProduct[prodID]['productVarientModel'],function(index,item){
+		if(item){
+			length++;
+		}
+	});
+	return length;
+	
+}
 $rootScope.RenderOnDemand = function(VarienModel,product,myVal){
 	//if(myVal == 'soft'){
+	console.log('------------Staart---------------');
 	console.log(product);
 	console.log(VarienModel);
 	console.log(myVal);

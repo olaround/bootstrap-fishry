@@ -56,15 +56,35 @@
         
         <div class="row section first-section ppb">
           <!-- /.section-summary -->
-        
+       
             <!--batman-data-formfor-settings="theme.settings"-->
+            <div class="span6  boxSIdeBar" ng-init="pageclick = 'Aesthetics'">
+            	 <h2 class="active heading section-expanded" ng-click="pageclick = 'Aesthetics'" ng-class="{'active':pageclick == 'Aesthetics'}">
+                  Aesthetics<br />
+                  <small>Logo, favicon and cart settings</small>
+                </h2>
+                 <h2 class="heading" ng-click="pageclick = 'Homepage'" ng-class="{'active':pageclick == 'Homepage'}">
+                  Homepage<br />
+                  <small>Banner, Layout</small>
+                </h2>
+                 <h2 class="heading" ng-click="pageclick = 'Product'" ng-class="{'active':pageclick =='Product'}">
+                  Product Page<br />
+                  <small>Banner, Layout</small>
+                </h2>
+                 <h2 class="heading" ng-click="pageclick = 'Collection'" ng-class="{'active':pageclick == 'Collection'}">
+                  Collection Page<br />
+                  <small>Banner, Layout</small>
+                </h2>
+                   <h2 class="heading" ng-click="pageclick = 'Footer'" ng-class="{'active':pageclick == 'Footer'}">
+                  Footer<br />
+                  <small>Social Links, Text, Menu</small>
+                </h2>
+            </div>
             <div class="span18 section-content">
               <div class="theme-settings-form">
                 <!--batman-data-context-__LIQUID__="theme.settings.current_values"-->
-                <h2 class="heading section-expanded">
-                  Aesthetics
-                </h2>
-                <fieldset>
+               <div class="Aesthetics" ng-show="pageclick == 'Aesthetics'">
+               		 <fieldset>
                   
                   <table>
                     <tbody>
@@ -468,13 +488,10 @@
                   </table>
                   
                 </fieldset>
-                
-                <h2 class="heading">
-                  Homepage
-                </h2>
-                <fieldset id="homePage" >
-                  
-                  <table>
+               </div>
+                <div class="Homepage" ng-show="pageclick == 'Homepage'">
+               		 <fieldset id="homePage" >
+                      <table>
                     <tbody>
                       <tr>
                         <td colspan="2">
@@ -520,7 +537,7 @@
                           <input  ng-model="Theme.enable_featuredproduct" type="checkbox" id="enable_featuredproduct" name="enable_featuredproduct" value="1">
                         </td>
                       </tr>
-                      
+                     
                       <tr class="horizontal">
                         <th>
                           <label for="frontpage_collection">
@@ -531,10 +548,10 @@
                           </small>
                         </th>
                         <td>
-                          <select ng-options="collection.id as collection.collectionName for collection in Collections" ng-model="Theme.featuredproduct">
-                          	<option value="">Select Featured Product Collection</option>
+                          <div ng-repeat="collection in Collections" ng-init="Theme.featuredproduct = {}">
+                          	<input ng-model="Theme.featuredproduct[collection.id]" type="checkbox" id="Featured_{{collection.id}}" value="{{collection.id}}">{{collection.collectionName}}
                           <!--	<option ng-repeat="collection in Collections" value="{{collection.id}}">{{collection.collectionName}}</option>-->
-                          </select>
+                          </div>
                         </td>
                       </tr>
                       
@@ -660,10 +677,9 @@
                   
                   
                 </fieldset>
-                <h2 class="heading">
-                  Product Page
-                </h2>
-                <fieldset>
+                </div>
+                <div class="Product" ng-show="pageclick == 'Product'">
+                	 <fieldset>
                   
                   <table>
                     <tbody>
@@ -700,11 +716,9 @@
                     </tbody>
                   </table>
                 </fieldset>
-                <h2 class="heading">
-                  Collection Page
-                </h2>
-                <fieldset >
-                  
+                </div>
+                <div class="Collection" ng-show="pageclick == 'Collection'">
+               		 <fieldset >
                   <table>
                     <tbody>
                       <tr class="horizontal">
@@ -715,6 +729,19 @@
                         </th>
                         <td>
                           <input ng-model="Theme.collection_tags"  type="checkbox" id="collection_tags" name="collection_tags" value="1" checked="checked">
+                        </td>
+                      </tr>
+                      <tr class="horizontal">
+                        <th>
+                          <label>
+                            Widgets to Show
+                          </label>
+                        </th>
+                        <td>
+                                <input ng-model="Theme.collection_widget_search"  type="checkbox"  name="collection_widget_search" value="1" > Search <br />
+                                <input ng-model="Theme.collection_widget_brand"  type="checkbox"  name="collection_widget_search" value="1" > Brand <br />
+                                <input ng-model="Theme.collection_widget_type"  type="checkbox"  name="collection_widget_search" value="1" > Type <br />
+                                <input ng-model="Theme.collection_widget_tag"  type="checkbox"  name="collection_widget_search" value="1" > Tag <br />
                         </td>
                       </tr>
                       <tr class="horizontal">
@@ -755,161 +782,275 @@
                           </select>
                         </td>
                       </tr>
-                      
-                    </tbody>
-                  </table>
-                </fieldset>
-                <h2 class="heading">
-                  Footer
-                </h2>
-                <fieldset >
-                  
-                  <table>
-                    <tbody>
-                      <tr class="horizontal">
-                        <th>
-                          <label for="footer_linklist_title">
-                            Footer link list heading
-                          </label>
-                        </th>
-                        <td>
-                          <input  ng-model="Theme.footer_linklist_title"  type="text" id="footer_linklist_title" name="footer_linklist_title" value="Quick Links">
-                        </td>
-                      </tr>
-                      <tr class="horizontal">
-                        <th>
-                          <label for="footer_linklist">
-                            Footer link list to show
-                          </label>
-                        </th>
-                        <td>
-                          <select   ng-model="Theme.footer_linklist"  name="footer_linklist" class="linklist" value="footer">
-                            <option value="">
-                              None
-                            </option>
-                            <option data-bind-value="linklist.handle" data-bind="linklist.title" value="footer">
-                              Footer
-                            </option>
-                            <option data-bind-value="linklist.handle" data-bind="linklist.title" value="main-menu">
-                              Main Menu
-                            </option>
-                            <!--batman-iterator-linklist="LinkList.all"-->
-                          </select>
-                        </td>
-                      </tr>
-                      <tr class="horizontal">
-                        <th>
-                          <label for="footer_display_newsletter">
-                            Show newsletter?
-                          </label>
-                        </th>
-                        <td>
-                          <input  ng-model="Theme.footer_display_newsletter" type="checkbox" id="footer_display_newsletter" name="footer_display_newsletter" value="1">
-                        </td>
-                      </tr>
-                      
+                       
                       <tr>
                         <td colspan="2">
                           <h3>
-                            Social Links
+                            Slideshow Collection Page
                           </h3>
+                          For best results, upload images that are at least 966px wide. Try to keep your slideshow images the same size.
                         </td>
-                        
                       </tr>
                       
-                      <tr class="horizontal">
-                        
-                        
-                      </tr>
                     </tbody>
                   </table>
-                  <table>
+                  <table class="standard-table">
                     <tbody>
-                      <tr class="odd">
+                      <tr>
                         <td>
-                          <label for="show_carousel_item_4">
-                            Twitter
+                        	<!--<input type="button" value="Add Slide" ng-click="addSlide()" >-->
+                        </td>
+                        <td>
+                          Show?
+                        </td>
+                        <td>
+                          Image
+                        </td>
+                        <td>
+                          Links to
+                        </td>
+                        <td>
+                          ALT text
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label>
+                            Slide #1
                           </label>
                         </td>
                         <td>
-                          <input  ng-model="Theme.twitter_link"  type="text" id="twitter_link" name="twitter_link">
+                          <input  type="checkbox"  ng-model="Theme.slide_collection_1_show" name="slide_1" value="1">
+                        </td>
+                        <td>
+                          <input class="files" id="Theme.slide_collection_1_img" type="file" accept="image/*" />
+                          <img src="{{Theme.slide_collection_1_img}}" ng-show="Theme.slide_collection_1_img" width="100" />
+                          
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_1_link" name="slide_collection_1_link" placeholder="/collections/all">
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_1_alt" name="slide_collection_1_alt" placeholder="Trees">
                         </td>
                       </tr>
-                      <tr class="odd">
+                      <tr>
                         <td>
-                          <label for="facebook_link">
-                            Facebook
+                          <label>
+                            Slide #2
                           </label>
                         </td>
                         <td>
-                          <input ng-model="Theme.facebook_link"  type="text" id="facebook_link" name="facebook_link">
+                          <input  type="checkbox"  ng-model="Theme.slide_collection_2_show" name="slide_collection_2" value="1">
+                        </td>
+                        <td>
+                          <input class="files" id="Theme.slide_collection_2_img" type="file" accept="image/*" />
+                          <img src="{{Theme.slide_collection_2_img}}" ng-show="Theme.slide_collection_2_img" width="100" />
+                          
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_2_link" name="slide_collection_2_link" placeholder="/collections/all">
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_2_alt" name="slide_collection_2_alt" placeholder="Trees">
                         </td>
                       </tr>
-                      <tr class="odd">
+                      <tr>
                         <td>
-                          <label for="google_link">
-                            Google+ Link
+                          <label>
+                            Slide #3
                           </label>
                         </td>
                         <td>
-                          <input ng-model="Theme.google_link"  type="text" id="google_link" name="google_link">
+                          <input  type="checkbox"  ng-model="Theme.slide_collection_3_show" name="slide_collection_3" value="1">
+                        </td>
+                        <td>
+                          <input class="files" id="Theme.slide_collection_3_img" type="file" accept="image/*" />
+                          <img src="{{Theme.slide_collection_3_img}}" ng-show="Theme.slide_collection_3_img" width="100" />
+                          
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_3_link" name="slide_collection_3_link" placeholder="/collections/all">
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_3_alt" name="slide_collection_3_alt" placeholder="Trees">
                         </td>
                       </tr>
-                      <tr class="odd">
+                      <tr>
                         <td>
-                          <label for="youtube_link">
-                            Youtube Link
+                          <label>
+                            Slide #4
                           </label>
                         </td>
                         <td>
-                          <input ng-model="Theme.youtube_link"  type="text" id="youtube_link" name="youtube_link">
+                          <input  type="checkbox"  ng-model="Theme.slide_collection_4_show" name="slide_collection_4" value="1">
+                        </td>
+                        <td>
+                          <input class="files" id="Theme.slide_collection_4_img" type="file" accept="image/*" />
+                          <img src="{{Theme.slide_collection_4_img}}" ng-show="Theme.slide_collection_4_img" width="100" />
+                          
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_4_link" name="slide_collection_4_link" placeholder="/collections/all">
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_4_alt" name="slide_collection_4_alt" placeholder="Trees">
                         </td>
                       </tr>
-                      <tr class="odd">
-                        <td>
-                          <label for="vimeo_link">
-                            Vimeo Link
-                          </label>
-                        </td>
-                        <td>
-                          <input ng-model="Theme.vimeo_link"  type="text" id="vimeo_link" name="vimeo_link">
-                        </td>
-                      </tr>
-                      <tr class="odd">
-                        <td>
-                          <label for="pinterest_link">
-                            Pinterest Link
-                          </label>
-                        </td>
-                        <td>
-                          <input ng-model="Theme.pinterest_link" type="text" id="pinterest_link" name="pinterest_link">
-                        </td>
-                      </tr>
-                      <tr class="odd">
-                        <td>
-                          <label for="instagram_link">
-                            Instagram Link
-                          </label>
-                        </td>
-                        <td>
-                          <input  ng-model="Theme.instagram_link"  type="text" id="instagram_link" name="instagram_link">
-                        </td>
-                      </tr>
-                      <tr class="odd">
-                        <td>
-                          <label for="tumblr_link">
-                            Tumblr Link
-                          </label>
-                        </td>
-                        <td>
-                          <input ng-model="Theme.tumblr_link"  type="text" id="tumblr_link" name="tumblr_link">
-                        </td>
-                      </tr>
-                     
-                      
                     </tbody>
                   </table>
                 </fieldset>
+                </div>
+              <div class="Footer" ng-show="pageclick == 'Footer'">
+                     <fieldset >
+                      
+                      <table>
+                        <tbody>
+                          <tr class="horizontal">
+                            <th>
+                              <label for="footer_linklist_title">
+                                Footer link list heading
+                              </label>
+                            </th>
+                            <td>
+                              <input  ng-model="Theme.footer_linklist_title"  type="text" id="footer_linklist_title" name="footer_linklist_title" value="Quick Links">
+                            </td>
+                          </tr>
+                          <tr class="horizontal">
+                            <th>
+                              <label for="footer_linklist">
+                                Footer link list to show
+                              </label>
+                            </th>
+                            <td>
+                              <select   ng-model="Theme.footer_linklist"  name="footer_linklist" class="linklist" value="footer">
+                                <option value="">
+                                  None
+                                </option>
+                                <option data-bind-value="linklist.handle" data-bind="linklist.title" value="footer">
+                                  Footer
+                                </option>
+                                <option data-bind-value="linklist.handle" data-bind="linklist.title" value="main-menu">
+                                  Main Menu
+                                </option>
+                                <!--batman-iterator-linklist="LinkList.all"-->
+                              </select>
+                            </td>
+                          </tr>
+                          <tr class="horizontal">
+                            <th>
+                              <label for="footer_display_newsletter">
+                                Show newsletter?
+                              </label>
+                            </th>
+                            <td>
+                              <input  ng-model="Theme.footer_display_newsletter" type="checkbox" id="footer_display_newsletter" name="footer_display_newsletter" value="1">
+                            </td>
+                          </tr>
+                          
+                          <tr>
+                            <td colspan="2">
+                              <h3>
+                                Social Links
+                              </h3>
+                            </td>
+                            
+                          </tr>
+                          
+                          <tr class="horizontal">
+                            
+                            
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table>
+                        <tbody>
+                          <tr class="odd">
+                            <td>
+                              <label for="show_carousel_item_4">
+                                Twitter
+                              </label>
+                            </td>
+                            <td>
+                              <input  ng-model="Theme.twitter_link"  type="text" id="twitter_link" name="twitter_link">
+                            </td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+                              <label for="facebook_link">
+                                Facebook
+                              </label>
+                            </td>
+                            <td>
+                              <input ng-model="Theme.facebook_link"  type="text" id="facebook_link" name="facebook_link">
+                            </td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+                              <label for="google_link">
+                                Google+ Link
+                              </label>
+                            </td>
+                            <td>
+                              <input ng-model="Theme.google_link"  type="text" id="google_link" name="google_link">
+                            </td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+                              <label for="youtube_link">
+                                Youtube Link
+                              </label>
+                            </td>
+                            <td>
+                              <input ng-model="Theme.youtube_link"  type="text" id="youtube_link" name="youtube_link">
+                            </td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+                              <label for="vimeo_link">
+                                Vimeo Link
+                              </label>
+                            </td>
+                            <td>
+                              <input ng-model="Theme.vimeo_link"  type="text" id="vimeo_link" name="vimeo_link">
+                            </td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+                              <label for="pinterest_link">
+                                Pinterest Link
+                              </label>
+                            </td>
+                            <td>
+                              <input ng-model="Theme.pinterest_link" type="text" id="pinterest_link" name="pinterest_link">
+                            </td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+                              <label for="instagram_link">
+                                Instagram Link
+                              </label>
+                            </td>
+                            <td>
+                              <input  ng-model="Theme.instagram_link"  type="text" id="instagram_link" name="instagram_link">
+                            </td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+                              <label for="tumblr_link">
+                                Tumblr Link
+                              </label>
+                            </td>
+                            <td>
+                              <input ng-model="Theme.tumblr_link"  type="text" id="tumblr_link" name="tumblr_link">
+                            </td>
+                          </tr>
+                         
+                          
+                        </tbody>
+                      </table>
+                    </fieldset>
+                </div>
               </div>
             </div>
          

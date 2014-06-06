@@ -6,7 +6,7 @@ function GlobalCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
-	//console.log($rootScope.locationParm);	
+	////console.log($rootScope.locationParm);	
 }
 
 function HomeCtrl($scope,$location,$rootScope){
@@ -20,7 +20,104 @@ function HomeCtrl($scope,$location,$rootScope){
 }
 
 function CollectionCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,$cookies,$http) {
+	$scope.priceRange = {
+		name: 'Price Range',
+		minPrice: 0,
+		maxPrice: 0
+	  };
+   $scope.SearchVendorsearch = {};
    $rootScope.productCount = 0;	
+   $scope.hasBrandInCollection = function(VendorId){
+	   var hasVendor = false;
+	   var vendorCounts = 0;
+	   $.each($rootScope.ListProduct,function(index,item){
+		   var condition = 0;
+		   if(item.productVendor == VendorId){
+			   condition++;
+		   }
+		   if(item.productCollections){
+			   if(typeof(item.productCollections) == 'object'){
+				   //console.log(item.productCollections);
+				   $.each(item.productCollections,function(indCol,itemCol){
+						if($scope.routeParam == itemCol.urlParam){
+							console.log(item);
+							condition++;
+						}
+				   });
+			   }
+			   if(condition >= 2){
+				   console.log(item);
+					hasVendor = true;
+					vendorCounts++;
+					if(!item.productMultiOptions){
+						if(item.productPrice && $scope.priceRange.maxPrice < item.productPrice){
+							$scope.priceRange.maxPrice = item.productPrice;
+						}
+					}else{
+						var price = $rootScope.returnPrice(item);
+						if(price && $scope.priceRange.maxPrice < price){
+							$scope.priceRange.maxPrice = item.productPrice;
+						}
+					}
+			   }
+		   }
+	   });
+	   return vendorCounts;
+   }
+   $scope.SearchVendorsearchReturn = function(items){
+	   //console.log(items);
+	   var hasItemsPre = false;
+	  $.each($scope.SearchVendorsearch,function(ind,itm){
+				if(itm == true){
+					hasItemsPre = true;
+				}
+		});
+	if(!hasItemsPre){
+		return items;
+	}
+   	//console.log('acho');
+	//console.log(items);
+	//console.log($scope.SearchVendorsearch);
+	var pushItems = [];
+		var hasItems = false;
+		$.each($scope.SearchVendorsearch,function(ind,itm){
+			if(items.productVendor){
+				if(ind == items.productVendor && itm == true){
+					hasItems = true;
+				}
+			}
+		});
+		//console.log(hasItems);
+		////console.log(hasItems);
+		if(hasItems){
+			return items;
+		}else{
+			return false;
+		}
+   }
+   $scope.SearchMinMaxPriceReturn = function(items){
+	var pushItems = [];
+		var hasItems = false;
+		
+		if(!items.productMultiOptions){
+			if(items.productPrice >= $scope.priceRange.minPrice && items.productPrice <= $scope.priceRange.maxPrice){
+				hasItems = true;
+			}
+		}else{
+			var price = $rootScope.returnPrice(items);
+			if(price >= $scope.priceRange.minPrice && price <= $scope.priceRange.maxPrice){
+				hasItems = true;
+			}
+		}
+		
+		
+		if(hasItems){
+			return items;
+		}else{
+			return false;
+		}
+   }
+   
    $scope.routeParam = $routeParams.CollectionName;
 	$scope.init = function(){
 		$scope.startFromPage = 0;
@@ -74,7 +171,7 @@ function CollectionCtrl($scope,$location,AzureMobileClient,$rootScope,$routePara
 		}
 	});
 	
-	console.log('start');
+	//console.log('start');
 	$scope.nextPage = function(){
 		$scope.startFromPage = $scope.startFromPage + 1;
 	}
@@ -87,16 +184,16 @@ function CollectionCtrl($scope,$location,AzureMobileClient,$rootScope,$routePara
 	$scope.numberOfPages=function(item,filters){
 		if(item.length){
 			$scope.TotalCounts = 0;
-			console.log('bda');
-			console.log(item.length);
-			console.log(filters);
+			//console.log('bda');
+			//console.log(item.length);
+			//console.log(filters);
 			
 			$.each(item,function(ind,itm){
-				//console.log(itm.productCollections);
+				////console.log(itm.productCollections);
 				if(itm.productCollections){
 					$.each(itm.productCollections,function(inds,itms){
-						console.log(itms.urlParam);
-						console.log(filters.collection);
+						//console.log(itms.urlParam);
+						//console.log(filters.collection);
 						if(itms.urlParam == filters.collection){
 							$scope.TotalCounts= parseInt($scope.TotalCounts) + 1;
 						}
@@ -104,7 +201,7 @@ function CollectionCtrl($scope,$location,AzureMobileClient,$rootScope,$routePara
 				}
 			});
 			
-				console.log($scope.TotalCounts +'asdasdasd');
+				//console.log($scope.TotalCounts +'asdasdasd');
 				 //return  $scope.TotalCounts;
 				 //return Math.ceil($scope.TotalCounts/$scope.pageSize); 
 			
@@ -114,11 +211,11 @@ function CollectionCtrl($scope,$location,AzureMobileClient,$rootScope,$routePara
 aeCommerce.filter('startFrom', function() {
     return function(input, start) {
 		if(input){
-			console.log(start +  'start');
-		    console.log(input +  'inout');
+			//console.log(start +  'start');
+		    //console.log(input +  'inout');
        	    start = +start; //parse to int
 			start = +start; //parse to int
-			console.log(input.slice(start));
+			//console.log(input.slice(start));
         	return input.slice(start);
 		}else{
 			return 0;
@@ -127,14 +224,14 @@ aeCommerce.filter('startFrom', function() {
 });
 aeCommerce.filter('returnTotals', function($rootScope) {
     return function(input) {
-		console.log('---------------bda-------------------');
-		console.log(input);
+		//console.log('---------------bda-------------------');
+		//console.log(input);
 		var items = 0;
 		$.each(input,function(index,item){
 			items++;
 		});
 		$rootScope.productCount = items;
-		console.log('---------------end-------------------');
+		//console.log('---------------end-------------------');
 		return input;
 		
     }
@@ -317,7 +414,7 @@ function SearchCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,$
 		}
 	});
 	
-	console.log('start');
+	//console.log('start');
 	$scope.nextPage = function(){
 		$scope.startFromPage = $scope.startFromPage + 1;
 	}
@@ -330,16 +427,16 @@ function SearchCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,$
 	$scope.numberOfPages=function(item,filters){
 		if(item.length){
 			$scope.TotalCounts = 0;
-			console.log('bda');
-			console.log(item.length);
-			console.log(filters);
+			//console.log('bda');
+			//console.log(item.length);
+			//console.log(filters);
 			
 			$.each(item,function(ind,itm){
-				//console.log(itm.productCollections);
+				////console.log(itm.productCollections);
 				if(itm.productCollections){
 					$.each(itm.productCollections,function(inds,itms){
-						console.log(itms.urlParam);
-						console.log(filters.collection);
+						//console.log(itms.urlParam);
+						//console.log(filters.collection);
 						if(itms.urlParam == filters.collection){
 							$scope.TotalCounts= parseInt($scope.TotalCounts) + 1;
 						}
@@ -347,7 +444,7 @@ function SearchCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,$
 				}
 			});
 			
-				console.log($scope.TotalCounts +'asdasdasd');
+				//console.log($scope.TotalCounts +'asdasdasd');
 				 //return  $scope.TotalCounts;
 				 //return Math.ceil($scope.TotalCounts/$scope.pageSize); 
 			

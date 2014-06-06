@@ -1,4 +1,4 @@
-var aeCommerce = angular.module('aeCommerce', ['ngCookies','ngResource','ui.bootstrap','ngSanitize','App.filters','compile'])
+var aeCommerce = angular.module('aeCommerce', ['ngCookies','ngResource','ui.bootstrap','ngSanitize','App.filters','compile','uiSlider'])
 	.config(aeCommerceRouter);
 
 function aeCommerceRouter ($routeProvider,$locationProvider,$provide,$compileProvider) {

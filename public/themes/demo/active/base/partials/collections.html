@@ -1,6 +1,66 @@
 <div class="row clearfix" ng-init="init()">
-
-						<div class="col-md-12 column">
+						<div class="col-md-3 column">
+                            <h1>Filters</h1>
+                            <hr />
+                        		<div class="form-group">
+                                        <div class="panel panel-default">
+                                              <div class="panel-heading">Title</div>
+                                              <div class="panel-body">
+                                                    <input placeholder="Search By Title..." ng-model="SearchTitleSearch" type="text" class="form-control">
+                                              </div>
+                                          </div>
+                                          <!--<div class="panel panel-default">
+                                              <div class="panel-heading">Collection</div>
+                                              <div class="panel-body">
+                                              		 <select ng-model="SearchCollectionSearch"  class="form-control">
+                                                      <option value="">Select Collection</option>
+                                                      <option   ng-repeat="collections in ListCollection" value="{{collections.collectionName}}">{{collections.collectionName}}</option>
+                                                    </select>
+                                              </div>
+                                          </div> -->
+                                         <div class="panel panel-default">
+                                              <div class="panel-heading">Shop By Brand</div>
+                                              <div class="panel-body">
+                                              		 <div ng-repeat="(keysVendor,vendors) in ListProductVendor" >
+                                                     		<span ng-if="hasBrandInCollection(vendors.id)"> <input  type="checkbox" value="{{vendors.id}}" ng-model="SearchVendorsearch[vendors.id]"/> {{vendors.productVendorName}} ({{hasBrandInCollection(vendors.id)}})</span>
+                                                     </div>
+                                              </div>
+                                          </div> 
+                                         <!--<select ng-model="SearchVendorsearch"  class="form-control">-->
+                                                    
+                                                  <!--  </select>--><br>
+                                                  
+                                           <div class="panel panel-default">
+                                              <div class="panel-heading">Price Range</div>
+                                              <div class="panel-body">
+                                               <ul style="list-style:none; margin:0; padding:0">
+                                                    <li>                                                    
+                                                        <slider floor="1" ceiling="5000" ng-model-low="priceRange.minPrice" ng-model-high="priceRange.maxPrice"></slider>
+                                                        <span class="pull-left">Min: {{priceRange.minPrice}}</span> 
+                                                        <span  class="pull-right">Max: {{priceRange.maxPrice}}</span> 
+                                                    </li>
+                                                    <div class="clearfix"></div>
+                                                </ul>
+                                              </div>
+                                            </div> 
+                                           <div class="panel panel-default">
+                                              <div class="panel-heading">Type</div>
+                                              <div class="panel-body">
+                                                    <select ng-model="SearchTypeSearch"  class="form-control">
+                                                      <option value="">Select Type</option>
+                                                      <option   ng-repeat="Types in ListProductType" value="{{Types.productTypeName}}">{{Types.productTypeName}}</option>
+                                                    </select>
+                                              </div>
+                                          </div> 
+                                          <div class="panel panel-default">
+                                              <div class="panel-heading">Tags</div>
+                                              <div class="panel-body">
+                                                   <input placeholder="Search By Tags..." ng-model="SearchTagsSearch" type="text" class="form-control">
+                                              </div>
+                                          </div> 
+                                    </div>
+                        </div>	
+						<div class="col-md-9 column">
 						  <div class="row" ng-repeat="collection in ListCollection  | filter:{collectionName:SearchCollection}">
 						 <div ng-show="(collection.collectionName != 'Frontpage')">
                           <div class="col-lg-12" ng-if="routeParam == collection.collectionUrl || routeParam == 'all' || !routeParam">
@@ -8,7 +68,7 @@
                                  <hr />
                           </div>
 							<div ng-if="routeParam == collection.collectionUrl || routeParam == 'all'  || !routeParam" style="min-height:780px;">
-                                    <div class="col-md-4" ng-animate="'animate'"  ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} |  filter:{productName:SearchTitle} | filter:{ProductVendorName:SearchVendor} | filter:{ProductTypeName:SearchType} | filter:{productTags:SearchTags} | returnTotals:products | startFrom:startFromPage | limitTo:pageLimit ">
+                                    <div class="col-md-4" ng-animate="'animate'"  ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} |  filter:{productName:SearchTitleSearch} | filter:SearchMinMaxPriceReturn | filter:SearchVendorsearchReturn | filter:{ProductTypeName:SearchTypeSearch} | filter:{productTags:SearchTagsSearch} | returnTotals:products | startFrom:startFromPage | limitTo:pageLimit ">
                                       <div class="thumbnail">
                                         <a href="./products/{{products.productUrl}}" ng-if="products.productName">
                                         	<img ng-if="products.productImage[0].Image" alt="{{products.productName}}" src="{{products.productImage[0].Image}}">
@@ -17,7 +77,7 @@
                                         <div class="caption">
                                           <h4>
                                             <a href="./products/{{products.productUrl}}">
-                                                        {{products.productName}}
+                                                        {{products.productName}} <br /><small ng-show="products.ProductVendorName">By :  {{products.ProductVendorName}}</small>
                                             </a>
                                           </h4>                                   
                                              <h5 ng-if="!products.productMultiOptions">({{SettingGeneral.settings.currencies_format}} {{products.productPrice}}) <span  ng-if="products.productPriceCompare"><strike>({{SettingGeneral.settings.currencies_format}} {{products.productPriceCompare}})</strike></span></h5>
