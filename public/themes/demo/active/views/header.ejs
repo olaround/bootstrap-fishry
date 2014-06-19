@@ -21,10 +21,39 @@
           <% } %>
              
 			   <%- requireServerVars() %>
+			     <% include header_resources %>
+				 <style>
+				 	body,.jumbotron,.btn-info{
+					       background:<%= theme.theme_settings.web_bg_color %>;
+					}
+					a,.btn-info,td,span,div,tr,table,select,input,p,h1,h2,h3,h4,h5,label,small,span.div,h1 small, .h1 small, h2 small, .h2 small, h3 small, .h3 small, h1 .small, .h1 .small, h2 .small, .h2 .small, h3 .small, .h3 .small,h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small{
+						color: <%= theme.theme_settings.text_color %>;
+					}
+					.jumbotron h1, .jumbotron .h1 {
+						color: <%= theme.theme_settings.text_color %>;
+					}
+					.navbar-default,.btn-info:hover,.bg-white {
+						background-color: <%= theme.theme_settings.toolbar_bg_color %>;
+						border-color: <%= theme.theme_settings.toolbar_bg_color %>;
+					}
+					.navbar-default .navbar-nav>li>a {
+						color:<%= theme.theme_settings.link_color %>;
+					}
+					.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+						color:<%= theme.theme_settings.toolbar_text_color %>;
+					}
+					a{
+						color:<%= theme.theme_settings.link_color %>;
+					}
+					.thumbnail{
+						background:<%= theme.theme_settings.toolbar_bg_color %>;
+					}
+				 </style>
               </head>
               <body id="index">
 			  <div id='loadingbar'></div>
 			  <!--<div id="Loader" style="position:fixed;left:0;top:0;padding:5px;">loading...</div>-->
+			  <h1>Layout <%= theme.theme_settings.homepage_page_layout %></h1>
 				<div class="container" style="display:none;">
                	 <div class="col-md-12 column fixed">
                                 <div class="col-md-12 bg-white">
@@ -47,7 +76,7 @@
 											  <th class="col-md-4">
 												Price
 											  </th>
-											  <th class="col-md-4">
+											  <th class="col-md-4" ng-show="ThemeSettings.theme_settings.display_quantity_dropdown">
 												Quantity
 											  </th>
 											  <th class="col-md-4 min200">
@@ -67,7 +96,7 @@
 											  <td class="col-md-4">
 												{{SettingGeneral.settings.currencies_format}}. {{Itemss.price}}
 											  </td>
-											  <td class="col-md-4">
+											  <td class="col-md-4" ng-show="ThemeSettings.theme_settings.display_quantity_dropdown">
 												<input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="Itemss.quantity" type="number" >
 											  </td>
 											  <td class="col-md-4">
@@ -85,7 +114,7 @@
 											  <td class="col-md-4">
 												{{SettingGeneral.settings.currencies_format}}. {{itm.price}}
 											  </td>
-											  <td class="col-md-4">
+											  <td class="col-md-4"  ng-show="ThemeSettings.theme_settings.display_quantity_dropdown">
 												<input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="itm.quantity" type="number" >
 											  </td>
 											  <td class="col-md-4">
@@ -143,7 +172,15 @@
 				  <div class="row clearfix">
                           <div class="page-header">
                                  <div class="pull-left">
-                                     <h1> <img width="100" alt="Logo" src="{{ThemeSettings.theme_settings.logo_img}}"> <small>{{SettingGeneral.name}}</small></h1>
+                                     <h1> 
+									 <span ng-if="ThemeSettings.theme_settings.use_logo"> 
+									 	<img width="100" alt="Logo" src="{{ThemeSettings.theme_settings.logo_img}}">
+									 </span>
+									 <span ng-if="!ThemeSettings.theme_settings.use_logo"  style="background:#000;"> 
+									 	<img width="100" alt="Logo" src="//fishry.com/frontend/img/theme/logo.png">
+									 </span>
+										<small> {{SettingGeneral.name}}</small>
+								    </h1>
                                 </div>
                                  <div class="pull-right">
                                 <span>Customer Info  :</span>

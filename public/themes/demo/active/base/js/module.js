@@ -74,6 +74,11 @@ function aeCommerceRouter ($routeProvider,$locationProvider,$provide,$compilePro
 			controller: 'ResetCtrl',
 			title : 'Reset Password - '+storeNameMeta,
 		 })
+		 .when('/reset_password/:id', {
+			templateUrl: BaseUrl+'partials/reset_password.html',
+			controller: 'ResetCtrl',
+			title : 'Reset Password - '+storeNameMeta,
+		 })
 		  .when('/account_info', {
 			templateUrl: BaseUrl+'partials/account_info.html',
 			controller: 'AccountCtrl',

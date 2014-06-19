@@ -121,7 +121,7 @@ function CollectionCtrl($scope,$location,AzureMobileClient,$rootScope,$routePara
    $scope.routeParam = $routeParams.CollectionName;
 	$scope.init = function(){
 		$scope.startFromPage = 0;
-		$scope.pageLimit = 3;
+		$scope.pageLimit = $rootScope.ThemeSettings.theme_settings.pagination_limit;
 	}
 	$scope.totalProducts = 0;
 	$scope.noOfPages = [];

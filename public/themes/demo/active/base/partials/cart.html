@@ -13,7 +13,7 @@
           <th class="col-md-4">
             Price
           </th>
-          <th class="col-md-4">
+          <th class="col-md-4"  ng-show="ThemeSettings.theme_settings.display_quantity_dropdown">
             Quantity
           </th>
           <th class="col-md-4 min200">
@@ -34,7 +34,7 @@
             {{SettingGeneral.settings.currencies_format}}. {{Itemss.price}}
           </td>
           <td class="col-md-4">
-            <input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="Itemss.quantity" type="number" >
+            <input ng-show="ThemeSettings.theme_settings.display_quantity_dropdown" style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="Itemss.quantity" type="number" >
           </td>
           <td class="col-md-4">
             {{SettingGeneral.settings.currencies_format}}. {{Itemss.price * Itemss.quantity}}
@@ -51,7 +51,7 @@
           <td class="col-md-4">
             {{SettingGeneral.settings.currencies_format}}. {{itm.price}}
           </td>
-          <td class="col-md-4">
+          <td class="col-md-4"  ng-show="ThemeSettings.theme_settings.display_quantity_dropdown">
             <input style="width:62px;" ng-change="changeQuantity()"  min='1'  ng-model="itm.quantity" type="number" >
           </td>
           <td class="col-md-4">

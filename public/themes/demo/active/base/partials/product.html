@@ -34,25 +34,25 @@
                                   
 								  <p>
                                  <form name="addtoCart" ng-submit="addToCart(product.id,product);">
-                                      <input class="input input-small"  min='1' ng-model="product.productQuantity" type="number" >
-                                      <div ng-if="product.productMultiOptions">
-                                          <div class="section_attribute" style="width:100px;"  ng-repeat="valueSize in product.productMultiOptionsList">
-                                            <select ng-options="parms as parms for parms in valueSize.value" required ng-model="product.productVarientModel[valueSize.name]" name="color" style="width:150px;margin:10px 0;">
-                                              <option value="">Select {{valueSize.name}}</option>
-                                             <!-- <option ng-repeat="parms in valueSize.value" value="{{parms}}" ng-show="parms">{{parms}}</option>-->
-                                            </select>
-                                          </div>
-                                      </div>
-                                      <div  ng-if="product.productMultiOptions && selectedVarients(product.productVarientModel)">
-                                   		 <h4 ng-if="!returnPrice(product)" class="label label-danger">Not Avalible</h4>
-                                   	 </div>
-                                      <div ng-if="!product.productMultiOptions">
-                                    		  <input class="btn"  type="submit" value="Add" name="submit" />
-                                      </div>
-                                      <div ng-if="product.productMultiOptions && selectedVarients(product.productVarientModel) && returnPrice(product) && returnPrice(product) >= 0">
-                                    		  <input class="btn"  type="submit" value="Add" name="submit" />
-                                      </div>
-                                  </form>
+                                                  <input ng-show="ThemeSettings.theme_settings.display_quantity_dropdown" class="input input-small"  min='1' ng-model="product.productQuantity" type="number" >
+                                                  <div ng-if="product.productMultiOptions">
+                                                      <div class="section_attribute" style="width:100px;"  ng-repeat="valueSize in product.productMultiOptionsList">
+                                                        <select ng-options="parms as parms for parms in valueSize.value" required ng-model="product.productVarientModel[valueSize.name]" name="color" style="width:150px;margin:10px 0;">
+                                                          <option value="">Select {{valueSize.name}}</option>
+                                                         <!-- <option ng-repeat="parms in valueSize.value" value="{{parms}}" ng-show="parms">{{parms}}</option>-->
+                                                        </select>
+                                                      </div>
+                                                  </div>
+                                                  <div  ng-if="product.productMultiOptions && selectedVarients(product.productVarientModel)">
+                                                     <h4 ng-if="!returnPrice(product)" class="label label-danger">Not Avalible</h4>
+                                                 </div>
+                                                  <div ng-if="!product.productMultiOptions">
+                                                          <input class="btn"  type="submit" value="Add" name="submit" />
+                                                  </div>
+                                                  <div ng-if="product.productMultiOptions && selectedVarients(product.productVarientModel) && returnPrice(product) && returnPrice(product) >= 0">
+                                                          <input class="btn"  type="submit" value="Add" name="submit" />
+                                                  </div>
+                                              </form>
               </div>
               <div class="col-md-6 column">
                       <h1>Product Details</h1>
@@ -76,5 +76,108 @@
                </div>
                 
 			</div>
+            
+            <div class="row clearfix">
+    	 <div class="col-md-12 column"  ng-if="ThemeSettings.theme_settings.custom_product_recommadtaion == 'Brand'">
+    		<h3>Recommended Product (By Brand {{product.ProductVendorName}})</h3>
+            <hr />
+							<div class="col-md-3" ng-animate="'animate'"  ng-repeat="products in ListProduct |  filter:{productVendor:product.productVendor} | limitTo:4">
+                                      <div class="thumbnail">
+                                        <a href="./products/{{products.productUrl}}" ng-if="products.productName">
+                                        	<img ng-if="products.productImage[0].Image" alt="{{products.productName}}" src="{{products.productImage[0].Image}}">
+                                            <span class="no-image-span"  ng-if="!products.productImage[0].Image"><i  class="glyphicon glyphicon-camera"></i></span>
+                                         </a>
+                                        <div class="caption">
+                                          <h4>
+                                            <a href="./products/{{products.productUrl}}">
+                                                        {{products.productName}} <br /><small ng-show="products.ProductVendorName">By :  {{products.ProductVendorName}}</small>
+                                            </a>
+                                          </h4>                                   
+                                             <h5 ng-if="!products.productMultiOptions">({{SettingGeneral.settings.currencies_format}} {{products.productPrice}}) <span  ng-if="products.productPriceCompare"><strike>({{SettingGeneral.settings.currencies_format}} {{products.productPriceCompare}})</strike></span></h5>
+                                              <h5 ng-if="products.productMultiOptions && selectedVarients(products.productVarientModel) && returnPrice(products) && returnPrice(products) >= 0 ">({{SettingGeneral.settings.currencies_format}} {{returnPrice(products)}}) <span ng-if="products.productPriceCompare"><strike>({{SettingGeneral.settings.currencies_format}} {{products.productPriceCompare}})</strike></span></h5>
+                                              
+                                              <p>
+                                             <!--<form name="addtoCart" ng-submit="addToCart(products.id,products);">
+                                                  <input ng-show="ThemeSettings.theme_settings.display_quantity_dropdown" class="input input-small"  min='1' ng-model="products.productQuantity" type="number" >
+                                                  <div ng-if="products.productMultiOptions">
+                                                      <div class="section_attribute" style="width:100px;"  ng-repeat="valueSize in products.productMultiOptionsList">
+                                                        <select ng-options="parms as parms for parms in valueSize.value" required ng-model="products.productVarientModel[valueSize.name]" name="color" style="width:150px;margin:10px 0;">
+                                                          <option value="">Select {{valueSize.name}}</option>
+                                                         <!-- <option ng-repeat="parms in valueSize.value" value="{{parms}}" ng-show="parms">{{parms}}</option>
+                                                        </select>
+                                                      </div>
+                                                  </div>
+                                                  <div  ng-if="products.productMultiOptions && selectedVarients(products.productVarientModel)">
+                                                     <h4 ng-if="!returnPrice(products)" class="label label-danger">Not Avalible</h4>
+                                                 </div>
+                                                  <div ng-if="!products.productMultiOptions">
+                                                          <input class="btn"  type="submit" value="Add" name="submit" />
+                                                  </div>
+                                                  <div ng-if="products.productMultiOptions && selectedVarients(products.productVarientModel) && returnPrice(products) && returnPrice(products) >= 0">
+                                                          <input class="btn"  type="submit" value="Add" name="submit" />
+                                                  </div>
+                                              </form>-->
+                                          </p>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    
+        </div>
+    </div>
+    
+    
+    
+    <div class="col-md-12 column" ng-if="ThemeSettings.theme_settings.custom_product_recommadtaion == 'Type'">
+    		<h3>Recommended Product (By Type {{product.ProductTypeName}})</h3>
+            <hr />
+							<div class="col-md-3" ng-animate="'animate'"  ng-repeat="products in ListProduct |  filter:{productType:product.productType} | limitTo:4">
+                                      <div class="thumbnail">
+                                        <a href="./products/{{products.productUrl}}" ng-if="products.productName">
+                                        	<img ng-if="products.productImage[0].Image" alt="{{products.productName}}" src="{{products.productImage[0].Image}}">
+                                            <span class="no-image-span"  ng-if="!products.productImage[0].Image"><i  class="glyphicon glyphicon-camera"></i></span>
+                                         </a>
+                                        <div class="caption">
+                                          <h4>
+                                            <a href="./products/{{products.productUrl}}">
+                                                        {{products.productName}} <br /><small ng-show="products.ProductVendorName">By :  {{products.ProductVendorName}}</small>
+                                            </a>
+                                          </h4>                                   
+                                             <h5 ng-if="!products.productMultiOptions">({{SettingGeneral.settings.currencies_format}} {{products.productPrice}}) <span  ng-if="products.productPriceCompare"><strike>({{SettingGeneral.settings.currencies_format}} {{products.productPriceCompare}})</strike></span></h5>
+                                              <h5 ng-if="products.productMultiOptions && selectedVarients(products.productVarientModel) && returnPrice(products) && returnPrice(products) >= 0 ">({{SettingGeneral.settings.currencies_format}} {{returnPrice(products)}}) <span ng-if="products.productPriceCompare"><strike>({{SettingGeneral.settings.currencies_format}} {{products.productPriceCompare}})</strike></span></h5>
+                                              
+                                              <p>
+                                             <!--<form name="addtoCart" ng-submit="addToCart(products.id,products);">
+                                                  <input ng-show="ThemeSettings.theme_settings.display_quantity_dropdown" class="input input-small"  min='1' ng-model="products.productQuantity" type="number" >
+                                                  <div ng-if="products.productMultiOptions">
+                                                      <div class="section_attribute" style="width:100px;"  ng-repeat="valueSize in products.productMultiOptionsList">
+                                                        <select ng-options="parms as parms for parms in valueSize.value" required ng-model="products.productVarientModel[valueSize.name]" name="color" style="width:150px;margin:10px 0;">
+                                                          <option value="">Select {{valueSize.name}}</option>
+                                                         <!-- <option ng-repeat="parms in valueSize.value" value="{{parms}}" ng-show="parms">{{parms}}</option>
+                                                        </select>
+                                                      </div>
+                                                  </div>
+                                                  <div  ng-if="products.productMultiOptions && selectedVarients(products.productVarientModel)">
+                                                     <h4 ng-if="!returnPrice(products)" class="label label-danger">Not Avalible</h4>
+                                                 </div>
+                                                  <div ng-if="!products.productMultiOptions">
+                                                          <input class="btn"  type="submit" value="Add" name="submit" />
+                                                  </div>
+                                                  <div ng-if="products.productMultiOptions && selectedVarients(products.productVarientModel) && returnPrice(products) && returnPrice(products) >= 0">
+                                                          <input class="btn"  type="submit" value="Add" name="submit" />
+                                                  </div>
+                                              </form>-->
+                                          </p>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    
+        </div>
+    </div>
+    
+            
+            
+            
+            
 		</div>
 	</div>
+    

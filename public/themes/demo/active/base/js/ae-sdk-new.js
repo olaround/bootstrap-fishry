@@ -1,10 +1,8 @@
-function AECtrl ($rootScope,$location,AzureMobileClient,$routeParams,$cookies,$http,$compile,$timeout) {
+function AECtrl ($rootScope,$location,AzureMobileClient,$routeParams,$cookies,$http,$compile) {
 	//alert(localStorage.getItem('myFirstKey'));
 	////console.log($routeParams);
 	$rootScope.$location = $location;	
 	$rootScope.Cart = {};
-	
-	$rootScope.orderId = 'OrderIDRender';
 	$rootScope.User = {};
 	$rootScope.userData = {};
 	$rootScope.User.info = {};
@@ -18,7 +16,7 @@ function AECtrl ($rootScope,$location,AzureMobileClient,$routeParams,$cookies,$h
 	$rootScope.SettingShippingCountry = {};
 	$rootScope.SettingShipping = {};
 	$rootScope.BaseUrl = BaseUrl;
-	$rootScope.storeName = unescape(storeName);
+	$rootScope.storeName = storeName;
 	$rootScope.StartLogin = false;
 	$rootScope.StartSignup = false;
 	$rootScope.StartSubmitOrder = false;
@@ -30,7 +28,9 @@ function AECtrl ($rootScope,$location,AzureMobileClient,$routeParams,$cookies,$h
 	$rootScope.dt = new Date();
 	$rootScope.CartData = false;
 	$rootScope.PaymentMethod = '';
-	$rootScope.ExtraOptions = '';
+	$rootScope.User.info.Customer = {};
+	$rootScope.User.info.Billing = {};
+	$rootScope.User.info.Shipping = {};
 	
 	$rootScope.submitedOrder = [];
 	$rootScope.Customer = {};
@@ -141,21 +141,23 @@ $rootScope.GetSettingNotification = function(param){
 					$rootScope.newOrderTitle =  $rootScope.ListSettingsNotification.NewOrderTitle;
 					$rootScope.orderTitle =  $rootScope.ListSettingsNotification.OrderTitle;
 					if($rootScope.ListSettingsNotification.OrderPlainText == true){
+						//console.log('plain text');
 						$rootScope.orderConfirmationTemplate = $rootScope.ListSettingsNotification.OrderText;
 					}else if($rootScope.ListSettingsNotification.OrderPlainText == false){
+						//console.log('html text');
 						$rootScope.orderConfirmationTemplate = $rootScope.ListSettingsNotification.OrderHTML;
 					}
 					
 					if($rootScope.ListSettingsNotification.NewOrderPlainText == true){
+						//console.log('new order plain text');
 						$rootScope.newOrderTemplate = $rootScope.ListSettingsNotification.NewOrderText;
 					}else if($rootScope.ListSettingsNotification.NewOrderPlainText == false){
+						//console.log('new order html text');
 						$rootScope.newOrderTemplate = $rootScope.ListSettingsNotification.NewOrderHTML;
 					}
 				}
 				$rootScope.loadPositionSetter();
-				$rootScope.$apply(function(){
-					$rootScope.applyDivOrderConfirmationTemplate();
-				});
+				$rootScope.$apply();
 		});
 	
 };
@@ -264,17 +266,12 @@ $rootScope.CreatCartHTML = function() {
 }
 
 $rootScope.applyDivOrderConfirmationTemplate = function(){
-	$('body').append('<div id="addEmailTemplates" style="display:none;"></div>');
-	$('#addEmailTemplates').append('<div ng-if="orderConfirmationTemplate" id="orderConfirmation" compile="getOrderConfirmationTemplate()"></div><div ng-if="orderTitle" id="orderTitle" compile="getorderTitle()"></div><div ng-if="newOrderTitle" id="newOrderTitle" compile="getnewOrderTitle()"></div><div ng-if="newOrderTemplate" id="newOrderTemplate" compile="getnewOrderTemplate()"></div>');
+	$('body').append('<div id="addEmailTemplates" style="display:none"></div>');
+	$('#addEmailTemplates').append('<div ng-if="orderConfirmationTemplate" id="orderConfirmation" compile="getOrderConfirmationTemplate()"></div><div ng-if="newOrderTemplate" id="newOrderTemplate" compile="getnewOrderTemplate()"></div>');
 		 var ele = $('#addEmailTemplates');
 		$compile(ele.contents())($rootScope);
 }
-$rootScope.getorderTitle = function(){
-	return $rootScope.orderTitle;
-}
-$rootScope.getnewOrderTitle = function(){
-	return $rootScope.newOrderTitle;
-}
+
 $rootScope.getOrderConfirmationTemplate = function(){
 	return $rootScope.orderConfirmationTemplate;
 }
@@ -580,6 +577,8 @@ $rootScope.GetSettingNotification();
 $rootScope.GetSettingNotificationOrder();
 
 
+
+
 $rootScope.ProductCount = function(collectionName,pageName){
 	var count = 0;
 	angular.forEach($rootScope.ListProduct, function (product) {
@@ -598,17 +597,13 @@ $rootScope.ProductCount = function(collectionName,pageName){
 }
 $rootScope.GuestLogin = function(redirect){
 	////console.log(redirect);
-	$rootScope.User.info = {};
-	$rootScope.User.info.CustomerEmail = $rootScope.GuestEmail;
-	$rootScope.User.info.CustomerFirstName = $rootScope.GuestFirstName;
-	$rootScope.User.info.CustomerLastName = $rootScope.GuestLastName;
-	 $rootScope.User.info.GuestAuth = true;
+	$rootScope.User.info.Customer = {};
+	$rootScope.User.info.Customer.Email = $rootScope.GuestEmail;
+	$rootScope.User.info.Customer.First_Name = $rootScope.GuestFirstName;
+	$rootScope.User.info.Customer.Last_Name = $rootScope.GuestLastName;
+	$rootScope.User.info.Customer.Guest_User = true;
 	$rootScope.SetLocalStorage('User');
-	if(redirect == 'window.history.back()'){
-		window.history.back();
-	}else{
-		$location.path("/"+redirect);
-	}
+	$location.path("/"+redirect);
 }
 //Add to cart
 $rootScope.addToCart = function(productID,productInfo,redirect){	
@@ -832,6 +827,7 @@ $rootScope.ReturnItems= function(){
 	});
 	return length;
 }
+
 $rootScope.ReturnTax= function(){	
 	var Tax= 0;
 	////console.log($rootScope.Cart);
@@ -873,9 +869,11 @@ $rootScope.ReturnTaxPrice= function(){
 		}
 	
 }
+
 $rootScope.changeQuantity = function() {
       $rootScope.SetLocalStorage('Cart');
 }
+
 $rootScope.ReturnTotal= function(){	
 	var Amount= 0;
 	////console.log($rootScope.Cart);
@@ -951,16 +949,9 @@ $rootScope.CheckLogin = function(redirect){
 			console.log(data[0]);
 			if(data.length > 0){
 				$rootScope.StartLogin = false;
-				$rootScope.User.info = {};
-				$rootScope.User.info = data[0];
-				$rootScope.Customer = data[0];
-				$rootScope.Customer.FirstName= $rootScope.Customer.CustomerFirstName;
-				$rootScope.Customer.LastName = $rootScope.Customer.CustomerLastName;
-				$rootScope.Customer.Email = $rootScope.Customer.CustomerEmail;
-				$rootScope.Customer.Address = $rootScope.Customer.addressesFirst;
-				$rootScope.Customer.AddressContinue = $rootScope.Customer.addressesSecond;
-				$rootScope.Customer.PostCode = $rootScope.Customer.Zip;
-				 $rootScope.User.info.GuestAuth = false;
+				$rootScope.User.info.Customer = {};
+				$rootScope.User.info.Customer = data[0];
+				$rootScope.User.info.Customer.Guest_User = false;
 				
 				$rootScope.SetLocalStorage('User');
 				$rootScope.$apply(function() { 
@@ -1122,8 +1113,8 @@ $rootScope.SignUp = function(redirect){
 				$rootScope.DuplicateEmailError = false;
 				$rootScope.StartSignup = false;
 			   ////console.log(UserData);
-			   $rootScope.User.info = UserData;
-			   $rootScope.User.info.GuestAuth = false;
+			   $rootScope.User.info.Customer = UserData;
+			   $rootScope.User.info.Customer.Guest_User = false;
 			   $rootScope.SetLocalStorage('User');
 			   $rootScope.$apply(function() { 
 			   		if(redirect == 'window.history.back()'){
@@ -1179,7 +1170,7 @@ $rootScope.UpdateUserInfo = function(redirect){
 			});
 }
 
-$rootScope.Logout = function(redirect){
+$rootScope.Logout = function(){
 	var shippingCountry  = $rootScope.Customer.ShippingCountry;
 	delete $rootScope.User.info;
 	delete $rootScope.Customer;
@@ -1188,13 +1179,6 @@ $rootScope.Logout = function(redirect){
 	$rootScope.Customer = {};
 	$rootScope.Customer.ShippingCountry = shippingCountry;
 	$rootScope.SetLocalStorage('User');
-	if(redirect){
-		if(redirect == 'window.history.back()'){
-			window.history.back();
-		}else{
-			$location.path("/"+redirect);
-		}
-	}
 	$rootScope.$apply();
 }
 $rootScope.returnpaymentDescription = function (method){
@@ -1224,9 +1208,10 @@ $rootScope.LoadOrders = function(){
 	}
 }
 
+
 $rootScope.SubmitOrder =  function(payment,redirect,clear){
 	$rootScope.CreatCartHTML();
-	
+	$rootScope.applyDivOrderConfirmationTemplate();
 	$rootScope.StartSubmitOrder = true;
 	
 	if($rootScope.User.info.CustomerEmail == 'guest@fishry.com'){
@@ -1268,16 +1253,9 @@ $rootScope.SubmitOrder =  function(payment,redirect,clear){
 		AzureMobileClient.addData($rootScope.OrderTable, NewOrder).then(
 			function(OrderData) {
 				$rootScope.OrderInfo = OrderData;
-				 var OrderIdEncoded =  OrderData.orderid; 
-				 $rootScope.StartSubmitOrder = false;
-				 var HtmlorderTitle  = $('#orderTitle').children('span').text();
-				 HtmlorderTitle = HtmlorderTitle.replace('OrderIDRender',OrderIdEncoded);
-				$('#orderTitle').children('span').text(HtmlorderTitle);
-				 var HtmlnewOrderTitle  = $('#newOrderTitle').children('span').text();
-				 HtmlnewOrderTitle = HtmlnewOrderTitle.replace('OrderIDRender',OrderIdEncoded);
-				$('#newOrderTitle').children('span').text(HtmlnewOrderTitle);
-			    $rootScope.$apply(function() {
-				  
+				$rootScope.SendConfirmEmail(OrderData);
+				$rootScope.StartSubmitOrder = false;
+			   $rootScope.$apply(function() {
 				   if(!clear){
 					 $rootScope.Cart = {};
 					 $rootScope.SetLocalStorage('Cart');
@@ -1285,11 +1263,6 @@ $rootScope.SubmitOrder =  function(payment,redirect,clear){
 				   if(redirect == 'window.history.back()'){
 						window.history.back();
 					}else{
-						console.log('END2___________');
-						console.log($('#orderTitle').text());
-						console.log($('#newOrderTitle').text());
-						console.log('END___________');
-						$rootScope.SendConfirmEmail(OrderData);
 						$location.path(redirect);
 					}
 				 });
@@ -1311,8 +1284,7 @@ $rootScope.SendConfirmEmail = function (OrderData){
 		$rootScope.emailTo   = $rootScope.submitedOrder.userInfo.Email;
 		$rootScope.byFrom = $rootScope.SettingGeneral.contactEmail;
 		$rootScope.toBCC = '';
-		$rootScope.subjectEmail =  $('#orderTitle').children().html(); 
-		//$rootScope.subjectEmail = 'Order confirmation for order '+$rootScope.submitedOrder.orderid;  
+		$rootScope.subjectEmail = 'Order confirmation for order '+$rootScope.submitedOrder.orderid;  
 		$rootScope.emailBody =  $('#orderConfirmation').html();
 		var dataEmail = {data: $rootScope.emailBody, email: $rootScope.emailTo, subject: $rootScope.subjectEmail, toBCC: $rootScope.toBCC, byFrom: $rootScope.byFrom, fromName: $rootScope.storeName};
 		$rootScope.sendEmail(dataEmail);
@@ -1324,8 +1296,7 @@ $rootScope.SendConfirmEmail = function (OrderData){
 		$rootScope.emailTo =  $rootScope.subscriptionEmails;
 		$rootScope.byFrom = $rootScope.SettingGeneral.contactEmail;
 		$rootScope.toBCC = '';
-		$rootScope.subjectEmail = $('#newOrderTitle').children().html();
-		//$rootScope.subjectEmail = $rootScope.storeName +' Order '+ $rootScope.submitedOrder.orderid + ' placed by '+$rootScope.submitedOrder.userInfo.FirstName +' '+$rootScope.submitedOrder.userInfo.LastName;  
+		$rootScope.subjectEmail = $rootScope.storeName +' Order '+ $rootScope.submitedOrder.orderid + ' placed by '+$rootScope.submitedOrder.userInfo.FirstName +' '+$rootScope.submitedOrder.userInfo.LastName;  
 		$rootScope.emailBody =  $('#newOrderTemplate').html();
 		//console.log('----------------------------------------');
 		//console.log($rootScope.emailBody);
@@ -1345,7 +1316,8 @@ $rootScope.$on('$routeChangeSuccess', function () {
 			}
 	});
 	
-$('#loadingbar').width($rootScope.LoadPositions+'%');	
+$('#loadingbar').width($rootScope.LoadPositions+'%');
+	
 //send email
  $rootScope.sendEmail = function(dataEmail){
 	$http({method: 'POST', url: 'https://ae-commerce.azure-mobile.net/api/send_grid', data: dataEmail, headers: {'Content-Type': 'application/json'}}).
