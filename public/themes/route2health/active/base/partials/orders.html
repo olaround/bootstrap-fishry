@@ -1,0 +1,107 @@
+<div class="content_bg">
+    <div id="columns" class="container ">
+        <div class="row ">
+            <div class="loader_page">
+                <div id="center_column" class="center_column span12 clearfix" ng-init="LoadOrders();">
+                    <!-- Breadcrumb -->
+                    <div class="breadcrumb">
+                        <div class="breadcrumb_inset">
+                            <a class="breadcrumb-home" href="/" title="Return to Home"><i class="icon-home"></i></a>
+                            <span class="navigation-pipe">&gt;</span>
+                            <a href="#">My account</a>
+                            <span class="navigation-pipe">&gt;</span>Order history
+                        </div>
+                    </div>
+                    <!-- /Breadcrumb -->
+                    <h1>
+                        <span>Order history</span>
+                    </h1>
+                    <p>Here are the orders you've placed since your account was created.</p>
+
+                    <div class="block-center" ng-show="!Orders.length">
+                      <p class="warning  orderEmpty" ng-class="{show: !Orders.length}">You have not placed any orders.</p>
+                    </div>
+                    <!-- {{Orders.length}} -->
+                    <div class="block-center" id="block-history" ng-if="Orders.length">
+                        <table id="order-list" class="std shop_table footable footable-loaded tablet breakpoint">
+                            <thead>
+                                <tr>
+                                    <th data-class="expand" class="first_item ">Order ID</th>
+                                    <th class="item">Total price</th>
+                                    <th class="item">Payment:</th>
+                                    <th class="item">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="(keyMain,Itemss) in Orders track by $index">
+                                <tr class="first_item footable-detail-show">
+                                    <td>
+                                        {{Itemss.id}}
+                                    </td>
+                                    <td>{{SettingGeneral.settings.currencies_format}}&nbsp;{{Itemss.orderTotal}}</td>
+                                    <td>
+                                        {{Itemss.paymentInfo}}
+                                    </td>
+                                    <td>
+                                        <span ng-show="Itemss.payment">Not Fullfilled</span>
+                                        <span ng-hide="Itemss.payment">Fullfilled</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div id="block-order-detail" class="hidden">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- <div class="row clearfix" ng-init="LoadOrders();">
+    <div class="col-md-12 column">
+        <h1>
+            My orders
+        </h1>
+        <table ng-show="Orders" class="table">
+            <thead>
+                <tr>
+                    <th class="col-md-4">
+                        Order Id
+                    </th>
+                    <th class="col-md-4">
+                        Order Total
+                    </th>
+                    <th class="col-md-4">
+                        Payment Method
+                    </th>
+                    <th class="col-md-4">
+                        Status
+                    </th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="(keyMain,Itemss) in Orders track by $index">
+                <tr>
+                    <td class="col-md-4">
+                        {{Itemss.id}}
+                    </td>
+                    <td class="col-md-4">
+                        Rs. {{Itemss.orderTotal}}
+                    </td>
+                    <td class="col-md-4">
+                        Rs. {{Itemss.paymentInfo}}
+                    </td>
+                    <td class="col-md-4">
+                        <span ng-show="Itemss.payment">Not Fullfilled</span>
+                        <span ng-hide="Itemss.payment">Fullfilled</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <h6 ng-hide="Orders" align="center">
+        No Order Found
+    </h6>
+</div> -->

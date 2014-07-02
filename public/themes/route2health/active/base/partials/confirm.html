@@ -1,0 +1,1865 @@
+<div class="content_bg">
+  <div id="columns" class="container">
+    <div class="row ">
+      <div class="loader_page">
+
+        <div id="center_column" class="center_column span12 clearfix">
+          <!-- Breadcrumb -->
+          <div class="breadcrumb">
+            <div class="breadcrumb_inset">
+              <a class="breadcrumb-home" href="/" title="Return to Home"><i class="icon-home"></i></a>
+              <span class="navigation-pipe">&gt;</span>
+              <span class="navigation_page">Your addresses</span>
+            </div>
+          </div>
+          <!-- /Breadcrumb -->
+
+          <h1 id="cart_title">
+            <span>Your order summary</span>
+          </h1>
+
+         <p ng-hide="IfCart()" id="emptyCartWarning" class="warning">Your shopping cart is empty.</p>
+          <div ng-show="IfCart()">
+            <p class="ordercart-title">Your shopping cart contains:
+              <span id="summary_products_quantity">{{ReturnItems()}} products</span>
+            </p>
+            <div id="order-detail-content" class="table_block">
+              <table id="cart_summary" class="std">
+                <thead>
+                </thead>
+                <tfoot>
+                  <tr class="cart_total_price ">
+                    <td><!-- Total products --></td>
+                    <td class="price" id="total_product">Total products: &nbsp;&nbsp;{{ReturnItems()}}</td>
+                  </tr>
+
+                  <tr class="cart_total_price " ng-if="ReturnTax()">
+                    <td><!-- Total products --></td>
+                    <td class="price" id="total_product">Tax: &nbsp;&nbsp;{{ReturnTaxPrice() | currency:SettingGeneral.settings.currencies_format+' '}}</td>
+                    <span>
+                          Tax are dependent on shipping country
+                        </span>
+                  </tr>
+
+                  <tr class="cart_total_price ">
+                    <td><!-- Total products --></td>
+                    <td class="price" id="total_product">Total Amount: &nbsp;&nbsp;{{ReturnTotal() | currency:SettingGeneral.settings.currencies_format+' '}}</td>
+                  </tr>
+
+                  <!-- <tr class="cart_total_price cart_last_tr">
+                    <td class="total_price_container" id="total_price_container">Total Amount</td>
+                    <td class="price" id="total_price">
+                      {{SettingGeneral.settings.currencies_format}}&nbsp;{{ReturnTotal()}}
+                    </td>
+                  </tr> -->
+                </tfoot>
+                <tbody ng-repeat="(keyMain,Items) in Cart track by $index">
+                  <tr ng-show="Items.productID" id="product_1_0_0_0" class="bordercolor cart_item address_0 odd">
+                    <td class="cart_product">
+                      <a href="/product/{{Items.productInfo.productUrl}}">
+                        <img ng-if="Items.productInfo.productImage[0].Image" src="{{Items.productInfo.productImage[0].Image}}" alt="{{Items.productInfo.productName}}">
+
+                        <img ng-if="Items.productInfo.productImage[0].Image == undefined" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{Items.productInfo.productName}}">
+                      </a>
+                    </td>
+                    <td class="cart">
+                      <div class="productInfo clearfix insset-bottom">
+                        <h5><a class="product_link" href="/product/{{Items.productInfo.productUrl}}">{{Items.productInfo.productName}}</a>
+                        </h5>
+                        <div class="insset-bottom">
+                          <span class="title-th cart_quantity_title">Qty:</span>
+
+                          <div class="cart_quantity">
+                            <div id="cart_quantity_button" class="cart_quantity_button" style="float:left;" ng-controller="CartCtrl">
+
+                              <a rel="nofollow" class="cart_quantity_down" href="javascript:void(0)" title="Subtract" ng-click="Items.quantity = limitCartProductQuantity(Items.quantity)">
+                                <img src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/img/icon/quantity_down.gif" alt="Subtract" width="23" height="24">
+                              </a>
+                              <input size="2" type="text" autocomplete="off" class="cart_quantity_input" value="{{Items.quantity}}" ng-model="Items.quantity" name="quantity_1_0_0_0" min="1">
+
+                              <a rel="nofollow" class="cart_quantity_up" id="cart_quantity_up_1_0_0_0" href="javascript:void(0)" title="Add" ng-click="Items.quantity = Items.quantity+1">
+                                <img src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/img/icon/quantity_up.gif" alt="Add" width="23" height="24">
+                              </a>
+
+                            </div>
+
+                            <div class="div_cart_quantity_delete">
+                              <!-- <a rel="nofollow" class="cart_quantity_delete" href="javascript:void(0)" ng-click="RemoveCartItem(itm.productID,false)"></a> -->
+
+                              <a class="ajax_cart_block_remove_link" rel="nofollow" href="javascript:void(0)" ng-click="RemoveCartItem(Items.productID,false)"></a>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="priceBlock clearfix insset-bottom">
+                        <div class="clearfix insset-bottom" >
+                          <span class="title-th">Unit price:</span>
+                          <span class="price" id="product_price_1_0_0">
+                            <span style="text-decoration:line-through; display:inline-block; padding-right:5px;" ng-if="Items.productInfo.comparePrice">{{Items.productInfo.comparePrice | currency:SettingGeneral.settings.currencies_format+' '}}</span>
+                            {{Items.productInfo.productPrice | currency:SettingGeneral.settings.currencies_format+' '}}
+                          </span>
+                        </div>
+                        <span class="title-th">Total:</span>
+                        <span class="price total-pr">
+                        {{Items.productInfo.productPrice * Items.quantity | currency:SettingGeneral.settings.currencies_format+' '}}
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr ng-hide="Items.productID" class="bordercolor cart_item address_0 odd" ng-repeat="(key,itm) in Items track by $index">
+
+                    <td class="cart_product">
+                      <a href="/product/{{itm.productInfo.productUrl}}">
+
+                        <img ng-if="itm.productInfo.productImage[0].Image" src="{{itm.productInfo.productImage[0].Image}}" alt="{{itm.productInfo.productName}}">
+
+                        <img ng-if="itm.productInfo.productImage[0].Image == undefined" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{itm.productInfo.productName}}">
+                      </a>
+                    </td>
+                    <td class="cart">
+                      <div class="productInfo">
+                        <h5><a class="product_link" href="/product/{{itm.productInfo.productUrl}}">{{itm.productInfo.productName}}</a>
+                        </h5>
+                        
+                        <div class="insset-bottom">
+                        <span class="title-th cart_quantity_title">Qty:</span>
+
+                        <div class="cart_quantity">
+                          <div id="cart_quantity_button" class="cart_quantity_button" style="float:left;" ng-controller="CartCtrl">
+
+                            <a rel="nofollow" class="cart_quantity_down" href="javascript:void(0)" title="Subtract" ng-click="itm.quantity = limitCartProductQuantity(itm.quantity)">
+                              <img src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/img/icon/quantity_down.gif" alt="Subtract" width="23" height="24">
+                            </a>
+                            <input size="2" type="text" autocomplete="off" class="cart_quantity_input" value="{{itm.quantity}}" ng-model="itm.quantity" name="quantity_1_0_0_0" min="1">
+
+                            <a rel="nofollow" class="cart_quantity_up" href="javascript:void(0)" title="Add" ng-click="itm.quantity = itm.quantity+1">
+                              <img src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/img/icon/quantity_up.gif" alt="Add" width="23" height="24">
+                            </a>
+
+                          </div>
+
+                          <div class="div_cart_quantity_delete">
+                            <!-- <a rel="nofollow" class="cart_quantity_delete" href="javascript:void(0)" ng-click="RemoveCartItem(itm.productID,key)"></a> -->
+                            <a class="ajax_cart_block_remove_link" rel="nofollow" href="javascript:void(0)" ng-click="RemoveCartItem(itm.productID,key)"></a>
+                          </div>
+
+                        </div>
+                        </div>
+                      </div>
+                      <div class="priceBlock">
+                        <div class="insset-bottom">
+                          <span class="title-th">Unit price:</span>
+                          <span class="price">
+                            <span style="text-decoration:line-through; display:inline-block; padding-right:5px;" ng-if="itm.productInfo.comparePrice">{{itm.productInfo.comparePrice | currency:SettingGeneral.settings.currencies_format+' '}}</span>
+                            {{itm.productInfo.newPrice | currency:SettingGeneral.settings.currencies_format+' '}}
+                          </span>
+                        </div>
+                        <span class="title-th">Total:</span>
+                        <span class="price total-pr" id="total_product_price_1_0_0">
+                        {{itm.productInfo.newPrice * itm.quantity | currency:SettingGeneral.settings.currencies_format+' '}}
+                        </span>
+                      </div>
+                    
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+            <h1>
+              <span>Contact Details</span>
+            </h1>
+
+            <p class="required" style="padding:10px 0 10px 0; margin:0;"><sup>*</sup> Required field</p>
+
+            <form role="form" ng-submit="SubmitOrder(PaymentMethod,'/thankyou')" class="std titled_box" id="add_address">
+              <fieldset>
+                 <div class="row-fluid">
+                  <div class="span6">
+                    <p class="required text">
+                      <label for="firstname">First name <sup>*</sup>
+                      </label>
+                      <input required ng-model="Customer.FirstName" ng-readonly="User.info.CustomerEmail && !User.info.GuestAuth" ng-value="Customer.FirstName" type="text" name="firstname" id="firstname">
+                    </p>
+
+                    <p class="required  text">
+                      <label for="lastname">Last name <sup>*</sup>
+                      </label>
+                      <input required ng-model="Customer.LastName" ng-readonly="User.info.CustomerEmail && !User.info.GuestAuth" ng-value="Customer.LastName" type="text" id="lastname" name="lastname">
+                    </p>
+
+                  </div>
+                  <div class="span6">
+                    <p class="required text">
+                      <label for="email">Email <sup>*</sup>
+                      </label>
+                      <input required ng-model="Customer.Email" ng-readonly="User.info.CustomerEmail && !User.info.GuestAuth" ng-value="Customer.Email" type="text" name="email" id="email">
+                    </p>
+
+                    <p class="required  text">
+                      <label for="phone">Phone <sup>*</sup>
+                      </label>
+                      <input required ng-model="Customer.Phone" ng-readonly="User.info.CustomerEmail && !User.info.GuestAuth" ng-value="Customer.Phone" type="text" id="phone" name="phone">
+                    </p>
+                  </div>
+
+                </div>
+              
+              </fieldset>
+
+              <h1>
+                <span>Delivery Details</span>
+
+                <span style="margin: 10px 0;" ng-if="User.info.CustomerFirstName != 'Guest'">
+                  <input style="margin:0; margin-top: 4px;" type="checkbox" ng-model="Customer.SameBilling" id="sameAddress" name="sameAddress" /> <label for="sameAddress" style="cursor: pointer">add new Delivery Details</label>
+                </span>
+
+              </h1>
+
+              <fieldset ng-if="!Customer.SameBilling">
+                 <div class="row-fluid">
+                  <div class="span6">
+                    <p class="required text">
+                      <label for="firstname">First name <sup>*</sup>
+                      </label>
+                      <input required ng-readonly="User.info.CustomerEmail && !User.info.GuestAuth" ng-model="Customer.FirstName" ng-value="Customer.FirstName" type="text" name="firstname" id="firstname">
+                    </p>
+
+                    <p class="required  text">
+                      <label for="lastname">Last name <sup>*</sup>
+                      </label>
+                      <input required ng-readonly="User.info.CustomerEmail && !User.info.GuestAuth" ng-model="Customer.LastName" ng-value="Customer.LastName" type="text" id="lastname" name="lastname">
+                    </p>
+
+                  </div>
+                  <div class="span6">
+                    
+                    <p class="required text">
+                      <label for="address1">Address <sup>*</sup>
+                      </label>
+                      <input required ng-model="Customer.Address" ng-value="Customer.Address" type="text" id="address1" name="address1" >
+                    </p>
+
+                   <p class="required text">
+                      <label for="address2">Address (Line 2)</label>
+                      <input ng-model="Customer.AddressContinue" ng-value="Customer.AddressContinue" type="text" id="address2" name="address2">
+                    </p>
+
+                    <p class="required text">
+                      <label for="city">City <sup>*</sup>
+                      </label>
+                      <input required type="text" name="city" id="city" ng-value="Customer.City" maxlength="64" ng-model="Customer.City">
+                    </p>
+
+                    <p class="required postcode text">
+                      <label for="postcode">Zip / Postal Code</label>
+                      <input type="tel" id="postcode" name="postcode" ng-value="Customer.PostCode" ng-model="Customer.PostCode">
+                    </p>
+
+                    <p class="required select">
+                      <label for="id_country">Country <sup>*</sup>
+                      </label>
+                      <!-- <h1>{{Customer.Country}}</h1> -->
+                      <select required ng-model="Customer.Country" id="id_country" name="id_country">
+                        <option value="">
+                          Please Select
+                        </option>
+                        <option value="AF">
+                          Afghanistan
+                        </option>
+                        <option value="AX">
+                          Aland Islands
+                        </option>
+                        <option value="AL">
+                          Albania
+                        </option>
+                        <option value="DZ">
+                          Algeria
+                        </option>
+                        <option value="AD">
+                          Andorra
+                        </option>
+                        <option value="AO">
+                          Angola
+                        </option>
+                        <option value="AI">
+                          Anguilla
+                        </option>
+                        <option value="AG">
+                          Antigua And Barbuda
+                        </option>
+                        <option value="AR">
+                          Argentina
+                        </option>
+                        <option value="AM">
+                          Armenia
+                        </option>
+                        <option value="AW">
+                          Aruba
+                        </option>
+                        <option value="AU">
+                          Australia
+                        </option>
+                        <option value="AT">
+                          Austria
+                        </option>
+                        <option value="AZ">
+                          Azerbaijan
+                        </option>
+                        <option value="BS">
+                          Bahamas
+                        </option>
+                        <option value="BH">
+                          Bahrain
+                        </option>
+                        <option value="BD">
+                          Bangladesh
+                        </option>
+                        <option value="BB">
+                          Barbados
+                        </option>
+                        <option value="BY">
+                          Belarus
+                        </option>
+                        <option value="BE">
+                          Belgium
+                        </option>
+                        <option value="BZ">
+                          Belize
+                        </option>
+                        <option value="BJ">
+                          Benin
+                        </option>
+                        <option value="BM">
+                          Bermuda
+                        </option>
+                        <option value="BT">
+                          Bhutan
+                        </option>
+                        <option value="BO">
+                          Bolivia
+                        </option>
+                        <option value="BA">
+                          Bosnia And Herzegovina
+                        </option>
+                        <option value="BW">
+                          Botswana
+                        </option>
+                        <option value="BV">
+                          Bouvet Island
+                        </option>
+                        <option value="BR">
+                          Brazil
+
+                        </option>
+                        <option value="IO">
+                          British Indian Ocean Territory
+                        </option>
+                        <option value="BN">
+                          Brunei
+                        </option>
+                        <option value="BG">
+                          Bulgaria
+                        </option>
+                        <option value="BF">
+                          Burkina Faso
+                        </option>
+                        <option value="MM">
+                          Burma
+                        </option>
+                        <option value="BI">
+                          Burundi
+                        </option>
+                        <option value="KH">
+                          Cambodia
+                        </option>
+                        <option value="CA">
+                          Canada
+                        </option>
+                        <option value="CV">
+                          Cape Verde
+                        </option>
+                        <option value="KY">
+                          Cayman Islands
+                        </option>
+                        <option value="CF">
+                          Central African Republic
+                        </option>
+                        <option value="TD">
+                          Chad
+                        </option>
+                        <option value="CL">
+                          Chile
+                        </option>
+                        <option value="CN">
+                          China
+                        </option>
+                        <option value="CX">
+                          Christmas Island
+                        </option>
+                        <option value="CC">
+                          Cocos (Keeling) Islands
+                        </option>
+                        <option value="CO">
+                          Colombia
+                        </option>
+                        <option value="KM">
+                          Comoros
+                        </option>
+                        <option value="CG">
+                          Congo
+                        </option>
+                        <option value="CD">
+                          Congo, The Democratic Republic Of The
+                        </option>
+                        <option value="CK">
+                          Cook Islands
+                        </option>
+                        <option value="CR">
+                          Costa Rica
+                        </option>
+                        <option value="HR">
+                          Croatia
+                        </option>
+                        <option value="CU">
+                          Cuba
+                        </option>
+                        <option value="CW">
+                          Curaçao
+                        </option>
+                        <option value="CY">
+                          Cyprus
+                        </option>
+                        <option value="CZ">
+                          Czech Republic
+                        </option>
+                        <option value="CI">
+                          Côte d'Ivoire
+                        </option>
+                        <option value="DK">
+                          Denmark
+                        </option>
+                        <option value="DJ">
+                          Djibouti
+                        </option>
+                        <option value="DM">
+                          Dominica
+                        </option>
+                        <option value="DO">
+                          Dominican Republic
+                        </option>
+                        <option value="EC">
+                          Ecuador
+                        </option>
+                        <option value="EG">
+                          Egypt
+                        </option>
+                        <option value="SV">
+                          El Salvador
+                        </option>
+                        <option value="GQ">
+                          Equatorial Guinea
+                        </option>
+                        <option value="ER">
+                          Eritrea
+                        </option>
+                        <option value="EE">
+                          Estonia
+                        </option>
+                        <option value="ET">
+                          Ethiopia
+                        </option>
+                        <option value="FK">
+                          Falkland Islands (Malvinas)
+                        </option>
+                        <option value="FO">
+                          Faroe Islands
+                        </option>
+                        <option value="FJ">
+                          Fiji
+                        </option>
+                        <option value="FI">
+                          Finland
+                        </option>
+                        <option value="FR">
+                          France
+                        </option>
+                        <option value="GF">
+                          French Guiana
+                        </option>
+                        <option value="PF">
+                          French Polynesia
+                        </option>
+                        <option value="TF">
+                          French Southern Territories
+                        </option>
+                        <option value="GA">
+                          Gabon
+                        </option>
+                        <option value="GM">
+                          Gambia
+                        </option>
+                        <option value="GE">
+                          Georgia
+                        </option>
+                        <option value="DE">
+                          Germany
+                        </option>
+                        <option value="GH">
+                          Ghana
+                        </option>
+                        <option value="GI">
+                          Gibraltar
+                        </option>
+                        <option value="GR">
+                          Greece
+                        </option>
+                        <option value="GL">
+                          Greenland
+                        </option>
+                        <option value="GD">
+                          Grenada
+                        </option>
+                        <option value="GP">
+                          Guadeloupe
+                        </option>
+                        <option value="GT">
+                          Guatemala
+                        </option>
+                        <option value="GG">
+                          Guernsey
+                        </option>
+                        <option value="GN">
+                          Guinea
+                        </option>
+                        <option value="GW">
+                          Guinea Bissau
+                        </option>
+                        <option value="GY">
+                          Guyana
+                        </option>
+                        <option value="HT">
+                          Haiti
+                        </option>
+                        <option value="HM">
+                          Heard Island And Mcdonald Islands
+                        </option>
+                        <option value="VA">
+                          Holy See (Vatican City State)
+                        </option>
+                        <option value="HN">
+                          Honduras
+                        </option>
+                        <option value="HK">
+                          Hong Kong
+                        </option>
+                        <option value="HU">
+                          Hungary
+                        </option>
+                        <option value="IS">
+                          Iceland
+                        </option>
+                        <option value="IN">
+                          India
+                        </option>
+                        <option value="ID">
+                          Indonesia
+                        </option>
+                        <option value="IR">
+                          Iran, Islamic Republic Of
+                        </option>
+                        <option value="IQ">
+                          Iraq
+                        </option>
+                        <option value="IE">
+                          Ireland
+                        </option>
+                        <option value="IM">
+                          Isle Of Man
+                        </option>
+                        <option value="IL">
+                          Israel
+                        </option>
+                        <option value="IT">
+                          Italy
+                        </option>
+                        <option value="JM">
+                          Jamaica
+                        </option>
+                        <option value="JP">
+                          Japan
+                        </option>
+                        <option value="JE">
+                          Jersey
+                        </option>
+                        <option value="JO">
+                          Jordan
+                        </option>
+                        <option value="KZ">
+                          Kazakhstan
+                        </option>
+                        <option value="KE">
+                          Kenya
+                        </option>
+                        <option value="KI">
+                          Kiribati
+                        </option>
+                        <option value="KP">
+                          Korea, Democratic People's Republic Of
+                        </option>
+                        <option value="KV">
+                          Kosovo
+                        </option>
+                        <option value="KW">
+                          Kuwait
+                        </option>
+                        <option value="KG">
+                          Kyrgyzstan
+                        </option>
+                        <option value="LA">
+                          Lao People's Democratic Republic
+                        </option>
+                        <option value="LV">
+                          Latvia
+                        </option>
+                        <option value="LB">
+                          Lebanon
+                        </option>
+                        <option value="LS">
+                          Lesotho
+                        </option>
+                        <option value="LR">
+                          Liberia
+                        </option>
+                        <option value="LY">
+                          Libyan Arab Jamahiriya
+                        </option>
+                        <option value="LI">
+                          Liechtenstein
+                        </option>
+                        <option value="LT">
+                          Lithuania
+                        </option>
+                        <option value="LU">
+                          Luxembourg
+                        </option>
+                        <option value="MO">
+                          Macao
+                        </option>
+                        <option value="MK">
+                          Macedonia, Republic Of
+                        </option>
+                        <option value="MG">
+                          Madagascar
+                        </option>
+                        <option value="MW">
+                          Malawi
+                        </option>
+                        <option value="MY">
+                          Malaysia
+                        </option>
+                        <option value="MV">
+                          Maldives
+                        </option>
+                        <option value="ML">
+                          Mali
+                        </option>
+                        <option value="MT">
+                          Malta
+                        </option>
+                        <option value="MQ">
+                          Martinique
+                        </option>
+                        <option value="MR">
+                          Mauritania
+                        </option>
+                        <option value="MU">
+                          Mauritius
+                        </option>
+                        <option value="YT">
+                          Mayotte
+                        </option>
+                        <option value="MX">
+                          Mexico
+                        </option>
+                        <option value="MD">
+                          Moldova, Republic of
+                        </option>
+                        <option value="MC">
+                          Monaco
+                        </option>
+                        <option value="MN">
+                          Mongolia
+                        </option>
+                        <option value="ME">
+                          Montenegro
+                        </option>
+                        <option value="MS">
+                          Montserrat
+                        </option>
+                        <option value="MA">
+                          Morocco
+                        </option>
+                        <option value="MZ">
+                          Mozambique
+                        </option>
+                        <option value="NA">
+                          Namibia
+                        </option>
+                        <option value="NR">
+                          Nauru
+                        </option>
+                        <option value="NP">
+                          Nepal
+                        </option>
+                        <option value="NL">
+                          Netherlands
+                        </option>
+                        <option value="AN">
+                          Netherlands Antilles
+                        </option>
+                        <option value="NC">
+                          New Caledonia
+                        </option>
+                        <option value="NZ">
+                          New Zealand
+                        </option>
+                        <option value="NI">
+                          Nicaragua
+                        </option>
+                        <option value="NE">
+                          Niger
+                        </option>
+                        <option value="NG">
+                          Nigeria
+                        </option>
+                        <option value="NU">
+                          Niue
+                        </option>
+                        <option value="NF">
+                          Norfolk Island
+                        </option>
+                        <option value="NO">
+                          Norway
+                        </option>
+                        <option value="OM">
+                          Oman
+                        </option>
+                        <option value="PK">
+                          Pakistan
+                        </option>
+                        <option value="PS">
+                          Palestinian Territory, Occupied
+                        </option>
+                        <option value="PA">
+                          Panama
+                        </option>
+                        <option value="PG">
+                          Papua New Guinea
+                        </option>
+                        <option value="PY">
+                          Paraguay
+                        </option>
+                        <option value="PE">
+                          Peru
+                        </option>
+                        <option value="PH">
+                          Philippines
+                        </option>
+                        <option value="PN">
+                          Pitcairn
+                        </option>
+                        <option value="PL">
+                          Poland
+                        </option>
+                        <option value="PT">
+                          Portugal
+                        </option>
+                        <option value="QA">
+                          Qatar
+                        </option>
+                        <option value="CM">
+                          Republic of Cameroon
+                        </option>
+                        <option value="RE">
+                          Reunion
+                        </option>
+                        <option value="RO">
+                          Romania
+                        </option>
+                        <option value="RU">
+                          Russia
+                        </option>
+                        <option value="RW">
+                          Rwanda
+                        </option>
+                        <option value="BL">
+                          Saint Barthélemy
+                        </option>
+                        <option value="SH">
+                          Saint Helena
+                        </option>
+                        <option value="KN">
+                          Saint Kitts And Nevis
+                        </option>
+                        <option value="LC">
+                          Saint Lucia
+                        </option>
+                        <option value="MF">
+                          Saint Martin
+                        </option>
+                        <option value="PM">
+                          Saint Pierre And Miquelon
+                        </option>
+                        <option value="WS">
+                          Samoa
+                        </option>
+                        <option value="SM">
+                          San Marino
+                        </option>
+                        <option value="ST">
+                          Sao Tome And Principe
+                        </option>
+                        <option value="SA">
+                          Saudi Arabia
+                        </option>
+                        <option value="SN">
+                          Senegal
+                        </option>
+                        <option value="RS">
+                          Serbia
+                        </option>
+
+                        <option value="SC">
+                          Seychelles
+                        </option>
+                        <option value="SL">
+                          Sierra Leone
+                        </option>
+                        <option value="SG">
+                          Singapore
+                        </option>
+                        <option value="SK">
+                          Slovakia
+                        </option>
+                        <option value="SI">
+                          Slovenia
+                        </option>
+                        <option value="SB">
+                          Solomon Islands
+                        </option>
+                        <option value="SO">
+                          Somalia
+                        </option>
+                        <option value="ZA">
+                          South Africa
+                        </option>
+                        <option value="GS">
+                          South Georgia And The South Sandwich Islands
+                        </option>
+                        <option value="KR">
+                          South Korea
+                        </option>
+                        <option value="ES">
+                          Spain
+                        </option>
+                        <option value="LK">
+                          Sri Lanka
+                        </option>
+                        <option value="VC">
+                          St. Vincent
+                        </option>
+                        <option value="SD">
+                          Sudan
+                        </option>
+                        <option value="SR">
+                          Suriname
+                        </option>
+                        <option value="SJ">
+                          Svalbard And Jan Mayen
+                        </option>
+                        <option value="SZ">
+                          Swaziland
+                        </option>
+                        <option value="SE">
+                          Sweden
+                        </option>
+                        <option value="CH">
+                          Switzerland
+                        </option>
+                        <option value="SY">
+                          Syria
+                        </option>
+                        <option value="TW">
+                          Taiwan
+                        </option>
+                        <option value="TJ">
+                          Tajikistan
+                        </option>
+                        <option value="TZ">
+                          Tanzania, United Republic Of
+                        </option>
+                        <option value="TH">
+                          Thailand
+                        </option>
+                        <option value="TL">
+                          Timor Leste
+                        </option>
+                        <option value="TG">
+                          Togo
+                        </option>
+                        <option value="TK">
+                          Tokelau
+                        </option>
+                        <option value="TO">
+                          Tonga
+                        </option>
+                        <option value="TT">
+                          Trinidad and Tobago
+                        </option>
+                        <option value="TN">
+                          Tunisia
+                        </option>
+                        <option value="TR">
+                          Turkey
+                        </option>
+                        <option value="TM">
+                          Turkmenistan
+                        </option>
+                        <option value="TC">
+                          Turks and Caicos Islands
+                        </option>
+                        <option value="TV">
+                          Tuvalu
+                        </option>
+                        <option value="UG">
+                          Uganda
+                        </option>
+                        <option value="UA">
+                          Ukraine
+                        </option>
+                        <option value="AE">
+                          United Arab Emirates
+                        </option>
+                        <option value="GB">
+                          United Kingdom
+                        </option>
+                        <option value="US">
+                          United States
+                        </option>
+                        <option value="UM">
+                          United States Minor Outlying Islands
+                        </option>
+                        <option value="UY">
+                          Uruguay
+                        </option>
+                        <option value="UZ">
+                          Uzbekistan
+                        </option>
+                        <option value="VU">
+                          Vanuatu
+                        </option>
+                        <option value="VE">
+                          Venezuela
+                        </option>
+                        <option value="VN">
+                          Vietnam
+                        </option>
+                        <option value="VG">
+                          Virgin Islands, British
+                        </option>
+                        <option value="WF">
+                          Wallis And Futuna
+                        </option>
+                        <option value="EH">
+                          Western Sahara
+                        </option>
+                        <option value="YE">
+                          Yemen
+                        </option>
+                        <option value="ZM">
+                          Zambia
+                        </option>
+                        <option value="ZW">
+                          Zimbabwe
+                        </option>
+                      </select>
+                    </p>
+
+                  </div>
+
+                </div>
+              
+              </fieldset>
+
+              <fieldset ng-if="Customer.SameBilling">
+                <!-- <h1>Billing Address</h1> -->
+                 <div class="row-fluid">
+                  <div class="span6">
+                    <p class="required text">
+                      <label for="firstname">First name <sup>*</sup>
+                      </label>
+                      <input required ng-model="Customer.FirstNameBilling" ng-value="Customer.FirstNameBilling" type="text" name="firstname" id="firstname">
+                    </p>
+
+                    <p class="required  text">
+                      <label for="lastname">Last name <sup>*</sup>
+                      </label>
+                      <input required ng-model="Customer.LastNameBilling" ng-value="Customer.LastNameBilling" type="text" id="lastname" name="lastname">
+                    </p>
+
+                  </div>
+                  <div class="span6">
+                    
+                    <p class="required text">
+                      <label for="address1">Address <sup>*</sup>
+                      </label>
+                      <input required ng-model="Customer.AddressBilling" ng-value="Customer.AddressBilling" type="text" id="address1" name="address1" >
+                    </p>
+
+
+
+                    <p class="required text">
+                      <label for="address2">Address (Line 2)</label>
+                      <input ng-model="Customer.AddressContinueBilling" ng-value="Customer.AddressContinueBilling" type="text" id="address2" name="address2">
+                    </p>
+
+
+
+
+                    <p class="required text">
+                      <label for="city">City <sup>*</sup>
+                      </label>
+                      <input required type="text" name="city" id="city" ng-value="Customer.CityBilling" maxlength="64" ng-model="Customer.CityBilling">
+                    </p>
+
+
+
+                    <!-- <p class="required postcode text" style="">
+                      <label for="postcode">Zip / Postal Code <sup>*</sup>
+                      </label>
+                      <input type="tel" id="postcode" name="postcode" ng-value="Customer.PostCodeBilling" ng-model="Customer.PostCodeBilling">
+                    </p> -->
+
+
+
+                    <p class="required select">
+                      <label for="id_country">Country <sup>*</sup>
+                      </label>
+                      <select required ng-model="Customer.Country" id="id_country" name="id_country">
+                        <option value="">
+                          Please Select
+                        </option>
+                        <option value="AF">
+                          Afghanistan
+                        </option>
+                        <option value="AX">
+                          Aland Islands
+                        </option>
+                        <option value="AL">
+                          Albania
+                        </option>
+                        <option value="DZ">
+                          Algeria
+                        </option>
+                        <option value="AD">
+                          Andorra
+                        </option>
+                        <option value="AO">
+                          Angola
+                        </option>
+                        <option value="AI">
+                          Anguilla
+                        </option>
+                        <option value="AG">
+                          Antigua And Barbuda
+                        </option>
+                        <option value="AR">
+                          Argentina
+                        </option>
+                        <option value="AM">
+                          Armenia
+                        </option>
+                        <option value="AW">
+                          Aruba
+                        </option>
+                        <option value="AU">
+                          Australia
+                        </option>
+                        <option value="AT">
+                          Austria
+                        </option>
+                        <option value="AZ">
+                          Azerbaijan
+                        </option>
+                        <option value="BS">
+                          Bahamas
+                        </option>
+                        <option value="BH">
+                          Bahrain
+                        </option>
+                        <option value="BD">
+                          Bangladesh
+                        </option>
+                        <option value="BB">
+                          Barbados
+                        </option>
+                        <option value="BY">
+                          Belarus
+                        </option>
+                        <option value="BE">
+                          Belgium
+                        </option>
+                        <option value="BZ">
+                          Belize
+                        </option>
+                        <option value="BJ">
+                          Benin
+                        </option>
+                        <option value="BM">
+                          Bermuda
+                        </option>
+                        <option value="BT">
+                          Bhutan
+                        </option>
+                        <option value="BO">
+                          Bolivia
+                        </option>
+                        <option value="BA">
+                          Bosnia And Herzegovina
+                        </option>
+                        <option value="BW">
+                          Botswana
+                        </option>
+                        <option value="BV">
+                          Bouvet Island
+                        </option>
+                        <option value="BR">
+                          Brazil
+
+                        </option>
+                        <option value="IO">
+                          British Indian Ocean Territory
+                        </option>
+                        <option value="BN">
+                          Brunei
+                        </option>
+                        <option value="BG">
+                          Bulgaria
+                        </option>
+                        <option value="BF">
+                          Burkina Faso
+                        </option>
+                        <option value="MM">
+                          Burma
+                        </option>
+                        <option value="BI">
+                          Burundi
+                        </option>
+                        <option value="KH">
+                          Cambodia
+                        </option>
+                        <option value="CA">
+                          Canada
+                        </option>
+                        <option value="CV">
+                          Cape Verde
+                        </option>
+                        <option value="KY">
+                          Cayman Islands
+                        </option>
+                        <option value="CF">
+                          Central African Republic
+                        </option>
+                        <option value="TD">
+                          Chad
+                        </option>
+                        <option value="CL">
+                          Chile
+                        </option>
+                        <option value="CN">
+                          China
+                        </option>
+                        <option value="CX">
+                          Christmas Island
+                        </option>
+                        <option value="CC">
+                          Cocos (Keeling) Islands
+                        </option>
+                        <option value="CO">
+                          Colombia
+                        </option>
+                        <option value="KM">
+                          Comoros
+                        </option>
+                        <option value="CG">
+                          Congo
+                        </option>
+                        <option value="CD">
+                          Congo, The Democratic Republic Of The
+                        </option>
+                        <option value="CK">
+                          Cook Islands
+                        </option>
+                        <option value="CR">
+                          Costa Rica
+                        </option>
+                        <option value="HR">
+                          Croatia
+                        </option>
+                        <option value="CU">
+                          Cuba
+                        </option>
+                        <option value="CW">
+                          Curaçao
+                        </option>
+                        <option value="CY">
+                          Cyprus
+                        </option>
+                        <option value="CZ">
+                          Czech Republic
+                        </option>
+                        <option value="CI">
+                          Côte d'Ivoire
+                        </option>
+                        <option value="DK">
+                          Denmark
+                        </option>
+                        <option value="DJ">
+                          Djibouti
+                        </option>
+                        <option value="DM">
+                          Dominica
+                        </option>
+                        <option value="DO">
+                          Dominican Republic
+                        </option>
+                        <option value="EC">
+                          Ecuador
+                        </option>
+                        <option value="EG">
+                          Egypt
+                        </option>
+                        <option value="SV">
+                          El Salvador
+                        </option>
+                        <option value="GQ">
+                          Equatorial Guinea
+                        </option>
+                        <option value="ER">
+                          Eritrea
+                        </option>
+                        <option value="EE">
+                          Estonia
+                        </option>
+                        <option value="ET">
+                          Ethiopia
+                        </option>
+                        <option value="FK">
+                          Falkland Islands (Malvinas)
+                        </option>
+                        <option value="FO">
+                          Faroe Islands
+                        </option>
+                        <option value="FJ">
+                          Fiji
+                        </option>
+                        <option value="FI">
+                          Finland
+                        </option>
+                        <option value="FR">
+                          France
+                        </option>
+                        <option value="GF">
+                          French Guiana
+                        </option>
+                        <option value="PF">
+                          French Polynesia
+                        </option>
+                        <option value="TF">
+                          French Southern Territories
+                        </option>
+                        <option value="GA">
+                          Gabon
+                        </option>
+                        <option value="GM">
+                          Gambia
+                        </option>
+                        <option value="GE">
+                          Georgia
+                        </option>
+                        <option value="DE">
+                          Germany
+                        </option>
+                        <option value="GH">
+                          Ghana
+                        </option>
+                        <option value="GI">
+                          Gibraltar
+                        </option>
+                        <option value="GR">
+                          Greece
+                        </option>
+                        <option value="GL">
+                          Greenland
+                        </option>
+                        <option value="GD">
+                          Grenada
+                        </option>
+                        <option value="GP">
+                          Guadeloupe
+                        </option>
+                        <option value="GT">
+                          Guatemala
+                        </option>
+                        <option value="GG">
+                          Guernsey
+                        </option>
+                        <option value="GN">
+                          Guinea
+                        </option>
+                        <option value="GW">
+                          Guinea Bissau
+                        </option>
+                        <option value="GY">
+                          Guyana
+                        </option>
+                        <option value="HT">
+                          Haiti
+                        </option>
+                        <option value="HM">
+                          Heard Island And Mcdonald Islands
+                        </option>
+                        <option value="VA">
+                          Holy See (Vatican City State)
+                        </option>
+                        <option value="HN">
+                          Honduras
+                        </option>
+                        <option value="HK">
+                          Hong Kong
+                        </option>
+                        <option value="HU">
+                          Hungary
+                        </option>
+                        <option value="IS">
+                          Iceland
+                        </option>
+                        <option value="IN">
+                          India
+                        </option>
+                        <option value="ID">
+                          Indonesia
+                        </option>
+                        <option value="IR">
+                          Iran, Islamic Republic Of
+                        </option>
+                        <option value="IQ">
+                          Iraq
+                        </option>
+                        <option value="IE">
+                          Ireland
+                        </option>
+                        <option value="IM">
+                          Isle Of Man
+                        </option>
+                        <option value="IL">
+                          Israel
+                        </option>
+                        <option value="IT">
+                          Italy
+                        </option>
+                        <option value="JM">
+                          Jamaica
+                        </option>
+                        <option value="JP">
+                          Japan
+                        </option>
+                        <option value="JE">
+                          Jersey
+                        </option>
+                        <option value="JO">
+                          Jordan
+                        </option>
+                        <option value="KZ">
+                          Kazakhstan
+                        </option>
+                        <option value="KE">
+                          Kenya
+                        </option>
+                        <option value="KI">
+                          Kiribati
+                        </option>
+                        <option value="KP">
+                          Korea, Democratic People's Republic Of
+                        </option>
+                        <option value="KV">
+                          Kosovo
+                        </option>
+                        <option value="KW">
+                          Kuwait
+                        </option>
+                        <option value="KG">
+                          Kyrgyzstan
+                        </option>
+                        <option value="LA">
+                          Lao People's Democratic Republic
+                        </option>
+                        <option value="LV">
+                          Latvia
+                        </option>
+                        <option value="LB">
+                          Lebanon
+                        </option>
+                        <option value="LS">
+                          Lesotho
+                        </option>
+                        <option value="LR">
+                          Liberia
+                        </option>
+                        <option value="LY">
+                          Libyan Arab Jamahiriya
+                        </option>
+                        <option value="LI">
+                          Liechtenstein
+                        </option>
+                        <option value="LT">
+                          Lithuania
+                        </option>
+                        <option value="LU">
+                          Luxembourg
+                        </option>
+                        <option value="MO">
+                          Macao
+                        </option>
+                        <option value="MK">
+                          Macedonia, Republic Of
+                        </option>
+                        <option value="MG">
+                          Madagascar
+                        </option>
+                        <option value="MW">
+                          Malawi
+                        </option>
+                        <option value="MY">
+                          Malaysia
+                        </option>
+                        <option value="MV">
+                          Maldives
+                        </option>
+                        <option value="ML">
+                          Mali
+                        </option>
+                        <option value="MT">
+                          Malta
+                        </option>
+                        <option value="MQ">
+                          Martinique
+                        </option>
+                        <option value="MR">
+                          Mauritania
+                        </option>
+                        <option value="MU">
+                          Mauritius
+                        </option>
+                        <option value="YT">
+                          Mayotte
+                        </option>
+                        <option value="MX">
+                          Mexico
+                        </option>
+                        <option value="MD">
+                          Moldova, Republic of
+                        </option>
+                        <option value="MC">
+                          Monaco
+                        </option>
+                        <option value="MN">
+                          Mongolia
+                        </option>
+                        <option value="ME">
+                          Montenegro
+                        </option>
+                        <option value="MS">
+                          Montserrat
+                        </option>
+                        <option value="MA">
+                          Morocco
+                        </option>
+                        <option value="MZ">
+                          Mozambique
+                        </option>
+                        <option value="NA">
+                          Namibia
+                        </option>
+                        <option value="NR">
+                          Nauru
+                        </option>
+                        <option value="NP">
+                          Nepal
+                        </option>
+                        <option value="NL">
+                          Netherlands
+                        </option>
+                        <option value="AN">
+                          Netherlands Antilles
+                        </option>
+                        <option value="NC">
+                          New Caledonia
+                        </option>
+                        <option value="NZ">
+                          New Zealand
+                        </option>
+                        <option value="NI">
+                          Nicaragua
+                        </option>
+                        <option value="NE">
+                          Niger
+                        </option>
+                        <option value="NG">
+                          Nigeria
+                        </option>
+                        <option value="NU">
+                          Niue
+                        </option>
+                        <option value="NF">
+                          Norfolk Island
+                        </option>
+                        <option value="NO">
+                          Norway
+                        </option>
+                        <option value="OM">
+                          Oman
+                        </option>
+                        <option value="Pakistan">
+                          Pakistan
+                        </option>
+                        <option value="PS">
+                          Palestinian Territory, Occupied
+                        </option>
+                        <option value="PA">
+                          Panama
+                        </option>
+                        <option value="PG">
+                          Papua New Guinea
+                        </option>
+                        <option value="PY">
+                          Paraguay
+                        </option>
+                        <option value="PE">
+                          Peru
+                        </option>
+                        <option value="PH">
+                          Philippines
+                        </option>
+                        <option value="PN">
+                          Pitcairn
+                        </option>
+                        <option value="PL">
+                          Poland
+                        </option>
+                        <option value="PT">
+                          Portugal
+                        </option>
+                        <option value="QA">
+                          Qatar
+                        </option>
+                        <option value="CM">
+                          Republic of Cameroon
+                        </option>
+                        <option value="RE">
+                          Reunion
+                        </option>
+                        <option value="RO">
+                          Romania
+                        </option>
+                        <option value="RU">
+                          Russia
+                        </option>
+                        <option value="RW">
+                          Rwanda
+                        </option>
+                        <option value="BL">
+                          Saint Barthélemy
+                        </option>
+                        <option value="SH">
+                          Saint Helena
+                        </option>
+                        <option value="KN">
+                          Saint Kitts And Nevis
+                        </option>
+                        <option value="LC">
+                          Saint Lucia
+                        </option>
+                        <option value="MF">
+                          Saint Martin
+                        </option>
+                        <option value="PM">
+                          Saint Pierre And Miquelon
+                        </option>
+                        <option value="WS">
+                          Samoa
+                        </option>
+                        <option value="SM">
+                          San Marino
+                        </option>
+                        <option value="ST">
+                          Sao Tome And Principe
+                        </option>
+                        <option value="SA">
+                          Saudi Arabia
+                        </option>
+                        <option value="SN">
+                          Senegal
+                        </option>
+                        <option value="RS">
+                          Serbia
+                        </option>
+
+                        <option value="SC">
+                          Seychelles
+                        </option>
+                        <option value="SL">
+                          Sierra Leone
+                        </option>
+                        <option value="SG">
+                          Singapore
+                        </option>
+                        <option value="SK">
+                          Slovakia
+                        </option>
+                        <option value="SI">
+                          Slovenia
+                        </option>
+                        <option value="SB">
+                          Solomon Islands
+                        </option>
+                        <option value="SO">
+                          Somalia
+                        </option>
+                        <option value="ZA">
+                          South Africa
+                        </option>
+                        <option value="GS">
+                          South Georgia And The South Sandwich Islands
+                        </option>
+                        <option value="KR">
+                          South Korea
+                        </option>
+                        <option value="ES">
+                          Spain
+                        </option>
+                        <option value="LK">
+                          Sri Lanka
+                        </option>
+                        <option value="VC">
+                          St. Vincent
+                        </option>
+                        <option value="SD">
+                          Sudan
+                        </option>
+                        <option value="SR">
+                          Suriname
+                        </option>
+                        <option value="SJ">
+                          Svalbard And Jan Mayen
+                        </option>
+                        <option value="SZ">
+                          Swaziland
+                        </option>
+                        <option value="SE">
+                          Sweden
+                        </option>
+                        <option value="CH">
+                          Switzerland
+                        </option>
+                        <option value="SY">
+                          Syria
+                        </option>
+                        <option value="TW">
+                          Taiwan
+                        </option>
+                        <option value="TJ">
+                          Tajikistan
+                        </option>
+                        <option value="TZ">
+                          Tanzania, United Republic Of
+                        </option>
+                        <option value="TH">
+                          Thailand
+                        </option>
+                        <option value="TL">
+                          Timor Leste
+                        </option>
+                        <option value="TG">
+                          Togo
+                        </option>
+                        <option value="TK">
+                          Tokelau
+                        </option>
+                        <option value="TO">
+                          Tonga
+                        </option>
+                        <option value="TT">
+                          Trinidad and Tobago
+                        </option>
+                        <option value="TN">
+                          Tunisia
+                        </option>
+                        <option value="TR">
+                          Turkey
+                        </option>
+                        <option value="TM">
+                          Turkmenistan
+                        </option>
+                        <option value="TC">
+                          Turks and Caicos Islands
+                        </option>
+                        <option value="TV">
+                          Tuvalu
+                        </option>
+                        <option value="UG">
+                          Uganda
+                        </option>
+                        <option value="UA">
+                          Ukraine
+                        </option>
+                        <option value="AE">
+                          United Arab Emirates
+                        </option>
+                        <option value="GB">
+                          United Kingdom
+                        </option>
+                        <option value="US">
+                          United States
+                        </option>
+                        <option value="UM">
+                          United States Minor Outlying Islands
+                        </option>
+                        <option value="UY">
+                          Uruguay
+                        </option>
+                        <option value="UZ">
+                          Uzbekistan
+                        </option>
+                        <option value="VU">
+                          Vanuatu
+                        </option>
+                        <option value="VE">
+                          Venezuela
+                        </option>
+                        <option value="VN">
+                          Vietnam
+                        </option>
+                        <option value="VG">
+                          Virgin Islands, British
+                        </option>
+                        <option value="WF">
+                          Wallis And Futuna
+                        </option>
+                        <option value="EH">
+                          Western Sahara
+                        </option>
+                        <option value="YE">
+                          Yemen
+                        </option>
+                        <option value="ZM">
+                          Zambia
+                        </option>
+                        <option value="ZW">
+                          Zimbabwe
+                        </option>
+                      </select>
+                    </p>
+
+                  </div>
+
+                </div>
+              
+              </fieldset>
+
+              <fieldset>
+                <div class="row-fluid">
+                  <h1>
+                        <span>Payment Method</span>
+                    </h1>
+
+                  <div class="span4" style="margin-left: 0;">
+                    <label for="id_country">Payment Method <sup>*</sup></label>
+                    <select class="form-control" required ng-model="PaymentMethod">
+                      <option value="">
+                        Please Select
+                      </option>
+                      <option ng-repeat="payment in ListPaymentMethod" value="{{payment.name}}">{{payment.name}}</option>
+
+                    </select>
+                  </div>
+                  <div class="span8" style="margin-top: 20px;">
+                    <p ng-repeat="paymentArray in ListPaymentMethod" ng-hide="paymentArray.name != PaymentMethod"><span ng-bind-html="paymentArray.payInstruction"></span></p>
+                  </div>
+                </div>
+
+              </fieldset>
+              
+              <p class="submit2">
+                <div id="actionLoader" ng-show="StartSubmitOrder">&nbsp;&nbsp;</div>
+                <input type="submit" name="submitAddress" id="submitAddress" value="Submit Order" class="button">
+              </p>
+            </form>
+
+            <fieldset class="center_column" style="display:none">
+                  <div class="cat_desc" ng-if="ListPaymentGateways.refund_policy" ng-init="isfullConetent = false">
+                      <div class="page-header">
+                        <h1>Refund Policy</h1>
+                     </div>
+                      <div id="shortContentRefund">
+                        <p  ng-bind-html="ListPaymentGateways.refund_policy.slice(0,400)"></p>
+                        <span onClick="$('#shortContentRefund').hide();$('#fullContentRefund').show()" class="lnk_more_cat">More</span>
+                      </div>
+                      <div id="fullContentRefund" style="display:none">
+                        <p ng-bind-html="ListPaymentGateways.refund_policy"></p>
+                        <span class="lnk_more_cat" onClick="$('#shortContentRefund').show();$('#fullContentRefund').hide()">Hide</span>
+                      </div>
+                  </div>
+                  <div class="cat_desc" ng-if="ListPaymentGateways.privacy_policy">
+                      <div class="page-header">
+                         <h1>Privacy Policy</h1>
+                     </div>
+                      <div id="shortContentPrivacy">
+                        <p  ng-bind-html="ListPaymentGateways.privacy_policy.slice(0,400)"></p>
+                        <span onClick="$('#shortContentPrivacy').hide();$('#fullContentPrivacy').show()" class="lnk_more_cat" style="cursor:pointer">More</span>
+                      </div>
+                      <div id="fullContentPrivacy" style="display:none">
+                        <p ng-bind-html="ListPaymentGateways.privacy_policy"></p>
+                        <span class="lnk_more_cat" onClick="$('#shortContentPrivacy').show();$('#fullContentPrivacy').hide()">Hide</span>
+                      </div>
+
+                  </div>
+                  <div class="cat_desc" ng-if="ListPaymentGateways.terms_of_service">
+                      <div class="page-header">
+                          <h1>Terms of Service</h1>
+                     </div>
+                      <div id="shortContentTerms">
+                        <p  ng-bind-html="ListPaymentGateways.terms_of_service.slice(0,400)"></p>
+                        <span onClick="$('#shortContentTerms').hide();$('#fullContentTerms').show()" class="lnk_more_cat" style="cursor:pointer">More</span>
+                      </div>
+                      <div id="fullContentTerms" style="display:none">
+                        <p ng-bind-html="ListPaymentGateways.terms_of_service"></p>
+                        <span class="lnk_more_cat" onClick="$('#shortContentTerms').show();$('#fullContentTerms').hide()">Hide</span>
+                      </div>
+
+                  </div>
+           </fieldset>
+          </div>
+
+          <!-- Right -->
+          <!-- <aside id="right_column" class="span3 column right_home">
+            <section id="manufacturers_block_left" class="block blockmanufacturer column_box" ng-include src="'partials/sidebar.html'">
+            </section>
+          </aside> -->
+        </div>
+      </div>
+    </div>
+  </div>

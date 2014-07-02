@@ -1,0 +1,377 @@
+<!DOCTYPE HTML>
+<html ng-app="aeCommerce" ng-controller="AECtrl">
+<head>
+	<!-- Version: 0.0.1 -->
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="fragment" content="!">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+	<base href="/">
+		<% if (typeof(meta) != "undefined") { %>
+		      <% for (var metaItem in meta) { %>
+		      		<meta name="<%= metaItem %>" content="<%= meta[metaItem] %>" />
+		      <% } %>
+	    <% } %>
+
+	    <% if (typeof(og) != "undefined") { %>
+			  <% for (var ogItem in og) { %>
+				<meta property="<%= ogItem %>" content="<%= og[ogItem] %>" />
+				<% } %>
+        <% } %>
+
+    <meta name="description" content="Shop powered by Route2health"/>
+	<meta name="keywords" content="shop, Route2Health"/>
+   	
+   	<title ng-bind="title"><%= title %></title>
+   	
+   	<%- requireServerVars() %>
+   	
+   	<% include header_resources %>
+	
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	
+	<link href='//fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/normalize.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/bootstrap-responsive.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/font.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/theme.css" rel="stylesheet" type="text/css" media="all" />
+
+	<link href="http://www.professorcloud.com/styles/cloud-zoom.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/320.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/480.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%= BaseUrl %>css/theme/theme-defaults/768.css" rel="stylesheet" type="text/css" media="all" />
+	<script src="<%= BaseUrl %>js/theme-defaults/bootstrap.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/plugins.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/footable.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/jquery.scrollpane.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/jquery.uniform.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/jquery.mousewheel.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/modernizr-2.5.3.min.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/jquery.carouFredSel-6.2.1.js"></script>
+	<script src="<%= BaseUrl %>js/theme-defaults/jquery.touchSwipe.min.js"></script>
+
+	<script type="text/javascript" src="<%= BaseUrl %>js/lib/fancybox/jquery.fancybox.js"></script>
+	<link href="<%= BaseUrl %>js/lib/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all" />
+
+	<!-- JQuery Slider -->
+	<script src="<%= BaseUrl %>js/nivo-slider/jquery.nivo.slider.js"></script>
+	<script src="<%= BaseUrl %>js/nivo-slider/jquery.carouFredSel-6.2.1.js"></script>
+	<link href="<%= BaseUrl %>js/nivo-slider/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
+
+	<script src="<%= BaseUrl %>js/lib/colorbox/jquery.colorbox.js"></script>
+	<link href="<%= BaseUrl %>js/lib/colorbox/colorbox.css" rel="stylesheet" type="text/css" media="all" />
+
+
+
+	<!-- Route2Health files by zaib -->
+	<script src="<%= BaseUrl %>js/frontend.js"></script>
+	<link href="<%= BaseUrl %>css/theme/frontendstyle.css" rel="stylesheet" type="text/css" media="all" />
+
+	<meta property="og:type" content="website" />
+	<link rel="icon" type="image/vnd.microsoft.icon" ng-if="ThemeSettings.theme_settings.favicon" href="{{ThemeSettings.theme_settings.favicon}}"/>	
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=358436447628477";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	
+</head>
+<body id="index">
+		<div id="fb-root"></div>
+ <!-- {{ThemeSettings}} -->
+ <!-- <h1>{{SettingGeneral}}</h1> -->
+<!-- <img src="{{ThemeSettings.theme_settings.logo_img}}">	 -->
+<!-- <div id="Loader">&nbsp;</div> -->
+<div id='loadingbar'></div>
+<div class="loading_container" style="display:none">
+	<div id="wrapp">
+		<div id="wrapp_2">
+			<div class="header_bg">
+
+				<header id="header" class="container ">
+					<div id="header-inner">
+						<a id="header_logo" href="/" title="Route2Health">
+							<!-- <img class="logo" src="/img/theme/logo.png" alt="Route2Health" width="200" /> -->
+							<img ng-if="ThemeSettings.theme_settings.logo_img" class="logo" src="{{ThemeSettings.theme_settings.logo_img}}" alt="Route2Health" width="200" />
+						</a>
+
+						<section id="currencies_block_top" class="header-box header-button hidden-desktop hidden-tablet">
+						    
+						</section>
+
+
+						<section id="languages_block_top" class="header-box header-button hidden-desktop hidden-tablet">
+						</section>
+
+
+						<!-- MODULE Block cart -->
+						<section id="cart_block" class="block column_box exclusive" style="display:block" ng-if="cartHandler">
+							<h4>
+								<span>Cart</span>
+								<span class="column_icon_toggle"></span>
+							</h4>
+							<div class="block_content toggle_content">
+
+								<!-- block summary -->
+								<div id="cart_block_summary" class="collapsed">
+									<span class="ajax_cart_quantity">{{ReturnItems()}}</span>
+									<span class="ajax_cart_product_txt_s" ng-if="ReturnItems() > 1">Products</span>
+									<span class="ajax_cart_product_txt" ng-if="ReturnItems() <= 1">Product</span>
+									<span class="ajax_cart_total">{{SettingGeneral.settings.currencies_format}}&nbsp;{{ReturnTotal()}}</span>
+									<span class="ajax_cart_no_product" ng-hide="IfCart()">(empty)</span>
+								</div>
+
+								<div id="cart_block_list" class="expanded" style="display:block">
+									<dl class="products clearfix" ng-repeat="(keyMain,Items) in Cart track by $index">
+										<dt id="cart_block_product_1_0_0" class="clearfix first_item" ng-show="Items.productID">
+											<a class="cart-images" href="/product/{{Items.productInfo.productUrl}}">
+												<img ng-if="Items.productInfo.productImage[0].Image" src="{{Items.productInfo.productImage[0].Image}}" alt="" title="{{Items.productInfo.productName}}">
+												<img ng-if="Items.productInfo.productImage[0].Image == undefined" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{Items.productInfo.productName}}">
+											</a>
+											<span class="quantity-formated">
+												<span class="quantity" style="opacity: 1;">{{Items.quantity}}</span>x
+											</span>
+											<a class="cart_block_product_name product_link" href="/product/{{Items.productInfo.productUrl}}" title="Items.productInfo.productName">{{Items.productInfo.productName.slice(0,10)}}<span ng-if="products.productName.length > 10">....</span></a>
+											
+											<span class="remove_link">
+												<a class="ajax_cart_block_remove_link" rel="nofollow" href="javascript:void(0)" ng-click="RemoveCartItem(Items.productID,false)"></a>
+											</span>
+											<span class="price">
+											{{Items.productInfo.productPrice * Items.quantity | currency:SettingGeneral.settings.currencies_format+' '}}
+											</span>
+										</dt>
+
+										<dt ng-hide="Items.productID" id="cart_block_product_1_0_0" class="clearfix first_item" ng-repeat="(key,itm) in Items track by $index">
+											<a class="cart-images" href="/product/{{itm.productInfo.productUrl}}">
+												<img ng-if="itm.productInfo.productImage[0].Image" src="{{itm.productInfo.productImage[0].Image}}" alt="" title="{{itm.productInfo.productName}}">
+												<img ng-if="itm.productInfo.productImage[0].Image == undefined" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{itm.productInfo.productName}}">
+											</a>
+											<span class="quantity-formated">
+												<span class="quantity" style="opacity: 1;">{{itm.quantity}}</span>x
+											</span>
+											<a class="cart_block_product_name product_link" href="/product/{{itm.productInfo.productUrl}}" title="itm.productInfo.productName">{{itm.productInfo.productName.slice(0,10)}}<span ng-if="products.productName.length > 10">....</span> <span ng-if="key" class="attributesName">- ( {{key}} )</span></a>
+											
+											<span class="remove_link">
+												<a class="ajax_cart_block_remove_link" rel="nofollow" href="javascript:void(0)" ng-click="RemoveCartItem(itm.productID,key)"></a>
+											</span>
+											<span class="price">
+											{{itm.productInfo.newPrice * Itm.quantity | currency:SettingGeneral.settings.currencies_format+' '}}	
+											</span>
+										</dt>
+
+									</dl>
+									<div class="cart-prices" ng-if="ReturnItems() > 0 ">
+										<div class="cart-prices-block">
+											<span id="cart_block_total" class="price
+											 ajax_block_cart_total" ng-if="ReturnItems()">{{ReturnTotal() | currency:SettingGeneral.settings.currencies_format+' '}}</span>
+											<span>Total</span>
+										</div>
+									</div>
+									<p id="cart-buttons" class="" ng-if="ReturnItems() > 0">
+										<!-- <a href="/cart" class="button_mini" title="View my shopping cart" rel="nofollow">Cart</a> -->
+										<a href="/cart" id="button_order_cart" class="exclusive" title="Checkout" rel="nofollow">cart</a>
+									</p>
+								</div>
+								<p class="no_products" id="cart_block_no_products" ng-if="ReturnItems() <=0 ">No products</p>
+								<!-- <h1>{{ifCart()}}</h1> -->
+							</div>
+						</section>
+						<!-- /MODULE Block cart -->
+
+					
+						<section class="customerInfo hidden-phone">
+							<div ng-if="User.info.CustomerEmail"> Welcome <strong class="customerName">{{User.info.CustomerFirstName}}</strong></div>
+							<div ng-if="User.info.CustomerEmail"> <a class="btn btn-info loginBtn createNewBtn logoutBtn"  style="font-size: 14px !important;line-height: 7px;" href="javascript:void(0)" ng-click="Logout()"> Logout </a></div>
+
+							<div ng-if="!User.info.CustomerEmail">
+								<!-- <a class="btn btn-info loginBtn" href="/login">Login</a> -->
+								<a class="btn btn-info loginBtn button_small" href="/login">SIGN IN </a>
+								Don't have an account? <a class="btn btn-info loginBtn createNewBtn" href="/signup">CREATE ONE</a>
+							</div>
+							<!-- <div ng-if="!User.info.CustomerEmail"> <a class="btn btn-info" href="./signup"> Sign Up </a></div> -->
+						</section>
+
+						<!-- block seach mobile -->
+						<!-- Block search module TOP -->
+						<section id="search_block_top" class="header-box">
+							<label for="search_query_top">Search</label>
+							<input placeholder="Search" ng-model="SearchTitleSearch" class="search_query" type="text" id="search_query_top" ng-enter />
+							<a href="/search" id="searchPageLink" style="padding:10px;">Search</a>
+						</section>
+						
+						<!-- /Block search module TOP -->
+
+						<!-- Block user information module HEADER -->
+						<section ng-controller="GlobalCtrl">
+							<section id="header_user" class="blockuserinfo-cart header-box" ng-class="{closeCart: cartHandler == true}">
+								<div id="shopping_cart" ng-controller="GlobalCtrl">
+									<a href="javascript:void(0)"  rel="nofollow" ng-click="isCartOpen()">
+										<strong class="opancart"></strong>
+										<span class="shopping_cart_title">Cart</span>
+										<span class="ajax_cart_quantity" >{{ReturnItems()}}</span>
+									</a>
+								</div>
+							</section>
+						</section>
+						<section class="blockuserinfo header-box hidden-desktop hidden-tablet">
+							<a ng-if="!User.info.CustomerEmail" href="/login" title="Login" class="login">
+								<span>
+									<!-- <i class="icon-lock"></i> -->
+									Login
+								</span>
+							</a>
+							<a ng-if="User.info.CustomerEmail" href="javascript:void(0)" ng-click="Logout()" title="Logout" class="login" rel="tooltip" data-placement="bottom" data-original-title="first tooltip">
+								<span>
+									<!-- <i class="icon-unlock"></i> -->
+									Logout
+								</span>
+							</a>
+						</section>
+
+						<!-- Block permanent links module HEADER -->
+						<section class="header-box blockpermanentlinks-header">
+							
+
+							<ul id="header_links" ng-repeat="Navigation in ListNavigation | filter : 'header-pages'">
+								<li ng-repeat="Nav in Navigation.link_list" ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}"><a ng-href="{{Nav.commaSeprated}}">{{Nav.name}}</a>
+								</li>
+							</ul>
+
+							
+
+							<div class="mobile-link-top header-button" ng-controller="GlobalCtrl">
+								<h4 ng-click="openMenu" ng-init="enableDropdown = true">
+									<span class="title-hed" ng-click="openMenu()"></span>
+									<span class="arrow_header_top_menu arrow_header_top" ng-click="openMenu()"></span>
+								</h4>
+								<ul id="mobilelink" class="list_header" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
+									
+									<li ng-repeat="Nav in Navigation.link_list"  ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
+									<a href="{{Nav.commaSeprated}}">{{Nav.name}}</a>
+									</li>
+									
+									<!-- <li><ahref="/" class="header_links_home">Home</a>
+									</li>
+									<li id="header_link_contact"><a href="javascript:void(0)"  title="contact">Contact</a>
+									</li>
+									<li id="header_link_sitemap"><a href="/page/about" title="sitemap">About Us</a>
+									</li> -->
+								</ul>
+							</div>
+						</section>
+						<!-- /Block permanent links module HEADER -->
+
+
+						<div class="clearfix"></div>
+						<div id="menu-wrap" class="clearfix">
+							<div id="menu-trigger">Categories
+								<span class="menu-icon"></span>
+							</div>
+							<ul id="menu-custom" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
+								<li ng-repeat="Nav in Navigation.link_list"  ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
+									<a href="/{{Nav.commaSeprated}}">{{Nav.name}}</a>
+								</li>
+
+								<li ng-if="Navigation.link_list">
+									<a href="javascript:void(0)">More</a>	
+									<ul id="menu-custom" ng-repeat="Navigation in ListNavigation | filter : 'more'">
+										<li ng-repeat="Nav in Navigation.link_list"  ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
+											<a href="/{{Nav.commaSeprated}}">{{Nav.name}}</a>
+										</li>
+									</ul>
+								</li>
+							
+							</ul>
+
+							
+
+						</div>
+						<!-- Minic Slider -->
+						<div ng-if="$location.path() == '/' && ThemeSettings.theme_settings.slide_1_img">
+							<div id="minic_slider" class="theme-default"  class="hidden-phone">
+								<div id="slider" class="nivoSlider">
+									<a href="{{ThemeSettings.theme_settings.slide_1_link}}">
+										<img ng-if="ThemeSettings.theme_settings.slide_1_img && ThemeSettings.theme_settings.slide_1_show == true" ng-src="{{ThemeSettings.theme_settings.slide_1_img}}" class="slider_image">
+									</a>
+									<a href="{{ThemeSettings.theme_settings.slide_2_link}}">
+										<img ng-if="ThemeSettings.theme_settings.slide_2_img && ThemeSettings.theme_settings.slide_2_show == true" ng-src="{{ThemeSettings.theme_settings.slide_2_img}}" class="slider_image">
+									</a>
+									<a ng-if="ThemeSettings.theme_settings.slide_3_img && ThemeSettings.theme_settings.slide_3_show == true" href="{{ThemeSettings.theme_settings.slide_3_link}}">
+										<img ng-src="{{ThemeSettings.theme_settings.slide_3_img}}" class="slider_image">
+									</a>
+									<a ng-if="ThemeSettings.theme_settings.slide_4_img && ThemeSettings.theme_settings.slide_4_show == true" href="{{ThemeSettings.theme_settings.slide_4_link}}">
+										<img ng-src="{{ThemeSettings.theme_settings.slide_4_img}}" class="slider_image">
+									</a>
+								</div>
+							</div>
+							<div ng-if="ThemeSettings.theme_settings.slide_1_img">
+								<script type="text/javascript">
+									$(function(){
+							            // $('#slider').nivoSlider({animSpeed: 2000,});
+										$('#slider').nivoSlider({
+								                effect: 'random', 
+								                slices: 15, 
+								                boxCols: 8, 
+								                boxRows: 4, 
+								                animSpeed: 500, 
+								                pauseTime: 7000, 
+								                startSlide: 0,
+								                directionNav: false, 
+								                controlNav: true, 
+								                controlNavThumbs: false,
+								                pauseOnHover: true, 
+								                manualAdvance: false, 
+								                prevText: 'Prev', 
+								                nextText: 'Next', 
+								                randomStart: false            
+								           });
+										});
+								</script>
+					        </div>
+
+						<div id="customcontent_top2" ng-if="ThemeSettings.theme_settings.promotion_1_img && ThemeSettings.theme_settings.promotion_1_show == true">
+								<ul class="customcontent-home">
+									<li class="num-1">
+										<a href="{{ThemeSettings.theme_settings.promotion_1_link}}">
+											<img ng-src="{{ThemeSettings.theme_settings.promotion_1_img}}" class="slider_image">
+										</a>
+									</li>
+								</ul>
+								<div class="clearfix"></div>
+						</div>
+							<div class="clearfix"></div>
+
+							<div id="customcontent_top">
+								<ul class="customcontent-top">
+									<li ng-repeat="products in ListProduct | CustomFilter:{collection:'frontpage'} | limitTo:3" class="num-{{$index+1}}">
+										<a href="/product/{{products.productUrl}}">
+											<img ng-src="{{products.productImage[0].Image}}" alt="{{products.productName}}">
+										</a>
+										<a class="abs" href="/product/{{products.productUrl}}">
+											<div class="title">{{products.productName.slice(0,20)}}<span ng-if="products.productName.length > 20">....</span></div>
+											<!-- <p>{{products.productDescription.slice(0,65)}}</p> -->
+											<div class="title2">
+												<p ng-bind-html="products.productDescription.slice(0,120)"></p>
+											</div>
+											<div class="title3">
+												{{products.productPrice | currency:SettingGeneral.settings.currencies_format+' '}}<i class="icon-circle-arrow-right"></i>
+												<!-- {{SettingGeneral.settings.currencies_format}}&nbsp;{{products.productPrice | nfcurrency: SettingGeneral.settings.currencies_format}}<i class="icon-circle-arrow-right"></i> -->
+											</div>
+										</a>
+									</li>
+									<div class="clearfix"></div>
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+
+						</div>
+					</div>
+				</header>
+
+			</div>
+
