@@ -15,7 +15,59 @@ var formidable = require('formidable');
 
 var app = express();
 app.configure(function () {
+  //console.log(process.env.PORT);
   app.use(express.bodyParser({limit: '10mb'}));
+  app.set('port', process.env.PORT || 3000);
+  app.use(express.compress());
+  app.use(function(req, res, next) {
+		  req.setMaxListeners(0);
+		  var url = req.protocol + '://' + req.get('host') + req.originalUrl;
+		  var BaseUrl = req.get('host').split('.');
+		        	  app.locals.domainUrl = req.get('host');
+					  if(BaseUrl[0] == 'fishry'){
+						BaseUrl[0] = 'demo';
+					  }
+					  if(req.get('host') == 'fishry.com'){
+						app.locals.store = '12345';						
+						app.locals.ThemeFolder = 'public/frontend/';
+						app.locals.ThemeFolderPath =  'public/frontend/';
+						app.locals.ThemeFolderPathBase =   'frontend/';
+						app.locals.ThemeFolderPathBaseAdmin =  'public/frontend/';
+						app.locals.EjsFilePath =  'home/views/';
+					  }else{
+						app.locals.store = '12345';
+						app.locals.ThemeFolder = 'public/themes/'+BaseUrl[0]+'/';
+						app.locals.ThemeFolderPath =  'public/themes/'+BaseUrl[0]+'/active/views/';
+						app.locals.ThemeFolderPathBase =  '/themes/'+BaseUrl[0]+'/active/base/';	
+						app.locals.ThemeFolderPathBaseAdmin =  '/themes/'+BaseUrl[0]+'/active/base/partials/';	
+						app.locals.EjsFilePath = 'themes/'+BaseUrl[0]+'/active/views/';
+						app.locals.storeName = BaseUrl[0];
+						
+					  }
+					  if(url.indexOf('admin') < 0 ){
+						app.set('views', path.join(__dirname, 'public'));
+						app.use(express.static(path.join(__dirname, 'public')));
+						app.set('view engine', 'ejs');
+						app.use(express.favicon());
+						app.use(express.logger('dev'));
+						app.use(express.json());
+						app.use(express.urlencoded());
+						app.use(express.methodOverride());
+						app.use(app.router);
+					  }else{
+						app.set('views', path.join(__dirname, 'views'));
+						app.use(express.static(path.join(__dirname, 'public')));
+						app.set('view engine', 'ejs');
+						app.use(express.favicon());
+						app.use(express.logger('dev'));
+						app.use(express.json());
+						app.use(express.urlencoded());
+						app.use(express.methodOverride());
+						app.use(app.router);
+					  }
+		  next()
+})
+
 });
 
 
@@ -36,10 +88,7 @@ app.use(express.static(path.join(__dirname, 'public/theme/base')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-app.all('*', function(req, res, next) {
-	app.locals.store = '12345';
-  next()
-})
+
 app.get('/', routes.index);
 app.get('/product', routes.product);
 app.get('/product/:id', routes.product_any);
@@ -64,5 +113,3 @@ http.createServer(app).listen(app.get('port'), function(){
 
 
 
-
-//console.log(azure);

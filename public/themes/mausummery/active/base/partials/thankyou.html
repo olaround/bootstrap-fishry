@@ -1,0 +1,30 @@
+<div id="page">
+
+    <!-- BREADCRUMBS -->
+    <section class="breadcrumb parallax margbot30" style="background: url({{ThemeSettings.theme_settings.slide_collection_2_img}}) no-repeat;background-size:cover;"></section>
+    <!-- //BREADCRUMBS -->
+
+
+    <!-- PAGE HEADER -->
+    <section class="page_header">
+
+        <!-- CONTAINER -->
+        <div class="container border0 margbot0">
+            <div class="row">
+                <div class="col-md-12 column" style="margin-bottom: 30px;">
+                    <h1 style="font-weight: bold;text-transform: none;margin: 2px 0px 20px;">Thank you for your Order!</h1>
+                    <h2 style="font-weight: bold;font-size: 16px;text-transform: none;margin: 0px 0px -6px;">Order received on {{dt|date:'medium'}} with Order ID: {{SettingGeneral.settings.order_number_format}}{{OrderInfo.orderid}}.Your order will be processed shortly.</h2>
+                    <h3 style="font-weight:bold;font-size:20px;">
+                    <a href="/" style="font-weight: bold;font-size: 16px;text-decoration: underline;text-transform:none;">Return To Home Page</a>
+                        
+                    </h3>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- //CONTAINER -->
+    </section>
+</div>
+<script type="text/javascript">
+     jQuery('.shopping_bag .cart').hide();
+</script>

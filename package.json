@@ -9,6 +9,7 @@
     "express": "3.4.6",
     "ejs": "*",
 	"azure": "0.7.x",
-	"formidable": ""	
+	"formidable": "",
+	"request":"*"	
   }
 }
