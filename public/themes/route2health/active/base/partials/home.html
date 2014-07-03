@@ -12,7 +12,7 @@
 								</a>
 							</h4>
 							<ul class="row">
-								<li class="ajax_block_product span3" ng-repeat="products in ListProduct | limitTo:ThemeSettings.theme_settings.featuredproductLimit | CustomFilter:{collection:ThemeSettings.theme_settings.featuredproduct}" ng-class="{clearBoth: ($index + 1)%4 == 0}">
+								<li class="ajax_block_product span3" ng-repeat="products in ListProduct  | CustomFilter:{collection:ThemeSettings.theme_settings.featuredproduct} | limitTo:ThemeSettings.theme_settings.featuredproductLimit" ng-class="{clearBoth: ($index + 1)%4 == 0}">
 									<div class="featured_li" ng-controller="GlobalCtrl">
 										<!-- <div class="imageContainer"> -->
 											<a class="product_image" href="/product/{{products.productUrl}}" tooltip-placement="bottom" tooltip="{{products.productName}}">
@@ -38,7 +38,7 @@
 													<a ng-if="products.productPrice" class="exclusive ajax_add_to_cart_button btn_add_cart" href="javascript:void(0)" id="{{products.id}}" ng-click="addToCartEffect();addToCart(products.id,products);">
 														<span>Add to cart</span>
 													</a>
-													<a class="button" href="/product/{{products.productUrl}}">View</a>
+													<!--<a class="button" href="/product/{{products.productUrl}}">View</a>-->
 												<!-- </div> -->
 											</div>
 

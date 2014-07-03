@@ -220,10 +220,7 @@
 						</section>
 						<section class="blockuserinfo header-box hidden-desktop hidden-tablet">
 							<a ng-if="!User.info.CustomerEmail" href="/login" title="Login" class="login">
-								<span>
-									<!-- <i class="icon-lock"></i> -->
-									Login
-								</span>
+								<span>Login</span>
 							</a>
 							<a ng-if="User.info.CustomerEmail" href="javascript:void(0)" ng-click="Logout()" title="Logout" class="login" rel="tooltip" data-placement="bottom" data-original-title="first tooltip">
 								<span>
@@ -244,10 +241,10 @@
 
 							
 
-							<div class="mobile-link-top header-button" ng-controller="GlobalCtrl">
-								<h4 ng-click="openMenu" ng-init="enableDropdown = true">
-									<span class="title-hed" ng-click="openMenu()"></span>
-									<span class="arrow_header_top_menu arrow_header_top" ng-click="openMenu()"></span>
+							<div class="mobile-link-top header-button" ng-controller="GlobalCtrl" ng-init="enableDropdown = true">
+								<h4 ng-click="openMenu()">
+									<span class="title-hed"></span>
+									<span class="arrow_header_top_menu arrow_header_top"></span>
 								</h4>
 								<ul id="mobilelink" class="list_header" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
 									

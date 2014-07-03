@@ -116,12 +116,15 @@
 		/* ************************************************************************************************
 				BLOCK HEADER USER INFO LOGIN/LOGOUT
 		************************************************************************************************ */
-		.blockuserinfo { position:absolute;top:0px; right:0px; text-align:center; width:25%; height:45px;background:#000; padding-top:1px; padding-left:0; border-left:0;}
+		.blockuserinfo { position:absolute;top:0px; right:0px; text-align:center; width:25%; height:45px;background:#000; padding-top:1px; padding-left:0; border-left:1px solid #444;}
 		.blockuserinfo a{display:block; padding:10px 0 5px 0; }
 		.blockuserinfo:hover{background:#333;}
 		#authentication .blockuserinfo{background:#333;}
-		.blockuserinfo a.login span { color:#fff;}
-		.blockuserinfo a.logout span {color:#fff;}
+		.blockuserinfo a.login {}
+		.blockuserinfo a.login span { color:#fff; font-weight: bold; display: inline-block;
+margin-top: 2px;}
+		.blockuserinfo a.logout span {color:#fff; font-weight: bold; display: inline-block;
+margin-top: 2px;}
 		.blockuserinfo:hover a.login span,
 		#authentication .blockuserinfo a.login span{ }
 		.blockuserinfo:hover a.logout span,
@@ -232,11 +235,11 @@
 		#product_list li .center_block h3,.grid li h3 {margin:-3px 0 0px 0;}
 		#product_list li .center_block{ width:64%;padding:0 0 14px 0px; float:right;}
 		#product_list li .right_block{width:64%;border-width:0px;padding:0px 0px 0px 0px; float:right; height: auto;}
-		#product_list li .right_block span.price {margin:0px 0px 0 0; font-size:19px; padding-bottom:0; line-height:23px;}
+		#product_list li .right_block span.price {margin:0px 0px 0 0; font-size:19px; padding-bottom:0; line-height:23px; display:inline-block;}
 		#product_list .right_block span.discount {float: right;margin:0px 0 0px 0px;}
 		#product_list .right_block span.on_sale{ float:right;margin:-11px 0 0 0; width:auto; height:31px;}
 		#product_list li .right_block .button {}
-		#product_list li .right_block .exclusive{margin:20px 10px 0 0px;}
+		#product_list li .right_block .exclusive{margin:-3px 10px 0px 10px !important;}
 		.title_shop { font-size:12px;}
 		#product_list .product_flags span {margin: 0 13px 0 0;}
 		.grid li.num-1, .grid li.num-2, .grid li.num-3 {border-top: 1px dotted #B2B2B2;}

@@ -1210,7 +1210,7 @@ ul.footer_links li a i {
 }
 .blockuserinfo a span {
 	display:inline-block;
-	width:23px;
+	width:32px;
 	height:24px
 }
 .blockuserinfo a span i {
@@ -6306,7 +6306,7 @@ div.uploader input {
 }
 #customcontent_top ul .abs {
 	position:absolute;
-	right:0px;
+	right:10px;
 	top:26px;
 	width:210px
 }
@@ -7594,7 +7594,7 @@ div.uploader input {
 	color:#7f7f7f;
 	text-transform:uppercase;
 	font-family:'Fjalla One', sans-serif;
-	margin-bottom:10px
+	margin-bottom:10px;
 }
 .addhomefeatured ul li span.price {
 	display:inline-block;
@@ -7657,7 +7657,7 @@ div.uploader input {
 		float:left;
 		margin:0 0 20px 0;
 		border:1px solid #cccccc;
-		padding:16px 20px 20px 20px
+		padding:16px 10px 20px 0px
 	}
 	.addhomefeatured ul li:first-child {
 	}
@@ -7696,7 +7696,7 @@ div.uploader input {
 	.addhomefeatured ul li span.price {
 		padding:12px 0 4px 0;
 		font-size:24px;
-		display:block
+		display:inline-block
 	}
 	.addhomefeatured ul li img {
 		width:118px;
@@ -7711,8 +7711,11 @@ div.uploader input {
 	}
 	.addhomefeatured ul li .exclusive, .addhomefeatured ul li a.exclusive {
 		display:inline-block;
-		margin:20px 16px 0 0;
-		float:none
+		margin:-10px 0px 0 10px;
+		float:none;
+	}
+	.sidepanel label:hover {
+		cursor:pointer;
 	}
 	.addhomefeatured ul li p.product_desc {
 		display:block;

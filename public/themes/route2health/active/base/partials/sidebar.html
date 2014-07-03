@@ -8,7 +8,7 @@
         </h4>
         <div class="block_content toggle_content">
             <ul>
-                <li class="shop_box  clearfix" ng-repeat="products in ListProduct | limitTo:3 |CustomFilter:{collection: ThemeSettings.theme_settings.sidebarCollection}">
+                <li class="shop_box  clearfix" ng-repeat="products in ListProduct |CustomFilter:{collection: ThemeSettings.theme_settings.sidebarCollection} | limitTo:3">
                     <a class="products_block_img" href="./product/{{products.productUrl}}">
                         <img ng-src="{{products.productImage[0].Image}}" alt="{{products.productName}}" title="{{products.productName}}">
                     </a>

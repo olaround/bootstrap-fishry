@@ -33,7 +33,7 @@ function GlobalCtrl($scope, $location, $rootScope) {
         	$('#mobilelink').slideDown(500,'linear');
         	$rootScope.enableDropdown = true;
     	}else if($rootScope.enableDropdown == true) {
-        	$('#mobilelink').slideUp(500,'linear');
+        	$('#mobilelink').slideUp(300,'linear');
         	$rootScope.enableDropdown = false; 	
     	}
     }
