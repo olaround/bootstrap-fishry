@@ -63,16 +63,16 @@
                                 <div class="clear"></div>
                                 <h3><a class="product_link" href="/product/{{products.productUrl}}" title="{{products.productName}}">{{products.productName.slice(0,30)}}<span ng-if="products.productName.length > 30">....</span></a>
                                 </h3>
-                                <!--<p class="product_desc" ng-bind-html="products.productDescription.slice(0,250) + '.....'"></p>-->
-                                <p class="product_desc mob" ng-bind-html="products.productDescription.slice(0,180)"></p>
-                                <p class="product_desc mob2" ng-bind-html="products.productDescription.slice(0,180)"></p>
+                                <!-- <p class="product_desc1" ng-bind-html="products.productDescription.slice(0,150) + '.....'"></p> -->
+                                <!-- <p class="product_desc hidden-tablet hidden-desktop" ng-bind-html="products.productDescription.slice(0,80)"></p> -->
+                                <!-- <p class="product_desc" ng-bind-html="products.productDescription.slice(0,180)"></p> -->
                             </div>
                             <div class="right_block" ng-controller="GlobalCtrl">
                                 <span class="price" ng-if="products.productPrice">{{products.productPrice | currency:SettingGeneral.settings.currencies_format+' '}}</span>
                                 <a ng-if="products.productPrice" class="ajax_add_to_cart_button exclusive btn_add_cart" rel="ajax_id_product_1" href="javascript:void(0)" ng-click="addToCartEffect();addToCart(products.id,products)" title="Add to cart" style="margin: 0 10px 0px 0">
                                     <span>Add to cart</span>
                                 </a>
-                                <a class="button hidden-phone hidden-tablet" href="/product/{{products.productUrl}}" title="View">View</a>
+                                <a class="button" href="/product/{{products.productUrl}}" title="View">View</a>
                             </div>
                             <div class="clearBoth"></div>
                         </li>
