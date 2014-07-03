@@ -353,7 +353,7 @@
 											<div class="title">{{products.productName.slice(0,20)}}<span ng-if="products.productName.length > 20">....</span></div>
 											<!-- <p>{{products.productDescription.slice(0,65)}}</p> -->
 											<div class="title2">
-												<p ng-bind-html="products.productDescription.slice(0,120)"></p>
+												<p ng-bind-html="products.productDescription.slice(0,80)+ '...'"></p>
 											</div>
 											<div class="title3">
 												{{products.productPrice | currency:SettingGeneral.settings.currencies_format+' '}}<i class="icon-circle-arrow-right"></i>

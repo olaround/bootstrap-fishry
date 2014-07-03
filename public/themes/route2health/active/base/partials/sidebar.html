@@ -16,7 +16,7 @@
                         <h5 style="margin-top: 3px;">
                             <a class="product_link" href="./product/{{products.productUrl}}" title="{{products.productName}}">{{products.productName.slice(0,20)}}</a>
                         </h5>
-                        <p class="product_desc" ng-bind-html="products.productDescription.slice(0,100)"></p>
+                        <p class="product_desc" ng-bind-html="products.productDescription.slice(0,50)+ '...'"></p>
                     </div>
                 </li>
             </ul>

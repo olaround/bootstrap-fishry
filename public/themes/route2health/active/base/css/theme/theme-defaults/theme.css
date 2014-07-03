@@ -2109,7 +2109,7 @@ a.tag_level1 {
 	text-transform:uppercase
 }
 .page_product_box.blockproductscategory h3 {
-	margin-top:17px
+	margin-top:5px
 }
 .page_product_box.accordion h3.active {
 	background:#000
@@ -2692,7 +2692,8 @@ form#account-creation_form textarea {
 	display: inline-block;
 }
 .ajax_block_product .linksContainer {
-	text-align: 
+	text-align: left;
+	margin-top: 10px;
 }
 .shop_table td.comparison_feature_even.comparison_infos, .shop_table td.comparison_feature_odd.comparison_infos {
 	text-align:center
@@ -7585,7 +7586,7 @@ div.uploader input {
 	overflow:hidden
 }
 .addhomefeatured ul li h5.productTitle {
-	padding:18px 0 4px 0;
+	padding:5px 0 4px 0;
 	min-height:16px
 }
 .addhomefeatured ul li p.product_desc {
@@ -7707,11 +7708,11 @@ div.uploader input {
 	}
 	.addhomefeatured ul li .button {
 		display:inline-block;
-		margin:20px 0 0 0
+		margin:0px 0 0 0
 	}
 	.addhomefeatured ul li .exclusive, .addhomefeatured ul li a.exclusive {
 		display:inline-block;
-		margin:-10px 0px 0 10px;
+		margin:0px 10px 0 0px;
 		float:none;
 	}
 	.sidepanel label:hover {
