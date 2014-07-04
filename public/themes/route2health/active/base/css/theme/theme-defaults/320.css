@@ -271,8 +271,8 @@ margin-top: 2px;}
 		#thumbs_list {width: 300px;}
 		#thumbs_list li a {width: 92px;}
 		#thumbs_list li:first-child a {width: 91px;}
-		#views_block {height: 144px; width:320px; margin:0 auto}
-		#primary_block #image-block{width:300px; margin:0 auto}
+		#views_block {height: 144px; /*width:320px;*/ margin:0 auto}
+		#primary_block #image-block{/*width:300px;*/ margin:0 auto}
 		#usefull_link_block{ margin-top:18px;}
 		#usefull_link_block {border-bottom: 1px dotted #DADAD9; padding-bottom:2px; margin-top:10px;}
 		.crossselling.page_product_box h3, .tab-video.page_product_box h3 {margin-top:20px;}
