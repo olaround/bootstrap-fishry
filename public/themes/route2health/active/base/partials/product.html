@@ -41,7 +41,7 @@
                                         </span>
                                     </div>
                                     <!-- thumbnails -->
-                                    <div id="views_block" ng-if="product.productImage[0].Image">
+                                    <div id="views_block" ng-if="product.productImage[1].Image">
                                         <div id="thumbs_list">
                                             <ul id="thumbs_list_frame" style="width: 380px;">
 
@@ -87,19 +87,18 @@
                                     <div id="image-block">
                                         <span id="view_full_size_mobile">
                                             <div id="wrap" style="top:0px;z-index:auto;position:relative; text-align:center;">
-                                                <a href="javascript:void(0)">
-                                                    <img ng-if="!product.productImage[0].Image" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{product.productInfo.productName}}">
+                                                <img ng-if="!product.productImage[0].Image" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{product.productInfo.productName}}">
 
-                                                    <img ng-if="product.productImage[0].Image" id="bigpic-5" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[0].Image}}">
+                                                <img ng-if="product.productImage[0].Image" id="bigpic-5" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[0].Image}}">
 
-                                                    <img ng-if="product.productImage[1].Image" id="bigpic-6" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[1].Image}}" style="display:none">
+                                                <img ng-if="product.productImage[1].Image" id="bigpic-6" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[1].Image}}" style="display:none">
 
-                                                    <img ng-if="product.productImage[2].Image" id="bigpic-7" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[2].Image}}" style="display:none">
+                                                <img ng-if="product.productImage[2].Image" id="bigpic-7" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[2].Image}}" style="display:none">
 
-                                                    <img ng-if="product.productImage[3].Image" id="bigpic-8" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[3].Image}}" style="display:none">
+                                                <img ng-if="product.productImage[3].Image" id="bigpic-8" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[3].Image}}" style="display:none">
 
-                                                    <img ng-if="product.productImage[4].Image" id="bigpic-9" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[4].Image}}" style="display:none">
-                                                </a>
+                                                <img ng-if="product.productImage[4].Image" id="bigpic-9" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[4].Image}}" style="display:none">
+                                               
                                             </div>
                                         </span>
                                     </div>
@@ -194,7 +193,7 @@
                                     });
                                     </script>
                                     
-                                    <li class="print"><a href="javascript:print();"><i class="icon-print"></i>Print</a>
+                                    <li class="print hidden-phone hidden-tablet"><a href="javascript:print();"><i class="icon-print"></i>Print</a>
                                     </li>
                                 </ul>
 
@@ -244,11 +243,11 @@
                                         <p id="old_price" style="float: left;">
                                             <span class="price">
                                                 <span id="old_price_display price" ng-if="product.productPriceCompare">
-                                                    <strike>{{product.productPriceCompare | currency:SettingGeneral.settings.currencies_format+' '}}</strike>
+                                                    <strike>{{product.productPriceCompare | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</strike>
                                                 </span>
 
-                                                <span id="old_price_display price" ng-if="product.productMultiOptions">{{returnPrice(product) | currency:SettingGeneral.settings.currencies_format+' '}}</span>
-                                                <span id="old_price_display price" ng-if="!product.productMultiOptions">{{product.productPrice | currency:SettingGeneral.settings.currencies_format+' '}}</span>
+                                                <span id="old_price_display price" ng-if="product.productMultiOptions">{{returnPrice(product) | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</span>
+                                                <span id="old_price_display price" ng-if="!product.productMultiOptions">{{product.productPrice | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</span>
                                             </span>
                                         </p>
                                         <form name="addtoCart" ng-submit="addToCart(product.id,product);addToCartEffect();" style="margin:0;">
@@ -270,9 +269,9 @@
                                                 <input type="number" name="qty" id="quantity_wanted" class="text" value="1" min='1' ng-model="product.productQuantity">
                                                 <label class="hidden-phone">Quantity:</label>
                                             </p>
-
                                             <div class="clearBoth"></div>
                                         </form>
+                                        <p class="taxCopy">Prices are subject to change without prior notice. All prices are inclusive of 17% Sale Tax</p>
                                     </div>
                                 </div>
 
@@ -282,8 +281,8 @@
                                 <script src="https://apis.google.com/js/plusone.js"></script>
                                 <g:plus action="share" annotation="bubble" href="http://route2health.fishry.com/product/{{product.productUrl}}"></g:plus>
 
-                                 <a style="margin-top: -13px;display: inline-block;vertical-align: middle;" target="_blank" ng-href="http://www.facebook.com/sharer.php?u=http://route2health.fishry.com/product/{{routeParam}}&amp;t={{product.productName}}" class="js-new-window"><img ng-src="{{BaseUrl}}/img/theme/facebook_share.png" alt="Facebook Share"></a>
-
+                                 <!-- <a style="margin-top: -13px;display: inline-block;vertical-align: middle;" target="_blank" ng-href="http://www.facebook.com/sharer.php?u=http://route2health.fishry.com/product/{{routeParam}}&amp;t={{product.productName}}" class="js-new-window"><img ng-src="{{BaseUrl}}/img/theme/facebook_share.png" alt="Facebook Share"></a> -->
+                                 <iframe ng-src="{{likeURL}};width&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=35&amp;appId=358436447628477" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:20px; width: 250px;" allowTransparency="true"></iframe>
                                 <!--<iframe ng-src="//www.facebook.com/plugins/like.php?href=http://route2health.fishry.com/product/{{product.Url}};width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=358436447628477" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:20px; width: 140px;" allowTransparency="true"></iframe>-->
 
                                 <!-- <div class="fb-share-button" data-href="http://route2health.fishry.com/product/{{product.Url}}" data-type="button_count"></div> -->
@@ -302,12 +301,9 @@
                                         <li ng-repeat="products in ListProduct | filter: {productType: product.productType}" ng-show="products.productName != product.productName" class="num-{{$index+1}}">
                                             <a ng-if="products.productName != product.productName" ng-href="/product/{{products.productUrl}}" class="lnk_img" title="{{productItem.productName}}">
                                                 <img ng-if="products.productImage[0].Image" ng-src="{{products.productImage[0].Image}}" alt="{{products.productName}}">
-
                                                 <img ng-if="products.productImage[0].Image == undefined" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{product.productInfo.productName}}">
-                                            </a>
-                                            <a ng-if="products.productName != product.productName" class="product_link" href="/product/{{products.productUrl}}">
-                                                <div class="title">{{products.productName.slice(0,15)}}
-                                                    <span ng-if="products.productName.length > 15">....</span>
+                                                <div class="title" style="text-align:center">{{products.productName.slice(0,13)}}
+                                                    <span ng-if="products.productName.length > 13">....</span>
                                                 </div>
                                             </a>
                                         </li>

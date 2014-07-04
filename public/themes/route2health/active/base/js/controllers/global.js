@@ -545,7 +545,9 @@ function ProductCtrl($scope, $location, AzureMobileClient, $rootScope, $routePar
 
     // $scope.shareURL = 'http://www.facebook.com/sharer.php?u=http://route2health.fishry.com/product/' + $scope.routeParam;
 
-	$routeParams.shareURL = "//www.facebook.com/plugins/like.php?href=http://route2health.fishry.com/product/"+$scope.routeParam+";width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=358436447628477";
+	// $routeParams.shareURL = "//www.facebook.com/plugins/like.php?href=http://route2health.fishry.com/product/"+$scope.routeParam+";width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=358436447628477";
+    $scope.likeURL = 'http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.route2health.fishry.com%2F' + $routeParams.ProductSlug + '&amp;send=false&amp;layout=button_count&amp;width=150&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=286715611395896';
+    
     // var visitedProducts = {};
     // visitedProducts.push();
 

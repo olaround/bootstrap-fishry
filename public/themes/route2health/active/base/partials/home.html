@@ -1,5 +1,5 @@
 <!--  Route2Health -->
-<div class="content_bg">
+<div class="content_bg" ng-init="init()">
 	<div id="columns" class="container ">
 		<div class="row">
 			<div class="loader_page">
@@ -27,11 +27,11 @@
 											<h5 class="productTitle"><a class="product_link" href="/product/{{products.productUrl}}" title="">{{products.productName.slice(0,30)}}<span ng-if="products.productName.length > 30">....</span></a>
 											</h5>
 												<p class="product_desc hidden-phone" ng-bind-html="products.productDescription.slice(0,100) + '.....'"></p>
-												<p class="product_desc hidden-desktop hidden-tablet" ng-bind-html="products.productDescription.slice(0,60)"></p>
+												<p class="product_desc hidden-desktop hidden-tablet" ng-bind-html="products.productDescription.slice(0,60)+ '...'"></p>
 											<div class="fright">
 												<span class="price" ng-if="products.productPrice">
 													<!-- {{SettingGeneral.settings.currencies_format}}&nbsp;{{products.productPrice}} -->
-													{{products.productPrice | currency:SettingGeneral.settings.currencies_format+' '}}
+													{{products.productPrice | nfcurrency:SettingGeneral.settings.currencies_format+' '}}
 												</span>
 												<span class="price-drop-feacherd" ng-if="products.productPriceCompare">{{SettingGeneral.settings.currencies_format}}&nbsp;{{products.productPriceCompare}}</span>
 												<div class="linksContainer hidden-desktop hidden-tablet">

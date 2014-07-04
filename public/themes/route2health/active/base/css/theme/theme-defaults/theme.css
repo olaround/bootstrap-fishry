@@ -255,7 +255,7 @@ a.product_link:hover {
 span.price {
 	color:#363435;
 	font-weight:normal;
-	font-size:23px;
+	font-size:20px;
 	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-family:'Fjalla One', sans-serif
 }
@@ -945,9 +945,12 @@ ul.footer_links li a i {
 	background-color:#238f46;
 	border:none;
 	line-height:30px;
-	padding:0 10px;
+	padding:0 12px;
 	border:none;
 	color: white;
+}
+.carousel-ul li div.title {
+	font-weight: bold;
 }
 .pagination ul > li > a:hover {
 	color: #333;
@@ -6039,7 +6042,7 @@ div.uploader input {
 .list li .right_block span.price {
 	display:block;
 	padding:0 0 0 0;
-	font-size:21px;
+	font-size:20px;
 	margin:0 0 0 0
 }
 .list li .right_block .compare {
@@ -6095,8 +6098,14 @@ div.uploader input {
 .grid li span.price {
 	display:block;
 	padding:0 0 12px 0;
-	font-size:21px;
+	font-size:20px;
 	margin:0 0 0 0
+}
+.content_prices .row_1 p.taxCopy {
+	margin: 10px 0;
+	font-size: 10px;
+	display: inline-block;
+	float: left;
 }
 .grid li .compare {
 	margin:0;
@@ -6332,7 +6341,7 @@ div.uploader input {
 }
 #customcontent_top ul .title3 {
 	color:#363435;
-	font:normal 27px/28px Arial, Helvetica, sans-serif;
+	font:normal 20px/20px Arial, Helvetica, sans-serif;
 	font-family:'Fjalla One', sans-serif;
 	text-transform:uppercase
 }
@@ -6340,7 +6349,7 @@ div.uploader input {
 	color:#238f46;
 	font-size:22px;
 	position:relative;
-	top:-4px;
+	/*top:-4px;*/
 	margin-left:3px;
 	background:none;
 	transition:all 500ms ease-in-out;
@@ -7600,7 +7609,7 @@ div.uploader input {
 .addhomefeatured ul li span.price {
 	display:inline-block;
 	padding:6px 0 0 0;
-	font-size:23px;
+	font-size:20px;
 	line-height:24px
 }
 .addhomefeatured .price-drop-feacherd {
@@ -7696,7 +7705,7 @@ div.uploader input {
 	}
 	.addhomefeatured ul li span.price {
 		padding:12px 0 4px 0;
-		font-size:24px;
+		font-size:20px;
 		display:inline-block
 	}
 	.addhomefeatured ul li img {

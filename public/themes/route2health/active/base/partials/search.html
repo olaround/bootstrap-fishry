@@ -34,7 +34,7 @@
                                   <p class="product_desc mob2" ng-bind-html="products.productDescription.slice(0,180)+ '....'"></p>
                               </div>
                               <div class="right_block" ng-controller="GlobalCtrl">
-                                  <span class="price" ng-if="products.productPrice">{{products.productPrice | currency:SettingGeneral.settings.currencies_format+' '}}</span>
+                                  <span class="price" ng-if="products.productPrice">{{products.productPrice | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</span>
                                   <div class="clear noneclass"></div>
 
                                   <div class="actionBtns">

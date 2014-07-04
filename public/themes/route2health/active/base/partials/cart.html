@@ -42,12 +42,12 @@
 
 									<tr class="cart_total_price " ng-if="ReturnTax()">
 										<td><!-- Total products --></td>
-										<td class="price" id="total_product">Tax: &nbsp;&nbsp;{{ReturnTaxPrice() | currency:SettingGeneral.settings.currencies_format+' '}}</td>
+										<td class="price" id="total_product">Tax: &nbsp;&nbsp;{{ReturnTaxPrice() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
 									</tr>
 
 									<tr class="cart_total_price ">
 										<td><!-- Total products --></td>
-										<td class="price" id="total_product">Total Amount: &nbsp;&nbsp;{{ReturnTotal() | currency:SettingGeneral.settings.currencies_format+' '}}</td>
+										<td class="price" id="total_product">Total Amount: &nbsp;&nbsp;{{ReturnTotal() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
 									</tr>
 
 								</tfoot>
@@ -93,13 +93,13 @@
 												<div class="clearfix insset-bottom" >
 													<span class="title-th">Unit price:</span>
 													<span class="price" id="product_price_1_0_0">
-														<span style="text-decoration:line-through; display:inline-block; padding-right:5px;" ng-if="Items.productInfo.comparePrice">{{Items.productInfo.comparePrice | currency:SettingGeneral.settings.currencies_format+' '}}</span>
-														{{Items.productInfo.productPrice | currency:SettingGeneral.settings.currencies_format+' '}}
+														<span style="text-decoration:line-through; display:inline-block; padding-right:5px;" ng-if="Items.productInfo.comparePrice">{{Items.productInfo.comparePrice | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</span>
+														{{Items.productInfo.productPrice | nfcurrency:SettingGeneral.settings.currencies_format+' '}}
 													</span>
 												</div>
 												<span class="title-th">Total:</span>
 												<span class="price total-pr">
-													{{Items.productInfo.productPrice * Items.quantity | currency:SettingGeneral.settings.currencies_format+' '}}
+													{{Items.productInfo.productPrice * Items.quantity | nfcurrency:SettingGeneral.settings.currencies_format+' '}}
 												</span>
 											</div>
 										</td>
@@ -148,13 +148,13 @@
 												<div class="insset-bottom">
 													<span class="title-th">Unit price:</span>
 													<span class="price">
-														<span style="text-decoration:line-through; display:inline-block; padding-right:5px;" ng-if="itm.productInfo.comparePrice">{{itm.productInfo.comparePrice | currency:SettingGeneral.settings.currencies_format+' '}}</span>
-														{{itm.productInfo.newPrice | currency:SettingGeneral.settings.currencies_format+' '}}
+														<span style="text-decoration:line-through; display:inline-block; padding-right:5px;" ng-if="itm.productInfo.comparePrice">{{itm.productInfo.comparePrice | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</span>
+														{{itm.productInfo.newPrice | nfcurrency:SettingGeneral.settings.currencies_format+' '}}
 													</span>
 												</div>
 												<span class="title-th">Total:</span>
 												<span class="price total-pr" id="total_product_price_1_0_0">
-													{{itm.productInfo.newPrice * itm.quantity | currency:SettingGeneral.settings.currencies_format+' '}}
+													{{itm.productInfo.newPrice * itm.quantity | nfcurrency:SettingGeneral.settings.currencies_format+' '}}
 												</span>
 											</div>
 										

@@ -68,7 +68,7 @@
                                 <!-- <p class="product_desc" ng-bind-html="products.productDescription.slice(0,180)"></p> -->
                             </div>
                             <div class="right_block" ng-controller="GlobalCtrl">
-                                <span class="price" ng-if="products.productPrice">{{products.productPrice | currency:SettingGeneral.settings.currencies_format+' '}}</span>
+                                <span class="price" ng-if="products.productPrice">{{products.productPrice | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</span>
                                 <a ng-if="products.productPrice" class="ajax_add_to_cart_button exclusive btn_add_cart" rel="ajax_id_product_1" href="javascript:void(0)" ng-click="addToCartEffect();addToCart(products.id,products)" title="Add to cart" style="margin: 0 10px 0px 0">
                                     <span>Add to cart</span>
                                 </a>
