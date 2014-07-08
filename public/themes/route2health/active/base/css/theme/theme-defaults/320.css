@@ -267,6 +267,7 @@ margin-top: 2px;}
 		#nextprev_links{ display:none;}
 		#buy_block .row_1 p#quantity_wanted_p {clear: both;padding-right:0px; margin-top:10px;}
 		
+		.page_product_box a.prev, .page_product_box a.next {top: 80px !important;}
 		#product_comments_block_tab div.comment div.comment_author { padding-bottom:20px;}
 		#thumbs_list {width: 300px;}
 		#thumbs_list li a {width: 92px;}

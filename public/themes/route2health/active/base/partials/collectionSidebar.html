@@ -30,8 +30,8 @@
         <!-- {{ListProductVendor}} -->
         <div ng-repeat="(keysVendor,vendors) in ListProductVendor">
             <span ng-if="hasBrandInCollection(vendors.id)">
-                <input type="checkbox" id="{{vendors.productVendorName}}" name="{{vendors.productVendorName}}" value="{{vendors.id}}" ng-model="SearchVendorsearch[vendors.id]" />
-                <label for="{{vendors.productVendorName}}">{{vendors.productVendorName}} ({{hasBrandInCollection(vendors.id)}})</label>
+                <input type="checkbox" id="{{vendors.id}}" name="{{vendors.id}}" value="{{vendors.id}}" ng-model="SearchVendorsearch[vendors.id]" />
+                <label for="{{vendors.id}}" class="shopByBrands">{{vendors.productVendorName}} ({{hasBrandInCollection(vendors.id)}})</label>
             </span>
         </div>
     </div>

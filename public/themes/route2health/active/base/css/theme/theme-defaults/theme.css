@@ -252,6 +252,14 @@ a.product_link {
 a.product_link:hover {
 	color:#238f46
 }
+#u_0_2 {
+	height: 14px !important;
+	overflow: hidden !important;
+	display: inline-block !important;
+}
+div#___plus_0 {
+	vertical-align: top !important;
+}
 span.price {
 	color:#363435;
 	font-weight:normal;
@@ -2194,7 +2202,7 @@ a.tag_level1 {
 	height:27px;
 	display:block;
 	position:absolute;
-	top:80px;
+	top:75px;
 	display:none;
 	opacity:1;
 	filter:alpha(opacity=0);
@@ -4787,6 +4795,12 @@ form#sendComment h3 {
 .product_image img, .product_img_link img {
 	background:#fff;
 	/*width: 75%;*/
+}
+#product_list .product_image img,#product_list .product_img_link img {
+	height: 270px;
+}
+label.shopByBrands {
+	cursor: pointer;
 }
 .product_image, .product_img_link{
 	background-image: url('../img/image-loader.gif');
@@ -8095,10 +8109,14 @@ a.added {
 	background: none !important;
 	border: none !important;
 	color: #238F46 !important;
-	font-size: 10px !important;
-	margin-left: 0px !important;
+	font-size: 12px !important;
+	margin-left: -2px !important;
 	margin-right: 0px;
-	padding-top: 3px;
+	padding-top: 0px;
+	padding-left: 0px;
+	letter-spacing: 0px;
+	text-shadow: none !important;
+	font-weight: bold;
 }
 .logoutBtn {
 	font-size: 14px !important;

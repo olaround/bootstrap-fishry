@@ -208,9 +208,9 @@
 
 						<!-- Block user information module HEADER -->
 						<section ng-controller="GlobalCtrl">
-							<section id="header_user" class="blockuserinfo-cart header-box" ng-class="{closeCart: cartHandler == true}">
+							<section id="header_user" class="blockuserinfo-cart header-box" ng-class="{closeCart: cartHandler == true}" ng-click="isCartOpen()">
 								<div id="shopping_cart" ng-controller="GlobalCtrl">
-									<a href="javascript:void(0)"  rel="nofollow" ng-click="isCartOpen()">
+									<a href="javascript:void(0)"  rel="nofollow">
 										<strong class="opancart"></strong>
 										<span class="shopping_cart_title">Cart</span>
 										<span class="ajax_cart_quantity" >{{ReturnItems()}}</span>
