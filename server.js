@@ -20,14 +20,24 @@ app.configure(function () {
   app.set('port', process.env.PORT || 3000);
   app.use(express.compress());
   app.use(function(req, res, next) {
+	  console.log(req.get('host')+ '------bda============');
+	 if(req.get('host') == 'fishry.com' || req.get('host') == 'fishry.com:3000'){
+	 	res.redirect('http://www.fishry.com' + req.originalUrl);
+	 }else if(req.get('host').indexOf('www.') >= 0 && req.get('host').indexOf('fishry.') >= 0 && req.get('host') != 'www.fishry.com'){
+		 var newHost = req.get('host').replace('www.','');
+	 	 res.redirect('http://'+newHost + req.originalUrl);
+	 }/*else if(req.get('host').indexOf('www.') < 0){
+	 	 res.redirect('http://www.' + req.get('host') + req.originalUrl);
+	 }*/
+	 
 		  req.setMaxListeners(0);
 		  var url = req.protocol + '://' + req.get('host') + req.originalUrl;
-		  var BaseUrl = req.get('host').split('.');
+		   var BaseUrl = req.get('host').split('.');
 		        	  app.locals.domainUrl = req.get('host');
 					  if(BaseUrl[0] == 'fishry'){
 						BaseUrl[0] = 'demo';
 					  }
-					  if(req.get('host') == 'fishry.com'){
+					  if(req.get('host') == 'www.fishry.com' || req.get('host') == 'www.fishry.com:3000'){
 						app.locals.store = '12345';						
 						app.locals.ThemeFolder = 'public/frontend/';
 						app.locals.ThemeFolderPath =  'public/frontend/';
@@ -44,17 +54,8 @@ app.configure(function () {
 						app.locals.storeName = BaseUrl[0];
 						
 					  }
-					  if(url.indexOf('admin') < 0 ){
-						app.set('views', path.join(__dirname, 'public'));
-						app.use(express.static(path.join(__dirname, 'public')));
-						app.set('view engine', 'ejs');
-						app.use(express.favicon());
-						app.use(express.logger('dev'));
-						app.use(express.json());
-						app.use(express.urlencoded());
-						app.use(express.methodOverride());
-						app.use(app.router);
-					  }else{
+	
+		  				var BaseUrl = req.get('host').split('.');
 						app.set('views', path.join(__dirname, 'views'));
 						app.use(express.static(path.join(__dirname, 'public')));
 						app.set('view engine', 'ejs');
@@ -63,8 +64,7 @@ app.configure(function () {
 						app.use(express.json());
 						app.use(express.urlencoded());
 						app.use(express.methodOverride());
-						app.use(app.router);
-					  }
+					
 		  next()
 })
 
@@ -92,6 +92,8 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/product', routes.product);
 app.get('/product/:id', routes.product_any);
+app.get('/products', routes.product);
+app.get('/products/:id', routes.product_any);
 app.get('/collection-list', routes.collection_list);
 app.get('/collections', routes.collection);
 app.get('/collections/:id', routes.collection);
@@ -101,6 +103,12 @@ app.get('/search', routes.search_page);
 app.get('/cart', routes.cart);
 app.get('/signup', routes.signup);
 app.get('/login', routes.login);
+app.get('/forgot_password', routes.forgot_password);
+app.get('/reset_password/:id', routes.reset_password_email);
+app.get('/reset_password', routes.reset_password);
+app.get('/account_info', routes.account_info);
+app.get('/orders', routes.orders);
+app.get('/search', routes.search);
 app.get('/account', routes.account);
 app.get('/checkout', routes.checkout);
 app.get('/confirm', routes.confirm_screen);
