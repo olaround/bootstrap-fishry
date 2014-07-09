@@ -3,7 +3,7 @@
    <meta name="fragment" content="!">
     <base href="/">
 	 <title ng-bind="title">
-                 <%= title %>
+                 <%= unescape(title) %>
               </title>
 		<% if (typeof(meta) != "undefined") { %>
 			  <% for (var metaItem in meta) { %>
@@ -137,7 +137,7 @@
 											  <hr />
 											   <div class="col-md-12"  align="right">
 												<h2  align="right" ng-if="ReturnTax()">
-												  Total : {{ReturnTotal()- ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}}
+												  Total : {{ReturnTotal()- ReturnTaxPrice() - ReturnShipping()| currency:SettingGeneral.settings.currencies_format+' '}}
 												</h2>
 											  </div>
 											   <hr /> 
@@ -150,9 +150,20 @@
 												</span>
 												<hr />
 											  </div>
+											  
 											  <div class="clearfix">
 											  </div>
-											  
+											  <div class="col-md-12"  align="right"  ng-if="ReturnShipping()">
+                                            <h2  align="right">
+                                              Shipping : {{ReturnShipping()| currency:SettingGeneral.settings.currencies_format+' '}} 
+                                            </h2>
+                                            <span>
+                                              Shipping are dependent on shipping country
+                                            </span>
+                                            <hr />
+                                          </div>
+											    <div class="clearfix">
+											  </div>
 											  
 											  <div class="col-md-12"  align="right">
 												<h2>

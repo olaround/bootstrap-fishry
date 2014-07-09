@@ -1,4 +1,4 @@
-<div class="row clearfix">
+<div class="row clearfix" ng-init="InitProduct();">
 		<div class="col-md-12 column" ng-animate="'animate'" ng-repeat="(key,product) in ListProduct | CustomFilter:{productUrl : routeParam}">
             <h3>
 				{{product.productName}}

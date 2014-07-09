@@ -17,6 +17,11 @@ function HomeCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	if($rootScope.SettingGeneral){
+	  if($rootScope.SettingGeneral.settings.meta_title){
+		 $rootScope.title = $rootScope.SettingGeneral.settings.meta_title;
+	  }
+  }
 }
 
 function CollectionCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,$cookies,$http) {
@@ -117,12 +122,24 @@ function CollectionCtrl($scope,$location,AzureMobileClient,$rootScope,$routePara
 			return false;
 		}
    }
-   
    $scope.routeParam = $routeParams.CollectionName;
-	$scope.init = function(){
+   $rootScope.title = unescape(seoTitle);
+	$scope.InitCollection = function(){
+		console.log($scope.routeParam);
+		if($scope.routeParam == 'all'){
+			$rootScope.title = $rootScope.SettingGeneral.settings.meta_title;
+			return true;
+		}
+		$.each($rootScope.ListCollection,function(index,item){
+			if(item.collectionUrl == $scope.routeParam){
+				$rootScope.title = item.collectionSeoTitle;
+			}
+		});
 		$scope.startFromPage = 0;
 		$scope.pageLimit = $rootScope.ThemeSettings.theme_settings.pagination_limit;
+		
 	}
+	
 	$scope.totalProducts = 0;
 	$scope.noOfPages = [];
 	$scope.addProductCount = function(){
@@ -257,6 +274,15 @@ function ProductCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,
 		}
 	});
 	$scope.routeParam = $routeParams.ProductSlug;
+	$rootScope.title = unescape(seoTitle);
+	$scope.InitProduct = function(){		
+		$.each($rootScope.ListProduct,function(index,item){
+			if(item.productUrl == $scope.routeParam){
+				$rootScope.title = item.productSeoTitle;
+			}
+		});
+		
+	}
 }
 function CarouselDemoCtrl($scope) {
   $scope.myInterval = 5000;
@@ -283,6 +309,15 @@ function PageCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,$co
 		}
 	});
 	$scope.routeParam = $routeParams.PageUrl;
+	$rootScope.title = unescape(seoTitle);
+	$scope.InitPage = function(){		
+		$.each($rootScope.ListPage,function(index,item){
+			if(item.pageUrl == $scope.routeParam){
+				$rootScope.title = item.pageSeoTitle;
+			}
+		});
+		
+	}
 }
 // JavaScript Document
 function CartCtrl($scope,$location,$rootScope){
@@ -293,6 +328,7 @@ function CartCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	 $rootScope.title = 'Cart - '+$rootScope.SettingGeneral.settings.meta_title;
 }
 
 function ConfirmCtrl($scope,$location,$rootScope){
@@ -303,6 +339,7 @@ function ConfirmCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	$rootScope.title = 'Confirm - '+$rootScope.SettingGeneral.settings.meta_title;
 }
 // JavaScript Document
 function LoginCtrl($scope,$location,$rootScope){
@@ -313,6 +350,7 @@ function LoginCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	$rootScope.title = 'Login - '+$rootScope.SettingGeneral.settings.meta_title;
 }
 function ForgotCtrl($scope,$location,$rootScope){
 	$rootScope.locationParam = [];
@@ -322,6 +360,7 @@ function ForgotCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	 $rootScope.title = 'Forgot Password - '+$rootScope.SettingGeneral.settings.meta_title;
 }
 function ResetCtrl($scope,$location,$rootScope){
 	$rootScope.locationParam = [];
@@ -331,6 +370,7 @@ function ResetCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	$rootScope.title = 'Reset Password - '+$rootScope.SettingGeneral.settings.meta_title;
 }
 function SignupCtrl($scope,$location,$rootScope){
 	$rootScope.locationParam = [];
@@ -340,6 +380,18 @@ function SignupCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	$rootScope.title = 'Signup - '+$rootScope.SettingGeneral.settings.meta_title;
+}
+function ThankyouCtrl($scope,$location,$rootScope){
+  $rootScope.locationParam = [];
+  var locationsParam = $scope.$location.path().split('/');  
+  $.each(locationsParam,function(index,item){
+    if(item && item != ''){
+      $rootScope.locationParam.push(item);
+    }
+  });
+  $rootScope.title = 'Thankyou - '+$rootScope.SettingGeneral.settings.meta_title;
+
 }
 function AccountCtrl($scope,$location,$rootScope){
 	$rootScope.locationParam = [];
@@ -443,10 +495,6 @@ function SearchCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,$
 					});
 				}
 			});
-			
-				//console.log($scope.TotalCounts +'asdasdasd');
-				 //return  $scope.TotalCounts;
-				 //return Math.ceil($scope.TotalCounts/$scope.pageSize); 
 			
 		}
     }
