@@ -3,22 +3,7 @@
         <div class="row ">
             <div class="loader_page">
                 <div id="center_column" class="center_column span9 clearfix">
-                  <!-- <div class="sortPagiBar shop_box_row shop_box_row clearfix hidden-phone">
-
-                        <ul class="product_view clearfix">
-                            <li id="product_view_grid" class="current"></li>
-                            <li id="product_view_list" class=""></li>
-                        </ul>
-                    </div> -->
-
-                    <!-- <div> -->
-                 <!--  <div ng-repeat="collection in ListCollection  | filter:{collectionName:SearchCollectionSearch}" style="margin-top: 20px"> -->
-                  <!-- <div ng-if="routeParam == collection.collectionUrl || routeParam == 'all' || !routeParam">
-                    <h1>{{collection.collectionName}}</h1>
-                  </div> -->
-                    <!-- Products list -->
-                    <!-- <div> -->
-                      <ul id="product_list" class="row list">
+                  <ul id="product_list" class="row grid">
 
                           <li class="span3" ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} | filter:{productName:SearchTitleSearch} | filter:SearchMinMaxPriceReturn | filter:SearchVendorsearchReturn | filter:{ProductTypeName:SearchTypeSearch} | filter:{productTags:SearchTagsSearch} | returnTotals:products | startFrom:startFromPage | limitTo:pageLimit">
                               <a href="/product/{{products.productUrl}}" class="product_img_link" title="{{products.productName}}">
@@ -94,7 +79,7 @@
                         </script>
                       </ul>
 
-                      <div class="bottom_pagination shop_box_row  clearfix">
+                      <div class="bottom_pagination shop_box_row  clearfix" ng-if="pagesCounts().length > 1">
                         <div id="pagination" class="pagination" ng-if="ListProduct" ng-init="numberOfPages(ListProduct,{collection:routeParam})">
                             <ul class="pagination ng-isolate-scope ng-pristine ng-valid">
                                 <li>
@@ -117,45 +102,10 @@
                         </div>
                     </div>
 
-                   <!--  </div>
-                  </div> -->
                 </div>
-
-                 <!-- Right -->
-                <!-- <aside id="right_column" class="span2 column right_home">
-                    <h1>Filters</h1>
-                    <hr />
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input placeholder="Search By Title..." ng-model="SearchTitleSearch" type="text" class="form-control">
-                        <br>
-                        <label>Collection</label>
-                        <select ng-model="SearchCollectionSearch" class="form-control">
-                            <option value="">Select Collection</option>
-                            <option ng-repeat="collections in ListCollection" value="{{collections.collectionName}}">{{collections.collectionName}}</option>
-                        </select>
-                        <br>
-                        <label>Vendor</label>
-                        <select ng-model="SearchVendorsearch" class="form-control">
-                            <option value="">Select Vendor</option>
-                            <option ng-repeat="vendors in ListProductVendor" value="{{vendors.productVendorName}}">{{vendors.productVendorName}}</option>
-                        </select>
-                        <br>
-                        <label>Type</label>
-                        <select ng-model="SearchTypeSearch" class="form-control">
-                            <option value="">Select Type</option>
-                            <option ng-repeat="Types in ListProductType" value="{{Types.productTypeName}}">{{Types.productTypeName}}</option>
-                        </select>
-                        <br>
-                        <label>Tags</label>
-                        <input placeholder="Search By Tags..." ng-model="SearchTagsSearch" type="text" class="form-control">
-                        <br>
-
-                    </div>
-                </aside> -->
-
+             
                 <aside id="right_column" class="span3" ng-class="{'homeSideBar': $location.path() == '/'}">
-                  <section id="manufacturers_block_left" class="block blockmanufacturer olumn_box" ng-include src="getSidebarPath()">
+                  <section id="manufacturers_block_left" class="block blockmanufacturer olumn_box" ng-include src="getCollectionSidebarPath()">
                   </section>
                 </aside>
 

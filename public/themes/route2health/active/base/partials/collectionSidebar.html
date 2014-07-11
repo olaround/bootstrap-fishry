@@ -1,9 +1,19 @@
 <!-- MODULE Block specials -->
 <section id="specials" class="column products_block column_box hidden-phone" ng-if="ThemeSettings.theme_settings.enable_sidebar_collection" ng-if="ThemeSettings.theme_settings.sidebarCollection">
-    <div class="block ">
+     <div class="sidepanel widget_brands block" ng-if="$location.path().indexOf('collections') > -1">
         <h4>
-            <!-- {{ThemeSettings.theme_settings}} -->
-            <span>{{ThemeSettings.theme_settings.sidebarCollectionLabel}}</span>
+            <span>SHOP BY MANUFACTURERS {{$location.path()}}</span>
+        </h4>
+        <div ng-repeat="(keysVendor,vendors) in ListProductVendor" id="layered_block_left">
+            <span>
+                <input type="checkbox" id="{{vendors.id}}" name="{{vendors.id}}" value="{{vendors.id}}" ng-model="SearchVendorsearch[vendors.id]" />
+                <label for="{{vendors.id}}" class="nomargin">{{vendors.productVendorName}} ({{hasBrandInCollection(vendors.id)}})</label>
+            </span>
+        </div>
+    </div>
+    <div class="block">
+        <h4>
+            <span>Top Sellers</span>
             <span class="column_icon_toggle"></span>
         </h4>
         <div class="block_content toggle_content">
@@ -22,42 +32,5 @@
             </ul>
         </div>
     </div>
-
-    <div class="sidepanel widget_brands" ng-if="routeParam != 'all'">
-        <h4>
-            <span>SHOP BY BRANDS</span>
-        </h4>
-        <!-- {{ListProductVendor}} -->
-        <div ng-repeat="(keysVendor,vendors) in ListProductVendor">
-            <span ng-if="hasBrandInCollection(vendors.id)">
-                <input type="checkbox" id="{{vendors.id}}" name="{{vendors.id}}" value="{{vendors.id}}" ng-model="SearchVendorsearch[vendors.id]" />
-                <label for="{{vendors.id}}" class="shopByBrands">{{vendors.productVendorName}} ({{hasBrandInCollection(vendors.id)}})</label>
-            </span>
-        </div>
-    </div>
-
-    <!-- <div class="sidepanel widget_brands block">
-        <h4>
-            <span>SHOP BY TYPE</span>
-        </h4>
-        <select ng-model="SearchTypeSearch" class="form-control" style="margin-bottom: 14px;">
-            <option value="">Select Type</option>
-            <option ng-repeat="Types in ListProductType" value="{{Types.productTypeName}}">{{Types.productTypeName}}</option>
-        </select>
-    </div> -->
-
-    <!-- <div class="panel panel-default" ng-show="ThemeSettings.theme_settings.collection_widget_price">
-        <div class="panel-heading">Price Range</div>
-        <div class="panel-body">
-            <ul style="list-style:none; margin:0; padding:0">
-                <li>
-                    <slider floor="1" ceiling="6000" ng-model-low="priceRange.minPrice" ng-model-high="priceRange.maxPrice"></slider>
-                    <span class="pull-left">Min: {{priceRange.minPrice}}</span>
-                    <span class="pull-right">Max: {{priceRange.maxPrice}}</span>
-                </li>
-                <div class="clearfix"></div>
-            </ul>
-        </div>
-    </div> -->
 </section>
 <!-- /MODULE Block specials -->

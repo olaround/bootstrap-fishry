@@ -38,6 +38,13 @@ function GlobalCtrl($scope, $location, $rootScope) {
     	}
     }
 
+    $rootScope.titleSearchRemove = function(){
+        // alert('aa');
+        $('#search_query_top').val('');
+        $rootScope.SearchTitleSearch = false;
+        $rootScope.$apply();
+    }
+
     $rootScope.isCartOpen = function() {
         $rootScope.cartHandler = !$rootScope.cartHandler;
     }
@@ -54,7 +61,9 @@ function GlobalCtrl($scope, $location, $rootScope) {
     }
 
     $rootScope.getCollectionSidebarPath = function() {
-        return BaseUrl + 'partials/collectionSidebar.html';
+        // return BaseUrl + 'partials/collectionSidebar.html';
+        return BaseUrl + 'partials/sidebar.html';
+
     }
 
 }
@@ -542,6 +551,9 @@ function ProductCtrl($scope, $location, AzureMobileClient, $rootScope, $routePar
         }
     });
     $scope.routeParam = $routeParams.ProductSlug;
+
+    console.log($rootScope.prevUrl[$rootScope.prevUrl.length-1]);
+    // console.log();
 
     // $scope.shareURL = 'http://www.facebook.com/sharer.php?u=http://route2health.fishry.com/product/' + $scope.routeParam;
 

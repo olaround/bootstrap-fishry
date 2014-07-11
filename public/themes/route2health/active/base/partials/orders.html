@@ -28,14 +28,14 @@
                                 <tr>
                                     <th data-class="expand" class="first_item ">Order ID</th>
                                     <th class="item">Total price</th>
-                                    <th class="item">Payment:</th>
+                                    <th class="item">Payment Method</th>
                                     <th class="item">Status</th>
                                 </tr>
                             </thead>
                             <tbody ng-repeat="(keyMain,Itemss) in Orders track by $index">
                                 <tr class="first_item footable-detail-show">
                                     <td>
-                                        {{Itemss.id}}
+                                        {{Itemss.orderid}}
                                     </td>
                                     <td>{{SettingGeneral.settings.currencies_format}}&nbsp;{{Itemss.orderTotal}}</td>
                                     <td>

@@ -71,10 +71,10 @@
 													<div class="cart_quantity">
 														<div id="cart_quantity_button" class="cart_quantity_button" style="float:left;" ng-controller="CartCtrl">
 
-															<a rel="nofollow" class="cart_quantity_down" href="javascript:void(0)" title="Subtract" ng-click="Items.quantity = limitCartProductQuantity(Items.quantity)">
+															<a rel="nofollow" class="cart_quantity_down" href="javascript:void(0)" title="Subtract" ng-click="Items.quantity = Items.quantity-1">
 																<img ng-src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/img/icon/quantity_down.gif" alt="Subtract" width="23" height="24">
 															</a>
-															<input size="2" type="text" autocomplete="off" class="cart_quantity_input" value="{{Items.quantity}}" ng-model="Items.quantity" name="quantity_1_0_0_0" min="1">
+															<input type="text" autocomplete="off" class="cart_quantity_input" value="{{Items.quantity}}" ng-model="Items.quantity" min="1">
 
 															<a rel="nofollow" class="cart_quantity_up" id="cart_quantity_up_1_0_0_0" href="javascript:void(0)" title="Add" ng-click="Items.quantity = Items.quantity+1">
 																<img ng-src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/img/icon/quantity_up.gif" alt="Add" width="23" height="24">

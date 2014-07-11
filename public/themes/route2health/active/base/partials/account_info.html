@@ -20,12 +20,12 @@
                         </h1>
 
 
-                        <div class="block-center" ng-if="!User.info.CustomerEmail">
-                          <p class="warning">You are not logged in. Please click <a href="/login">Login</a></p>
+                        <div class="block-center" ng-if="!User.info.CustomerEmail || User.info.GuestAuth">
+                          <p class="warning">You are not logged in as a registered user. Please <a href="/login">Login</a></p>
                         </div>
 
                         <!---->
-                        <div ng-if="User.info.CustomerEmail">
+                        <div ng-if="User.info.CustomerEmail && !User.info.GuestAuth">
                           <form role="form" ng-submit="UpdateUserInfo('cart')" id="account-creation_form" class="std">
                             <fieldset>
                             <div class="row-fluid">

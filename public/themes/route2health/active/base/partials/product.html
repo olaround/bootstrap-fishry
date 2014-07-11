@@ -201,7 +201,8 @@
                             <!-- left infos-->
                             
                             <div id="pb-left-column" class="span5" ng-init="init()">
-                                <h1>{{product.productName}}</h1>
+                                <h1 class="productDetailTitle">{{product.productName}}</h1>
+                                <h5 class="productDetailVendor" ng-if="product.ProductVendorName">by {{product.ProductVendorName}}</h5>
                                 <div id="short_description_block">
                                     <div id="short_description_content" class="rte align_justify">
                                         <p ng-bind-html="product.productDescription">
@@ -209,7 +210,7 @@
                                 </div>
 
 
-                                <div class="row_1 row_product_detail" style="border-bottom: none;">
+                                <div class="row_1 row_product_detail" style="border-bottom: none; display:none">
                                     <p class="productType" ng-if="product.ProductTypeName">
                                         <strong>Type:&nbsp;&nbsp;</strong>
                                         <span>{{product.ProductTypeName}}</span>
@@ -271,7 +272,7 @@
                                             </p>
                                             <div class="clearBoth"></div>
                                         </form>
-                                        <p class="taxCopy">Prices are subject to change without prior notice. All prices are inclusive of 17% Sale Tax</p>
+                                        <p class="taxCopy">Prices are subject to change without prior notice. All prices are inclusive of Sale Tax.</p>
                                     </div>
                                 </div>
 
@@ -282,7 +283,7 @@
                                 <g:plus action="share" annotation="bubble" href="http://route2health.fishry.com/product/{{product.productUrl}}"></g:plus>
 
                                  <!-- <a style="margin-top: -13px;display: inline-block;vertical-align: middle;" target="_blank" ng-href="http://www.facebook.com/sharer.php?u=http://route2health.fishry.com/product/{{routeParam}}&amp;t={{product.productName}}" class="js-new-window"><img ng-src="{{BaseUrl}}/img/theme/facebook_share.png" alt="Facebook Share"></a> -->
-                                 <iframe ng-src="{{likeURL}};width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=20&amp;appId=358436447628477" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:20px; width: 235px;" allowTransparency="true"></iframe>
+                                 <iframe ng-src="{{likeURL}};width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=20&amp;appId=358436447628477" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:20px; width: 100px;" allowTransparency="true"></iframe>
                                 <!--<iframe ng-src="//www.facebook.com/plugins/like.php?href=http://route2health.fishry.com/product/{{product.Url}};width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=358436447628477" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:20px; width: 140px;" allowTransparency="true"></iframe>-->
 
                                 <!-- <div class="fb-share-button" data-href="http://route2health.fishry.com/product/{{product.Url}}" data-type="button_count"></div> -->
@@ -293,17 +294,16 @@
                     <div class="clear"></div>
                     <div class="extra-box-product">
                         <section class="page_product_box blockproductscategory">
-                            <h3 class="hidden-phone">realted products in the same category</h3>
-                            <h3 class="hidden-desktop hidden-tablet">realted products</h3>
+                            <h3>more from {{product.ProductTypeName}}</h3>
                             <div id="block-category-slider" class="carusel-inner responsive  toggle_content">
                                 <div class="caroufredsel_wrapper">
                                     <ul id="carouselproduct" class="carousel-ul">
-                                        <li ng-repeat="products in ListProduct | filter: {productType: product.productType}" ng-show="products.productName != product.productName" class="num-{{$index+1}}">
+                                        <li ng-repeat="products in ListProduct | orderBy: 'productName' | filter: {productType: product.productType}" ng-show="products.productName != product.productName" class="num-{{$index+1}}">
                                             <a ng-if="products.productName != product.productName" ng-href="/product/{{products.productUrl}}" class="lnk_img" title="{{productItem.productName}}">
                                                 <img ng-if="products.productImage[0].Image" ng-src="{{products.productImage[0].Image}}" alt="{{products.productName}}">
-                                                <img ng-if="products.productImage[0].Image == undefined" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{product.productInfo.productName}}">
-                                                <div class="title" style="text-align:center">{{products.productName.slice(0,13)}}
-                                                    <span ng-if="products.productName.length > 13">....</span>
+                                                <img ng-if="products.productImage[0].Image == null" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{product.productInfo.productName}}">
+                                                <div class="title" style="text-align:center">
+                                                {{products.productName.slice(0,10) + '...'}}
                                                 </div>
                                             </a>
                                         </li>
@@ -315,8 +315,7 @@
                         </section>
                         <div ng-if="product">
                             <script type="text/javascript">
-                            $(function() {
-
+                            // $(function() {
                                 console.log('qwerty' + $('#carouselproduct').children().length);
                                 $("#carouselproduct").carouFredSel({
                                  debug: true,
@@ -364,8 +363,10 @@
                                     },
 
                                 });
-                            });
+                            // });
                             </script>
+                        </div>
+
                             <script type="text/javascript">
                             $(function(){
                                  $("#carouselproductcross").carouFredSel({
@@ -406,7 +407,6 @@
                                  });
                              });
                             </script>
-                        </div>
                     </div>
                 </div>
 

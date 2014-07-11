@@ -53,7 +53,7 @@
 
                     <ul id="product_list" class="row grid">
 
-                        <li ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} | orderBy: 'productName' | filter:{productName:SearchTitleSearch} | filter:SearchMinMaxPriceReturn | filter:SearchVendorsearchReturn | filter:{ProductTypeName:SearchTypeSearch} | filter:{productTags:SearchTagsSearch} | returnTotals:products | startFrom:startFromPage |limitTo:pageLimit" class="ajax_block_product span3 shop_box num-{{$index}}">
+                        <li ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} | orderBy: 'productName' | filter:SearchMinMaxPriceReturn | filter:SearchVendorsearchReturn | filter:{ProductTypeName:SearchTypeSearch} | filter:{productTags:SearchTagsSearch} | returnTotals:products | startFrom:startFromPage |limitTo:pageLimit" class="ajax_block_product span3 shop_box num-{{$index}}">
                             
                             <a href="/product/{{products.productUrl}}" class="product_img_link" title="{{products.productName}}">
                                 <img ng-if="products.productImage[0].Image" ng-src="{{products.productImage[0].Image}}" alt="{{products.productName}}">
@@ -124,18 +124,6 @@
 
                     <div class="bottom_pagination shop_box_row  clearfix" ng-if="pagesCounts().length > 1">
                         <div id="pagination" class="pagination" ng-if="ListProduct" ng-init="numberOfPages(ListProduct,{collection:routeParam})">
-                            <!-- <ul class="pagination">
-								<li id="pagination_previous" ng-class="{disabled: startFromPage <= 0}">
-									<button ng-click="previousPage()" ng-disabled="startFromPage <= 0" class="button">Previous</button>
-								</li>
-								<li class="paeCount">
-									<span> {{startFromPage + 1}}/{{returnPages(TotalCounts)}}</span>
-								</li>
-								<li id="pagination_next"  ng-class="{disabled: startFromPage + 1 == returnPages(TotalCounts)}">
-									<button class="button" ng-click="nextPage()" ng-disabled="startFromPage + 1 == returnPages(TotalCounts)">Next</button>
-								</li>
-							</ul> -->
-
                             <ul class="pagination ng-isolate-scope ng-pristine ng-valid">
                                 <li>
                                     <a href="javascript:void(0)" ng-hide="!startFromPage" ng-click="selectPage('p')" class="ng-binding">
