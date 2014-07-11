@@ -1,4 +1,4 @@
-<div class="content_bg">
+<div class="content_bg" ng-init="InitProduct()">
     <div id="columns" class="container ">
         <div class="row ">
             <div class="loader_page" ng-repeat="(key,product) in ListProduct | CustomFilter:{productUrl : routeParam}">

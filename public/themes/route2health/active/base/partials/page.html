@@ -1,32 +1,31 @@
+<div class="content_bg" ng-init="InitPage()">
+    <div id="columns" class="container ">
+        <div class="row ">
+            <div class="loader_page" ng-repeat="page in ListPage | CustomFilter:{pageUrl : routeParam}">
+                <div id="center_column" class="center_column span9 clearfix">
 
-	<div class="content_bg">
-		<div id="columns" class="container ">
-			<div class="row ">
-				<div class="loader_page" ng-repeat="page in ListPage | CustomFilter:{pageUrl : routeParam}">
-					<div id="center_column" class="center_column span9 clearfix" >
+                    <!-- Breadcrumb -->
+                    <div class="breadcrumb">
+                        <div class="breadcrumb_inset">
+                            <a class="breadcrumb-home" href="/" title="Return to Home"><i class="icon-home"></i></a>
+                            <span class="navigation-pipe">&gt;</span>
+                            <span class="navigation_page">{{page.pageName}}</span>
+                        </div>
+                    </div>
+                    <!-- /Breadcrumb -->
+                    <div class="rte">
+                        <h1>{{page.pageName}}</h1>
+                        <p ng-bind-html="page.pageDescription"></p>
+                    </div>
+                    <br>
+                </div>
 
-						<!-- Breadcrumb -->
-						<div class="breadcrumb">
-							<div class="breadcrumb_inset">
-								<a class="breadcrumb-home" href="/" title="Return to Home"><i class="icon-home"></i></a>
-								<span class="navigation-pipe">&gt;</span>
-								<span class="navigation_page">{{page.pageName}}</span>
-							</div>
-						</div>
-						<!-- /Breadcrumb -->
-						<div class="rte">
-							<h1>{{page.pageName}}</h1>
-							<p ng-bind-html="page.pageDescription"></p>
-						</div>
-						<br>
-					</div>
-
-					<!-- Right -->
-					<aside id="right_column" class="span3 column right_home">
-						<section id="manufacturers_block_left" class="block blockmanufacturer column_box" ng-include src="getSidebarPath()">
-						</section>
-					</aside>
-				</div>
-			</div>
-		</div>
-	</div>
+                <!-- Right -->
+                <aside id="right_column" class="span3 column right_home">
+                    <section id="manufacturers_block_left" class="block blockmanufacturer column_box" ng-include src="getSidebarPath()">
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>

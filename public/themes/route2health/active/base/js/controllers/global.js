@@ -37,14 +37,6 @@ function GlobalCtrl($scope, $location, $rootScope) {
         	$rootScope.enableDropdown = false; 	
     	}
     }
-
-    $rootScope.titleSearchRemove = function(){
-        // alert('aa');
-        $('#search_query_top').val('');
-        $rootScope.SearchTitleSearch = false;
-        $rootScope.$apply();
-    }
-
     $rootScope.isCartOpen = function() {
         $rootScope.cartHandler = !$rootScope.cartHandler;
     }
@@ -76,239 +68,13 @@ function HomeCtrl($scope, $location, $rootScope) {
             $rootScope.locationParam.push(item);
         }
     });
+    
+    if($rootScope.SettingGeneral){
+      if($rootScope.SettingGeneral.settings.meta_title){
+         $rootScope.title = $rootScope.SettingGeneral.settings.meta_title;
+      }
+    }
 }
-
-// function CollectionCtrl($scope, $location, AzureMobileClient, $rootScope, $routeParams, $cookies, $http) {
-
-//     $scope.priceRange = {
-//         name: 'Price Range',
-//         minPrice: 0,
-//         maxPrice: 0
-//     };
-//     $scope.SearchVendorsearch = {};
-//     $rootScope.productCount = 0;
-//     $scope.hasBrandInCollection = function(VendorId) {
-//         var hasVendor = false;
-//         var vendorCounts = 0;
-//         $.each($rootScope.ListProduct, function(index, item) {
-//             var condition = 0;
-//             if (item.productVendor == VendorId) {
-//                 condition++;
-//             }
-//             if (item.productCollections) {
-//                 if (typeof(item.productCollections) == 'object') {
-//                     //console.log(item.productCollections);
-//                     $.each(item.productCollections, function(indCol, itemCol) {
-//                         if ($scope.routeParam == itemCol.urlParam) {
-//                             console.log(item);
-//                             condition++;
-//                         }
-//                     });
-//                 }
-//                 if (condition >= 2) {
-//                     console.log(item);
-//                     hasVendor = true;
-//                     vendorCounts++;
-//                     if (!item.productMultiOptions) {
-//                         if (item.productPrice && $scope.priceRange.maxPrice < item.productPrice) {
-//                             $scope.priceRange.maxPrice = item.productPrice;
-//                         }
-//                     } else {
-//                         var price = $rootScope.returnPrice(item);
-//                         if (price && $scope.priceRange.maxPrice < price) {
-//                             $scope.priceRange.maxPrice = item.productPrice;
-//                         }
-//                     }
-//                 }
-//             }
-//         });
-//         return vendorCounts;
-//     }
-//     $scope.SearchVendorsearchReturn = function(items) {
-//         //console.log(items);
-//         var hasItemsPre = false;
-//         $.each($scope.SearchVendorsearch, function(ind, itm) {
-//             if (itm == true) {
-//                 hasItemsPre = true;
-//             }
-//         });
-//         if (!hasItemsPre) {
-//             return items;
-//         }
-//         //console.log('acho');
-//         //console.log(items);
-//         //console.log($scope.SearchVendorsearch);
-//         var pushItems = [];
-//         var hasItems = false;
-//         $.each($scope.SearchVendorsearch, function(ind, itm) {
-//             if (items.productVendor) {
-//                 if (ind == items.productVendor && itm == true) {
-//                     hasItems = true;
-//                 }
-//             }
-//         });
-//         //console.log(hasItems);
-//         ////console.log(hasItems);
-//         if (hasItems) {
-//             return items;
-//         } else {
-//             return false;
-//         }
-//     }
-//     $scope.SearchMinMaxPriceReturn = function(items) {
-//         var pushItems = [];
-//         var hasItems = false;
-
-//         if (!items.productMultiOptions) {
-//             if (items.productPrice >= $scope.priceRange.minPrice && items.productPrice <= $scope.priceRange.maxPrice) {
-//                 hasItems = true;
-//             }
-//         } else {
-//             var price = $rootScope.returnPrice(items);
-//             if (price >= $scope.priceRange.minPrice && price <= $scope.priceRange.maxPrice) {
-//                 hasItems = true;
-//             }
-//         }
-
-
-//         if (hasItems) {
-//             return items;
-//         } else {
-//             return false;
-//         }
-//     }
-
-//     $rootScope.productCount = 0;
-//     $scope.routeParam = $routeParams.CollectionName;
-//     $scope.init = function() {
-//         $scope.startFromPage = 0;
-//         $scope.pageLimit = 18;
-//     }
-//     $scope.totalProducts = 0;
-//     $scope.noOfPages = [];
-//     $scope.addProductCount = function() {
-//         $scope.totalProducts = $scope.totalProducts + 1;
-//     }
-//     $scope.expectedPages = 0;
-//     $scope.pagesCounts = function() {
-//         $scope.noOfPages = [];
-//         if ($rootScope.productCount) {
-//             var pagesToBe = parseInt($rootScope.productCount / $scope.pageLimit);
-//             var extras = $rootScope.productCount % $scope.pageLimit;
-//             if (extras > 0) {
-//                 pagesToBe = pagesToBe + 1;
-//             }
-//             $scope.expectedPages = pagesToBe;
-//             for (i = 1; i <= pagesToBe; i++) {
-//                 $scope.noOfPages.push(i);
-//             }
-//         }
-//         return $scope.noOfPages;
-
-//     }
-//     $scope.currentPage = 1;
-//     $scope.returnStateActive = function(id) {
-//         if (($scope.pageLimit * id) == $scope.startFromPage) {
-//             $scope.currentPage = id + 1;
-//             return true;
-//         }
-//         return false;
-//     }
-
-//     $scope.selectPage = function(id) {
-//         if (id == 'n') {
-//             $scope.startFromPage = $scope.startFromPage + $scope.pageLimit;
-//         } else if (id == 'p') {
-//             $scope.startFromPage = $scope.startFromPage - $scope.pageLimit;
-//         } else {
-//             $scope.startFromPage = id * $scope.pageLimit;
-//         }
-//     }
-//     $rootScope.locationParam = [];
-//     var locationsParam = $scope.$location.path().split('/');
-//     $.each(locationsParam, function(index, item) {
-//         if (item && item != '') {
-//             $rootScope.locationParam.push(item);
-//         }
-//     });
-
-//     console.log('start');
-//     $scope.nextPage = function() {
-//         $scope.startFromPage = $scope.startFromPage + 1;
-//     }
-//     $scope.previousPage = function() {
-//         $scope.startFromPage = $scope.startFromPage - 1;
-//     }
-//     $scope.returnPages = function(item) {
-//         return Math.ceil(item / $scope.pageSize);
-//     }
-//     $scope.numberOfPages = function(item, filters) {
-//         if (item.length) {
-//             $scope.TotalCounts = 0;
-//             console.log('bda');
-//             console.log(item.length);
-//             console.log(filters);
-
-//             $.each(item, function(ind, itm) {
-//                 //console.log(itm.productCollections);
-//                 if (itm.productCollections) {
-//                     $.each(itm.productCollections, function(inds, itms) {
-//                         console.log(itms.urlParam);
-//                         console.log(filters.collection);
-//                         if (itms.urlParam == filters.collection) {
-//                             $scope.TotalCounts = parseInt($scope.TotalCounts) + 1;
-//                         }
-//                     });
-//                 }
-//             });
-
-//             console.log($scope.TotalCounts + 'asdasdasd');
-//             //return  $scope.TotalCounts;
-//             //return Math.ceil($scope.TotalCounts/$scope.pageSize); 
-
-//         }
-//     }
-// }
-// aeCommerce.filter('startFrom', function() {
-//     return function(input, start) {
-//         if (input) {
-//             console.log(start + 'start');
-//             console.log(input + 'inout');
-//             start = +start; //parse to int
-//             start = +start; //parse to int
-//             console.log(input.slice(start));
-//             return input.slice(start);
-//         } else {
-//             return 0;
-//         }
-//     }
-// });
-// aeCommerce.filter('returnTotals', function($rootScope) {
-//     return function(input) {
-//         console.log('---------------bda-------------------');
-//         console.log(input);
-//         var items = 0;
-//         $.each(input, function(index, item) {
-//             items++;
-//         });
-//         $rootScope.productCount = items;
-//         console.log('---------------end-------------------');
-//         return input;
-
-//     }
-// });
-// aeCommerce.directive('dynamic', function($compile) {
-//     return {
-//         restrict: 'A',
-//         replace: true,
-//         link: function(scope, ele, attrs) {
-//             scope.$watch(attrs.dynamic, function(html) {
-//                 ele.html(html);
-//                 $compile(ele.contents())(scope);
-//             });
-//         }
-//     };
-// });
 
 function CollectionCtrl($scope, $location, AzureMobileClient, $rootScope, $routeParams, $cookies, $http) {
     $scope.priceRange = {
@@ -356,7 +122,6 @@ function CollectionCtrl($scope, $location, AzureMobileClient, $rootScope, $route
         return vendorCounts;
     }
     $scope.SearchVendorsearchReturn = function(items) {
-        //console.log(items);
         var hasItemsPre = false;
         $.each($scope.SearchVendorsearch, function(ind, itm) {
             if (itm == true) {
@@ -366,9 +131,6 @@ function CollectionCtrl($scope, $location, AzureMobileClient, $rootScope, $route
         if (!hasItemsPre) {
             return items;
         }
-        //console.log('acho');
-        //console.log(items);
-        //console.log($scope.SearchVendorsearch);
         var pushItems = [];
         var hasItems = false;
         $.each($scope.SearchVendorsearch, function(ind, itm) {
@@ -378,8 +140,6 @@ function CollectionCtrl($scope, $location, AzureMobileClient, $rootScope, $route
                 }
             }
         });
-        //console.log(hasItems);
-        ////console.log(hasItems);
         if (hasItems) {
             return items;
         } else {
@@ -408,8 +168,25 @@ function CollectionCtrl($scope, $location, AzureMobileClient, $rootScope, $route
             return false;
         }
     }
-    $rootScope.productCount = 0;
     $scope.routeParam = $routeParams.CollectionName;
+    $rootScope.title = unescape(seoTitle);
+    $scope.InitCollection = function(){
+        console.log($scope.routeParam);
+        if($scope.routeParam == 'all'){
+            $rootScope.title = $rootScope.SettingGeneral.settings.meta_title;
+            return true;
+        }
+        $.each($rootScope.ListCollection,function(index,item){
+            if(item.collectionUrl == $scope.routeParam){
+                $rootScope.title = item.collectionSeoTitle;
+            }
+        });
+        $scope.startFromPage = 0;
+        $scope.pageLimit = $rootScope.ThemeSettings.theme_settings.pagination_limit;
+        
+    }
+
+    $rootScope.productCount = 0;
     $scope.init = function() {
         $scope.startFromPage = 0;
         $scope.pageLimit = 18;
@@ -551,6 +328,15 @@ function ProductCtrl($scope, $location, AzureMobileClient, $rootScope, $routePar
         }
     });
     $scope.routeParam = $routeParams.ProductSlug;
+    $rootScope.title = unescape(seoTitle);
+    $scope.InitProduct = function(){        
+        $.each($rootScope.ListProduct,function(index,item){
+            if(item.productUrl == $scope.routeParam){
+                $rootScope.title = item.productSeoTitle;
+            }
+        });
+        
+    }
 
     console.log($rootScope.prevUrl[$rootScope.prevUrl.length-1]);
     // console.log();
@@ -562,7 +348,6 @@ function ProductCtrl($scope, $location, AzureMobileClient, $rootScope, $routePar
     
     // var visitedProducts = {};
     // visitedProducts.push();
-
 }
 
 function CarouselDemoCtrl($scope) {
@@ -590,6 +375,15 @@ function PageCtrl($scope, $location, AzureMobileClient, $rootScope, $routeParams
     });
 
     $scope.routeParam = $routeParams.PageUrl;
+    $rootScope.title = unescape(seoTitle);
+    $scope.InitPage = function(){       
+        $.each($rootScope.ListPage,function(index,item){
+            if(item.pageUrl == $scope.routeParam){
+                $rootScope.title = item.pageSeoTitle;
+            }
+        });
+        
+    }
 
     // console.log('qwerty');
     $rootScope.askDoctor = {}
@@ -618,28 +412,29 @@ function PageCtrl($scope, $location, AzureMobileClient, $rootScope, $routeParams
     }
 }
 // JavaScript Document
-
-function CartCtrl($scope, $location, $rootScope) {
+function CartCtrl($scope,$location,$rootScope){
     $rootScope.locationParam = [];
-    var locationsParam = $scope.$location.path().split('/');
-    $.each(locationsParam, function(index, item) {
-        if (item && item != '') {
+    var locationsParam = $scope.$location.path().split('/');    
+    $.each(locationsParam,function(index,item){
+        if(item && item != ''){
             $rootScope.locationParam.push(item);
         }
     });
+     $rootScope.title = 'Cart - '+$rootScope.SettingGeneral.settings.meta_title;
 }
 
-function ConfirmCtrl($scope, $location, $rootScope) {
+function ConfirmCtrl($scope,$location,$rootScope){
     $rootScope.locationParam = [];
-    var locationsParam = $scope.$location.path().split('/');
-    $.each(locationsParam, function(index, item) {
-        if (item && item != '') {
+    var locationsParam = $scope.$location.path().split('/');    
+    $.each(locationsParam,function(index,item){
+        if(item && item != ''){
             $rootScope.locationParam.push(item);
         }
     });
+    $rootScope.title = 'Confirm - '+$rootScope.SettingGeneral.settings.meta_title;
 }
+
 // JavaScript Document
-
 function LoginCtrl($scope, $location, $rootScope) {
     console.log(document.referrer);
 
@@ -650,6 +445,7 @@ function LoginCtrl($scope, $location, $rootScope) {
             $rootScope.locationParam.push(item);
         }
     });
+    $rootScope.title = 'Login - '+$rootScope.SettingGeneral.settings.meta_title;
 
     $rootScope.redirectHandler = function() {
         if ($rootScope.prevUrl[$rootScope.prevUrl.length - 1] == 'cart' && $rootScope.IfCart()) {
@@ -683,51 +479,61 @@ function askDoctor($scope, $location, $rootScope) {
     }
 }
 
-function ForgotCtrl($scope, $location, $rootScope) {
+function ForgotCtrl($scope,$location,$rootScope){
     $rootScope.locationParam = [];
-    var locationsParam = $scope.$location.path().split('/');
-    $.each(locationsParam, function(index, item) {
-        if (item && item != '') {
+    var locationsParam = $scope.$location.path().split('/');    
+    $.each(locationsParam,function(index,item){
+        if(item && item != ''){
+            $rootScope.locationParam.push(item);
+        }
+    });
+     $rootScope.title = 'Forgot Password - '+$rootScope.SettingGeneral.settings.meta_title;
+}
+function ResetCtrl($scope,$location,$rootScope){
+    $rootScope.locationParam = [];
+    var locationsParam = $scope.$location.path().split('/');    
+    $.each(locationsParam,function(index,item){
+        if(item && item != ''){
+            $rootScope.locationParam.push(item);
+        }
+    });
+    $rootScope.title = 'Reset Password - '+$rootScope.SettingGeneral.settings.meta_title;
+}
+function SignupCtrl($scope,$location,$rootScope){
+    $rootScope.locationParam = [];
+    var locationsParam = $scope.$location.path().split('/');    
+    $.each(locationsParam,function(index,item){
+        if(item && item != ''){
+            $rootScope.locationParam.push(item);
+        }
+    });
+    $rootScope.title = 'Signup - '+$rootScope.SettingGeneral.settings.meta_title;
+}
+function ThankyouCtrl($scope,$location,$rootScope){
+  $rootScope.locationParam = [];
+  var locationsParam = $scope.$location.path().split('/');  
+  $.each(locationsParam,function(index,item){
+    if(item && item != ''){
+      $rootScope.locationParam.push(item);
+    }
+  });
+  $rootScope.title = 'Thankyou - '+$rootScope.SettingGeneral.settings.meta_title;
+
+}
+function AccountCtrl($scope,$location,$rootScope){
+    $rootScope.locationParam = [];
+    var locationsParam = $scope.$location.path().split('/');    
+    $.each(locationsParam,function(index,item){
+        if(item && item != ''){
             $rootScope.locationParam.push(item);
         }
     });
 }
-
-function ResetCtrl($scope, $location, $rootScope) {
+function OrdersCtrl($scope,$location,$rootScope){
     $rootScope.locationParam = [];
-    var locationsParam = $scope.$location.path().split('/');
-    $.each(locationsParam, function(index, item) {
-        if (item && item != '') {
-            $rootScope.locationParam.push(item);
-        }
-    });
-}
-
-function SignupCtrl($scope, $location, $rootScope) {
-    $rootScope.locationParam = [];
-    var locationsParam = $scope.$location.path().split('/');
-    $.each(locationsParam, function(index, item) {
-        if (item && item != '') {
-            $rootScope.locationParam.push(item);
-        }
-    });
-}
-
-function AccountCtrl($scope, $location, $rootScope) {
-    $rootScope.locationParam = [];
-    var locationsParam = $scope.$location.path().split('/');
-    $.each(locationsParam, function(index, item) {
-        if (item && item != '') {
-            $rootScope.locationParam.push(item);
-        }
-    });
-}
-
-function OrdersCtrl($scope, $location, $rootScope) {
-    $rootScope.locationParam = [];
-    var locationsParam = $scope.$location.path().split('/');
-    $.each(locationsParam, function(index, item) {
-        if (item && item != '') {
+    var locationsParam = $scope.$location.path().split('/');    
+    $.each(locationsParam,function(index,item){
+        if(item && item != ''){
             $rootScope.locationParam.push(item);
         }
     });
