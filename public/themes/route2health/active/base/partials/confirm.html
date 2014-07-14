@@ -33,6 +33,17 @@
                     <td class="price" id="total_product">Total products: &nbsp;&nbsp;{{ReturnItems()}}</td>
                   </tr>
 
+
+                  <tr class="cart_total_price" ng-if="ReturnShipping()">
+                    <td><!-- Total products --></td>
+                    <td class="price" id="total_product">Amount without shipping: &nbsp;&nbsp;{{ReturnTotal()- ReturnShipping() -ReturnTaxPrice() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
+                  </tr>
+
+                  <tr class="cart_total_price" ng-if="ReturnShipping()">
+                    <td><!-- Total products --></td>
+                    <td class="price" id="total_product">Shipping Cost: {{ReturnShipping()| nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
+                  </tr>
+
                   <tr class="cart_total_price " ng-if="ReturnTax()">
                     <td><!-- Total products --></td>
                     <td class="price" id="total_product">Tax: &nbsp;&nbsp;{{ReturnTaxPrice() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
@@ -359,7 +370,6 @@
                         Please Select
                       </option>
                       <option ng-repeat="payment in ListPaymentMethod" value="{{payment.name}}">{{payment.name}}</option>
-
                     </select>
                   </div>
                   <div class="span8" style="margin-top: 20px;">
@@ -375,7 +385,7 @@
               </p>
             </form>
 
-            <fieldset class="center_column" style="display:none">
+           <!--  <fieldset class="center_column" style="display:none">
                   <div class="cat_desc" ng-if="ListPaymentGateways.refund_policy" ng-init="isfullConetent = false">
                       <div class="page-header">
                         <h1>Refund Policy</h1>
@@ -417,7 +427,7 @@
                       </div>
 
                   </div>
-           </fieldset>
+           </fieldset> -->
           </div>
 
           <!-- Right -->

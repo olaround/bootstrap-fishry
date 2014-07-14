@@ -23,7 +23,7 @@
     <meta name="description" content="Shop powered by Route2health"/>
 	<meta name="keywords" content="shop, Route2Health"/>
    	
-   	<title ng-bind="title"><%= title %></title>
+   	<title ng-bind="title"><%= unescape(title) %></title>
    	
    	<%- requireServerVars() %>
    	
@@ -237,7 +237,9 @@
 							
 
 							<ul id="header_links" ng-repeat="Navigation in ListNavigation | filter : 'header-pages'">
-								<li ng-repeat="Nav in Navigation.link_list" ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}"><a ng-href="{{Nav.commaSeprated}}">{{Nav.name}}</a>
+								
+								<li ng-repeat="Nav in Navigation.link_list" ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}"><a ng-if="Nav.commaSeprated" ng-href="{{Nav.commaSeprated}}">{{Nav.name}}</a>
+								<a ng-if="!Nav.commaSeprated" ng-href="/">{{Nav.name}}</a>
 								</li>
 							</ul>
 

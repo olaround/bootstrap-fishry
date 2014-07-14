@@ -68,7 +68,6 @@ function HomeCtrl($scope, $location, $rootScope) {
             $rootScope.locationParam.push(item);
         }
     });
-    
     if($rootScope.SettingGeneral){
       if($rootScope.SettingGeneral.settings.meta_title){
          $rootScope.title = $rootScope.SettingGeneral.settings.meta_title;
@@ -182,8 +181,9 @@ function CollectionCtrl($scope, $location, AzureMobileClient, $rootScope, $route
             }
         });
         $scope.startFromPage = 0;
-        $scope.pageLimit = $rootScope.ThemeSettings.theme_settings.pagination_limit;
-        
+        // $scope.pageLimit = $rootScope.ThemeSettings.theme_settings.pagination_limit;
+        $scope.pageLimit = 18;
+ 
     }
 
     $rootScope.productCount = 0;
@@ -339,15 +339,12 @@ function ProductCtrl($scope, $location, AzureMobileClient, $rootScope, $routePar
     }
 
     console.log($rootScope.prevUrl[$rootScope.prevUrl.length-1]);
-    // console.log();
-
-    // $scope.shareURL = 'http://www.facebook.com/sharer.php?u=http://route2health.fishry.com/product/' + $scope.routeParam;
-
-	// $routeParams.shareURL = "//www.facebook.com/plugins/like.php?href=http://route2health.fishry.com/product/"+$scope.routeParam+";width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=358436447628477";
     $scope.likeURL = 'http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.route2health.fishry.com%2F' + $routeParams.ProductSlug + '&amp;send=false&amp;layout=button_count&amp;width=150&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=286715611395896';
     
-    // var visitedProducts = {};
-    // visitedProducts.push();
+    $rootScope.productDetailPage = function(newUrl){
+        // var urlDetailPage = '/product/' + $routeParams.ProductSlug;
+        $location.path('/product/' + newUrl);
+    } 
 }
 
 function CarouselDemoCtrl($scope) {
@@ -451,7 +448,7 @@ function LoginCtrl($scope, $location, $rootScope) {
         if ($rootScope.prevUrl[$rootScope.prevUrl.length - 1] == 'cart' && $rootScope.IfCart()) {
             $rootScope.CheckLogin('confirm');
         } else {
-            $rootScope.CheckLogin('window.history.back()');
+            $rootScope.CheckLogin('/collections/a-to-z');
         }
     }
 }

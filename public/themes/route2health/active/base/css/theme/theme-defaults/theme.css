@@ -1069,7 +1069,8 @@ ul.footer_links li a i {
 	display:block;
 	position:absolute;
 	left:0;
-	top:20px
+	top:20px;
+	width: 200px;
 }
 #header-inner {
 	padding:140px 0 0 0;
@@ -1278,7 +1279,7 @@ ul.footer_links li a i {
 	height:7px;
 	position:absolute;
 	top:5px;
-	right:5px;
+	right:8px;
 	display:block
 }
 #header_user.closeCart #shopping_cart .opancart {
@@ -2365,6 +2366,7 @@ a.tag_level1 {
 	background: none;
 	border: none;
 	top: 10px;
+	font-size: 10px;
 }
 #searchCrossBtn:focus{
 	outline: 0;
@@ -2822,7 +2824,7 @@ form#new_account_form h4 {
 #pb-left-column h1, .pb-right-colum-h {
 	background:none;
 	border:none;
-	color:#363435;
+	color:#238f46;
 	font-size:23px;
 	margin:0 0 15px 0;
 	padding:0 0 0 0;
@@ -3502,7 +3504,9 @@ table#cart_summary tbody tr {
 table#cart_summary td {
 	padding:20px;
 	border:none;
-	vertical-align:top
+	vertical-align:top;
+	min-width: 220px !important;
+	display: inline-block;
 }
 table#cart_summary .customization {
 	border-color:#ccc

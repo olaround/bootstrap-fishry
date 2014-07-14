@@ -150,6 +150,58 @@ aeCommerce.directive('dynamicTooltip', function($compile) {
       }
     }
   })
+// aeCommerce.directive('loadSliderScript', function() {
+//     return {
+//         link: function(scope, element, attrs) {
+//         	$("#carouselproduct").carouFredSel({
+// 	             debug: true,
+// 	             circular: true,
+// 	                   infinite: true,
+// 	             responsive: true,
+// 	             align   : "center",
+// 	             width: '100%',
+// 	                auto : {
+// 	                     play    : 1,
+// 	                 timeoutDuration :15000
+// 	                },
+
+// 	                items    : {
+
+// 	             visible: {
+// 	                         min: 2,
+// 	                         max: 6
+// 	                          },
+// 	                          width:167,
+
+// 	             },      
+// 	             scroll  : {
+// 	                 items   : 1,
+// 	                 pauseOnHover:false
+// 	             },
+// 	             prev    : {
+// 	                 button  : "#cat_prev"
+// 	             },
+// 	             next    : {
+// 	                 button  : "#cat_next"
+// 	             },
+// 	             swipe: {
+// 	                         onMouse: false,
+// 	                         onTouch: true
+// 	                    }
+// 	            }, 
+// 	            {
+// 	                classnames       : {
+// 	                 selected        : "selected",
+// 	                 hidden          : "hidden",
+// 	                 disabled        : "disabled",
+// 	                 paused          : "paused",
+// 	                 stopped         : "stopped"
+// 	                },
+
+// 	            });
+// 	        }
+// 	    }
+// 	}); 
 aeCommerce.directive('ngEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {

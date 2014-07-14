@@ -5,7 +5,7 @@
                 <div id="center_column" class="center_column span9 clearfix">
                   <ul id="product_list" class="row grid">
 
-                          <li class="span3" ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} | filter:{productName:SearchTitleSearch} | filter:SearchMinMaxPriceReturn | filter:SearchVendorsearchReturn | filter:{ProductTypeName:SearchTypeSearch} | filter:{productTags:SearchTagsSearch} | returnTotals:products | startFrom:startFromPage | limitTo:pageLimit">
+                          <li class="span3" ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} | filter:SearchTitleSearch | filter:SearchMinMaxPriceReturn | filter:SearchVendorsearchReturn | filter:{ProductTypeName:SearchTypeSearch} | filter:{productTags:SearchTagsSearch} | returnTotals:products | startFrom:startFromPage | limitTo:pageLimit">
                               <a href="/product/{{products.productUrl}}" class="product_img_link" title="{{products.productName}}">
                                   <img ng-if="products.productImage[0].Image" ng-src="{{products.productImage[0].Image}}" alt="{{products.productName}}">
                                   <img ng-if="!products.productImage[0].Image" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{products.prouctName}}">
