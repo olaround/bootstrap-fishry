@@ -417,7 +417,17 @@ function CartCtrl($scope,$location,$rootScope){
             $rootScope.locationParam.push(item);
         }
     });
-     $rootScope.title = 'Cart - '+$rootScope.SettingGeneral.settings.meta_title;
+    
+    $rootScope.title = 'Cart - '+$rootScope.SettingGeneral.settings.meta_title;
+
+    $scope.limitCartProductQuantity = function(item) {
+        if(item.quantity > 1) {
+            item.quantity = item.quantity-1;
+        }
+        return item.quantity;
+    }
+
+
 }
 
 function ConfirmCtrl($scope,$location,$rootScope){
@@ -448,7 +458,7 @@ function LoginCtrl($scope, $location, $rootScope) {
         if ($rootScope.prevUrl[$rootScope.prevUrl.length - 1] == 'cart' && $rootScope.IfCart()) {
             $rootScope.CheckLogin('confirm');
         } else {
-            $rootScope.CheckLogin('/collections/a-to-z');
+            $rootScope.CheckLogin('window.history.back()');
         }
     }
 }

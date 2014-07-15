@@ -30,26 +30,41 @@
                 <tfoot>
                   <tr class="cart_total_price ">
                     <td><!-- Total products --></td>
+                    <td><!-- Total products --></td>
+                    <td><!-- Total products --></td>
+                    <td><!-- Total products --></td>
                     <td class="price" id="total_product">Total products: &nbsp;&nbsp;{{ReturnItems()}}</td>
                   </tr>
 
 
                   <tr class="cart_total_price" ng-if="ReturnShipping()">
                     <td><!-- Total products --></td>
+                    <td><!-- Total products --></td>
+                    <td><!-- Total products --></td>
+                    <td><!-- Total products --></td>
                     <td class="price" id="total_product">Amount without shipping: &nbsp;&nbsp;{{ReturnTotal()- ReturnShipping() -ReturnTaxPrice() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                   </tr>
 
                   <tr class="cart_total_price" ng-if="ReturnShipping()">
+                    <td><!-- Total products --></td>
+                    <td><!-- Total products --></td>
+                    <td><!-- Total products --></td>
                     <td><!-- Total products --></td>
                     <td class="price" id="total_product">Shipping Cost: {{ReturnShipping()| nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                   </tr>
 
                   <tr class="cart_total_price " ng-if="ReturnTax()">
                     <td><!-- Total products --></td>
+                    <td><!-- Total products --></td>
+                    <td><!-- Total products --></td>
+                    <td><!-- Total products --></td>
                     <td class="price" id="total_product">Tax: &nbsp;&nbsp;{{ReturnTaxPrice() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                   </tr>
 
                   <tr class="cart_total_price ">
+                    <td><!-- Total products --></td>
+                    <td><!-- Total products --></td>
+                    <td><!-- Total products --></td>
                     <td><!-- Total products --></td>
                     <td class="price" id="total_product">Total Amount: &nbsp;&nbsp;{{ReturnTotal() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                   </tr>
@@ -80,7 +95,7 @@
                           <div class="cart_quantity">
                             <div id="cart_quantity_button" class="cart_quantity_button" style="float:left;" ng-controller="CartCtrl">
 
-                              <a rel="nofollow" class="cart_quantity_down" href="javascript:void(0)" title="Subtract" ng-click="Items.quantity = limitCartProductQuantity(Items.quantity)">
+                              <a rel="nofollow" class="cart_quantity_down" href="javascript:void(0)" title="Subtract" ng-click="Items.quantity = limitCartProductQuantity(Items)">
                                 <img src="http://livedemo00.template-help.com/prestashop_44889/themes/theme686/img/icon/quantity_down.gif" alt="Subtract" width="23" height="24">
                               </a>
                               <input size="2" type="text" autocomplete="off" class="cart_quantity_input" value="{{Items.quantity}}" ng-model="Items.quantity" name="quantity_1_0_0_0" min="1">

@@ -1072,6 +1072,9 @@ ul.footer_links li a i {
 	top:20px;
 	width: 200px;
 }
+.fbPageLink {
+	color: blue !important;
+}
 #header-inner {
 	padding:140px 0 0 0;
 	position:relative
