@@ -8,5 +8,20 @@ function CollectionCtrl($scope,$location,AzureMobileClient,$rootScope,$routePara
 		}
 	});
 	$scope.routeParam = $routeParams.CollectionName;
+	$rootScope.title = unescape(seoTitle);
+	$scope.InitCollection = function(){
+		console.log($scope.routeParam);
+		if($scope.routeParam == 'all'){
+			$rootScope.title = $rootScope.SettingGeneral.settings.meta_title;
+			return true;
+		}
+		$.each($rootScope.ListCollection,function(index,item){
+			if(item.collectionUrl == $scope.routeParam){
+				$rootScope.title = item.collectionSeoTitle + ' - '+$rootScope.SettingGeneral.settings.meta_title;
+			}
+		});
+		
+	}
+	
 	
 }

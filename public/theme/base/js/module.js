@@ -1,88 +1,97 @@
-var aeCommerce = angular.module('aeCommerce', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngSanitize', 'App.filters'])
+var aeCommerce = angular.module('aeCommerce', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngSanitize', 'App.filters','compile'])
     .config(aeCommerceRouter);
 
 function aeCommerceRouter($routeProvider, $locationProvider, $provide) {
     $routeProvider
         .when('/', {
             templateUrl: BaseUrl + 'partials/home.html',
-            controller: '',
-            title: 'Home'
+            controller: 'HomeCtrl',
+           title : unescape(seoTitle),
         })
         .when('/collections/:CollectionName', {
             templateUrl: BaseUrl + 'partials/collections.html',
             controller: 'CollectionCtrl',
-            title: 'Collections'
+            title : unescape(seoTitle),
         })
-        .when('/product/:ProductName', {
+        .when('/product/:ProductSlug', {
             templateUrl: BaseUrl + 'partials/product.html',
             controller: 'ProductCtrl',
-            title: 'Product'
+           title : unescape(seoTitle),
         })
-        .when('/products/:ProductName', {
+        .when('/products/:ProductSlug', {
             templateUrl: BaseUrl + 'partials/products.html',
             controller: 'ProductCtrl',
-            title: 'Product'
+            title : unescape(seoTitle),
         })
         .when('/cart', {
             templateUrl: BaseUrl + 'partials/cart.html',
-            controller: 'OrderCtrl',
-            title: 'Cart'
+            controller: 'CartCtrl',
+            title : unescape(seoTitle),
         })
         .when('/confirm', {
             templateUrl: BaseUrl + 'partials/confirm.html',
-            controller: '',
-            title: 'Confirm Order'
+            controller: 'ConfirmCtrl',
+           title : unescape(seoTitle),
         })
         .when('/thankyou', {
             templateUrl: BaseUrl + 'partials/thankyou.html',
-            controller: '',
-            title: 'Thankyou'
+            controller: 'ThankyouCtrl',
+            title : unescape(seoTitle),
         })
         .when('/login', {
             templateUrl: BaseUrl + 'partials/login.html',
-            controller: '',
-            title: 'Login'
+            controller: 'LoginCtrl',
+            title : unescape(seoTitle),
         })
         .when('/signup', {
             templateUrl: BaseUrl + 'partials/signup.html',
-            controller: '',
-            title: 'Signup'
+            controller: 'SignupCtrl',
+             title : unescape(seoTitle),
         })
         .when('/page/order', {
             templateUrl: BaseUrl + 'partials/order.html',
             controller: 'OrderCtrl',
-            title: 'Order'
+            title : unescape(seoTitle),
         })
         .when('/page/locations', {
             templateUrl: BaseUrl + 'partials/locations.html',
             controller: 'PageCtrl',
-            title: 'Locations'
+          	 title : unescape(seoTitle),
         })
+        .when('/forgot_password', {
+            templateUrl: BaseUrl+'partials/forgot_password.html',
+            controller: 'ForgotCtrl',
+            title : unescape(seoTitle),
+         })
+         .when('/reset_password', {
+            templateUrl: BaseUrl+'partials/reset_password.html',
+            controller: 'ResetCtrl',
+             title : unescape(seoTitle),
+         })
+		 .when('/reset_password/:id', {
+			templateUrl: BaseUrl+'partials/reset_password.html',
+			controller: 'ResetCtrl',
+			title : 'Reset Password - '+storeNameMeta,
+		 })
         .when('/page/:PageUrl', {
             templateUrl: BaseUrl + 'partials/page.html',
             controller: 'PageCtrl',
-            title: 'Page Any'
+            title : unescape(seoTitle),
         })
         .when('/:any', {
             templateUrl: BaseUrl + 'partials/404.html',
             controller: '',
-            title: 'Page Not Found'
+            title : unescape(seoTitle),
         });
     $locationProvider.html5Mode(true).hashPrefix('navigate');
 }
 
 aeCommerce.run(['$location', '$rootScope', function($location, $rootScope) {
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-        var addedTitle = '';
-        if(current.params.CollectionName){
-            addedTitle = ' | '+current.params.CollectionName;
-        }
-        if(current.params.ProductSlug){
-            addedTitle = ' | '+current.params.ProductSlug;
-        }
-        console.log(current);
-        $rootScope.title = current.$$route.title + addedTitle;
-    });
+		if($rootScope.setLocalStorageData){
+			$rootScope.setLocalStorageData();
+		}
+	});
     
 }]);
 aeCommerce.directive('tagInput', function() {
@@ -123,6 +132,13 @@ aeCommerce.directive('tagInput', function() {
         }
     }
 });
+aeCommerce.filter('nfcurrency', [ '$filter', '$locale', function ($filter, $locale) {
+    var currency = $filter('currency'), formats = $locale.NUMBER_FORMATS;
+    return function (amount, symbol) {
+        var value = currency(amount, symbol);
+        return value.replace(new RegExp('\\' + formats.DECIMAL_SEP + '\\d{2}'), '')
+    }
+}]);
 
 angular.module('ng').filter('cut', function() {
     return function(value, wordwise, max, tail) {
@@ -168,3 +184,4 @@ var compile = angular.module('compile', [], function($compileProvider) {
       };
     })
 });
+

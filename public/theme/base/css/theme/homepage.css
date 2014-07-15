@@ -3,6 +3,7 @@
     min-height:0;
     z-index:10
 }
+
 #genericHeader .mainNavigation span a:hover {
     color:#f9022d;
     background:#fff
@@ -21,7 +22,7 @@
     margin-left:15px
 }
 #genericHeader .subNavigation .logo {
-    width:100px;
+   width:100px;
     height:100px;
     top:-34px;
     background:transparent url(../../img/theme/img-logo-home.png) no-repeat 0 0 scroll;
@@ -148,7 +149,7 @@
 #homePage.generalMarket #sectionMain .hero.panPizza-hero .buttonContainer #heroCTA {
     font-size:1.5em;
     height:32px;
-    left:284px;
+    left:290px;
     position:absolute;
     top:193px;
     width:117px;
@@ -192,7 +193,7 @@
     height:22px;
     left:60px;
     position:absolute;
-    top:204px;
+    top:209px;
     width:87px;
     padding:0;
     font-size:1.2em
@@ -291,7 +292,7 @@
     height:30px;
     left:52px;
     position:absolute;
-    top:210px;
+    top:200px;
     width:110px;
     font-size:1.4em;
     padding:2px 6px
