@@ -8,4 +8,14 @@ function ProductCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,
 		}
 	});
 	$scope.routeParam = $routeParams.ProductName;
+	
+	$rootScope.title = unescape(seoTitle);
+	$scope.InitProduct = function(){		
+		$.each($rootScope.ListProduct,function(index,item){
+			if(item.productUrl == $scope.routeParam){
+				$rootScope.title = item.productSeoTitle + ' - '+$rootScope.SettingGeneral.settings.meta_title;
+			}
+		});
+		
+	}
 }

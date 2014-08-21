@@ -6047,7 +6047,7 @@ display: inline-block;
     font-size:1.1em
 }
 #entreesPage .generalMarket .promotions #fiftyPercentOff {
-    background:url('../../img/theme/noimage.png') no-repeat 0 0;
+    background:url('../../img/theme/DPZ_N1_GM_OP_50off.jpg') no-repeat 0 0;
     margin-right:12px;
     width:605px;
     background-size: cover;
@@ -6059,9 +6059,9 @@ display: inline-block;
 }
 #entreesPage .generalMarket .promotions #fiftyPercentOff #fiftyPercentOffCTA {
     height:26px;
-    left:336px;
+    left:470px;
     position:absolute;
-    top:117px;
+    top:135px;
     width:110px
 }
 #entreesPage .generalMarket .promotions #fiftyPercentOff #fiftyPercentOffCTA.btn {
@@ -6766,4 +6766,37 @@ border-bottom: 1px solid rgb(213, 206, 206);
 }
 .builderWrapper .tbody.variants-border:last-child{
 border-bottom: none;	
+}
+a.js-resetPassword:hover{
+color:#0078ae;	
+
+}
+.edit{
+color: #fa001f;
+float: right;
+font-weight: bold;
+display: block;
+font-size: 12px;
+text-decoration: underline;	
+cursor: pointer;
+}
+.pageBox.border-pop{
+border: 14px solid #0078ae;	
+border-radius: 5px 5px 5px 5px;
+}
+.popup-body{
+position: fixed;
+z-index: 10002;
+left: 0;
+top: 0;
+right: 0;
+width: 100% !important;
+height: 100% !important;
+background-color: rgba(255,255,255,0.75);
+transition: all 0.5s ease-in-out;
+-webkit-transition: all 0.5s ease-in-out;
+}	
+}
+.hide{
+display: none;	
 }

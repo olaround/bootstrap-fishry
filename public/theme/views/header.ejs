@@ -1,30 +1,43 @@
-<!DOCTYPE PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html ng-app="aeCommerce" ng-controller="AECtrl">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	     <meta name="fragment" content="!">
-		<base href="/">
-		<meta name="description" content="Dominos powered by Bramerz"/>
-	    <meta name="keywords" content="shop, Dominos"/>
-	    <meta property="og:type" content="website" />
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="fragment" content="!">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <base href="/">
+    <link rel="icon" type="image/vnd.microsoft.icon" ng-if="ThemeSettings.theme_settings.favicon" href="{{ThemeSettings.theme_settings.favicon}}"/>
+	 <title ng-bind="title">
+                 <%= unescape(title) %>
+              </title>
 		<% if (typeof(meta) != "undefined") { %>
-		<% for (var metaItem in meta) { %>
-		<meta name="
-		<%= metaItem %>
-		" content="
-		<%= meta[metaItem] %>
-		" />
-		<% } %>
-		<% } %>
-		<link rel="icon" type="image/vnd.microsoft.icon" ng-if="ThemeSettings.theme_settings.favicon" href="{{ThemeSettings.theme_settings.favicon}}"/>
-		<title ng-bind="title">
-		<%= title %>
-		</title> 
+			  <% for (var metaItem in meta) { %>
+			  <% if (meta[metaItem] && metaItem) { %>
+				<meta name="<%= metaItem %>" content="<%= meta[metaItem] %>" />
+				<% } %>
+				<% } %>
+          <% } %>
+		  <% if (typeof(og) != "undefined") { %>
+			  <% for (var ogItem in og) { %>
+			   <% if (og[ogItem] && ogItem) { %>
+				<meta property="<%= ogItem %>" content="<%= og[ogItem] %>" />
+				<% } %>
+				<% } %>
+          <% } %>
+		
 		
 		<%- requireServerVars() %>
+		<% include header_resources %>
 		
 	</head>
 	<body id="index" >
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 		<div id='loadingbar'></div>
 		<div id="Loader" style="position:absolute;z-index:9999;background: none repeat scroll 0 0 rgba(0, 0, 0, 0.89); display:none !important; height: 259%;width: 100%;"><img src="<%= BaseUrl %>img/theme/bkg-loading.gif" alt="Loader" style="margin: 0 auto;display: block;margin-top: 226px;"></div>
 		<div  class="container" style="display:none;">

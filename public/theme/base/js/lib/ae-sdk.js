@@ -226,7 +226,7 @@ $rootScope.GuestLogin = function(redirect){
 	$rootScope.User.info.CustomerEmail = $scope.GuestEmail;
 	$rootScope.User.info.CustomerFirstName = $scope.GuestFirstName;
 	$rootScope.User.info.CustomerLastName = $scope.GuestLastName;
-	$rootScope.SetLocalStorage('User');
+	$rootScope.SetLocalStorageGlobal('User');
 	top.location.href = "/"+redirect;
 }
 //Add to cart
@@ -259,7 +259,7 @@ $rootScope.addToCart = function(productID,productInfo){
 					  if(varrientArray == ''){
 					  	varrientArray += varientItem;
 					  }else{
-					  	varrientArray += ','+varientItem;
+					  	varrientArray += ', '+varientItem;
 					  }
 				  }
 				 counters++;
@@ -315,7 +315,7 @@ $rootScope.addToCart = function(productID,productInfo){
 	//console.log(productInfo);
 	//console.log($rootScope.Cart[productID]);
 
-	$rootScope.SetLocalStorage('Cart');
+	$rootScope.SetLocalStorageGlobal('Cart');
 }
 $rootScope.IfCart= function(){	
 	var length= 0;
@@ -389,9 +389,9 @@ $rootScope.RemoveCartItem= function(Productid,keyId){
 		console.log(Productid);	
 		delete $rootScope.Cart[Productid];
 	}
-	$rootScope.SetLocalStorage('Cart');
+	$rootScope.SetLocalStorageGlobal('Cart');
 }
-$rootScope.SetLocalStorage= function(Index){
+$rootScope.SetLocalStorageGlobal= function(Index){
 	if(Index == 'Cart' || Index == ''){
 		window.localStorage.setItem('Cart',JSON.stringify($rootScope.Cart));
 		console.log(window.localStorage.getItem('Cart'));
@@ -427,7 +427,7 @@ $rootScope.CheckLogin = function(redirect){
 				$rootScope.User.info = {};
 				$rootScope.User.info = data[0];
 				$rootScope.Customer = data[0];
-				$rootScope.SetLocalStorage('User');
+				$rootScope.SetLocalStorageGlobal('User');
 				$scope.$apply(function() { 
 					if(redirect == 'window.history.back()'){
 						window.history.back();
@@ -461,7 +461,7 @@ $rootScope.SignUp = function(redirect){
 			function(UserData) {
 			   //console.log(UserData);
 			   $rootScope.User.info = UserData;
-			   $rootScope.SetLocalStorage('User');
+			   $rootScope.SetLocalStorageGlobal('User');
 			   $scope.$apply(function() { 
 			   		if(redirect == 'window.history.back()'){
 						window.history.back();
@@ -496,7 +496,7 @@ $rootScope.SubmitOrder =  function(payment,redirect){
 			function(OrderData) {
 			   $rootScope.OrderInfo = OrderData;
 			   $rootScope.Cart = {};
-			   $rootScope.SetLocalStorage('Cart');
+			   $rootScope.SetLocalStorageGlobal('Cart');
 			   $scope.$apply(function() {
 				   if(redirect == 'window.history.back()'){
 						window.history.back();

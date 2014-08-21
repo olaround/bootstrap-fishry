@@ -21,7 +21,7 @@
                 <h2 class="sectionHeading">Thank You For Your Order</h2>
                 <div class="pageBox">
                     <p class="headlineText informationText">Order #
-                        <strong>{{OrderInfo.id}}</strong>&nbsp;was successfully placed.</p>
+                        <strong>{{SettingGeneral.settings.order_number_format}}{{OrderInfo.orderid}}</strong>&nbsp;was successfully placed.</p>
                     <p class="contentText">You should receive a confirmation email shortly containing your order number and the store information. Your order details are below.</p>
                 </div>
                 
@@ -41,3 +41,19 @@
     </div>
 
 </div>
+<!-- Facebook Conversion Code for Domino&#039;s Online Order -->
+<script>(function() {
+var _fbq = window._fbq || (window._fbq = []);
+if (!_fbq.loaded) {
+var fbds = document.createElement('script');
+fbds.async = true;
+fbds.src = '//connect.facebook.net/en_US/fbds.js';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(fbds, s);
+_fbq.loaded = true;
+}
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', '6019775005264', {'value':'0.01','currency':'USD'}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6019775005264&amp;cd[value]=0.01&amp;cd[currency]=USD&amp;noscript=1" /></noscript>

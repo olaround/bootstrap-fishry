@@ -7,4 +7,6 @@ function CartCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	alert(1);
+	$rootScope.title = 'Cart - '+$rootScope.SettingGeneral.settings.meta_title;
 }

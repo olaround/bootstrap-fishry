@@ -19,7 +19,7 @@
                 <div class="profileMsg">
                     <p>With a Pizza Profile, your address and payment information will be saved so it will be even easier and faster to order than ever.</p>
                 </div>
-                <form role="form" ng-submit="SignUp('window.history.back()')">
+                <form role="form" ng-submit="redirectHandlerSignup();">
                     <div class="formArea horizontal right wide">
                         <h1 class="sectionHeading">
                             <span class="profileIcon">Create a Pizza Profile</span>
@@ -825,11 +825,14 @@
                                 </div>
                             </div>
 
+
                             <div class="formEntry entryGroup leftAlign">
                                 <label for="Agree_To_Terms_Of_Use" class="entryToggle">
                                     <input type="checkbox" class="checkbox js-agreeToTerms" required="required" id="Agree_To_Terms_Of_Use" name="Agree_To_Terms_Of_Use">
                                     <strong>*</strong>Yes. I agree to the <a class="js-isContentPopup" href="page/privacy">Terms of Use</a> and I am 13 or older</label>
                             </div>
+
+                             <div ng-if="DuplicateEmailError"  class="label label-warning" style="color:red;font-weight: bolder;margin-left:106px;margin-top:24px;">Email address already exits in our system</div>
                         </div>
                         <div class="requiredFieldsText">
                             <strong>*</strong>
@@ -839,7 +842,7 @@
                             <button class="btn btnLarge" type="submit" title="Create your profile">
                                 <span>Create Profile
                                 </span>
-                            </button>
+                            </button><img ng-if="StartSignup && !DuplicateEmailError" src="{{BaseUrl}}img/theme/wait.gif" style="float: right;margin-top: 8px;margin-right: 14px;">
                             <div class="clr">
 
                             </div>

@@ -7,4 +7,5 @@ function HomeCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	$rootScope.title = $rootScope.SettingGeneral.settings.meta_title;
 }

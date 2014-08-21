@@ -1,4 +1,4 @@
-<div id="pageFrame">
+<div id="pageFrame" ng-init="InitPage()">
     <div id="pageHeader">
         <div id="genericHeader">
             <div class="subNavigation">
@@ -22,80 +22,77 @@
                     <form ng-submit="postproduct(); addressGiven();">
                         <div class="formArea horizontal">
                             <div class="pageBox">
-                            
+
                                 <h3><b>We just need to know where you are so we can find your nearest store.</b>
                                 </h3>
+                                 <div class="formEntry" style="margin-top: 18px;">
+                                                                <label for="City" class="entryLabel">
+                                                                    <strong>*</strong>Payment Type:</label>
+                                                                <div class="entryGroup">
+                                        
+                                                                    <select ng-change="UpdatePaymentMethod(PaymentMethod);SetLocalStorageGlobal(PaymentMethod,'Payment');"
+                                                                     ng-options="payment.name as payment.name for payment in ListPaymentMethod"  style="width:199px;" ng-model="PaymentMethod" required>
+                                                                        <option value="">Select Payment Type</option>
+                                                                       
+                                                                    </select>
 
-                                <!-- <div class="formEntry">
-                                    <div class="entryGroup iconsTemplate serviceType js-changeServiceType">
-                                        <label class="squareIcon" ng-repeat="payment in ListPaymentMethod">
-                                            <input type="radio" required  name="service" class="servicedeliver"  ng-model="ServiceType" style="width: 4px;" value="{{payment.name}}" ng-class="{active :'value'}" ng-click="value = true">{{payment.name}}
-                                        </label>
-                                        <div class="clr">
-                                            
-                                        </div>
+                                                                    <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-left: 10px;">Payment Type is required</span>
 
-                                    </div>
-                                </div> -->
-                                <div class="formEntry" style="margin-top: 18px;">
-                                        <label for="City" class="entryLabel">
-                                            <strong>*</strong>Payment Type:</label>
-                                        <div class="entryGroup">
-                                            <select  id="Payment" style="width:199px;" ng-model="PaymentMethod" required>
-                                                <option value="">Select Payment Type</option>
-                                                <option value="{{payment.name}}" ng-repeat="payment in ListPaymentMethod" >
-                                                    {{payment.name}}
-                                                </option>
-                                            </select>
-                                            <!-- <h3>{{CountryName}}</h3> -->
-                                        </div>
-                                    </div>
-                                
-                                 <div class="js-otherAddress none" style="display: block;">
+                                                               </div>
+                                                            </div>
+
+                                                            <div class="js-otherAddress none" style="display: block;">
 
 
-                                    <div class="formEntry"  style="margin-top: 18px;">
-                                        <label for="City" class="entryLabel">
-                                            <strong>*</strong>City:</label>
-                                        <div class="entryGroup">
-                                            <select id="City" required name="city" class="mini js-region" style="width: 200px;" ng-model="CountryName">
-                                                <option value="">Select City</option>
-                                                <option ng-repeat="Shipping in returnShippingCountry()" value="{{Shipping}}">{{Shipping}}</option>
+                                                                <div class="formEntry" style="margin-top: 18px;">
+                                                                    <label for="City" class="entryLabel">
+                                                                        <strong>*</strong>City:</label>
+                                                                    <div class="entryGroup">
+                                                                        <select  ng-change="UpdateCountryName(User.info.CountryName);SetLocalStorageGlobal(User.info.CountryName,'City');" id="citytype" ng-options="Shipping as Shipping for Shipping in returnShippingCountry()" required name="city" class="mini js-region" style="width: 200px;" ng-model="User.info.CountryName">
+                                                                            <option value="">Select City</option>
+                                                                            
+                                                                        
+                                                                        </select>
 
-                                            </select>
-                                            <!-- <h3>{{CountryName}}</h3> -->
-                                        </div>
-                                    </div>
-                                    <div class="formEntry"  style="margin-top: 18px;">
-                                        <label for="locality" class="entryLabel">
-                                            <strong>*</strong>Locality:</label>
-                                        <div class="entryGroup">
-                                            <select id="Locality" required name="locality" class="mini js-region" style="width: 200px;" ng-model="LocalityName">
-                                                <option value="">Select Locality</option>
-                                                <option  ng-repeat ="Shipping in returnShippingLocality()" value="{{Shipping}}">{{Shipping}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="formEntry"  style="margin-top: 18px;">
-                                        <label for="locality" class="entryLabel">
-                                            <strong>*</strong>Area Name:</label>
-                                        <div class="entryGroup">
-                                            <select id="Area" required name="locality" class="mini js-region" style="width: 200px;" ng-model="AreaName">
-                                                <option value="">Select Area</option>
-                                                <option value="{{Shipping}}" ng-repeat="Shipping in returnShippingArea()">{{Shipping}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="formEntry"  style="margin-top: 18px;">
-                                        <label for="outlet" class="entryLabel">
-                                            <strong>*</strong>Outlet Name:</label>
-                                        <div class="entryGroup">
-                                            <select id="Outlet" required name="outlet" class="mini js-region" style="width: 200px;" ng-model="outletName">
-                                                <option value="">Select Outlet</option>
-                                                <option value="{{Shipping}}" ng-repeat="Shipping in returnShippingOutlet()">{{Shipping}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                                                        <span class="hide city-inline" style="display:none;color: #fa001f;font-weight: 700;padding-left: 10px;">City is required</span>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                <div class="formEntry" style="margin-top: 18px;">
+                                                                    <label for="locality" class="entryLabel">
+                                                                        <strong>*</strong>Locality:</label>
+                                                                    <div class="entryGroup">
+                                                                        <select ng-change="UpdateLocalityName(User.info.LocalityName);SetLocalStorageGlobal(User.info.LocalityName,'Locality');" id="localitytype" ng-options="Shipping as Shipping for Shipping in returnShippingLocality()" required name="locality" class="mini js-region" style="width: 200px;" ng-model="User.info.LocalityName">
+                                                                            <option value="">Select Locality</option>
+                                                                            
+                                                                        </select>
+                                                                        <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-left: 10px;">Locality is required</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="formEntry" style="margin-top: 18px;">
+                                                                    <label for="locality" class="entryLabel">
+                                                                        <strong>*</strong>Area Name:</label>
+                                                                    <div class="entryGroup">
+                                                                        <select ng-change="UpdateAreaName(User.info.AreaName);SetLocalStorageGlobal(User.info.AreaName,'Area');" id="areatype" ng-options="Shipping as Shipping for Shipping in returnShippingArea()" required name="locality" class="mini js-region" style="width: 200px;" ng-model="User.info.AreaName">
+                                                                            <option value="">Select Area</option>
+                                                                           
+                                                                        </select>
+
+                                                                        <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-left: 10px;">Area is required</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="formEntry" style="margin-top: 18px;">
+                                                                    <label for="outlet" class="entryLabel">
+                                                                        <strong>*</strong>Outlet Name:</label>
+                                                                    <div class="entryGroup">
+                                                                        <select ng-change="UpdateoutletName(User.info.outletName);SetLocalStorageGlobal(User.info.outletName,'Outlet');"  id="outlettype" ng-options="Shipping as Shipping for Shipping in returnShippingOutlet()" required name="outlet" class="mini js-region" style="width: 200px;" ng-model="User.info.outletName">
+                                                                            <option value="">Select Outlet</option>
+                                                                            
+                                                                        </select>
+
+                                                                        <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-left: 10px;">Outlet is required</span>
+                                                                    </div>
+                                                                </div>
                                 </div>
                             </div>
                             <div class="formEntry actions right">
@@ -131,7 +128,8 @@
                         <div class="content">
                             <h3 ng-if="!PaymentMethod" class="dominosColororder">Service Type
                             </h3>
-                             <h3 ng-if="PaymentMethod" class="dominosColorok">Service Type<img src="{{BaseUrl}}img/theme/tick.png" style="width: 12px;padding-left: 2px;">
+                            <h3 ng-if="PaymentMethod" class="dominosColorok">Service Type
+                                <img src="{{BaseUrl}}img/theme/tick.png" style="width: 12px;padding-left: 2px;">
                             </h3>
                             <ul class="genericList qa-Mystore">
                                 <li>{{PaymentMethod}}</li>
@@ -139,47 +137,51 @@
                             </ul>
                             <div class="divider">
                             </div>
-                            <h3 ng-if="!CountryName" class="dominosColororder">My City
+                            <h3 ng-if="!User.info.CountryName" class="dominosColororder">My City
                             </h3>
-                            <h3 ng-if="CountryName"  class="dominosColorok">My City<img src="{{BaseUrl}}img/theme/tick.png" style="width: 12px;padding-left: 2px;">
+                            <h3 ng-if="User.info.CountryName" class="dominosColorok">My City
+                                <img src="{{BaseUrl}}img/theme/tick.png" style="width: 12px;padding-left: 2px;">
                             </h3>
                             <ul class="genericList qa-MyLoc">
-                                <li>{{CountryName}}</li>
-                                <li ng-if="!CountryName">Not Selected</li>
+                                <li>{{User.info.CountryName}}</li>
+                                <li ng-if="!User.info.CountryName">Not Selected</li>
                             </ul>
                             <div class="divider">
                                 <!-- -->
                             </div>
-                           
-                            <h3 ng-if="!LocalityName" class="dominosColororder">My Location
+
+                            <h3 ng-if="!User.info.LocalityName" class="dominosColororder">My Location
                             </h3>
-                            <h3 ng-if="LocalityName" class="dominoscolorok">My Location<img src="{{BaseUrl}}img/theme/tick.png" style="width: 12px;padding-left: 2px;">
+                            <h3 ng-if="User.info.LocalityName" class="dominoscolorok">My Location
+                                <img src="{{BaseUrl}}img/theme/tick.png" style="width: 12px;padding-left: 2px;">
                             </h3>
                             <ul class="genericList qa-MyLoc">
-                                <li>{{LocalityName}}</li>
-                                <li ng-if="!LocalityName">Not Selected</li>
+                                <li>{{User.info.LocalityName}}</li>
+                                <li ng-if="!User.info.LocalityName">Not Selected</li>
                             </ul>
-                             <div class="divider">
+                            <div class="divider">
                                 <!-- -->
                             </div>
-                             <h3 ng-if="!AreaName" class="dominosColororder">My Area
+                            <h3 ng-if="!User.info.AreaName" class="dominosColororder">My Area
                             </h3>
-                            <h3  ng-if="AreaName" class="dominoscolorok">My Area<img src="{{BaseUrl}}img/theme/tick.png" style="width: 12px;padding-left: 2px;">
+                            <h3 ng-if="User.info.AreaName" class="dominoscolorok">My Area
+                                <img src="{{BaseUrl}}img/theme/tick.png" style="width: 12px;padding-left: 2px;">
                             </h3>
                             <ul class="genericList qa-MyLoc">
-                                <li>{{AreaName}}</li>
-                                <li ng-if="!AreaName">Not Selected</li>
+                                <li>{{User.info.AreaName}}</li>
+                                <li ng-if="!User.info.AreaName">Not Selected</li>
                             </ul>
-                             <div class="divider">
+                            <div class="divider">
                                 <!-- -->
                             </div>
-                            <h3 ng-if="!outletName" class="dominosColororder">My Outlet
+                            <h3 ng-if="!User.info.outletName" class="dominosColororder">My Outlet
                             </h3>
-                            <h3 ng-if="outletName" class="dominoscolorok">My Outlet<img src="{{BaseUrl}}img/theme/tick.png" style="width: 12px;padding-left: 2px;">
+                            <h3 ng-if="User.info.outletName" class="dominoscolorok">My Outlet
+                                <img src="{{BaseUrl}}img/theme/tick.png" style="width: 12px;padding-left: 2px;">
                             </h3>
                             <ul class="genericList qa-MyLoc">
-                                <li>{{outletName}}</li>
-                                <li ng-if="!outletName">Not Selected</li>
+                                <li>{{User.info.outletName}}</li>
+                                <li ng-if="!User.info.outletName">Not Selected</li>
                             </ul>
 
                         </div>
@@ -194,34 +196,3 @@
 </div>
 </div>
 
-<script>
-$(document).ready(function() {
-
-    $('#City').on('change', function() {
-        localStorage.setItem('City', $('#City').val());
-    });
-    $('#Locality').on('change', function() {
-        localStorage.setItem('Locality', $('#Locality').val());
-    });
-    $('#Outlet').on('change', function() {
-        localStorage.setItem('Outlet', $('#Outlet').val());
-    });
-
-    $('#Payment').on('change', function() {
-        localStorage.setItem('Pay', $('#Payment').val());
-    });
-    $('#Area').on('change', function() {
-        localStorage.setItem('Area', $('#Area').val());
-    });
-    
-
-    /*$(".squareIcon").click(function() {
-        $(".squareIcon").removeClass("active");
-        $(this).addClass("active");
-
-    });*/
-
-    
-
-});
-</script>
