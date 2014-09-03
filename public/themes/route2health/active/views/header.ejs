@@ -250,10 +250,10 @@
 									<span class="title-hed"></span>
 									<span class="arrow_header_top_menu arrow_header_top"></span>
 								</h4>
-								<ul id="mobilelink" class="list_header" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
+								<ul id="mobilelink" class="list_header" ng-repeat="Navigation in ListNavigation | filter : 'header-pages'">
 									
-									<li ng-repeat="Nav in Navigation.link_list"  ng-class="{selected:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
-									<a href="{{Nav.commaSeprated}}">{{Nav.name}}</a>
+									<li ng-repeat="Nav in Navigation.link_list" ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}"><a ng-if="Nav.commaSeprated" ng-href="{{Nav.commaSeprated}}">{{Nav.name}}</a>
+									<a ng-if="!Nav.commaSeprated" ng-href="/">{{Nav.name}}</a>
 									</li>
 									
 									<!-- <li><ahref="/" class="header_links_home">Home</a>
@@ -269,7 +269,8 @@
 
 
 						<div class="clearfix"></div>
-						<div id="menu-wrap" class="clearfix">
+						
+						<!-- <div id="menu-wrap" class="clearfix">
 							<div id="menu-trigger">Categories
 								<span class="menu-icon"></span>
 							</div>
@@ -288,10 +289,51 @@
 								</li>
 							
 							</ul>
+						</div> -->
 
-							
-
+						<div id="menu-wrap" class="clearfix mobile hidden-desktop" ng-controller="GlobalCtrl" ng-init="enableCategoryDropdown = true">
+						    <div id="menu-trigger" class="hidden-desktop">Categories
+						        <span class="menu-icon" ng-click="openCategoryMenu()"></span>
+						    </div>
+							    <ul id="menu-custom" class="mobile" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
+							        <li ng-repeat="Nav in Navigation.link_list"  ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
+										<a href="/{{Nav.commaSeprated}}">{{Nav.name}}</a>
+									</li>
+							        <li ng-init="enableCategorySubDropdown = true">
+							            <span class="open-mobile-2" ng-click="openCategorySubMenu()"></span><a href="javascript:void(0)">More</a>
+							            <ul class="menu-mobile-2" id="menu-mobile-2" ng-repeat="Navigation in ListNavigation | filter : 'more'">
+							                
+							                <li ng-repeat="Nav in Navigation.link_list"  ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
+												<a href="/{{Nav.commaSeprated}}">{{Nav.name}}</a>
+											</li>
+							                
+							            </ul>
+							        </li>
+							    </ul>
 						</div>
+
+						<div id="menu-wrap" class="clearfix hidden-phone hidden-tablet" ng-controller="GlobalCtrl" ng-init="enableCategoryDropdown = true">
+						    <div id="menu-trigger" class="hidden-desktop">Categories
+						        <span class="menu-icon" ng-click="openCategoryMenu()"></span>
+						    </div>
+							    <ul id="menu-custom" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
+							        <li ng-repeat="Nav in Navigation.link_list"  ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
+										<a href="/{{Nav.commaSeprated}}">{{Nav.name}}</a>
+									</li>
+							        <li ng-init="enableCategorySubDropdown = true">
+							            <span class="open-mobile-2" ng-click="openCategorySubMenu()"></span><a href="javascript:void(0)">More</a>
+							            <ul class="menu-mobile-2" id="menu-mobile-2" ng-repeat="Navigation in ListNavigation | filter : 'more'">
+							                
+							                <li ng-repeat="Nav in Navigation.link_list"  ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
+												<a href="/{{Nav.commaSeprated}}">{{Nav.name}}</a>
+											</li>
+							                
+							            </ul>
+							        </li>
+							    </ul>
+						</div>
+
+
 						<!-- Minic Slider -->
 						<div ng-if="$location.path() == '/' && ThemeSettings.theme_settings.slide_1_img">
 							<div id="minic_slider" class="theme-default"  class="hidden-phone">

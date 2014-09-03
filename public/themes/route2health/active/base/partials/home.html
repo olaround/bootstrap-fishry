@@ -7,9 +7,9 @@
 					<section class="addhomefeatured">
 						<section>
 							<h4>
-								<a href="/collections/{{collection.collectionUrl}}">
+								<!-- <a href="/collections/{{collection.collectionUrl}}"> -->
 									<span>{{ThemeSettings.theme_settings.featuredproductTitle}}</span>
-								</a>
+								<!-- </a> -->
 							</h4>
 							<ul class="row">
 								<li class="ajax_block_product span3" ng-repeat="products in ListProduct  | CustomFilter:{collection:ThemeSettings.theme_settings.featuredproduct} | limitTo:ThemeSettings.theme_settings.featuredproductLimit" ng-class="{clearBoth: ($index + 1)%4 == 0}">

@@ -3599,7 +3599,8 @@ table#cart_summary #total_price_container {
 table#cart_summary tfoot td {
 	padding:16px 0 14px 0;
 	border:none;
-	text-align:left
+	text-align:right;
+	float: right;
 }
 table#cart_summary tfoot td + td {
 	text-align:right
@@ -4828,7 +4829,7 @@ form#sendComment h3 {
 	/*width: 75%;*/
 }
 #product_list .product_image img,#product_list .product_img_link img {
-	height: 270px;
+	/*height: 270px;*/
 }
 label.shopByBrands {
 	cursor: pointer;
@@ -7938,10 +7939,13 @@ div.uploader input {
 #menu-custom {
 	display:block
 }
-@media only screen and (max-width:767px) {
+@media only screen and (max-width: 768px) {
 	#menu-wrap {
 		position:relative;
-		border-left:none
+		border-left:none;
+		margin-top: 19px;
+		height: 55px;
+		/*overflow: hidden;*/
 	}
 	#menu-wrap * {
 		-moz-box-sizing:border-box;
@@ -7949,17 +7953,17 @@ div.uploader input {
 		box-sizing:border-box
 	}
 	#menu-trigger {
-		height:74px;
+		height:55px;
 		line-height:20px;
 		cursor:pointer;
-		padding:30px 0 0 20px;
+		padding:20px 0 0 20px;
 		color:#fff;
 		font-weight:normal;
 		font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
 		font-size:24px;
 		background:#000;
 		font-family:'Fjalla One', sans-serif;
-		text-transform:uppercase
+		text-transform:uppercase;
 	}
 	#menu-trigger.menu-custom-icon .menu-icon {
 		background:url(http://livedemo00.template-help.com/prestashop_44889/themes/theme686/css/modules/blocktopmenu/css/../../../../img/main_sprite.png) no-repeat left -797px #000
@@ -7970,14 +7974,14 @@ div.uploader input {
 		height:26px;
 		display:block;
 		position:absolute;
-		top:25px;
+		top:15px;
 		right:20px
 	}
 	#menu-custom {
 		margin:0;
 		padding:10px;
 		position:absolute;
-		top:74px;
+		top:65px;
 		width:100%;
 		z-index:1;
 		background-color:#444;

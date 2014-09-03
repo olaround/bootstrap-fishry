@@ -17,6 +17,8 @@ function GlobalCtrl($scope, $location, $rootScope) {
 
     $rootScope.cartHandler = false;
     $rootScope.enableDropdown = false;
+    $rootScope.enableCategoryDropdown = false;
+    $rootScope.enableCategorySubDropdown = false;
     $rootScope.mouseHover = false;
 
     $rootScope.addToCartEffect = function() {
@@ -27,8 +29,6 @@ function GlobalCtrl($scope, $location, $rootScope) {
 
     }
     $rootScope.openMenu = function() {
-        // console.log('clicked');
-        // $rootScope.enableDropdown = !$rootScope.enableDropdown;
         if($rootScope.enableDropdown == false || $rootScope.enableDropdown == null) {
         	$('#mobilelink').slideDown(500,'linear');
         	$rootScope.enableDropdown = true;
@@ -36,6 +36,28 @@ function GlobalCtrl($scope, $location, $rootScope) {
         	$('#mobilelink').slideUp(300,'linear');
         	$rootScope.enableDropdown = false; 	
     	}
+    }
+    $rootScope.openCategoryMenu = function() {
+        if($rootScope.enableCategoryDropdown == false || $rootScope.enableCategoryDropdown == null) {
+            $('#menu-custom').slideDown(500,'linear');
+            $('#menu-trigger').addClass('menu-custom-icon');
+            $rootScope.enableCategoryDropdown = true;
+        }else if($rootScope.enableCategoryDropdown == true) {
+            $('#menu-custom').slideUp(300,'linear');
+            $('#menu-trigger').removeClass('menu-custom-icon');
+            $rootScope.enableCategoryDropdown = false;  
+        }
+    }
+    $rootScope.openCategorySubMenu = function() {
+        if($rootScope.enableCategorySubDropdown == false || $rootScope.enableCategorySubDropdown == null) {
+            $('#menu-mobile-2').slideDown(500,'linear');
+            $('.open-mobile-2').addClass('mobile-close-2');
+            $rootScope.enableCategorySubDropdown = true;
+        }else if($rootScope.enableCategorySubDropdown == true) {
+            $('#menu-mobile-2').slideUp(300,'linear');
+            $('.open-mobile-2').removeClass('mobile-close-2');            
+            $rootScope.enableCategorySubDropdown = false;  
+        }
     }
     $rootScope.isCartOpen = function() {
         $rootScope.cartHandler = !$rootScope.cartHandler;
@@ -339,7 +361,7 @@ function ProductCtrl($scope, $location, AzureMobileClient, $rootScope, $routePar
     }
 
     console.log($rootScope.prevUrl[$rootScope.prevUrl.length-1]);
-    $scope.likeURL = 'http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.route2health.fishry.com%2F' + $routeParams.ProductSlug + '&amp;send=false&amp;layout=button_count&amp;width=150&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=286715611395896';
+    $scope.likeURL = 'http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.route2.bz%2Fproduct%2F' + $routeParams.ProductSlug + '&amp;send=false&amp;layout=button_count&amp;width=150&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=286715611395896';
     
     $rootScope.productDetailPage = function(newUrl){
         // var urlDetailPage = '/product/' + $routeParams.ProductSlug;
@@ -384,7 +406,7 @@ function PageCtrl($scope, $location, AzureMobileClient, $rootScope, $routeParams
 
     // console.log('qwerty');
     $rootScope.askDoctor = {}
-    // console.log($rootScope.SettingGeneral.contactEmail)
+    console.log($rootScope.SettingGeneral.contactEmail)
 
     $rootScope.sendaskDoctorEmail = function() {
         // console.log($rootScope.askDoctor);

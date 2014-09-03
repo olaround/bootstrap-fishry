@@ -112,6 +112,10 @@ aeCommerce.run(['$location', '$rootScope', function($location, $rootScope) {
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
 		$rootScope.cartHandler = false;
 		$('#mobilelink').slideUp(500,'linear');
+		$('.mobile#menu-custom').slideUp(500,'linear');
+        $('#menu-trigger').removeClass('menu-custom-icon');
+        // $('.open-mobile-2').removeClass('mobile-close-2');            
+		
 		var addedTitle = '';
 		if(current.params.CollectionName){
 			addedTitle = ' | '+current.params.CollectionName;

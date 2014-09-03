@@ -110,8 +110,8 @@
                                             </p>
 
                                             <p class="required text">
-                                                <label for="Country">Country<sub>*</sub></label>
-                                                <select style="width: 400px;" ng-model="Customer.Country" required id="customer-address-province-0" class="form-control" data-event-change="resetProvince" data-addclass-error="customer.errors.addresses.first.country_code.length">
+                                                <label for="Country">Country {{Customer.ShippingCountry}}<sub>*</sub></label>
+                                                <select style="width: 400px;" ng-model="Customer.ShippingCountry" required id="customer-address-province-0" class="form-control" data-event-change="resetProvince" data-addclass-error="customer.errors.addresses.first.country_code.length">
                                                     <option value="">
                                                         Please Select
                                                     </option>
@@ -596,7 +596,7 @@
                                                     <option value="OM">
                                                         Oman
                                                     </option>
-                                                    <option value="PK">
+                                                    <option value="Pakistan">
                                                         Pakistan
                                                     </option>
                                                     <option value="PS">

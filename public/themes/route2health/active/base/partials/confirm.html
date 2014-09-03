@@ -29,53 +29,27 @@
                 </thead>
                 <tfoot>
                   <tr class="cart_total_price ">
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
                     <td class="price" id="total_product">Total products: &nbsp;&nbsp;{{ReturnItems()}}</td>
                   </tr>
 
 
                   <tr class="cart_total_price" ng-if="ReturnShipping()">
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
-                    <td class="price" id="total_product">Amount without shipping: &nbsp;&nbsp;{{ReturnTotal()- ReturnShipping() -ReturnTaxPrice() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
+                    <td class="price" id="total_product">Subtotal: &nbsp;&nbsp;{{ReturnTotal()- ReturnShipping() -ReturnTaxPrice() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                   </tr>
 
                   <tr class="cart_total_price" ng-if="ReturnShipping()">
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
                     <td class="price" id="total_product">Shipping Cost: {{ReturnShipping()| nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                   </tr>
 
                   <tr class="cart_total_price " ng-if="ReturnTax()">
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
                     <td class="price" id="total_product">Tax: &nbsp;&nbsp;{{ReturnTaxPrice() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                   </tr>
 
                   <tr class="cart_total_price ">
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
-                    <td><!-- Total products --></td>
                     <td class="price" id="total_product">Total Amount: &nbsp;&nbsp;{{ReturnTotal() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                   </tr>
 
-                  <!-- <tr class="cart_total_price cart_last_tr">
-                    <td class="total_price_container" id="total_price_container">Total Amount</td>
-                    <td class="price" id="total_price">
-                      {{SettingGeneral.settings.currencies_format}}&nbsp;{{ReturnTotal()}}
-                    </td>
-                  </tr> -->
-                </tfoot>
+                 </tfoot>
                 <tbody ng-repeat="(keyMain,Items) in Cart track by $index">
                   <tr ng-show="Items.productID" id="product_1_0_0_0" class="bordercolor cart_item address_0 odd">
                     <td class="cart_product">
@@ -284,7 +258,7 @@
                       <label for="id_country">Country <sup>*</sup>
                       </label>
                       <!-- <h1>{{Customer.Country}}</h1> -->
-                      <select required ng-model="Customer.Country" id="id_country" name="id_country">
+                      <select required ng-model="Customer.ShippingCountry" id="id_country" name="id_country">
                         <option value="">
                           Please Select
                         </option>
@@ -357,7 +331,7 @@
                     <p class="required select">
                       <label for="id_country">Country <sup>*</sup>
                       </label>
-                      <select required ng-model="Customer.CountryBilling" id="id_country" name="id_country">
+                      <select required ng-model="Customer.ShippingCountry" id="id_country" name="id_country">
                         <option value="">
                           Please Select
                         </option>
@@ -380,76 +354,25 @@
 
                   <div class="span4" style="margin-left: 0;">
                     <label for="id_country">Payment Method <sup>*</sup></label>
-                    <select class="form-control" required ng-model="PaymentMethod">
+                    <select class="form-control" ng-change="UpdatePaymentMethod(PaymentMethod)"  required ng-model="PaymentMethod">
                       <option value="">
                         Please Select
                       </option>
                       <option ng-repeat="payment in ListPaymentMethod" value="{{payment.name}}">{{payment.name}}</option>
                     </select>
                   </div>
-                  <div class="span8" style="margin-top: 20px;">
+                  <div class="span8" style="margin-top: 23px;">
                     <p ng-repeat="paymentArray in ListPaymentMethod" ng-hide="paymentArray.name != PaymentMethod"><span ng-bind-html="paymentArray.payInstruction"></span></p>
                   </div>
                 </div>
 
               </fieldset>
-              
-              <p class="submit2">
+                <p></p>
                 <div id="actionLoader" ng-show="StartSubmitOrder">&nbsp;&nbsp;</div>
-                <input type="submit" name="submitAddress" id="submitAddress" value="Submit Order" class="button">
-              </p>
+                <input  ng-if="IfCart()" type="submit" name="submitAddress" id="submitAddress" value="Submit Order" class="button">
             </form>
 
-           <!--  <fieldset class="center_column" style="display:none">
-                  <div class="cat_desc" ng-if="ListPaymentGateways.refund_policy" ng-init="isfullConetent = false">
-                      <div class="page-header">
-                        <h1>Refund Policy</h1>
-                     </div>
-                      <div id="shortContentRefund">
-                        <p  ng-bind-html="ListPaymentGateways.refund_policy.slice(0,400)"></p>
-                        <span onClick="$('#shortContentRefund').hide();$('#fullContentRefund').show()" class="lnk_more_cat">More</span>
-                      </div>
-                      <div id="fullContentRefund" style="display:none">
-                        <p ng-bind-html="ListPaymentGateways.refund_policy"></p>
-                        <span class="lnk_more_cat" onClick="$('#shortContentRefund').show();$('#fullContentRefund').hide()">Hide</span>
-                      </div>
-                  </div>
-                  <div class="cat_desc" ng-if="ListPaymentGateways.privacy_policy">
-                      <div class="page-header">
-                         <h1>Privacy Policy</h1>
-                     </div>
-                      <div id="shortContentPrivacy">
-                        <p  ng-bind-html="ListPaymentGateways.privacy_policy.slice(0,400)"></p>
-                        <span onClick="$('#shortContentPrivacy').hide();$('#fullContentPrivacy').show()" class="lnk_more_cat" style="cursor:pointer">More</span>
-                      </div>
-                      <div id="fullContentPrivacy" style="display:none">
-                        <p ng-bind-html="ListPaymentGateways.privacy_policy"></p>
-                        <span class="lnk_more_cat" onClick="$('#shortContentPrivacy').show();$('#fullContentPrivacy').hide()">Hide</span>
-                      </div>
-
-                  </div>
-                  <div class="cat_desc" ng-if="ListPaymentGateways.terms_of_service">
-                      <div class="page-header">
-                          <h1>Terms of Service</h1>
-                     </div>
-                      <div id="shortContentTerms">
-                        <p  ng-bind-html="ListPaymentGateways.terms_of_service.slice(0,400)"></p>
-                        <span onClick="$('#shortContentTerms').hide();$('#fullContentTerms').show()" class="lnk_more_cat" style="cursor:pointer">More</span>
-                      </div>
-                      <div id="fullContentTerms" style="display:none">
-                        <p ng-bind-html="ListPaymentGateways.terms_of_service"></p>
-                        <span class="lnk_more_cat" onClick="$('#shortContentTerms').show();$('#fullContentTerms').hide()">Hide</span>
-                      </div>
-
-                  </div>
-           </fieldset> -->
           </div>
-
-          <!-- Right -->
-          <!-- <aside id="right_column" class="span3 column right_home">
-            <section id="manufacturers_block_left" class="block blockmanufacturer column_box" ng-include src="'partials/sidebar.html'">
-            </section>
-          </aside> -->
         </div>
       </div>
     </div>

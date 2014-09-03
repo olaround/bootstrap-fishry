@@ -35,83 +35,22 @@
                                 </thead>
                                 <tfoot>
                                     <tr class="cart_total_price ">
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
                                         <td class="price" id="total_product">Total products: &nbsp;&nbsp;{{ReturnItems()}}</td>
                                     </tr>
 
-
                                     <tr class="cart_total_price" ng-if="ReturnShipping()">
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td class="price" id="total_product">Amount without shipping: &nbsp;&nbsp;{{ReturnTotal()- ReturnShipping() -ReturnTaxPrice() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
+                                        <td class="price" id="total_product">Subtotal: &nbsp;&nbsp;{{ReturnTotal()- ReturnShipping() -ReturnTaxPrice() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                                     </tr>
 
                                     <tr class="cart_total_price" ng-if="ReturnShipping()">
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td class="price" id="total_product">Shipping Cost: {{ReturnShipping()| nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
+                                        <td class="price" id="total_product">Shipping cost: {{ReturnShipping()| nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                                     </tr>
 
                                     <tr class="cart_total_price " ng-if="ReturnTax()">
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
                                         <td class="price" id="total_product">Tax: &nbsp;&nbsp;{{ReturnTaxPrice() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                                     </tr>
 
                                     <tr class="cart_total_price ">
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
-                                        <td>
-                                            <!-- Total products -->
-                                        </td>
                                         <td class="price" id="total_product">Total Amount: &nbsp;&nbsp;{{ReturnTotal() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                                     </tr>
 
