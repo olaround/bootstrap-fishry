@@ -1,0 +1,75 @@
+<html ng-app="aeCommerce" ng-controller="AECtrl">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="fragment" content="!">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <base href="/">
+    <link rel="icon" type="image/vnd.microsoft.icon" ng-if="ThemeSettings.theme_settings.favicon" href="{{ThemeSettings.theme_settings.favicon}}"/>
+	 <title ng-bind="title">
+                 <%= unescape(title) %>
+              </title>
+		<% if (typeof(meta) != "undefined") { %>
+			  <% for (var metaItem in meta) { %>
+			  <% if (meta[metaItem] && metaItem) { %>
+				<meta name="<%= metaItem %>" content="<%= meta[metaItem] %>" />
+				<% } %>
+				<% } %>
+          <% } %>
+		  <% if (typeof(og) != "undefined") { %>
+			  <% for (var ogItem in og) { %>
+			   <% if (og[ogItem] && ogItem) { %>
+				<meta property="<%= ogItem %>" content="<%= og[ogItem] %>" />
+				<% } %>
+				<% } %>
+          <% } %>
+		
+		
+		<%- requireServerVars() %>
+		<% include header_resources %>
+		
+	</head>
+	<body id="index" >
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+		<div id='loadingbar'></div>
+		<div id="Loader" style="position:absolute;z-index:9999;background: none repeat scroll 0 0 rgba(0, 0, 0, 0.89); display:none !important; height: 259%;width: 100%;"><img src="<%= BaseUrl %>img/theme/bkg-loading.gif" alt="Loader" style="margin: 0 auto;display: block;margin-top: 226px;"></div>
+		<div  class="container" style="display:none;">
+		<div id="pageFrame">
+			<div id="pageHeader"><!-- Page Header -->
+			<div id="genericHeader">
+				<div id="headerProfileContainer">
+					<div class="headerProfile">
+						<div class="js-changeLoginState" ng-if="User.info.CustomerEmail">Welcome  <a href="" class="welcomeUser js-userName">{{User.info.CustomerFirstName}}&nbsp;&nbsp;</a><a href="/" class="notUser js-notUser" ng-if="User.info.CustomerEmail" href="javascript:void(0)" ng-click="Logout()">Sign Out ?</a></div>
+						<div class="js-changeLoginState" ng-if="!User.info.CustomerEmail"><a href="/login" class="signInLink" title="Sign In">Sign in</a> Don't have a Pizza Profile? <a href="/signup" class="createAccount js-createProfile" ng-if="!User.info.CustomerEmail" title="Create Your Profile">Create one</a></div> </div>
+						<div class="clr"><!-- --></div></div>
+							
+					<div ng-controller="GlobalCtrl" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
+						<div class="mainNavigation">
+						
+							<span class="order" ng-repeat="Nav in Navigation.link_list"  ng-show="Nav.commaSeprated" ng-controller="GlobalCtrl">
+							<!-- <h1>{{$location.path()}}</h1><br /> -->							
+							
+							<a ng-class="{active: $location.path().indexOf('{{Nav.commaSeprated}}') >= 0 || ($index == 0 && ($location.path().indexOf('collections') > 0 && $location.path() != '/collections/menu' && $location.path() != '/collections/hot-deals'  || $location.path() == '/confirm' || $location.path() == '/thankyou'))}" href="{{Nav.commaSeprated}}" class="qa-Cl_order js-mBoxOOSwapHeader" id="{{Nav.name}}" ng-if="isAddress == false && $index == 0">{{Nav.name}}</a>
+
+							<a ng-class="{active: $location.path().indexOf('{{Nav.commaSeprated}}') >= 0 || ($index == 0 && ($location.path().indexOf('collections') > 0 && $location.path() != '/collections/menu' && $location.path() != '/collections/hot-deals' || $location.path() == '/cart' || $location.path() == '/confirm' || $location.path() == '/thankyou'))}" href="/collections/all" class="qa-Cl_order js-mBoxOOSwapHeader" id="{{Nav.name}}" ng-if="isAddress == true && $index == 0">{{Nav.name}}</a>
+
+
+
+							<a ng-class="{active: $location.path().indexOf('{{Nav.commaSeprated}}') >= 0 || ($index == 0 && ($location.path().indexOf('collections') > 0 && $location.path() != '/collections/menu' && $location.path() != '/collections/hot-deals'  || $location.path() == '/confirm' || $location.path() == '/thankyou'))}" href="{{Nav.commaSeprated}}" class="qa-Cl_order js-mBoxOOSwapHeader" id="{{Nav.name}}" ng-if="$index != 0">{{Nav.name}}</a>
+
+							</span>
+
+							<!-- <h3>{{$location.path()}}</h3> -->
+						</div>						
+					</div>
+						<div class="clr"><!--  --></div>											
+					</div>
+				</div>
+			</div><!-- Closes Page Header -->
