@@ -1,0 +1,80 @@
+<div id="pageFrame">
+    <div id="genericheader">
+        <div class="subNavigation">
+
+            <div id="notch">
+                <img ng-src="https://cache.dominos.com/nolo/us/en/013167/assets/build/images/img/logoNotch.gif" alt="Domino's Pizza" />
+            </div>
+
+            <a href="/" class="logo">Domino's Pizza</a>
+
+        </div>
+    </div>
+    <div id="pageBody">
+        <div id="pageContent"  ng-init="Customer.ShippingCountry = 'Pakistan';">
+            <div id="js-customerPage" class="w100">
+                <div id="customerLoginPage" class="w100">
+                    <p class="profileMsg">Have a Domino's Pizza Profile? Sign-in now or <a class="createAccount" href="/signup">create one</a> 
+                    </p>
+                    <h1 class="sectionHeading">Sign-in to my Pizza Profile</h1>
+                    <div class="pageBox" ng-if="!User.info.CustomerEmail && ListPaymentGateways.accountsDisabled != 'disabled'">
+                        <div class="leftContainer">
+                            <form role="form" ng-submit="redirectHandler();">
+                                <div class="formArea horizontal">
+                                    <div class="formEntry">
+                                        <label for="Email" class="entryLabel">
+                                            <strong>*</strong>Email Address:</label>
+                                        <div class="entryGroup">
+                                            <input type="email" placeholder="Enter Email Address" id="Email" name="Email" maxlength="100" class="medium js-email" value="" ng-model="Customer.email" required>
+                                        </div>
+                                    </div>
+                                    <div class="formEntry">
+                                        <label for="Password" class="entryLabel">
+                                            <strong>*</strong>Password:</label>
+                                        <div class="entryGroup">
+                                            <input type="password" id="Password" placeholder="Enter Password" name="Password" maxlength="40" class="medium js-password" ng-model="Customer.password" required>
+                                        </div>
+                                    </div>
+                                    <h4 id="error" style="display:none; color:red;font-weight: bolder;text-align: center;margin-left: 32px;">Please enter valid login info</h4>
+                                    
+                                    <div class="formEntry actions js-formActions">
+                                        <div>
+                                            <button class="btn btnSmall js-loginSubmit" type="submit" title="Click to Sign in">
+                                                <span>Sign In</span>
+                                            </button><a class="buttonType5 hint inline js-toggleLogin js-resetPassword" href="/forgot_password">Forgot your password?</a> <img ng-if="StartLogin" ng-src="{{BaseUrl}}img/theme/wait.gif" style="width: 30px;margin-bottom: -10px;margin-left: 10px;">
+                                        </div>
+                                        <div class="none">
+                                            <button class="btn btnSmall" type="submit">
+                                                <span>Reset Password</span>
+                                            </button> <a class="buttonType5 hint inline js-toggleLogin" href="#">Back to Sign-in</a> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="fl">
+                            <p class="profileMsg center">Order as a guest.</p>
+                            <a class="btn" ng-click="redirectHandlerGuest();" title="Order as a guest">
+                                <span>Continue Your Order</span>
+                            </a>
+                        </div>
+                        <div class="clr">
+                            <!-- -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix" ng-if="User.info.CustomerEmail || ListPaymentGateways.accountsDisabled == 'disabled'">
+                <!-- <div class="col-md-6 login-signup" ng-if="User.info.CustomerEmail && ListPaymentGateways.accountsDisabled != 'disabled'">
+                    <h4>You are already logged in</h4>
+                </div> -->
+                <div class="col-md-6 login-signup" ng-if="!User.info.CustomerEmail && ListPaymentGateways.accountsDisabled == 'disabled'">
+                    <h4>Login is disabled</h4>
+                </div>
+                <div class="col-md-6 login-signup" ng-if="User.info.CustomerEmail && ListPaymentGateways.accountsDisabled == 'disabled'">
+                    <h4>Login is disabled</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

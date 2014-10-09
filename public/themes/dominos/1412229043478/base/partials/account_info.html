@@ -1,0 +1,269 @@
+<div id="pageFrame">
+    <div id="genericheader">
+        <div class="subNavigation">
+
+            <div id="notch">
+                <img ng-src="https://cache.dominos.com/nolo/us/en/013167/assets/build/images/img/logoNotch.gif" alt="Domino's Pizza" />
+            </div>
+
+            <a href="/" class="logo">Domino's Pizza</a>
+
+        </div>
+    </div>
+
+    <div id="pageBody">
+        <div id="pageContent">
+            <div id="js-customerPage" class="w100">
+                <div class="profileMsg">
+                    <p>With a Pizza Profile, your address and payment information will be saved so it will be even easier and faster to order than ever.</p>
+                </div>
+                <form role="form" ng-submit="UpdateUserInfo('window.history.back()')">
+                    <div class="formArea horizontal right wide">
+                        <h1 class="sectionHeading">
+                            <span class="profileIcon">Create a Pizza Profile</span>
+                        </h1>
+                        <div class="pageBox">
+                            <div class="formEntry">
+                                <label for="First_Name" class="entryLabel">
+                                    <strong>*</strong>First Name:</label>
+                                    <div class="entryGroup">
+                                        <input ng-model="Customer.FirstName" placeholder="Enter First Name" type="text" id="name_signup" maxlength="40" class="medium" value="">
+                                         <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 8px;">First Name is required</span>
+                                    </div>
+                                </div>
+                                <div class="formEntry">
+                                    <label for="Last_Name" class="entryLabel">
+                                        <strong>*</strong>Last Name:</label>
+                                        <div class="entryGroup">
+                                            <input ng-model="Customer.LastName" placeholder="Enter Last Name" required="required" type="text" id="sign_last_name"  maxlength="40" class="medium" value="">
+                                             <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 8px;">Last Name is required</span>
+                                        </div>
+                                    </div>
+                                    <div class="formEntry">
+                                        <label for="Email" class="entryLabel">
+                                            <strong>*</strong>Email Address:</label>
+                                            <div class="entryGroup">
+                                                <input ng-model="Customer.Email" required="required" placeholder="Enter Email Address" type="email" id="sign_email" name="Email" maxlength="100" class="medium js-email" value="">
+                                                 <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 8px;">Email is required</span>
+                                            </div>
+                                        </div>
+                                        <div class="formEntry">
+                                            <label for="Email" class="entryLabel">
+                                                <strong>*</strong>Address:</label>
+                                                <div class="entryGroup">
+                                                    <textarea id="sign_address" rows="3" cols="26" placeholder="Enter Address" ng-model="Customer.Address" required>
+                                                    </textarea>
+                                                     <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 3px;vertical-align: top;">Address is required</span>
+                                                </div>
+                                            </div>
+                                            <div class="formEntry">
+                                                <label for="Phone" alt="required" class="entryLabel">
+                                                    <strong>*</strong>Mobile Number:</label>
+                                                    <div class="entryGroup">
+                                                        <input type="tel" pattern="[0-9]{11}" title="Eleven Digit Number" id="sign_phone" placeholder="Enter Phone No" ng-model="Customer.Phone" required="required" name="Phone"  placeholder="Phone" class="small js-phone" value="">
+                                                         <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 8px;">Mobile no is required</span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="formEntry">
+                                                    <label for="Phone" alt="required" class="entryLabel">
+                                                        <strong>*</strong>Country:</label>
+                                                        <div class="entryGroup">
+                                                            <select ng-model="Customer.Country" id="sign_country" class="form-control ng-pristine ng-valid" data-event-change="resetProvince" data-addclass-error="customer.errors.addresses.first.country_code.length" style="width:229px;">
+                                                                <option value="">
+                                                                  Please Select
+                                                              </option>
+                                                            
+                                                              <option data-bind="key.name" data-bind-value="key.code" value="Pakistan">
+                                                                  Pakistan
+                                                              </option>
+                                                              
+                                                              <!--batman-iterator-key="sortedCountries"-->
+                                                          </select>
+                                                           <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 8px;">Country is required</span>
+
+
+                                                      </div>
+                                                  </div>
+                                                  <div class="formEntry">
+                                                    <label for="Phone" alt="required" class="entryLabel">
+                                                        <strong>*</strong>City:</label>
+                                                        <div class="entryGroup">
+                                                         <select ng-model="Customer.City" id="sign_city" class="form-control" data-event-change="resetProvince" data-addclass-error="customer.errors.addresses.first.country_code.length"  style="width: 229px;" required>
+                                                            <option value="">
+                                                                Please Select
+                                                            </option>
+                                                            <option data-bind="key.name" data-bind-value="key.code" value="Lhr">
+                                                             Lahore
+                                                         </option>
+
+                                                         <option data-bind="key.name" data-bind-value="key.code" value="Khi">
+                                                             Karachi
+                                                         </option>
+                                                         <option data-bind="key.name" data-bind-value="key.code" value="Isl">
+                                                             Islamabad
+                                                         </option>
+                                                         <option data-bind="key.name" data-bind-value="key.code" value="Rwl">
+                                                             Rawalpindi
+                                                         </option>                                                
+                                                     </select>
+                                                      <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 8px;">City is required</span>
+
+                                                 </div>
+                                             </div>
+                                             
+                                           
+                                                
+
+                                                    
+
+                                                        
+                                                    </div>
+                                                    
+                                                    <div class="actions right">
+                                                        <button type="submit" class="sign-btn btn btnLarge"  title="Create your profile">
+                                                           Update Profile
+                                                        </button><img ng-if="StartSignup && !DuplicateEmailError" ng-src="{{BaseUrl}}img/theme/wait.gif" style="float: right;margin-top: 8px;margin-right: 14px;">
+                                                        <div class="clr">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+<script type="text/javascript">
+$('.sign-btn').click(function(){
+    
+    
+    if ($('#name_signup').val()==="") {
+    // invalid
+    $('#name_signup').next('.help-inline').show();
+    return false;
+    }
+    else {
+    // submit the form here
+    // $('#InfroText').submit();
+    $('#name_signup').next('.help-inline').hide();
+    return true;
+    }
+    });
+
+    $('.sign-btn').click(function(){
+    
+    if ($('#sign_last_name').val()==="") {
+    // invalid
+    $('#sign_last_name').next('.help-inline').show();
+    return false;
+    }
+    else {
+    // submit the form here
+    // $('#InfroText').submit();
+    $('#sign_last_name').next('.help-inline').hide();
+    return true;
+    }
+    });
+    $('.sign-btn').click(function(){
+    
+    if ($('#sign_email').val()==="") {
+    // invalid
+    $('#sign_email').next('.help-inline').show();
+    return false;
+    }
+    else {
+    // submit the form here
+    // $('#InfroText').submit();
+    $('#sign_email').next('.help-inline').hide();
+    return true;
+    }
+    });
+    $('.sign-btn').click(function(){
+    
+    if ($('#sign_address').val()==="") {
+    // invalid
+    $('#sign_address').next('.help-inline').show();
+    return false;
+    }
+    else {
+    // submit the form here
+    // $('#InfroText').submit();
+    $('#sign_address').next('.help-inline').hide();
+    return true;
+    }
+    });
+    $('.sign-btn').click(function(){
+    
+    if ($('#sign_phone').val()==="") {
+    // invalid
+    $('#sign_phone').next('.help-inline').show();
+    return false;
+    }
+    else {
+    // submit the form here
+    // $('#InfroText').submit();
+    $('#sign_phone').next('.help-inline').hide();
+    return true;
+    }
+    });
+    $('.sign-btn').click(function(){
+    
+    if ($('#sign_confirm_password').val()==="") {
+    // invalid
+    $('#sign_confirm_password').next('.help-inline').show();
+    return false;
+    }
+    else {
+    // submit the form here
+    // $('#InfroText').submit();
+    $('#sign_confirm_password').next('.help-inline').hide();
+    return true;
+    }
+    });
+    $('.sign-btn').click(function(){
+    
+    if ($('#sign_country').val()==="") {
+    // invalid
+    $('#sign_country').next('.help-inline').show();
+    return false;
+    }
+    else {
+    // submit the form here
+    // $('#InfroText').submit();
+    $('#sign_country').next('.help-inline').hide();
+    return true;
+    }
+    });
+    $('.sign-btn').click(function(){
+    
+    if ($('#sign_city').val()==="") {
+    // invalid
+    $('#sign_city').next('.help-inline').show();
+    return false;
+    }
+    else {
+    // submit the form here
+    // $('#InfroText').submit();
+    $('#sign_city').next('.help-inline').hide();
+    return true;
+    }
+    });
+    $('.sign-btn').click(function(){
+    
+    if ($('#sign_password').val()==="") {
+    // invalid
+    $('#sign_password').next('.help-inline').show();
+    return false;
+    }
+    else {
+    // submit the form here
+    // $('#InfroText').submit();
+    $('#sign_password').next('.help-inline').hide();
+    return true;
+    }
+    });
+
+    </script>

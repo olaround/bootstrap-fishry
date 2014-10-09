@@ -1,0 +1,373 @@
+<div ng-init="InitCollection()">
+<div id="pageFrame" ng-if="routeParam == 'menu'">
+    <div id="genericHeader">
+        <div class="subNavigation">
+
+            <div id="notch">
+                <img ng-src="https://cache.dominos.com/nolo/us/en/013167/assets/build/images/img/logoNotch.gif" alt="Domino's Pizza">
+            </div>
+            <a href="/" class="logo">Domino's Pizza</a>
+        </div>
+    </div>
+    <div id="pageBody">
+        <div id="pageContent" ng-init="init()">
+
+            <div id="genericMenuPage" ng-if="routeParam != 'all'" itemscope itemtype="https://schema.org/CollectionPage">
+                <div id="js-categoryArea" class="pageLeftColumn">
+                    <div class="category" ng-repeat="collection in ListCollection">
+                        <div ng-show="(collection.collectionName != 'Frontpage')">
+
+                        <div class="sectionHeading" ng-if="collection.collectionName != 'Menu' && collection.collectionName != 'View All'" >
+                            <h1 itemprop="name">{{collection.collectionName}}</h1>
+                            <span>pricing available when ordering</span>
+                            <div class="clr">
+                                <!--  -->
+                            </div>
+                        </div>
+
+                        <div class="product" ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} |  filter:Search" itemscope itemtype="http://schema.org/Product">
+                            <div class="productImage">
+                                <a  href="./product/{{products.productUrl}}" itemprop="url" ng-if="products.productImage[0].Image">
+
+                                    <img itemprop="image" ng-src="{{products.productImage[0].Image}}" title="{{products.productDescription}}" style="background:url(/themes/dominos/active/base/img/theme/load.gif) no-repeat center;z-index: 9999;"/>
+                                </a>
+                                <a  href="./product/{{products.productUrl}}" itemprop="url" ng-if="!products.productImage[0].Image">
+
+                                    <img itemprop="image" ng-src="{{BaseUrl}}img/theme/default.png" alt="abc" style="background-color: rgb(235, 232, 232);"/>
+                                </a>
+                            </div>
+
+
+
+                            <a class="btn fullWidth" title="Click Here To Order" href="./product/{{products.productUrl}}" itemprop="url">Order</a>
+                            <h3 class="dominosColor1" itemprop="name"><a  href="./product/{{products.productUrl}}" itemprop="url" title="{{products.productDescription}}">{{products.productName}}</a>
+                            </h3>
+                            <div>
+                                <p class="description" ng-bind-html="products.productDescription | cut:true:80:' ...'" itemprop="description"></p>
+
+                            </div>
+                        </div>
+
+                        <div class="clr"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="js-optionsArea" class="pageRightColumn">
+                    <div id="layout-availableOptionsComponent" class="layout-component">
+                        <div class="sidebarBox options">
+                            <h2 class="sectionHeading">Available Options</h2>
+                             <div class="content">
+                                <h3 class="dominosColor1 ">Pizza Crusts (6)</h3>
+                                <ul>
+                                    <li>Crunchy Thin Crust</li>
+                                    <li>Double Melt</li>
+                                    <li>Quesadilla</li>
+                                    <li>Italiano Crust</li>
+                                    <li>Pan Pizza</li>
+                                    <li>Dominator</li>
+                                    <li>Hand Tossed</li>
+                                </ul>
+                                <h3 class="dominosColor1 ">Sizes (5)</h3>
+                                <ul>
+                                    <li>6”</li>
+                                    <li>8"</li>
+                                    <li>11"</li>
+                                    <li>13"</li>
+                                    <li>16"</li>
+
+                                </ul>
+                                <h3 class="dominosColor1 ">Desserts (2)</h3>
+                                <ul>
+                                    <li>Cinnastix</li>
+                                    <li>Chocolate Calzone</li>
+                                </ul>
+                                <h3 class="dominosColor1 ">Sidelines (5)</h3>
+                                <ul>
+                                    <li>Cheesy Bread</li>
+                                    <li>Chicken Wings</li>
+                                    <li>Bread Stick</li>
+                                    <li>Stuffed Cheesy Bread Pepperoni</li>
+                                    <li>Stuffed Cheesy Bread Tex-Mex</li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clr">
+                    <!--  -->
+                </div>
+            </div>
+        </div>
+        <!-- Pan Upsell Pop-up for N6 -->
+    </div>
+</div>
+
+<div id="pageFrame" ng-if="routeParam != 'menu'">
+    <div id="genericHeader">
+        <div class="subNavigation" ng-if="routeParam != 'hot-deals'">
+
+            <div id="notch">
+                <img ng-src="https://cache.dominos.com/nolo/us/en/013167/assets/build/images/img/logoNotch.gif" alt="Domino's Pizza">
+            </div>
+            <a href="/" class="logo">Domino's Pizza</a>
+            <div id="js-subNavigationPage" ng-controller="GlobalCtrl" ng-repeat="Navigation in ListNavigation | filter : 'collection-list'">
+                <ul ng-repeat="Nav in Navigation.link_list" ng-show="Nav.commaSeprated" itemscope itemtype="https://schema.org/CollectionPage">
+                    <li itemprop="name" ng-class="{active:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated"><a href="{{Nav.commaSeprated}}" itemprop="url" class="navigation-All ">{{Nav.name}}</a>
+                    </li>
+                    <li class="divider">|</li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="subNavigation" ng-if="routeParam == 'hot-deals'">
+
+            <div id="notch">
+                <img ng-src="https://cache.dominos.com/nolo/us/en/013167/assets/build/images/img/logoNotch.gif" alt="Domino's Pizza">
+            </div>
+            <a href="/" class="logo">Domino's Pizza</a>
+        </div>
+    </div>
+    <div id="pageBody">
+        <div id="pageContent" ng-init="init()">
+            <div id="js-splitFrame" class="w100 none" style="display: block;">
+                <div id="js-pageSplit" class="pageLeftColumn">
+                    <div id="entreesPage">
+
+                        <div ng-if="routeParam == 'all'">
+                            <div id="js-entreePromos">
+                                <div id="flash-home">
+                                    <div id="orderTouts">
+                                        <!--mp_trans_remove_start-->
+                                        <div id="entreesBanner" class="generalMarket">
+                                            <ul class="promotions" itemprop="breadcrumb" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                                                <li id="fiftyPercentOff" style="background: url('{{ThemeSettings.theme_settings.slide_5_img}}') no-repeat 0 0;background-size:cover;" alt="ThemeSettings.theme_settings.slide_5_alt">
+                                                    <a  href="{{ThemeSettings.theme_settings.slide_5_link}}" data-role="wt-event" data-wt-panelname="50off" data-wt-panelnumber="1">
+                                                        <h1>Online Only March 17 - March 23</h1>
+                                                        <h2>50% Off Any Pizza At Menu Price</h2>
+                                                        <p>You must ask for this limited-time offer. Prices, participation, delivery area and charges may vary. Offer applies to the pizza portion of your order only. Minimum purchase required for delivery.</p>
+                                                        <div id="fiftyPercentOffCTA" class="btn btnSmall btnShimmer btnBounce">Order Now</div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clr">
+                                    <!-- -->
+                                </div>
+                            </div>
+                            <div  ng-repeat="collection in ListCollection"  itemscope itemtype="https://schema.org/CollectionPage">
+                                <div ng-show="(collection.collectionName != 'Frontpage')">
+                                <div class="item js-toggle" ng-if="collection.collectionName != 'Menu' && collection.collectionName != 'View All'">
+                                    <div class="header" ng-if="routeParam == collection.collectionUrl || routeParam == 'all'">
+                                        <a class="dominosColor1 qa-PastPopular" href="collections/{{collection.collectionUrl}}" itemprop="url" data-wt-panelname="pastpopularitems">
+                                            <img itemprop="image" ng-src="http://aecommerce.blob.core.windows.net/collection/{{collection.collectionImage}}" title="{{collection.collectionName}}" style="background:url(/themes/dominos/active/base/img/theme/load.gif) no-repeat center;z-index: 9999;height: 77px;">
+                                            <div class="column">
+                                                <h2 itemprop="name" class="media__title">{{collection.collectionName}}</h2>
+                                                <p  class="media__description none--handheld" ng-bind-html="collection.collectionDescription | cut:true:70:' ...'" itemprop="description"></p>
+                                                
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                           
+
+
+
+                            </div>
+                        </div>
+                        <div id="genericMenuPage" ng-if="routeParam != 'all'">
+                            <div class="clr">
+                                <!--  -->
+                            </div>
+                            <div id="js-categoryArea" class="pageLeftColumn">
+                                <div class="category" ng-repeat="collection in ListCollection | CustomFilter:{frontPage:false}" itemscope itemtype="https://schema.org/CollectionPage">
+                                    <div class="sectionHeading" ng-if="routeParam == collection.collectionUrl || routeParam == 'all'">
+                                        <h1 itemprop="name">{{collection.collectionName}}</h1>
+                                        <span>pricing available when ordering</span>
+                                        <div class="clr">
+                                            <!--  -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-repeat="collection in ListCollection | CustomFilter:{frontPage:false}">
+                                <div class="product" ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} | CustomFilter:{collection:routeParam} | filter:Search" itemscope itemtype="http://schema.org/Product">
+                                    <div class="productImage">
+                                        <a  href="./product/{{products.productUrl}}" itemprop="url" ng-if="products.productImage[0].Image">
+
+                                            <img ng-src="{{products.productImage[0].Image}}" title="{{products.productName}}" itemprop="image" style="background:url(/themes/dominos/active/base/img/theme/load.gif) no-repeat center;z-index: 9999;" />
+                                        </a>
+                                        <a href="./product/{{products.productUrl}}"  itemprop="url" ng-if="!products.productImage[0].Image" >
+
+                                            <img ng-src="{{BaseUrl}}img/theme/default.png" itemprop="image" alt="abc" style="background-color: rgb(235, 232, 232);" />
+                                        </a>
+                                    </div>
+                                    <a class="btn fullWidth" title="Click Here To Order" href="./product/{{products.productUrl}}" itemprop="url">Order</a>
+                                    <h3 class="dominosColor1" itemprop="name"><a href="./product/{{products.productUrl}}" itemprop="url"  title="{{products.productName}}">{{products.productName}}</a>
+                                    </h3>
+                                    <p class="description" ng-bind-html="products.productDescription | cut:true:80:' ...'" itemprop="description"></p>
+
+                                </div>
+                                </div>
+
+                            </div>
+                            <div class="clr">
+                                <!--  -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pageRightColumn" style="margin-top: 0px;">
+                        <!--  -->
+                        <div id="js-myOrderPage">
+                            <div id="orderSummaryInColumn" class="sidebarBox">
+                                <h2 class="sectionHeading">
+                                    <span>My Order</span>
+                                </h2>
+                                <div class="content">
+                                    <a href="/cart" class="btn btnLarge buttonCheckout qa-AllChek" data-icon="shopping-cart" style="" ng-if="IfCart() != ''" title="Go to Cart Page">
+                                        <span>Checkout</span>
+                                    </a>
+
+                                    <a href="javascript:void(0)" class="btnDisable btn btnLarge buttonCheckout qa-AllChek" data-icon="shopping-cart" style="background-color: #DF3450;opacity: 0.5;" ng-if="IfCart() == ''" title="Please First Choose the Items you want to Order">
+                                        <span>Checkout</span>
+                                    </a>
+
+                                    <div class="orderSummaryContent">
+                                        <div class="orderSummaryItems">
+                                            <div class="miniLineItem table" cellspacing="0"  ng-show="IfCart()">
+                                                <div ng-repeat="(keyMain,Itemss) in Cart track by $index">
+                                                    <div ng-show="Itemss.productID" style="margin-bottom: 20px;border-bottom: 1px solid #9bc1d9;padding-bottom: 12px;margin-left: -3px;">
+                                                        <div>
+                                                            <h3><a href="javascript:void(0)">{{Itemss.productInfo.productName}}</a>
+                                                            </h3>
+
+                                                        </div>
+                                                    
+                                                 
+                                                        <div class="qty">
+                                                            <select name="6|Quantity" min='1' ng-change="changeQuantity()" ng-model="Itemss.quantity" type="number" style="margin-top: 12px;margin-left: 12px;">
+                                                                <!-- -->
+                                                                <option selected="" value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                                <option value="6">6</option>
+                                                                <option value="7">7</option>
+                                                                <option value="8">8</option>
+                                                                <option value="9">9</option>
+                                                                <option value="10">10</option>
+                                                                <option value="11">11</option>
+                                                                <option value="12">12</option>
+                                                                <option value="13">13</option>
+                                                                <option value="14">14</option>
+                                                                <option value="15">15</option>
+                                                                <option value="16">16</option>
+                                                                <option value="17">17</option>
+                                                                <option value="18">18</option>
+                                                                <option value="19">19</option>
+                                                                <option value="20">20</option>
+                                                                <option value="21">21</option>
+                                                                <option value="22">22</option>
+                                                                <option value="23">23</option>
+                                                                <option value="24">24</option>
+                                                                <option value="25">25</option>
+                                                            </select>
+                                                            <div class="remove" ng-click="RemoveCartItem(Itemss.productID,false)" style="margin-left: 12px;">Remove</div>
+                                                            <div class="price">{{Itemss.price * Itemss.quantity | nfcurrency:"PKR "}}</div>
+                                                        </div>
+                                                    
+                                                        
+
+                                                    </div>
+                                                    <div ng-hide="Itemss.productID" ng-repeat="(key,itm) in Itemss track by $index" style="margin-bottom: 20px;border-bottom: 1px solid #9bc1d9;padding-bottom: 12px;margin-left: -3px;">
+                                                        <div>
+
+                                                            <h3><a href="javascript:void(0)">{{itm.productInfo.productName}}, {{key}}</a>
+                                                            </h3>
+
+                                                        </div>
+                                                    
+                                                        <div class="qty">
+                                                            <select name="6|Quantity" min='1' ng-change="changeQuantity()" ng-model="itm.quantity" type="number" style="margin-top: 12px;margin-left: 12px;">
+                                                                <!-- -->
+                                                                <option selected="" value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                                <option value="6">6</option>
+                                                                <option value="7">7</option>
+                                                                <option value="8">8</option>
+                                                                <option value="9">9</option>
+                                                                <option value="10">10</option>
+                                                                <option value="11">11</option>
+                                                                <option value="12">12</option>
+                                                                <option value="13">13</option>
+                                                                <option value="14">14</option>
+                                                                <option value="15">15</option>
+                                                                <option value="16">16</option>
+                                                                <option value="17">17</option>
+                                                                <option value="18">18</option>
+                                                                <option value="19">19</option>
+                                                                <option value="20">20</option>
+                                                                <option value="21">21</option>
+                                                                <option value="22">22</option>
+                                                                <option value="23">23</option>
+                                                                <option value="24">24</option>
+                                                                <option value="25">25</option>
+                                                            </select>
+                                                            <div class="remove" ng-click="RemoveCartItem(itm.productID,key)" style="margin-left: 12px;">Remove</div>
+                                                             <div class="price" style="margin-top: -10px;">{{itm.price * itm.quantity | nfcurrency:"PKR "}}</div>
+                                                        </div>
+                                                    
+                                                       
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clr">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="js-hotDeals"  >
+                            <div id="hotDealsInColumn" class="sidebarBox">
+                                <div ng-repeat="collection in ListCollection | CustomFilter:{frontPage:false}" itemscope itemtype="http://schema.org/CollectionPage">
+                                   
+                                        <h2 class="sectionHeading" ng-if="collection.collectionName == 'Hot Deals'">
+                                            <span itemprop="name">{{collection.collectionName}}</span>
+                                        </h2>
+                                    
+                                </div>
+                                <div class="content" >
+                                    <ul class="genericList border" ng-repeat="products in ListProduct | CustomFilter:{collection:'Hot Deals'}" itemscope itemtype="http://schema.org/Product" >
+                                        <li><a href="collections/hot-deals" itemprop="name">{{products.productName}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="clr">
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- Pan Upsell Pop-up for N6 -->
+        </div>
+</div>
+
+</div>
+
+
+
