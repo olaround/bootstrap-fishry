@@ -1,0 +1,190 @@
+<div id="pageFrame">
+	<div id="pageHeader">
+		<div id="genericHeader">
+			<div class="subNavigation">
+				<div id="notch">
+					<img ng-src="https://cache.dominos.com/nolo/us/en/013167/assets/build/images/img/logoNotch.gif" alt="Domino's Pizza">
+				</div>
+				<a href="/" class="logo">Domino's Pizza</a>
+				<div id="js-subNavigationPage"></div>
+			</div>
+		</div>
+	</div>
+	<div id="pageBody" ng-init="LoadOrders();">
+		<div id="pageContent">
+			<div id="js-fullFrame" class="none" style="display: block;">
+				<div id="js-pageFull" class="w100">
+					<div id="orderCheckoutPage">
+						<div id="js-checkoutColumns">
+							<form role="form" ng-submit="locationVerify();">
+								<div class="pageRightColumn" style="margin-top: 0px;">
+									<div id="myProfileInCheckout" class="sidebarBox">
+										<h2 class="sectionHeading">
+											<span>My Account</span>
+										</h2>
+										<div class="content">
+											<h3 class="dominosColororder" style="border-bottom: 1px solid rgb(221, 210, 210);padding-bottom: 10px;">{{Customer.FirstName}} {{Customer.LastName}}
+											</h3>
+											<h3 class="dominosColororder" style="border-bottom: 1px solid rgb(221, 210, 210);padding-bottom: 10px;font-weight: 100;font-size: 13px;">{{Customer.Email}}
+											</h3>
+											<h3 class="dominosColororder" style="border-bottom: 1px solid rgb(221, 210, 210);padding-bottom: 10px;font-weight: 100;font-size: 13px;">Ph:&nbsp;{{Customer.Phone}}
+											</h3>
+											<h3 class="dominosColororder" style="border-bottom: 1px solid rgb(221, 210, 210);padding-bottom: 10px;font-weight: 100;font-size: 13px;">Address:&nbsp;{{Customer.Address}}
+											</h3>
+											
+											<h3 class="dominosColororder" style="border-bottom: 1px solid rgb(221, 210, 210);padding-bottom: 10px;font-weight: 100;font-size: 13px;">City:&nbsp;{{Customer.City}}
+											</h3>
+											<h3 class="dominosColororder" style="border-bottom: 1px solid rgb(221, 210, 210);padding-bottom: 10px;font-weight: 100;font-size: 13px;">Country:&nbsp;{{Customer.Country}}
+											</h3>
+											<h3 ng-click="$location.path('/account_info')" class="dominosColororder" style="border-bottom: 1px solid rgb(221, 210, 210);padding-bottom: 10px;text-transform: uppercase; cursor:pointer;">Edit Account
+											</h3>
+											<h3 ng-click="$location.path('/reset_password')" class="dominosColororder" style="border-bottom: 1px solid rgb(221, 210, 210);padding-bottom: 10px;text-transform: uppercase; cursor:pointer;">Change Password
+											</h3>
+											<h3  ng-click="Logout('/')" class="dominosColororder" style="padding-bottom: 10px;text-transform: uppercase; cursor:pointer;">Logout
+											</h3>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="pageLeftColumn">
+								<div class="foodAndDrinkDetails">
+									<h2 class="sectionHeading">
+										<span>Order History</span>
+									</h2>
+									<div class="pageBox">
+
+										<h3 ng-if="!Orders.length" style="font-weight: bold;font-size: 12px;">You have not placed any orders.</h3>
+										<div class="orderSummaryContent" ng-if="Orders.length">
+											<div>
+												<table class="fullLineItem" cellpadding="0" cellspacing="0">
+													<tbody>
+														<tr>
+															<td class="itemHeader" style="padding-left:14px;color: #0078ae;">#</td>
+															<td class="itemHeader" style="width: 36%;color: #0078ae;">Order id</td>
+															<td class="itemHeader" style="color: #0078ae;">Total</td>
+															<td class="itemHeader" style="color: #0078ae;">Status</td>
+														</tr>
+													</tbody>
+												</table>
+												<table class="fullLineItem" cellpadding="0" cellspacing="0">
+													<tbody ng-repeat="(keyMain,Itemss) in Orders track by $index">
+														<tr>
+															<td class="itemHeader" style="background-color: white;padding-left: 10px;">
+																<h3 style="margin-left: 4px;font-size: 11px;font-weight: 700;">{{$index + 1}}</h3>
+															</td>
+															<td class="itemHeader" style="background-color: white;width: 42%;padding-left: 30px;">
+																<h3 style="margin-left: 4px;font-size: 11px;font-weight: 700;">{{Itemss.orderid}}
+																</h3>
+															</td>
+															<td class="itemHeader" style="background-color: white;padding-left: 0px;">
+																<h3 style="margin-left: 0px;font-size: 11px;font-weight: 700;">PKR {{Itemss.orderTotal}}</h3>
+															</td>
+															<td class="itemHeader" style="background-color: white;padding-left:67px;">
+																<div ng-hide="Itemss.paymentStatus">
+																	<span ng-show="Itemss.payment">Fullfilled</span>
+																	<span ng-hide="Itemss.payment">Not Fullfilled</span>
+																</div>
+																<div ng-show="Itemss.paymentStatus">
+																	<span>Canceled</span>
+																</div>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="clr">
+									<!-- -->
+								</div>
+							</div>
+							<div class="clr">
+								<!-- -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+	td h3{
+		max-width:200px;
+	}
+</style>
+<script type="text/javascript">
+	$('.buttonLocality').click(function(){
+		if ($('#citytype').val()==="") {
+// invalid
+$('#citytype').next('.city-inline').show();
+return false;
+}
+else {
+// submit the form here
+// $('#InfroText').submit();
+$('#citytype').next('.city-inline').hide();
+return true;
+}
+});
+	$('.buttonLocality').click(function(){
+		if ($('#paymenttype').val()==="") {
+// invalid
+$('#paymenttype').next('.help-inline').show();
+return false;
+}
+else {
+// submit the form here
+// $('#InfroText').submit();
+$('#paymenttype').next('.help-inline').hide();
+return true;
+}
+});
+	$('.buttonLocality').click(function(){
+		if ($('#localitytype').val()==="") {
+// invalid
+$('#localitytype').next('.help-inline').show();
+return false;
+}
+else {
+// submit the form here
+// $('#InfroText').submit();
+$('#localitytype').next('.help-inline').hide();
+return true;
+}
+});
+	$('.buttonLocality').click(function(){
+		if ($('#areatype').val()==="") {
+// invalid
+$('#areatype').next('.help-inline').show();
+return false;
+}
+else {
+// submit the form here
+// $('#InfroText').submit();
+$('#areatype').next('.help-inline').hide();
+return true;
+}
+});
+	$('.buttonLocality').click(function(){
+		if ($('#outlettype').val()==="") {
+// invalid
+$('#outlettype').next('.help-inline').show();
+return false;
+}
+else {
+// submit the form here
+// $('#InfroText').submit();
+$('#outlettype').next('.help-inline').hide();
+return true;
+}
+});
+	$(function () {
+		$('#myModal').modal({
+			show: false,
+			keyboard: false,
+			backdrop: 'static'
+		});
+	});
+</script>

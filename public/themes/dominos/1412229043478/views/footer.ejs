@@ -1,0 +1,70 @@
+<div id="pageFrame">
+	<div id="pageFooter"><!-- Footer -->
+	<div id="genericFooter">
+		<div id="footerLinks" ng-controller="GlobalCtrl" ng-repeat="Navigation in ListNavigation | filter : 'footer'">
+			<ul class="navigation dominosColor1 nav" ng-repeat="Nav in Navigation.link_list">
+				<li   ng-class="{active:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated"><a href="{{Nav.commaSeprated}}">{{Nav.name}}</a></li>
+				<li class="divider">/</li>
+				
+			</ul>
+			<ul class="navigation dominosColor1 nav">
+				<li><a href="/app">App</a></li>
+				<li class="divider">/</li>
+			</ul>
+		</div>
+		<div class="column1">
+			<div class="legalStuff">
+				<span class="tag dominosColor1">Legal Stuff:</span>
+				<div>
+					<p style="line-height: 17px;"><span class="bold">Any Delivery Charge is not a tip paid to your driver. Please reward your driver for awesomeness.Our drivers carry less than Rs.2000.</span> You must ask for this limited time offer. Minimum purchase required for delivery. Delivery charge and tax may apply. Prices, participation, delivery area and charges may vary. © 2014 Dominos IP Holder LLC. Dominos®, Domino's Pizza® and the modular logo are trademarks of Domino's IP Holder LLC. "Pepsi" design is registered trademarks of The PepsiCo.</p>
+					
+					<p>The Terms of Use govern your use of the Domino’s Pizza, Inc. and its affiliates (“Domino’s Pizza”) Website. By using, visiting, or browsing the Domino’s Pizza Website, you accept and agree to be bound by these Terms of Use. If you do not agree to these Terms of Use, you should not use the Domino’s Pizza Website. These Terms of Use are an ongoing contract between you and Domino’s Pizza Pakistan and applies to your use of the Domino’s Pizza Pakistan Website. The Terms of Use affect your rights and you should read them carefully.</p>
+					<p>Our Guarantee: If you are not completely satisfied with your Domino's Pizza experience, we will make it right or refund your money.</p>
+				</div>
+				<a href="http://www.bramerz.pk/" target="_blank"><img src="<%= BaseUrl %>img/theme/Bramerz-logo.png" style="width:124px;display: inline-block;"></a>
+			</div>
+		</div>
+		<div class="column2">
+			<div class="social-icons" style="margin-right:3px;">
+				<div class="fb-like" data-href="https://www.facebook.com/dominospakistan" data-width="48px" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+				<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="http://platform.twitter.com/widgets/follow_button.1411706120.html#_=1412164365932&amp;id=twitter-widget-0&amp;lang=en&amp;screen_name=dominospakistan&amp;show_count=false&amp;show_screen_name=false&amp;size=m" class="twitter-follow-button twitter-follow-button" title="Twitter Follow Button" data-twttr-rendered="true" style="width: 60px; height: 20px;"></iframe>
+
+				<div class="g-plusone" data-href="https://plus.google.com/u/1/105445373077368887873/posts" data-size="medium" data-annotation="none"></div>
+
+			</div>
+			<a href="https://play.google.com/store/apps/details?id=com.retailer.dom
+                    " target="_blank">
+                    <img ng-src="{{BaseUrl}}img/theme/google-btn.png" style="width: 146px;margin-top: 12px;margin-bottom: 0px;">
+                     </a>
+			<div id="promoLink">
+				<img alt="Open For Lunch" src="<%= BaseUrl %>img/theme/footerOpenLunch.gif">
+			</div>
+			<div id="promoLink">
+				<img alt="Delivering Dairy Goodness" src="<%= BaseUrl %>img/theme/footerDairyGoodness.jpg">
+			</div>
+		</div>
+		<!-- <h3>{{ThemeSettings}}</h3> -->
+		<!-- <h1>{{SettingGeneral.settings.meta_description}}</h1> -->
+		
+		<!-- <h1>{{SettingGeneral.settings.analyticsSnippet}}</h1> -->
+		<!-- <h1>{{SettingGeneral.id}}</h1> -->
+		<!-- <h1>{{SettingGeneral}}</h1> -->
+		<div class="clr"><!--  --></div>
+	</div>
+	</div><!-- Closes Footer -->
+</div>
+<% include footer_resources %>
+<script type="text/javascript">
+window.twttr = (function (d, s, id) {
+  var t, js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src= "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+  return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+}(document, "script", "twitter-wjs"));
+</script>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+</body>
+</html>

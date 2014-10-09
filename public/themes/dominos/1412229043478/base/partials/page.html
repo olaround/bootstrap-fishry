@@ -1,0 +1,29 @@
+
+<div ng-init="InitPage()">
+    <div id="pageFrame" ng-repeat="page in ListPage | CustomFilter:{pageUrl : routeParam}">
+        <div id="pageHeader">
+            <div id="genericHeader">
+                <div class="subNavigation">
+                    <div id="notch">
+                        <img src="https://cache.dominos.com/nolo/us/en/013167/assets/build/images/img/logoNotch.gif" alt="Domino's Pizza" />
+                    </div>
+                    <a href="/" class="logo">Domino's Pizza</a>
+                    <div id="js-subNavigationPage">
+                        <ul id="legalSubNav">
+                            <li><a href="/page/{{page.pageUrl}}" class="active"> {{page.pageName}}</a>
+                            </li>
+    
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="pageBody">
+            <div id="pageContent" >
+                <div class="genericContentPage">
+                    <p ng-bind-html="page.pageDescription"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
