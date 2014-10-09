@@ -1,0 +1,1078 @@
+<div id="content" class="">
+  
+  <div id="loading-header">
+    <div class="header-row">
+      <div class="span24">
+        <header>
+          <span class="tag">
+            <span class="tag-loader">
+              Loading...
+            </span>
+          </span>
+        </header>
+      </div>
+      
+      <!-- /.span24 -->
+    </div>
+    
+    <!-- /.header-row -->
+  </div>
+  
+  <!-- /#loading-header -->
+  
+  <section data-yield="main" id="ThemeSettings" style="margin-top:-24px">
+    <div>
+      <div id="themes-settings" class="page" data-addclass-is-active="layout.storefrontControl.designMode">
+      <form ng-submit="saveSettings()" enctype="multipart/form-data">
+        <div class="header-row">
+          <div class="span24">
+            <header>
+              <h1 class="header-main">
+                <i class="ico ico-20 ico-20-themes">
+                </i>
+                <span class="breadcrumb">
+                  <a data-route="routes.themes" href="/admin/themes">
+                    Themes
+                  </a>
+                  / 
+                </span>
+                <span data-bind="theme.name">
+                  launchpad
+                </span>
+              </h1>
+              <div class="header-right">
+                <ul class="segmented">
+                  <li>
+                    <button class="btn btn-primary" type="submit">Save</button>
+                  </li>
+                   
+                </ul>
+              </div>
+            </header>
+          </div>
+        </div>
+        
+        <!-- /.header-row -->
+        
+        <div class="row section first-section ppb">
+          <!-- /.section-summary -->
+       
+            <!--batman-data-formfor-settings="theme.settings"-->
+            <div class="span6  boxSIdeBar" ng-init="pageclick = 'Aesthetics'">
+               <h2 class="active heading section-expanded" ng-click="pageclick = 'Aesthetics'" ng-class="{'active':pageclick == 'Aesthetics'}">
+                  Aesthetics<br />
+                  <small>Logo, favicon and cart settings</small>
+                </h2>
+                 <h2 class="heading" ng-click="pageclick = 'Homepage'" ng-class="{'active':pageclick == 'Homepage'}">
+                  Homepage<br />
+                  <small>Banner, Layout</small>
+                </h2>
+                 <h2 class="heading" ng-click="pageclick = 'Product'" ng-class="{'active':pageclick =='Product'}">
+                  Product Page<br />
+                  <small>Banner, Layout</small>
+                </h2>
+                 <h2 class="heading" ng-click="pageclick = 'Collection'" ng-class="{'active':pageclick == 'Collection'}">
+                  Collection Page<br />
+                  <small>Banner, Layout</small>
+                </h2>
+                   <!--<h2 class="heading" ng-click="pageclick = 'Footer'" ng-class="{'active':pageclick == 'Footer'}">
+                  Footer<br />
+                  <small>Social Links, Text, Menu</small>
+                </h2>-->
+            </div>
+            <div class="span18 section-content">
+              <div class="theme-settings-form">
+                <!--batman-data-context-__LIQUID__="theme.settings.current_values"-->
+               <div class="Aesthetics" ng-show="pageclick == 'Aesthetics'">
+                   <fieldset>
+                              <table>
+                                <tbody>
+                                  <tr class="horizontal">
+                                    <th>
+                                      <label for="use_logo">
+                                      <strong>Use a custom logo? </strong></label>
+                                    </th>
+                                    <td>
+                                      <input type="checkbox" ng-model="Theme.use_logo" id="use_logo" name="use_logo" value="1">
+                                    </td>
+                                  </tr>
+                                  <tr ng-show="Theme.use_logo">
+                                    <th>
+                                      <label for="logo">
+                                      <strong>Shop logo</strong> </label>
+                                      <small>
+                                        (should be less than 700 pixels wide)
+                                      </small>
+                                    </th>
+                                    <td valign="middle">
+                                      <input class="files" id="Theme.logo_img" type="file" accept="image/*" style="float:left; margin-top:13px"/>
+                                      <img src="{{Theme.logo_img}}" ng-show="Theme.logo_img" width="100" />
+                                     
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <th>
+                                      <label for="logo">
+                                        <strong>Upload a favicon </strong><br>
+                                        <small>
+                                          Must be 16x16px
+                                        </small>
+                                      </label>
+                                    </th>
+                                    <td>
+                                      <input class="files" id="Theme.favicon" type="file" accept="image/*" style="float:left; margin-top:13px"/>
+                                      
+                                      <img src="{{Theme.favicon}}" ng-show="Theme.favicon" style="float:left; margin-top:18px"  width="100"/>
+                                      <!--<p>
+                                        <i class="ico ico-16 ico-uploaded-file">
+                                        </i>
+                                        <a target="_blank" href="" style="float:left;">
+                                          favicon.png
+                                        </a>
+                                      </p>-->
+                                    </td>
+                                  </tr>
+                                  
+                                </tbody>
+                              </table>
+                              
+                              <table>
+                                <tbody>
+                                  <tr>
+                                    <td colspan="2">
+                                      <h3>
+                                        Color Scheme</h3>
+                                    </td>
+                                  </tr>
+                                  <tr class="horizontal">
+                                    <th>
+                                      <label for="shop_bg_color">
+                                      <strong>Website background color </strong></label>
+                                    </th>
+                                    <td>
+                                      <div class="minicolors minicolors-theme-default minicolors-position-bottom minicolors-position-left">
+                                        <input ng-model="Theme.web_bg_color"  type="color" class="minicolors-input"/>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr class="horizontal">
+                                    <th>
+                                      <label for="toolbar_bg_color">
+                                      <strong>Top toolbar background color</strong> </label>
+                                    </th>
+                                    <td>
+                                      <div class="minicolors minicolors-theme-default minicolors-position-bottom minicolors-position-left">
+                                        <input  ng-model="Theme.toolbar_bg_color" type="color" class="minicolors-input"/>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr class="horizontal">
+                                    <th>
+                                      <label for="toolbar_text_color">
+                                      <strong>Top toolbar text color </strong></label>
+                                    </th>
+                                    <td>
+                                      <div class="minicolors minicolors-theme-default minicolors-position-bottom minicolors-position-left">
+                                        <input  ng-model="Theme.toolbar_text_color" type="color" class="minicolors-input"/>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr class="horizontal">
+                                    <th>
+                                      <label for="link_color">
+                                      <strong>Link color </strong></label>
+                                    </th>
+                                    <td>
+                                      <div class="minicolors minicolors-theme-default minicolors-position-bottom minicolors-position-left">
+                                        <input ng-model="Theme.link_color" type="color" class="minicolors-input"/>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr class="horizontal">
+                                    <th>
+                                      <label for="nav_link_color">
+                                      <strong>Nav link color </strong></label>
+                                    </th>
+                                    <td>
+                                      <div class="minicolors minicolors-theme-default minicolors-position-bottom minicolors-position-left">
+                                        <input ng-model="Theme.nav_link_color" type="color" class="minicolors-input"/>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr class="horizontal">
+                                    <th>
+                                      <label for="body_font_color">
+                                      <strong>Text color </strong></label>
+                                    </th>
+                                    <td>
+                                      <div class="minicolors minicolors-theme-default minicolors-position-bottom minicolors-position-left">
+                                        <input ng-model="Theme.text_color" type="color" class="minicolors-input"/>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr class="horizontal">
+                                    <th>
+                                      <label for="header_color">
+                                      <strong>Heading text color </strong></label>
+                                    </th>
+                                    <td>
+                                      <div class="minicolors minicolors-theme-default minicolors-position-bottom minicolors-position-left">
+                                        <input ng-model="Theme.heading_text_color" type="color" class="minicolors-input"/>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr class="horizontal">
+                                    <th>
+                                      <label for="shop_btn_color">
+                                      <strong>Button background color </strong></label>
+                                    </th>
+                                    <td>
+                                      <div class="minicolors minicolors-theme-default minicolors-position-bottom minicolors-position-left">
+                                        <input ng-model="Theme.button_bg_color" type="color" class="minicolors-input"/>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr class="horizontal">
+                                    <th>
+                                      <label for="border_color">
+                                      <strong>General border color </strong></label>
+                                    </th>
+                                    <td>
+                                      <div class="minicolors minicolors-theme-default minicolors-position-bottom minicolors-position-left">
+                                        <input ng-model="Theme.general_border_color" type="color" class="minicolors-input"/>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  
+                                  <tr>
+                                    <th>
+                                      <label for="icon_cart">
+                                      <strong>Cart icon </strong></label>
+                                    </th>
+                                    <td>
+                                      <input  ng-model="Theme.cart_icon" type="radio" name="icon_cart" value="none">
+                                      None
+                                      <input   ng-model="Theme.cart_icon" type="radio" name="icon_cart" value="light" selected="selected">
+                                      Light
+                                      <input   ng-model="Theme.cart_icon" type="radio" name="icon_cart" value="dark">
+                                    Dark</td>
+                                  </tr>
+                                  
+                                   <tr>
+                            <td colspan="2">
+                              <h3>
+                                Social Links
+                              </h3>
+                            </td>
+                            
+                          </tr>
+                          
+                          <tr class="horizontal">
+                            
+                            
+                          </tr>
+                                  
+                                </tbody>
+                              </table>
+                              
+                              <table>
+                        <tbody>
+                          <tr class="odd">
+                            <td>
+                              <label for="show_carousel_item_4">
+                              <strong>Twitter </strong></label>
+                            </td>
+                            <td>
+                              <input  ng-model="Theme.twitter_link"  type="text" id="twitter_link" name="twitter_link">
+                            </td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+                              <label for="facebook_link">
+                              <strong>Facebook </strong></label>
+                            </td>
+                            <td>
+                              <input ng-model="Theme.facebook_link"  type="text" id="facebook_link" name="facebook_link">
+                            </td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+                              <label for="google_link">
+                              <strong>Google+ Link </strong></label>
+                            </td>
+                            <td>
+                              <input ng-model="Theme.google_link"  type="text" id="google_link" name="google_link">
+                            </td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+                              <label for="youtube_link">
+                              <strong>Youtube Link </strong></label>
+                            </td>
+                            <td>
+                              <input ng-model="Theme.youtube_link"  type="text" id="youtube_link" name="youtube_link">
+                            </td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+                              <label for="vimeo_link">
+                              <strong>Vimeo Link </strong></label>
+                            </td>
+                            <td>
+                              <input ng-model="Theme.vimeo_link"  type="text" id="vimeo_link" name="vimeo_link">
+                            </td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+                              <label for="pinterest_link">
+                              <strong>Pinterest Link </strong></label>
+                            </td>
+                            <td>
+                              <input ng-model="Theme.pinterest_link" type="text" id="pinterest_link" name="pinterest_link">
+                            </td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+                              <label for="instagram_link">
+                              <strong>Instagram Link</strong> </label>
+                            </td>
+                            <td>
+                              <input  ng-model="Theme.instagram_link"  type="text" id="instagram_link" name="instagram_link">
+                            </td>
+                          </tr>
+                          <tr class="odd">
+                            <td>
+                              <label for="tumblr_link">
+                              <strong>Tumblr Link </strong></label>
+                            </td>
+                            <td>
+                              <input ng-model="Theme.tumblr_link"  type="text" id="tumblr_link" name="tumblr_link">
+                            </td>
+                          </tr>
+                         
+                          
+                        </tbody>
+                      </table>
+                              
+                              <!--<table>
+                                <tbody>
+                                  <tr>
+                                    <td colspan="2">
+                                      <h3>
+                                        Font options
+                                      </h3>
+                                    </td>
+                                  </tr>
+                                  <tr class="horizontal">
+                                    <th>
+                                      <label for="base_font">
+                                        Base Font
+                                      </label>
+                                    </th>
+                                    <td>
+                                      <select   ng-model="Theme.base_font" name="base_font" id="google_font" class="font">
+                                        <optgroup label="Google Web Fonts">
+                                          
+                                          <option value="Google+Arvo">
+                                            Arvo
+                                          </option>
+                                          <option value="Google+Asap">
+                                            Asap
+                                          </option>
+                                          <option value="Google+Cabin">
+                                            Cabin
+                                          </option>
+                                          <option value="Google+Copse">
+                                            Copse
+                                          </option>
+                                          <option value="Google+Droid+Sans">
+                                            Droid Sans
+                                          </option>
+                                          <option value="Google+Droid+Serif">
+                                            Droid Serif
+                                          </option>
+                                          <option value="Google+Gentium+Book+Basic">
+                                            Gentium Book Basic
+                                          </option>
+                                          <option value="Google+Josefin+Slab">
+                                            Josefin Slab
+                                          </option>
+                                          <option value="Google+Josefin+Sans">
+                                            Josefin Sans
+                                          </option>
+                                          <option value="Google+Kreon">
+                                            Kreon
+                                          </option>
+                                          <option value="Google+Lato">
+                                            Lato
+                                          </option>
+                                          <option value="Google+Merriweather">
+                                            Merriweather
+                                          </option>
+                                          <option value="Google+Old+Standard+TT">
+                                            Old Standard TT
+                                          </option>
+                                          <option value="Google+Open+Sans">
+                                            Open Sans
+                                          </option>
+                                        </optgroup>
+                                        <optgroup label="Sans-serif">
+                                          <option value="Helvetica, Arial, sans-serif">
+                                            Helvetica/Arial
+                                          </option>
+                                          <option value="Impact, Charcoal, Helvetica, Arial, sans-serif">
+                                            Impact
+                                          </option>
+                                          <option value="'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Lucida, Helvetica, Arial, sans-serif">
+                                            Lucida Grande
+                                          </option>
+                                          <option value="Trebuchet MS, sans-serif">
+                                            Trebuchet MS
+                                          </option>
+                                          <option value="Verdana, Helvetica, Arial, sans-serif">
+                                            Verdana
+                                          </option>
+                                        </optgroup>
+                                        <optgroup label="Serif">
+                                          <option value="Garamond, Baskerville, Caslon, serif">
+                                            Garamond
+                                          </option>
+                                          <option value="Georgia, Utopia, 'Times New Roman', Times, serif">
+                                            Georgia
+                                          </option>
+                                          <option value="Palatino, 'Palatino Linotype', 'Book Antiqua', serif">
+                                            Palatino
+                                          </option>
+                                          <option value="'Times New Roman', Times, serif">
+                                            Times New Roman
+                                          </option>
+                                        </optgroup>
+                                        <optgroup label="Monospace">
+                                          <option value="'Courier New', Courier, monospace">
+                                            Courier New
+                                          </option>
+                                          <option value="Monaco, 'Lucida Console', 'DejaVu Sans Mono', monospace">
+                                            Monaco/Lucida Console
+                                          </option>
+                                        </optgroup>
+                                      </select>
+                                    </td>
+                                  </tr>
+                                  
+                                  <tr class="horizontal">
+                                    <th>
+                                      <label for="header_font">
+                                        Heading Font
+                                      </label>
+                                    </th>
+                                    <td>
+                                      <select   ng-model="Theme.heading_font"  name="header_font" id="google_header_font" class="font">
+                                        <optgroup label="Google Web Fonts">
+                                          
+                                          <option value="Google+Arvo">
+                                            Arvo
+                                          </option>
+                                          <option value="Google+Asap">
+                                            Asap
+                                          </option>
+                                          <option value="Google+Cabin">
+                                            Cabin
+                                          </option>
+                                          <option value="Google+Copse">
+                                            Copse
+                                          </option>
+                                          <option value="Google+Droid+Sans">
+                                            Droid Sans
+                                          </option>
+                                          <option value="Google+Droid+Serif">
+                                            Droid Serif
+                                          </option>
+                                          <option value="Google+Gentium+Book+Basic">
+                                            Gentium Book Basic
+                                          </option>
+                                          <option value="Google+Josefin+Slab">
+                                            Josefin Slab
+                                          </option>
+                                          <option value="Google+Josefin+Sans">
+                                            Josefin Sans
+                                          </option>
+                                          <option value="Google+Kreon">
+                                            Kreon
+                                          </option>
+                                          <option value="Google+Lato">
+                                            Lato
+                                          </option>
+                                          <option value="Google+Merriweather">
+                                            Merriweather
+                                          </option>
+                                          <option value="Google+Old+Standard+TT">
+                                            Old Standard TT
+                                          </option>
+                                          <option value="Google+Open+Sans">
+                                            Open Sans
+                                          </option>
+                                        </optgroup>
+                                        <optgroup label="Sans-serif">
+                                          <option value="Helvetica, Arial, sans-serif">
+                                            Helvetica/Arial
+                                          </option>
+                                          <option value="Impact, Charcoal, Helvetica, Arial, sans-serif">
+                                            Impact
+                                          </option>
+                                          <option value="'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Lucida, Helvetica, Arial, sans-serif">
+                                            Lucida Grande
+                                          </option>
+                                          <option value="Trebuchet MS, sans-serif">
+                                            Trebuchet MS
+                                          </option>
+                                          <option value="Verdana, Helvetica, Arial, sans-serif">
+                                            Verdana
+                                          </option>
+                                        </optgroup>
+                                        <optgroup label="Serif">
+                                          <option value="Garamond, Baskerville, Caslon, serif">
+                                            Garamond
+                                          </option>
+                                          <option value="Georgia, Utopia, 'Times New Roman', Times, serif">
+                                            Georgia
+                                          </option>
+                                          <option value="Palatino, 'Palatino Linotype', 'Book Antiqua', serif">
+                                            Palatino
+                                          </option>
+                                          <option value="'Times New Roman', Times, serif">
+                                            Times New Roman
+                                          </option>
+                                        </optgroup>
+                                        <optgroup label="Monospace">
+                                          <option value="'Courier New', Courier, monospace">
+                                            Courier New
+                                          </option>
+                                          <option value="Monaco, 'Lucida Console', 'DejaVu Sans Mono', monospace">
+                                            Monaco/Lucida Console
+                                          </option>
+                                        </optgroup>
+                                      </select>
+                                    </td>
+                                  </tr>
+                                  
+                                </tbody>
+                              </table>-->
+                              
+                              
+                </fieldset>
+               </div>
+                <div class="Homepage" ng-show="pageclick == 'Homepage'">
+                   <fieldset id="homePage" >
+                      <table>
+                    <tbody>
+                     <tr class="horizontal">
+                      <tr class="horizontal" >
+                        <th style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <label for="homepage">
+                            <strong>Home Page Layout</strong> </label>
+                          <small>
+                            You can select a Layout on the homepage
+                          </small>
+                        </th>
+                        <td style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <select  ng-model="Theme.homepage_page_layout" style="width:275px">
+                            <option value="">Select Layout to show on homepage</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                          </select>
+                        </td>
+                      </tr>
+                     
+                      <tr class="horizontal">
+                        <th style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <label for="homepage">
+                            <strong>Page to show on homepage</strong> </label>
+                          <small>
+                            You can include a Page on the homepage
+                          </small>
+                        </th>
+                        <td style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <select ng-options="page.id as page.pageName for page in Page" ng-model="Theme.homepage_page" style="width:275px">
+                            <option value="">Select Page to show on homepage</option>
+                          </select>
+                        </td>
+                      </tr>
+                       <tr>
+                        <th style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <label for="enable_featuredproduct">
+                            <strong>Featured Products </strong></label>
+                          <small>
+                            To hide featured product just uncheck
+                          </small>
+                        </th>
+                        <td style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <input ng-model="Theme.enable_featuredproduct" type="checkbox" id="enable_featuredproduct" name="enable_featuredproduct" value="1">
+                        </td>
+                      </tr>
+                     
+                      <tr class="horizontal">
+                        <th style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <label for="frontpage_collection">
+                            <strong>Featured Products Collection</strong> </label>
+                          <small>
+                            Products in this collection will be on the homepage
+                          </small>
+                        </th>
+                        <td style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                        
+                          <div ng-repeat="collection in Collections" ng-init="requtestObject('featuredproduct')" style="float: left;margin: 0 10px 0 0px;">
+                            <input ng-checked="Theme.featuredproduct[collection.id]" ng-model="Theme.featuredproduct[collection.id]" type="checkbox" id="Featured_{{collection.id}}" value="{{collection.id}}">{{collection.collectionName}}
+                          <!--  <option ng-repeat="collection in Collections" value="{{collection.id}}">{{collection.collectionName}}</option>-->
+                          </div>
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td colspan="2" style="padding:20px 0;">
+                          <h3>
+                            Slideshow banner
+                          </h3>
+                          For best results, upload images that are at least 966px wide. Try to keep your slideshow images the same size.
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="standard-table">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <!--<input type="button" value="Add Slide" ng-click="addSlide()" >-->
+                        </td>
+                        <td style="padding-left:0px;">
+                         Show?
+                        </td>
+                        <td>
+                          Image
+                        </td>
+                        <td>
+                          Links to
+                        </td>
+                        <td>
+                          ALT text
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="width:11%;">
+                          <label>
+                            <strong>Slide #1</strong> </label>
+                        </td>
+                        <td>
+                          <input  type="checkbox"  ng-model="Theme.slide_1_show" name="slide_1" value="1">
+                        </td>
+                        <td>
+                          <input class="files" id="Theme.slide_1_img" type="file" accept="image/*" style="float:left"/>
+                          <img src="{{Theme.slide_1_img}}" ng-show="Theme.slide_1_img" width="75" style="float:left" />
+                          
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_1_link" name="slide_1_link" placeholder="/collections/all">
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_1_alt" name="slide_1_alt" placeholder="Trees">
+                        </td>
+                      </tr>
+                      <tr>
+                       <td width="11%">
+                          <label>
+                            <strong>Slide #2 </strong></label>
+                        </td>
+                        <td>
+                          <input  type="checkbox"  ng-model="Theme.slide_2_show" name="slide_2" value="1">
+                        </td>
+                        <td>
+                          <input class="files" id="Theme.slide_2_img" type="file" accept="image/*" style="float:left"/>
+                          <img src="{{Theme.slide_2_img}}" ng-show="Theme.slide_2_img" width="75" style="float:left" />
+                          
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_2_link" name="slide_2_link" placeholder="/collections/all">
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_2_alt" name="slide_2_alt" placeholder="Trees">
+                        </td>
+                      </tr>
+                      <tr>
+                       <td width="11%">
+                          <label>
+                            <strong>Slide #3 </strong></label>
+                        </td>
+                        <td>
+                          <input  type="checkbox"  ng-model="Theme.slide_3_show" name="slide_3" value="1">
+                        </td>
+                        <td>
+                          <input class="files" id="Theme.slide_3_img" type="file" accept="image/*" style="float:left"/>
+                          <img src="{{Theme.slide_3_img}}" ng-show="Theme.slide_3_img" width="75" style="float:left" />
+                          
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_3_link" name="slide_3_link" placeholder="/collections/all">
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_3_alt" name="slide_3_alt" placeholder="Trees">
+                        </td>
+                      </tr>
+                      <tr>
+                      <td width="11%">
+                          <label>
+                            <strong>Slide #4 </strong></label>
+                        </td>
+                        <td>
+                          <input  type="checkbox"  ng-model="Theme.slide_4_show" name="slide_4" value="1">
+                        </td>
+                        <td>
+                          <input class="files" id="Theme.slide_4_img" type="file" accept="image/*" style="float:left"/>
+                          <img src="{{Theme.slide_4_img}}" ng-show="Theme.slide_4_img" width="75" style="float:left" />
+                          
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_4_link" name="slide_4_link" placeholder="/collections/all">
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_4_alt" name="slide_4_alt" placeholder="Trees">
+                        </td>
+                      </tr>
+                      <tr>
+                      <td width="11%">
+                          <label>
+                            <strong>Slide #5 </strong></label>
+                        </td>
+                        <td>
+                          <input  type="checkbox"  ng-model="Theme.slide_5_show" name="slide_5" value="1">
+                        </td>
+                        <td>
+                          <input class="files" id="Theme.slide_5_img" type="file" accept="image/*" style="float:left"/>
+                          <img src="{{Theme.slide_5_img}}" ng-show="Theme.slide_5_img" width="75" style="float:left" />
+                          
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_5_link" name="slide_5_link" placeholder="/collections/all">
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_5_alt" name="slide_5_alt" placeholder="Trees">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  
+                  
+                  
+                </fieldset>
+                </div>
+                <div class="Product" ng-show="pageclick == 'Product'">
+                   <fieldset>
+                  
+                  <table>
+                    <tbody>
+                     <!-- <tr class="horizontal">
+                        <th style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <label for="enable_product_image_zoom">
+                            <strong>Enable image zoom feature? </strong></label>
+                        </th>
+                        <td style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <input ng-model="Theme.enable_product_image_zoom" type="checkbox" id="enable_product_image_zoom" name="enable_product_image_zoom" value="1">
+                        </td>
+                      </tr>-->
+                      <tr class="horizontal">
+                        <th style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <label for="display_quantity_dropdown">
+                            <strong>Display Quantity Box? </strong></label>
+                             <small>
+                            You can change display of Quantity Box
+                          </small>
+                        </th>
+                        <td style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <input ng-model="Theme.display_quantity_dropdown" type="checkbox" id="display_quantity_dropdown" name="display_quantity_dropdown" value="1">
+                        </td>
+                      </tr>
+                      <tr class="horizontal">
+                        <th style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <label for="show_related_products">
+                            <strong>Display related products? </strong></label>
+                            <small>
+                            You can change display of related products
+                          </small>
+                        </th>
+                        <td style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <input ng-model="Theme.show_related_products" type="checkbox" id="show_related_products" name="show_related_products" value="1" checked="checked">
+                        </td>
+                      </tr>
+                       <tr class="horizontal">
+                        <th valign="top" style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <label for="show_related_products">
+                            <strong>Custom Product Recommandation</strong> </label>
+                             <small>
+                            You can show Product Recommandation on the basis of selection
+                          </small>
+                        </th>
+                        <td style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <input ng-model="Theme.custom_product_recommadtaion" type="radio" name="custom_product_recommadtaion" value="Type"> By Type <br />
+                          <input ng-model="Theme.custom_product_recommadtaion" type="radio" name="custom_product_recommadtaion" value="Brand"> By Brand <br />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </fieldset>
+                </div>
+                <div class="Collection" ng-show="pageclick == 'Collection'">
+                   <fieldset >
+                  <table>
+                    <tbody>
+                    <tr class="horizontal">
+                        <th style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <label for="pagination_limit">
+                            <strong>Number of products to display </strong></label>
+                             <small>
+                            You can change include a page on the homepage
+                          </small>
+                        </th>
+                        <td style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <select  ng-model="Theme.pagination_limit"  name="pagination_limit" id="pagination_limit">
+                            <option value="48">
+                              48
+                            </option>
+                            <option value="36">
+                              36
+                            </option>
+                            <option value="24" selected="selected">
+                              24
+                            </option>
+                            <option value="12">
+                              12
+                            </option>
+                            <option value="9">
+                              9
+                            </option>
+                            <option value="8">
+                              8
+                            </option>
+                            <option value="6">
+                              6
+                            </option>
+                            <option value="4">
+                              4
+                            </option>
+                            <option value="3">
+                              3
+                            </option>
+                          </select>
+                        </td>
+                      </tr>
+                      <tr class="horizontal">
+                        <th style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <label for="collection_tags">
+                            <strong>Search Filter Show </strong></label>
+                             <small>
+                           Show search page filters
+                          </small>
+                        </th>
+                        <td style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <input ng-model="Theme.collection_widget_search"  type="checkbox" id="collection_tags" name="collection_tags" value="1" checked="checked">
+                        </td>
+                      </tr>
+                      <tr class="horizontal">
+                        <th style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <label>
+                            <strong>Widgets to Show </strong></label>
+                        </th>
+                        <td style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                                <input ng-model="Theme.collection_widget_title"  type="checkbox"  name="collection_widget_search" value="1" > Title <br />
+                                 <input ng-model="Theme.collection_widget_price"  type="checkbox"  name="collection_widget_search" value="1" > Price <br />
+                                <input ng-model="Theme.collection_widget_brand"  type="checkbox"  name="collection_widget_search" value="1" > Brand <br />
+                                <input ng-model="Theme.collection_widget_type"  type="checkbox"  name="collection_widget_search" value="1" > Type <br />
+                                <input ng-model="Theme.collection_widget_tag"  type="checkbox"  name="collection_widget_search" value="1" > Tag <br />
+                        </td>
+                      </tr>
+                       
+                      <tr>
+                        <td colspan="2" style=" border-bottom:1px solid #ececec; padding:20px 0;">
+                          <h3 style="border:none;">
+                            <strong>Slideshow Collection Page</strong> </h3>
+                          <small>For best results, upload images that are at least 966px wide. Try to keep your slideshow images the same size.</small>
+                        </td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                  <table class="standard-table">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <!--<input type="button" value="Add Slide" ng-click="addSlide()" >-->
+                        </td>
+                        <td style="padding-left:0px;">
+                          Show?
+                        </td>
+                        <td>
+                          Image
+                        </td>
+                        <td>
+                          Links to
+                        </td>
+                        <td>
+                          ALT text
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="width:11%">
+                          <label>
+                            <strong>Slide #1</strong> </label>
+                        </td>
+                        <td>
+                          <input  type="checkbox"  ng-model="Theme.slide_collection_1_show" name="slide_1" value="1" >
+                        </td>
+                        <td>
+                          <input class="files" id="Theme.slide_collection_1_img" type="file" accept="image/*" style="float:left"/>
+                          <img src="{{Theme.slide_collection_1_img}}" ng-show="Theme.slide_collection_1_img" width="75" style="float:left"/>
+                          
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_1_link" name="slide_collection_1_link" placeholder="/collections/all">
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_1_alt" name="slide_collection_1_alt" placeholder="Trees">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label>
+                            <strong>Slide #2 </strong></label>
+                        </td>
+                        <td>
+                          <input  type="checkbox"  ng-model="Theme.slide_collection_2_show" name="slide_collection_2" value="1">
+                        </td>
+                        <td>
+                          <input class="files" id="Theme.slide_collection_2_img" type="file" accept="image/*" style="float:left" />
+                          <img src="{{Theme.slide_collection_2_img}}" ng-show="Theme.slide_collection_2_img" width="75" style="float:left"/>
+                          
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_2_link" name="slide_collection_2_link" placeholder="/collections/all">
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_2_alt" name="slide_collection_2_alt" placeholder="Trees">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label>
+                            <strong>Slide #3</strong> </label>
+                        </td>
+                        <td>
+                          <input  type="checkbox"  ng-model="Theme.slide_collection_3_show" name="slide_collection_3" value="1">
+                        </td>
+                        <td>
+                          <input class="files" id="Theme.slide_collection_3_img" type="file" accept="image/*" style="float:left"/>
+                          <img src="{{Theme.slide_collection_3_img}}" ng-show="Theme.slide_collection_3_img" width="75" style="float:left"/>
+                          
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_3_link" name="slide_collection_3_link" placeholder="/collections/all">
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_3_alt" name="slide_collection_3_alt" placeholder="Trees">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label>
+                            <strong>Slide #4 </strong></label>
+                        </td>
+                        <td>
+                          <input  type="checkbox"  ng-model="Theme.slide_collection_4_show" name="slide_collection_4" value="1">
+                        </td>
+                        <td>
+                          <input class="files" id="Theme.slide_collection_4_img" type="file" accept="image/*" style="float:left"/>
+                          <img src="{{Theme.slide_collection_4_img}}" ng-show="Theme.slide_collection_4_img" width="75" style="float:left"/>
+                          
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_4_link" name="slide_collection_4_link" placeholder="/collections/all">
+                        </td>
+                        <td>
+                          <input type="text" ng-model="Theme.slide_collection_4_alt" name="slide_collection_4_alt" placeholder="Trees">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </fieldset>
+                </div>
+              <div class="Footer" ng-show="pageclick == 'Footer'">
+                     <fieldset >
+                      
+                      <table>
+                        <tbody>
+                          <tr class="horizontal">
+                            <th>
+                              <label for="footer_linklist_title">
+                              <strong>Footer link list heading</strong> </label>
+                            </th>
+                            <td>
+                              <input  ng-model="Theme.footer_linklist_title"  type="text" id="footer_linklist_title" name="footer_linklist_title" value="Quick Links">
+                            </td>
+                          </tr>
+                          <tr class="horizontal">
+                            <th>
+                              <label for="footer_linklist">
+                              <strong>Footer link list to show</strong> </label>
+                            </th>
+                            <td>
+                              <select   ng-model="Theme.footer_linklist"  name="footer_linklist" class="linklist" value="footer">
+                                <option value="">
+                                  None
+                                </option>
+                                <option data-bind-value="linklist.handle" data-bind="linklist.title" value="footer">
+                                  Footer
+                                </option>
+                                <option data-bind-value="linklist.handle" data-bind="linklist.title" value="main-menu">
+                                  Main Menu
+                                </option>
+                                <!--batman-iterator-linklist="LinkList.all"-->
+                              </select>
+                            </td>
+                          </tr>
+                          <tr class="horizontal">
+                            <th>
+                              <label for="footer_display_newsletter">
+                              <strong>Show newsletter?</strong> </label>
+                            </th>
+                            <td>
+                              <input  ng-model="Theme.footer_display_newsletter" type="checkbox" id="footer_display_newsletter" name="footer_display_newsletter" value="1">
+                            </td>
+                          </tr>                         
+                        </tbody>
+                      </table>
+                      
+                    </fieldset>
+                </div>
+              </div>
+            </div>
+         
+        </div>
+        
+        <!-- /.section -->
+        
+        
+        </form>
+      </div>
+      
+      <!-- /.page -->
+    </div>
+  </section>
+  
+</div>
+
+<style>
+
+.theme-settings-form h3 {
+  font-size: 18px;
+}
+</style>s

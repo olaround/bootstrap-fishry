@@ -1,0 +1,136 @@
+<div id="page">
+
+    <section class="breadcrumb parallax margbot30"></section>
+    <!-- //BREADCRUMBS -->
+
+
+    <!-- PAGE HEADER -->
+    <section class="page_header">
+
+        <!-- CONTAINER -->
+        <div class="container border0 margbot0">
+            <h3 class="pull-left"><b>Checkout</b>
+            </h3>
+
+            <div class="pull-right">
+                <a href="shopping-bag.html">Back shopping bag<i class="fa fa-angle-right"></i></a>
+            </div>
+        </div>
+        <!-- //CONTAINER -->
+    </section>
+    <!-- //PAGE HEADER -->
+    <!-- CHECKOUT PAGE -->
+    <section class="checkout_page">
+
+        <!-- CONTAINER -->
+        <div class="container">
+
+            <!-- CHECKOUT BLOCK -->
+            <div class="checkout_block">
+                <ul class="checkout_nav">
+                    <li class="done_step">1. Shipping Address</li>
+                    <li class="active_step">2. Billing Address</li>
+                    <li>3. Payment</li>
+                    <li class="last">4. Confirm Order</li>
+                </ul>
+
+                <form role="form" class="checkout_form clearfix" ng-submit="$location.path('/confirmthree')">
+
+
+                    <div ng-if="!ListPaymentGateways.same_billing_and_shipping_address">
+                        <div class="formEntry">
+                            <label class="entryLabel">
+                                <h1>Billing Address</h1>
+                            </label>
+
+                            <span style="font-weight: bold;display: block;padding-bottom: 6px;">
+                                <input type="checkbox"  ng-model="Customer.SameBilling" class="checkbox js-agreeToTerms" style="display:inline-block;margin-top: 0px;margin-right: 6px;"/>Same as Shipping Address</span>
+                        </div>
+                         <div ng-show="!Customer.SameBilling" class="checkout_form_input country">
+                            <label>Country
+                                <span class="color_red">*</span>
+                            </label>
+                            <select ng-options="country.CountryName as country.CountryName for country in SettingsShippingCountry" ng-model="Customer.BillingCountry" class="form-control">
+                                <option value="">Select Country</option>
+                            </select>
+                        </div>
+
+                        <div ng-show="!Customer.SameBilling" class="checkout_form_input sity">
+                            <label>City
+                                <span class="color_red">*</span>
+                            </label>
+                            <input type="text" name="name" value="" placeholder="" ng-model="Customer.CityBilling" />
+                        </div>
+
+
+                        <div ng-show="!Customer.SameBilling" class="checkout_form_input last postcode">
+                            <label>Postcode
+                                <span class="color_red">*</span>
+                            </label>
+                            <input type="text" name="name" value="" placeholder="" ng-model="Customer.PostCodeBilling" />
+                        </div>
+
+                        <div ng-show="!Customer.SameBilling" class="checkout_form_input2 adress">
+                            <label>Address
+                                <span class="color_red">*</span>
+                            </label>
+                            <input type="text" name="name" value="" placeholder="" ng-model="Customer.AddressBilling" />
+                        </div>
+
+                        <div ng-show="!Customer.SameBilling" class="checkout_form_input2 last adress">
+                            <label>Address Continue</label>
+                            <input type="text" name="name" value="" placeholder="" ng-model="Customer.AddressContinueBilling" />
+                        </div>
+
+                        <hr class="clear">
+
+                        <div ng-show="!Customer.SameBilling" class="checkout_form_input first_name">
+                            <label>First Name
+                                <span class="color_red">*</span>
+                            </label>
+                            <input type="text" name="name" value="" placeholder="" ng-model="Customer.FirstNameBilling" />
+                        </div>
+
+                        <div ng-show="!Customer.SameBilling" class="checkout_form_input last_name">
+                            <label>Last name
+                                <span class="color_red">*</span>
+                            </label>
+                            <input type="text" name="name" value="" placeholder="" ng-model="Customer.LastNameBilling" />
+                        </div>
+
+                        <div ng-show="!Customer.SameBilling" class="checkout_form_input phone">
+                            <label>Phone
+                                <span class="color_red">*</span>
+                            </label>
+                            <input type="text" name="name" value="" placeholder="" ng-model="Customer.PhoneBilling" />
+                        </div>
+
+                        <div ng-show="!Customer.SameBilling" class="checkout_form_input last E-mail">
+                            <label>Email
+                                <span class="color_red">*</span>
+                            </label>
+                            <input type="email" name="name" value="" placeholder="" ng-model="Customer.EmailBilling" />
+                        </div>
+                       
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="checkout_form_note">All fields marked with (
+                        <span class="color_red">*</span>) are required</div>
+
+                    <button class="btn active pull-right" type="submit">Continue</button>
+                </form>
+            </div>
+            <!-- //CHECKOUT BLOCK -->
+        </div>
+        <!-- //CONTAINER -->
+    </section>
+    <!-- //CHECKOUT PAGE -->
+
+
+
+</div>
+<script type="text/javascript">
+     jQuery('.shopping_bag .cart').hide();
+</script>

@@ -1,0 +1,78 @@
+<div id="page">
+    <section class="breadcrumb parallax margbot30"></section>
+    <!-- //BREADCRUMBS -->
+
+
+    <!-- PAGE HEADER -->
+    <section class="page_header">
+
+        <!-- CONTAINER -->
+        <div class="container border0 margbot0">
+            <h3 class="pull-left"><b>Checkout</b>
+            </h3>
+
+            <div class="pull-right">
+                <a href="shopping-bag.html">Back shopping bag<i class="fa fa-angle-right"></i></a>
+            </div>
+        </div>
+        <!-- //CONTAINER -->
+    </section>
+    <!-- //PAGE HEADER -->
+
+
+    <!-- CHECKOUT PAGE -->
+    <section class="checkout_page">
+
+        <!-- CONTAINER -->
+        <div class="container">
+
+            <!-- CHECKOUT BLOCK -->
+            <div class="checkout_block">
+                <ul class="checkout_nav">
+                    <li class="done_step2">1. Shipping Address</li>
+                    <li class="done_step">2. Billing Address</li>
+                    <li class="active_step">3. Payment</li>
+                    <li class="last">4. Confirm Order</li>
+                </ul>
+                <form role="form" ng-submit="$location.path('/confirmfour')">
+                    <div class="checkout_payment clearfix">
+                        <div class="payment_method padbot70">
+                            <p class="checkout_title">Payment Method</p>
+
+                            <ul class="clearfix">
+                                <select ng-change="UpdatePaymentMethod(PaymentMethod)" class="form-control"  ng-model="PaymentMethod" required>
+                                    <option value="">Select Payment Method</option>
+                                    <option ng-repeat="payment in ListPaymentMethod">{{payment.name}}</option>
+                                </select>
+                                
+                            </ul>
+
+                            <ul class="clearfix payment-description" ng-if="PaymentMethod && returnpaymentDescription(PaymentMethod)">
+                                <label for="PaymentMethods" style="font-weight: bold;">{{PaymentMethod}} Description</label>
+                                                <p>{{returnpaymentDescription(PaymentMethod)}}</p>
+                                
+                            </ul>
+                           
+                        </div>
+                        <div class="clear"></div>
+                        <button class="btn active pull-right checkout_block_btn" type="submit">Continue</button>
+                    </div>
+                </form>
+            </div>
+            <!-- //CHECKOUT BLOCK -->
+        </div>
+        <!-- //CONTAINER -->
+    </section>
+    <!-- //CHECKOUT PAGE -->
+</div>
+<script>
+$(document).ready(function() {
+
+    $('#Payment').on('change', function() {
+        localStorage.setItem('PaymentType', $('#Payment').val());
+    });
+});
+</script>
+<script type="text/javascript">
+     jQuery('.shopping_bag .cart').hide();
+</script>

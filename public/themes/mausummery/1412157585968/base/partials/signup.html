@@ -1,0 +1,82 @@
+<div id="page">
+    <!-- MY ACCOUNT PAGE -->
+    <section class="my_account parallax" style="background: url({{ThemeSettings.theme_settings.slide_collection_3_img}}) no-repeat;background-size:cover;">
+
+    <style type="text/css">
+        @media(max-width:768px){
+.login.account{
+width:100%; 
+}
+}
+    </style>
+        <!-- CONTAINER -->
+        <div class="container">
+
+            <div class="my_account_block clearfix" ng-if="!User.info.CustomerEmail  && ListPaymentGateways.accountsDisabled == 'optional'">
+                <div class="login account">
+                    <h2 class="create-account">Create Account</h2>
+                    <div class="create-account-margin">
+                        <p class="text-signup">Fill out the following form in order to register.Existing customer.
+                            <strong class="signin"><a href="/login">Sign In Here.</a></strong>
+                        </p>
+                        <p class="text-signup">We will save the details you provide in order to facilitate your purchase on our website.</p>
+                    </div>
+                    <hr class="create-account-hr">
+                    <form class="login_form new-account" role="form" ng-submit="SignUp('cart')">
+                        <div ng-if="DuplicateEmailError"  class="alert alert-warning">The Email address is already associated with an account.</div>
+                        <h3 class="create-account">User Account</h3>
+                        <label class="mediumm" for="exampleInputEmail1">Email Address*</label>
+                        <input class="last medium" type="email" name="username"  placeholder="Enter Email ID...." ng-model="Customer.Email" required />
+                        <label class="mediumm" for="exampleInputEmail1">Password*</label>
+                         <input class="last medium" ng-model="Customer.Password"  required="required" type="password" class="form-control" id="Password" placeholder="Enter Password...."/>
+                        <label class="mediumm" for="exampleInputEmail1">Repeat Password*</label>
+                        <input class="last medium" required="required" type="password" class="form-control" id="confirmPassword"  oninput="check(this)" placeholder="Confirm Password...." />
+                        <h3 class="create-account">Contact Details</h3>
+                        <label class="mediumm" for="exampleInputEmail1">Name*</label>
+                        <input class="last medium" type="text" name="username"  placeholder="Enter First Name ...." ng-model="Customer.FirstName" required />
+                        <input class="last medium" type="text" name="password"  placeholder="Enter Last name...." ng-model="Customer.LastName" required style="margin-left:  27.4%;" /><br>
+                        <label class="mediumm" for="exampleInputEmail1">Telephone*</label>
+                        <input class="last medium" type="tel" pattern="[0-9]{11}" name="text"  placeholder="Enter Telephone...." ng-model="Customer.Phone" required/>
+                        <label class="mediumm" for="exampleInputEmail1">Address*</label>
+                        <input class="last medium" type="address" name="text" ng-model="Customer.Address"  placeholder="Enter Address...." required/>
+                        <input class="last medium" type="text" name="text" ng-model="Customer.AddressContinue"  placeholder="Address Continue...." required style="margin-left:  27.4%;;" />
+                        <label class="mediumm" for="exampleInputEmail1">Postal Code*</label>
+                       <input class="last medium" type="text" name="text"  placeholder="Enter Postal code...." ng-model="Customer.PostCode" required/>
+                        <label class="mediumm" for="exampleInputEmail1">City*</label>
+                        <input class="last medium" type="text" name="text"  placeholder="Enter City...." ng-model="Customer.City" required/>
+                        <label class="mediumm" for="exampleInputEmail1">Country*</label>
+                        <input class="last medium" type="text" ng-model="Customer.Country" name="password"  placeholder="Enter Country...." required/>
+                        <div class="pull-left"><input type="checkbox" id="categorymanufacturer1" required /><label for="categorymanufacturer1">I accept the privacy statement</label></div>
+                        <div class="clearfix">
+                        
+
+
+                            
+                        </div>
+                            
+                        <hr style="width: 154%;margin-bottom: 18px;">
+                         
+                        <div class="center">
+                            <input type="submit" class="btn active" value="Create Account" style="float:left;">
+                        </div>
+                        <div ng-if="StartSignup && !DuplicateEmailError" class="inline-loaders">
+                        <img   ng-src="{{BaseUrl}}img/theme/preloader.gif" style="position: absolute;right: 50%;top: 50%;">
+                       </div> 
+                    </form>
+                </div>
+            </div>
+            <div class="my_account_block clearfix"  ng-if="User.info.CustomerEmail  || ListPaymentGateways.accountsDisabled != 'optional'">
+
+                <div class="login account" ng-if="ListPaymentGateways.accountsDisabled != 'optional'">
+                    <h4>Signup is disabled</h4>
+                </div>
+            </div>
+
+        </div>
+        <!-- //CONTAINER -->
+    </section>
+    <!-- //MY ACCOUNT PAGE -->
+</div>
+<script type="text/javascript">
+     jQuery('.shopping_bag .cart').hide();
+</script>

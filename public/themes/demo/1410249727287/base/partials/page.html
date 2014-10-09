@@ -1,0 +1,81 @@
+<!-- PAGE -->
+<div id="page" ng-init="InitPage()">
+    <div ng-repeat="page in ListPage | CustomFilter:{pageUrl : routeParam}">
+        <!-- BREADCRUMBS -->
+        <section class="breadcrumb parallax margbot30"></section>
+        <!-- //BREADCRUMBS -->
+
+
+        <!-- PAGE HEADER -->
+        <section class="page_header">
+
+            <!-- CONTAINER -->
+            <div class="container">
+                <h3 class="pull-left"><b>{{page.pageName}}</b>
+                </h3>
+
+                <div class="pull-right">
+                    <a href="/">Back to shop<i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <!-- //CONTAINER -->
+        </section>
+        <!-- //PAGE HEADER -->
+        <!-- FAQ PAGE -->
+       <section class="faq_page">
+           <!-- CONTAINER -->
+            <div class="container">
+                <!-- ROW -->
+                <div class="row">
+
+                    <!-- FAQ BLOCK -->
+                    <div class="col-lg-9 col-md-9 col-sm-9 padbot30">
+                        <p ng-bind-html="page.pageDescription"></p>
+                    </div>
+                    <!-- //FAQ BLOCK -->
+                    <!-- SIDEBAR -->
+                    <div id="sidebar" class="col-lg-3 col-md-3 col-sm-3 padbot50">
+                        <!-- WIDGET SEARCH -->
+                        <div class="sidepanel widget_search">
+                            <form class="search_form" action="javascript:void(0);" method="get" name="search_form">
+                                <input type="text" name="Search..." value="Search..." onFocus="if (this.value == 'Search...') this.value = '';" onBlur="if (this.value == '') this.value = 'Search...';" />
+                            </form>
+                        </div>
+                        <!-- //WIDGET SEARCH -->
+
+                        <!-- CATEGORIES -->
+                        <div class="sidepanel widget_categories">
+                            <h3>Sidebar Menu</h3>
+                            <ul ng-repeat="Navigation in ListNavigation | filter : 'footer'">
+                                <li class="sub-menu first" ng-repeat="Nav in Navigation.link_list" ng-class="{active:  $location.path() == '/'}" ng-show="Nav.optionSelected == 'frontpage'">
+                                    <a href="/">
+                                        {{Nav.name}}
+                                      </a>
+                                </li>
+                                <li class="sub-menu first" ng-repeat="Nav in Navigation.link_list" ng-class="{active:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
+                                    <a href="{{Nav.commaSeprated}}">
+                                        {{Nav.name}}
+                                      </a>
+                                </li>
+                                <li class="sub-menu first" ng-repeat="Nav in Navigation.link_list" ng-class="{active:  $location.path().indexOf('{{Nav.http}}') >= 0}" ng-show="Nav.http">
+                                    <a href="{{Nav.http}}" target="_blank">
+                                        {{Nav.name}}
+                                      </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- //CATEGORIES -->
+
+                        
+                    </div>
+                    <!-- //SIDEBAR -->
+                </div>
+                <!-- //ROW -->
+            </div>
+            <!-- //CONTAINER -->
+        </section>
+        <!-- //FAQ PAGE -->
+
+    </div>
+    <!-- //PAGE -->
+</div>

@@ -1,0 +1,36 @@
+<!-- MODULE Block specials -->
+<section id="specials" class="column products_block column_box hidden-phone" ng-if="ThemeSettings.theme_settings.enable_sidebar_collection" ng-if="ThemeSettings.theme_settings.sidebarCollection">
+     <div class="sidepanel widget_brands block" ng-if="$location.path().indexOf('collections') > -1">
+        <h4>
+            <span>SHOP BY MANUFACTURERS {{$location.path()}}</span>
+        </h4>
+        <div ng-repeat="(keysVendor,vendors) in ListProductVendor" id="layered_block_left">
+            <span>
+                <input type="checkbox" id="{{vendors.id}}" name="{{vendors.id}}" value="{{vendors.id}}" ng-model="SearchVendorsearch[vendors.id]" />
+                <label for="{{vendors.id}}" class="nomargin">{{vendors.productVendorName}} ({{hasBrandInCollection(vendors.id)}})</label>
+            </span>
+        </div>
+    </div>
+    <div class="block">
+        <h4>
+            <span>Top Sellers</span>
+            <span class="column_icon_toggle"></span>
+        </h4>
+        <div class="block_content toggle_content">
+            <ul>
+                <li class="shop_box  clearfix" ng-repeat="products in ListProduct | CustomFilter:{collection: ThemeSettings.theme_settings.sidebarCollection} | limitTo:3 ">
+                    <a class="products_block_img" href="./product/{{products.productUrl}}">
+                        <img ng-src="{{products.productImage[0].Image}}" alt="{{products.productName}}" title="{{products.productName}}">
+                    </a>
+                    <div>
+                        <h5 style="margin-top: 3px;">
+                            <a class="product_link" href="./product/{{products.productUrl}}" title="{{products.productName}}">{{products.productName.slice(0,20)}}</a>
+                        </h5>
+                        <p class="product_desc" ng-bind-html="products.productDescription.slice(0,100)"></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- /MODULE Block specials -->

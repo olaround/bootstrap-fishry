@@ -1,0 +1,388 @@
+<div class="content_bg" ng-init="InitProduct()">
+    <div id="columns" class="container ">
+        <div class="row ">
+            <div class="loader_page" ng-repeat="(key,product) in ListProduct | CustomFilter:{productUrl : routeParam}">
+                <div id="center_column" class="center_column span9 clearfix">
+                    <!-- Breadcrumb -->
+                    <div class="breadcrumb">
+                        <div class="breadcrumb_inset">
+                            <a class="breadcrumb-home" href="/" title="Return to Home"><i class="icon-home"></i></a>
+                            <span class="navigation-pipe">&gt;</span>{{product.productName}}
+                        </div>
+                    </div>
+                    <!-- /Breadcrumb -->
+                    <div id="primary_block" class="clearfix">
+                        <!--ADD CUSTOM CLOUD ZOOM!!!-->
+                        <!-- Call quick start function. -->
+                        <!-- right infos-->
+                        <div class="row">
+                            <div id="pb-right-column" class="span4">
+                                <h1 class="pb-right-colum-h">{{product.productName}}</h1>
+                                <!-- <h1>{{ListProductVendor}}</h1> -->
+                                <div  class="hidden-phone">
+                                    <!-- product img-->
+                                    <div id="image-block">
+                                        <span id="view_full_size">
+                                            <div id="wrap" style="top:0px;z-index:auto;position:relative; text-align:center;">
+                                                <a href="javascript:void(0)">
+                                                    <img ng-if="!product.productImage[0].Image" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{product.productInfo.productName}}">
+
+                                                    <img ng-if="product.productImage[0].Image" colorbox="{{product.productImage[0].Image}}" id="bigpic-0" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[0].Image}}">
+
+                                                    <img ng-if="product.productImage[1].Image" colorbox="{{product.productImage[1].Image}}" id="bigpic-1" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[1].Image}}" style="display:none">
+
+                                                    <img ng-if="product.productImage[2].Image" colorbox="{{product.productImage[2].Image}}" id="bigpic-2" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[2].Image}}" style="display:none">
+
+                                                    <img ng-if="product.productImage[3].Image" colorbox="{{product.productImage[3].Image}}" id="bigpic-3" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[3].Image}}" style="display:none">
+
+                                                    <img ng-if="product.productImage[4].Image" colorbox="{{product.productImage[4].Image}}" id="bigpic-4" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[4].Image}}" style="display:none">
+                                                </a>
+                                            </div>
+                                        </span>
+                                    </div>
+                                    <!-- thumbnails -->
+                                    <div id="views_block" ng-if="product.productImage[1].Image">
+                                        <div id="thumbs_list">
+                                            <ul id="thumbs_list_frame" style="width: 380px;">
+
+                                                <li id="thumbnail_1" ng-if="product.productImage[0].Image">
+                                                    <a href="javascript:void(0)">
+                                                        <img onClick="$('#view_full_size img').hide();$('#bigpic-0').fadeIn();" id="thumb_9" ng-src="{{product.productImage[0].Image}}" alt="">
+                                                    </a>
+                                                </li>
+
+                                                <li id="thumbnail_2" ng-if="product.productImage[1].Image">
+                                                    <a href="javascript:void(0)">
+                                                        <img onClick="$('#view_full_size img').hide();$('#bigpic-1').fadeIn();" id="thumb_10" ng-src="{{product.productImage[1].Image}}" alt="">
+                                                    </a>
+                                                </li>
+
+                                                <li id="thumbnail_3" ng-if="product.productImage[2].Image">
+                                                    <a href="javascript:void(0)">
+                                                        <img onClick="$('#view_full_size img').hide();$('#bigpic-2').fadeIn();" id="thumb_11" ng-src="{{product.productImage[2].Image}}" alt="">
+                                                    </a>
+
+                                                </li>
+
+                                                <li id="thumbnail_4" ng-if="product.productImage[3].Image">
+                                                    <a href="javascript:void(0)">
+                                                        <img onClick="$('#view_full_size img').hide();$('#bigpic-3').fadeIn();" id="thumb_12" ng-src="{{product.productImage[3].Image}}" alt="">
+                                                    </a>
+
+                                                </li>
+
+                                                <li id="thumbnail_5" ng-if="product.productImage[4].Image">
+                                                    <a href="javascript:void(0)">
+                                                        <img onClick="$('#view_full_size img').hide();$('#bigpic-4').fadeIn();" id="thumb_13" ng-src="{{product.productImage[4].Image}}" alt="">
+                                                    </a>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="hidden-desktop hidden-tablet">
+                                    <div id="image-block">
+                                        <span id="view_full_size_mobile">
+                                            <div id="wrap" style="top:0px;z-index:auto;position:relative; text-align:center;">
+                                                <img ng-if="!product.productImage[0].Image" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{product.productInfo.productName}}">
+
+                                                <img ng-if="product.productImage[0].Image" id="bigpic-5" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[0].Image}}">
+
+                                                <img ng-if="product.productImage[1].Image" id="bigpic-6" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[1].Image}}" style="display:none">
+
+                                                <img ng-if="product.productImage[2].Image" id="bigpic-7" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[2].Image}}" style="display:none">
+
+                                                <img ng-if="product.productImage[3].Image" id="bigpic-8" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[3].Image}}" style="display:none">
+
+                                                <img ng-if="product.productImage[4].Image" id="bigpic-9" alt="{{product.productName}}" title="{{product.productName}}" ng-src="{{product.productImage[4].Image}}" style="display:none">
+                                               
+                                            </div>
+                                        </span>
+                                    </div>
+                                    <!-- thumbnails -->
+                                    <div id="views_block" ng-if="product.productImage[0].Image">
+                                        <div id="thumbs_list">
+                                            <ul id="thumbs_list_frame" style="width: 380px;">
+
+                                                <li id="thumbnail_1" ng-if="product.productImage[0].Image">
+                                                    <a href="javascript:void(0)">
+                                                        <img onClick="$('#view_full_size_mobile img').hide();$('#bigpic-5').fadeIn();" id="thumb_9" ng-src="{{product.productImage[0].Image}}" alt="">
+                                                    </a>
+                                                </li>
+
+                                                <li id="thumbnail_2" ng-if="product.productImage[1].Image">
+                                                    <a href="javascript:void(0)">
+                                                        <img onClick="$('#view_full_size_mobile img').hide();$('#bigpic-6').fadeIn();" id="thumb_10" ng-src="{{product.productImage[1].Image}}" alt="">
+                                                    </a>
+                                                </li>
+
+                                                <li id="thumbnail_3" ng-if="product.productImage[2].Image">
+                                                    <a href="javascript:void(0)">
+                                                        <img onClick="$('#view_full_size_mobile img').hide();$('#bigpic-7').fadeIn();" id="thumb_11" ng-src="{{product.productImage[2].Image}}" alt="">
+                                                    </a>
+
+                                                </li>
+
+                                                <li id="thumbnail_4" ng-if="product.productImage[3].Image">
+                                                    <a href="javascript:void(0)">
+                                                        <img onClick="$('#view_full_size_mobile img').hide();$('#bigpic-8').fadeIn();" id="thumb_12" ng-src="{{product.productImage[3].Image}}" alt="">
+                                                    </a>
+
+                                                </li>
+
+                                                <li id="thumbnail_5" ng-if="product.productImage[4].Image">
+                                                    <a href="javascript:void(0)">
+                                                        <img onClick="$('#view_full_size_mobile img').hide();$('#bigpic-9').fadeIn();" id="thumb_13" ng-src="{{product.productImage[4].Image}}" alt="">
+                                                    </a>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <ul id="usefull_link_block" class="clearfix">
+                                    <li id="favoriteproducts_block_extra_added" class="favorite">
+                                        <i class="icon-heart"></i>Remove this product from my favorite's list.
+                                    </li>
+                                    <li id="favoriteproducts_block_extra_removed" class="favorite">
+                                        <i class="icon-heart-empty"></i>Add this product to my list of favorites.
+                                    </li>
+                                    <li id="left_share_fb">
+                                        <a ng-href="http://www.facebook.com/sharer.php?u=http://route2.bz/product/{{routeParam}}&amp;t={{product.productName}}" target="_blank" class="js-new-window"><i class="icon-facebook-sign"></i>Share on Facebook</a>
+                                    </li>
+                                    <script text="javascript">
+                                    $(function() {
+                                        $('#send_friend_button').fancybox();
+                                        
+                                        // $('#send_friend_button').click(function() {
+                                        //     $('#friend_content').show();
+                                        // });
+                                        $('#sendEmail').click(function() {
+                                            var datas = [];
+                                            $('#fancybox-content').find('input').each(function(index) {
+                                                var o = {};
+                                                o.key = $(this).attr('name');
+                                                o.value = $(this).val();
+                                                if (o.value != '')
+                                                    datas.push(o);
+                                            });
+                                            if (datas.length >= 3) {
+                                                $.ajax({
+                                                    url: "/prestashop_44889/modules/sendtoafriend/sendtoafriend_ajax.php",
+                                                    type: "POST",
+                                                    headers: {
+                                                        "cache-control": "no-cache"
+                                                    },
+                                                    data: {
+                                                        action: 'sendToMyFriend',
+                                                        secure_key: 'cac1bcf06b01d6738cc6e776b3dd1f02',
+                                                        friend: unescape(JSON.stringify(datas).replace(/u/g, '%u'))
+                                                    },
+                                                    dataType: "json",
+                                                    success: function(result) {
+                                                        $.fancybox.close();
+                                                    }
+                                                });
+                                            } else
+                                                $('#send_friend_form_error').text("You did not fill required fields");
+                                        });
+                                    });
+                                    </script>
+                                    
+                                    <li class="print hidden-phone hidden-tablet"><a href="javascript:print();"><i class="icon-print"></i>Print</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <!-- left infos-->
+                            
+                            <div id="pb-left-column" class="span5" ng-init="init()">
+                                <h1 class="productDetailTitle">{{product.productName}}</h1>
+                                <h5 class="productDetailVendor" ng-if="product.ProductVendorName">by {{product.ProductVendorName}}</h5>
+                                <div id="short_description_block">
+                                    <div id="short_description_content" class="rte align_justify">
+                                        <p ng-bind-html="product.productDescription">
+                                    </div>
+                                </div>
+                                <!-- add to cart form-->
+                                <div class="content_prices clearfix" style="margin-bottom:10px;">
+                                    
+                                    <div class="row_1">
+                                        <p id="old_price" style="float: left;">
+                                            <span class="price">
+                                                <span id="old_price_display price" ng-if="product.productPriceCompare">
+                                                    <strike>{{product.productPriceCompare | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</strike>
+                                                </span>
+
+                                                <span id="old_price_display price" ng-if="product.productMultiOptions">{{returnPrice(product) | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</span>
+                                                <span id="old_price_display price" ng-if="!product.productMultiOptions">{{product.productPrice | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</span>
+                                            </span>
+                                        </p>
+                                        <form name="addtoCart" ng-submit="addToCart(product.id,product);addToCartEffect();" style="margin:0;">
+                                            <div ng-if="product.productMultiOptions">
+                                                <div class="section_attribute" ng-if="product.productMultiOptions">
+                                                    <div class="section_attribute" style="width:100px;" ng-repeat="valueSize in product.productMultiOptionsList">
+                                                        <!-- {{product.productVarientModel[valueSize.name]}} -->
+                                                        <select ng-options="parms as parms for parms in valueSize.value" required ng-model="product.productVarientModel[valueSize.name]" name="color" style="width:150px;margin:10px 0;">
+                                                            <option value="">Select {{valueSize.name}}</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p class="addToCartBtn" ng-if="product.productPrice">
+                                                <input class="exclusive button btn_add_cart" type="submit" value="Add to cart" name="submit" />
+                                            </p>
+                                            <p id="quantity_wanted_p">
+                                                <input type="number" name="qty" id="quantity_wanted" class="text" value="1" min='1' ng-model="product.productQuantity">
+                                                <label class="hidden-phone">Quantity:</label>
+                                            </p>
+                                            <div class="clearBoth"></div>
+                                        </form>
+                                        <p class="taxCopy">Prices are subject to change without prior notice. All prices are inclusive of Sale Tax.</p>
+                                    </div>
+                                </div>
+
+
+                                <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url=http://route2.bz/product/{{product.productUrl}}&via=Route2Health&text={{product.productName}}" style="width:80px; height:20px;"></iframe>
+
+                                <script src="https://apis.google.com/js/plusone.js"></script>
+                                <g:plus action="share" annotation="bubble" href="http://route2.bz/product/{{product.productUrl}}"></g:plus>
+
+                                 <!-- <a style="margin-top: -13px;display: inline-block;vertical-align: middle;" target="_blank" ng-href="http://www.facebook.com/sharer.php?u=http://route2.bz/product/{{routeParam}}&amp;t={{product.productName}}" class="js-new-window"><img ng-src="{{BaseUrl}}/img/theme/facebook_share.png" alt="Facebook Share"></a> -->
+                                 <iframe ng-src="{{likeURL}};width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=20&amp;appId=358436447628477" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:20px; width: 100px;" allowTransparency="true"></iframe>
+                                <!--<iframe ng-src="//www.facebook.com/plugins/like.php?href=http://route2.bz/product/{{product.Url}};width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=358436447628477" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:20px; width: 140px;" allowTransparency="true"></iframe>-->
+
+                                <!-- <div class="fb-share-button" data-href="http://route2.bz/product/{{product.Url}}" data-type="button_count"></div> -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="extra-box-product">
+                        <section class="page_product_box blockproductscategory">
+                            <h3>more from {{product.ProductTypeName}}</h3>
+                            <div id="block-category-slider" class="carusel-inner responsive  toggle_content">
+                                <div class="caroufredsel_wrapper">
+                                    <ul id="carouselproduct" class="carousel-ul">
+                                        <li ng-repeat="products in ListProduct | orderBy: 'productName' | filter: {productType: product.productType}" ng-show="products.productName != product.productName" class="num-{{$index+1}}" ng-click="productDetailPage(products.productUrl)" ng-style="width: 167px;">
+                                            <img ng-if="products.productImage[0].Image" ng-src="{{products.productImage[0].Image}}" alt="{{products.productName}}">
+                                            <img ng-if="products.productImage[0].Image == null" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{product.productInfo.productName}}">
+                                            <div class="title" style="text-align:center">
+                                            {{products.productName.slice(0,10) + '...'}}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <a class="prev" id="cat_prev" href="javascript:void(0)" style="display: inline;"></a>
+                                <a class="next" id="cat_next" href="javascript:void(0)" style="display: inline;"></a>
+                            </div>
+                        </section>
+                        <div ng-if="product.productName">
+                            <script type="text/javascript">
+                                $("#carouselproduct").carouFredSel({
+                                 debug: true,
+                                 circular: true,
+                                       infinite: true,
+                                 responsive: true,
+                                 align   : "center",
+                                 width: '100%',
+                                    auto : {
+                                         play    : 1,
+                                     timeoutDuration :15000
+                                    },
+
+                                    items    : {
+
+                                 visible: {
+                                             min: 2,
+                                             max: 6
+                                              },
+                                              width:167,
+
+                                 },      
+                                 scroll  : {
+                                     items   : 1,
+                                     pauseOnHover:false
+                                 },
+                                 prev    : {
+                                     button  : "#cat_prev"
+                                 },
+                                 next    : {
+                                     button  : "#cat_next"
+                                 },
+                                 swipe: {
+                                             onMouse: false,
+                                             onTouch: true
+                                        }
+                                }, 
+                                {
+                                    classnames       : {
+                                     selected        : "selected",
+                                     hidden          : "hidden",
+                                     disabled        : "disabled",
+                                     paused          : "paused",
+                                     stopped         : "stopped"
+                                    },
+
+                                });
+                          
+                            </script>
+                        </div>
+
+                        <script type="text/javascript">
+                            $(function(){
+                                 $("#carouselproductcross").carouFredSel({
+                                     debug: true,
+                                     circular: true,
+                                     infinite: true,
+                                     responsive: true,
+                                     align   : "center",
+                                     width: '100%',
+                                     auto    : {
+                                         play    : 1,
+                                         timeoutDuration :20000
+                                     },
+
+                                     items   : {
+
+                                     visible: {
+                                                 min: 2,
+                                                 max: 6
+                                                  },
+                                                  width:167,
+
+                                     },      
+                                     scroll  : {
+                                         items   : 1,
+                                         pauseOnHover:false
+                                     },
+                                     prev    : {
+                                         button  : "#cross_prev"
+                                     },
+                                     next    : {
+                                         button  : "#cross_next"
+                                     },
+                                     swipe: {
+                                                 onMouse: true,
+                                                 onTouch: true
+                                            }
+                                 });
+                             });
+                            </script>
+                    </div>
+                </div>
+
+                <!-- Right -->
+                <aside id="right_column" class="span3 column right_home">
+                    <section id="manufacturers_block_left" class="block blockmanufacturer column_box" ng-include src="getSidebarPath()">
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>

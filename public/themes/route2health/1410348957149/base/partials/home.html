@@ -1,0 +1,78 @@
+<!--  Route2Health -->
+<div class="content_bg" ng-init="init()">
+	<div id="columns" class="container ">
+		<div class="row">
+			<div class="loader_page">
+				<div id="center_column" class="span9">
+					<section class="addhomefeatured">
+						<section>
+							<h4>
+								<!-- <a href="/collections/{{collection.collectionUrl}}"> -->
+									<span>{{ThemeSettings.theme_settings.featuredproductTitle}}</span>
+								<!-- </a> -->
+							</h4>
+							<ul class="row">
+								<li class="ajax_block_product span3" ng-repeat="products in ListProduct  | CustomFilter:{collection:ThemeSettings.theme_settings.featuredproduct} | limitTo:ThemeSettings.theme_settings.featuredproductLimit" ng-class="{clearBoth: ($index + 1)%4 == 0}">
+									<div class="featured_li" ng-controller="GlobalCtrl">
+										<!-- <div class="imageContainer"> -->
+											<a class="product_image" href="/product/{{products.productUrl}}" tooltip-placement="bottom" tooltip="{{products.productName}}">
+												<img ng-if="!products.productImage[0].Image" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{products.productName}}">
+												
+												<img ng-if="products.productImage[0].Image" ng-src="{{products.productImage[0].Image}}" alt="{{products.productName}}" class="main-img">
+												
+												<img ng-if="products.productImage[1].Image" ng-src="{{products.productImage[1].Image}}" alt="{{products.productName}}" class="next-img">
+											</a>
+										<!-- </div> -->
+										<div ng-controller="GlobalCtrl">
+											<h5 class="productTitle"><a class="product_link" href="/product/{{products.productUrl}}" title="">{{products.productName.slice(0,30)}}<span ng-if="products.productName.length > 30">....</span></a>
+											</h5>
+												<p class="product_desc hidden-phone" ng-bind-html="products.productDescription.slice(0,90) + '.....'"></p>
+												<p class="product_desc hidden-desktop hidden-tablet" ng-bind-html="products.productDescription.slice(0,60)+ '...'"></p>
+											<div class="fright">
+												<span class="price" ng-if="products.productPrice">
+													<!-- {{SettingGeneral.settings.currencies_format}}&nbsp;{{products.productPrice}} -->
+													{{products.productPrice | nfcurrency:SettingGeneral.settings.currencies_format+' '}}
+												</span>
+												<span class="price-drop-feacherd" ng-if="products.productPriceCompare">{{SettingGeneral.settings.currencies_format}}&nbsp;{{products.productPriceCompare}}</span>
+												<div class="linksContainer hidden-desktop hidden-tablet">
+													<a ng-if="products.productPrice" class="exclusive ajax_add_to_cart_button btn_add_cart" href="javascript:void(0)" id="{{products.id}}" ng-click="addToCartEffect();addToCart(products.id,products);">
+														<span>Add to cart</span>
+													</a>
+													<a class="button" href="/product/{{products.productUrl}}">View</a>
+												</div>
+												<a ng-if="products.productPrice" class="hidden-phone exclusive ajax_add_to_cart_button btn_add_cart" href="javascript:void(0)" id="{{products.id}}" ng-click="addToCartEffect();addToCart(products.id,products);">
+														<span>Add to cart</span>
+													</a>
+											</div>
+
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</li>
+							</ul>
+
+						</section>
+					</section>
+					<script>
+					$(function() {
+						$(this).find(".addhomefeatured ul li .main-img").mouseover(function() {
+							// alert('as');
+							$(this).next(".addhomefeatured ul li a img.next-img").stop(true, true).fadeIn(600, 'linear');
+						});
+						$(".addhomefeatured ul li .next-img").mouseleave(function() {
+							// alert('qw');
+							$(".addhomefeatured ul li a img.next-img").stop(true, true).fadeOut(600, 'linear');
+						});
+					});
+					</script>
+
+				</div>
+
+				<aside id="right_column" class="span3" ng-class="{'homeSideBar': $location.path() == '/'}">
+					<section id="manufacturers_block_left" class="block blockmanufacturer olumn_box" ng-include src="getSidebarPath()">
+					</section>
+				</aside>
+			</div>
+		</div>
+	</div>
+</div>

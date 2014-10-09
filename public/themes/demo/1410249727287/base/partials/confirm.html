@@ -1,0 +1,765 @@
+<div id="page">
+
+    <!-- BREADCRUMBS -->
+    <section class="breadcrumb parallax margbot30" style="background: url({{ThemeSettings.theme_settings.slide_collection_2_img}}) no-repeat;background-size:cover;"></section>
+    <!-- //BREADCRUMBS -->
+
+
+    <!-- PAGE HEADER -->
+    <section class="page_header">
+
+        <!-- CONTAINER -->
+        <div class="container border0 margbot0">
+            <h3 class="pull-left" style="margin: 0px 0 20px;"><b>Checkout</b>
+            </h3>
+
+            <div class="pull-right">
+                <a href="/">Back shopping bag<i class="fa fa-angle-right"></i></a>
+            </div>
+        </div>
+        <!-- //CONTAINER -->
+    </section>
+    <!-- //PAGE HEADER -->
+
+
+    <!-- CHECKOUT PAGE -->
+    <section class="checkout_page">
+
+        <!-- CONTAINER -->
+        <div class="container">
+
+            <!-- CHECKOUT BLOCK 1-->
+            <div id="shipping" class="checkout_block">
+                <ul class="checkout_nav">
+                    <li class="active_step">1. Shipping Address</li>
+                    <li>2. Billing Address</li>
+                    <li>3. Payment</li>
+                    <li class="last">4. Confirm Order</li>
+                </ul>
+
+                <form role="form" class="checkout_form clearfix">
+                    <div>
+                        <div class="checkout_form_input country">
+                            <label>Country
+                                <span class="color_red">*</span>
+                            </label>
+                            <select id="countrytype" ng-options="country.CountryName as country.CountryName for country in SettingsShippingCountry" ng-model="Customer.Country" class="form-control" style="margin-bottom:16px;">
+                                <option value="">Select Country</option>
+                            </select>
+                             <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;padding-top: 15px;">Country is required</span>
+                        </div>
+
+                        <div class="checkout_form_input sity">
+                            <label>City
+                                <span class="color_red">*</span>
+                            </label>
+                            <input id="citytype" type="text" name="name" value="" placeholder="" ng-model="Customer.City" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">City is required</span>
+                        </div>
+
+
+                        <div class="checkout_form_input last postcode">
+                            <label>Postcode
+                                <span class="color_red">*</span>
+                            </label>
+                            <input id="postcode" type="text" name="name" value="" placeholder="" ng-model="Customer.PostCode" required="required" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">PostCode is required</span>
+                        </div>
+
+                        <div class="checkout_form_input2 adress">
+                            <label>Address
+                                <span class="color_red">*</span>
+                            </label>
+                            <input id="address" type="text" name="name" value="" placeholder="" ng-model="Customer.Address" required="required" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Address is required</span>
+                        </div>
+
+                        <div class="checkout_form_input2 last adress">
+                            <label>Address Continue</label>
+                            <input id="addresscontinue" type="text" name="name" value="" placeholder="" ng-model="Customer.AddressContinue" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Address is required</span>
+                        </div>
+
+                        <hr class="clear">
+
+                        <div class="checkout_form_input first_name">
+                            <label>First Name
+                                <span class="color_red">*</span>
+                            </label>
+                            <input id="name" type="text" name="name" value="" placeholder="" ng-model="Customer.FirstName" required="required" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">First Name is required</span>
+                        </div>
+
+                        <div class="checkout_form_input last_name">
+                            <label>Last name
+                                <span class="color_red">*</span>
+                            </label>
+                            <input id="lastname" type="text" name="name" value="" placeholder="" ng-model="Customer.LastName" required="required" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Last Name is required</span>
+                        </div>
+
+                        <div class="checkout_form_input phone">
+                            <label>Phone
+                                <span class="color_red">*</span>
+                            </label>
+                            <input id="phone" type="text" name="name" value="" placeholder="" ng-model="Customer.Phone" required/>
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Phone no is required</span>
+                        </div>
+
+                        <div class="checkout_form_input last E-mail">
+                            <label>Email
+                                <span class="color_red">*</span>
+                            </label>
+                            <input id="email" type="email" name="name" value="" placeholder="" ng-model="Customer.Email" required="required" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Email is required</span>
+                        </div>
+
+                        <div class="clear"></div>
+
+                        <div class="checkout_form_note">All fields marked with (
+                            <span class="color_red">*</span>) are required</div>
+
+                        <button class="btn active pull-right" type="submit" id="InfoShippingSubmit">Continue</button>
+                    </div>
+                </form>
+            </div>
+            <!-- //CHECKOUT BLOCK -->
+            <!-- Checkout Block 2 -->
+            <div id="billing" class="checkout_block" style="display:none">
+                <ul class="checkout_nav">
+                    <li class="done_step">1. Shipping Address</li>
+                    <li class="active_step">2. Billing Address</li>
+                    <li>3. Payment</li>
+                    <li class="last">4. Confirm Order</li>
+                </ul>
+
+                <form role="form" class="checkout_form clearfix">
+
+
+                    <div ng-if="!ListPaymentGateways.same_billing_and_shipping_address">
+                        <div class="formEntry">
+                            <label class="entryLabel">
+                                <h1>Billing Address</h1>
+                            </label>
+
+                            <span style="font-weight: bold;display: block;padding-bottom: 6px;">
+                                <input type="checkbox" ng-model="Customer.SameBilling" class="checkbox js-agreeToTerms" style="display:inline-block;margin-top: 0px;margin-right: 6px;" />Same as Shipping Address</span>
+                        </div>
+                        <div ng-if="!Customer.SameBilling" class="checkout_form_input country">
+                            <label>Country
+                                <span class="color_red">*</span>
+                            </label>
+                            <select id="countrytypebilling" ng-options="country.CountryName as country.CountryName for country in SettingsShippingCountry" ng-model="Customer.CountryBilling" class="form-control" style="margin-bottom:16px;">
+                                <option value="">Select Country</option>
+                            </select>
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Country is required</span>
+                        </div>
+
+                        <div ng-if="!Customer.SameBilling" class="checkout_form_input sity">
+                            <label>City
+                                <span class="color_red">*</span>
+                            </label>
+                            <input id="citytypebilling" type="text" name="name" value="" placeholder="" ng-model="Customer.CityBilling" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">City is required</span>
+                        </div>
+
+
+                        <div ng-if="!Customer.SameBilling" class="checkout_form_input last postcode">
+                            <label>Postcode
+                                <span class="color_red">*</span>
+                            </label>
+                            <input id="postcodebilling" type="text" name="name" value="" placeholder="" ng-model="Customer.PostCodeBilling" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Post Code is required</span>
+                        </div>
+
+                        <div ng-if="!Customer.SameBilling" class="checkout_form_input2 adress">
+                            <label>Address
+                                <span class="color_red">*</span>
+                            </label>
+                            <input id="addressbilling" type="text" name="name" value="" placeholder="" ng-model="Customer.AddressBilling" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Address is required</span>
+                        </div>
+
+                        <div ng-if="!Customer.SameBilling" class="checkout_form_input2 last adress">
+                            <label>Address Continue</label>
+                            <input id="addresscontinuebilling" type="text" name="name" value="" placeholder="" ng-model="Customer.AddressContinueBilling" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Address is required</span>
+                        </div>
+
+                        <hr class="clear">
+
+                        <div ng-if="!Customer.SameBilling" class="checkout_form_input first_name">
+                            <label>First Name
+                                <span class="color_red">*</span>
+                            </label>
+                            <input id="namebilling" type="text" name="name" value="" placeholder="" ng-model="Customer.FirstNameBilling" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">First Name is required</span>
+                        </div>
+
+                        <div ng-if="!Customer.SameBilling" class="checkout_form_input last_name">
+                            <label>Last name
+                                <span class="color_red">*</span>
+                            </label>
+                            <input id="lastnamebilling" type="text" name="name" value="" placeholder="" ng-model="Customer.LastNameBilling" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Last Name is required</span>
+                        </div>
+
+                        <div ng-if="!Customer.SameBilling" class="checkout_form_input phone">
+                            <label>Phone
+                                <span class="color_red">*</span>
+                            </label>
+                            <input id="phonebilling" type="text" name="name" value="" placeholder="" ng-model="Customer.PhoneBilling" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Phone is required</span>
+                        </div>
+
+                        <div ng-if="!Customer.SameBilling" class="checkout_form_input last E-mail">
+                            <label>Email
+                                <span class="color_red">*</span>
+                            </label>
+                            <input id="emailbilling" type="email" name="name" value="" placeholder="" ng-model="Customer.EmailBilling" />
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Email is required</span>
+                        </div>
+
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="checkout_form_note">All fields marked with (
+                        <span class="color_red">*</span>) are required</div>
+
+                    <button class="btn active pull-right" id="InfoBillingSubmit" type="submit">Continue</button>
+                </form>
+            </div>
+
+            <!-- Checkout Block  -->
+
+            <!-- CHECKOUT BLOCK 3-->
+            <div id="payment"  class="checkout_block" style="display:none;">
+                <ul class="checkout_nav">
+                    <li class="done_step2">1. Shipping Address</li>
+                    <li class="done_step">2. Billing Address</li>
+                    <li class="active_step">3. Payment</li>
+                    <li class="last">4. Confirm Order</li>
+                </ul>
+                <form role="form">
+                    <div class="checkout_payment clearfix">
+                        <div class="payment_method">
+                            <p class="checkout_title">Payment Method</p>
+
+                            <ul class="clearfix">
+                                <select id="pay" ng-change="UpdatePaymentMethod(PaymentMethod)" class="form-control" ng-model="PaymentMethod" required style="margin-bottom: 16px;">
+                                    <option value="">Select Payment Method</option>
+                                    <option ng-repeat="payment in ListPaymentMethod">{{payment.name}}</option>
+                                </select>
+                                <span ng-if="!PaymentMethod" class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;margin-top: 16PX;">Payment Type is required</span>
+
+                            </ul>
+
+                            <ul class="clearfix payment-description" ng-if="PaymentMethod && returnpaymentDescription(PaymentMethod)">
+                                <label for="PaymentMethods" style="margin-top: 20px;">{{PaymentMethod}} Description</label>
+                                <p>{{returnpaymentDescription(PaymentMethod)}}</p>
+
+                            </ul>
+
+                        </div>
+                        <button class="btn active pull-right checkout_block_btn" id="InfoPaymentSubmit" type="submit" style="margin: 34px 0 0 0;">Continue</button>
+                    </div>
+                </form>
+            </div>
+            <!-- //CHECKOUT BLOCK -->
+
+            <div id="confirm" style="display:none;">
+
+                <!-- CHECKOUT BLOCK -->
+                <div class="checkout_block">
+                    <ul class="checkout_nav">
+                        <li class="done_step2">1. Shipping Address</li>
+                        <li class="done_step2">2. Delivery</li>
+                        <li class="done_step">3. Payment</li>
+                        <li class="active_step last">4. Confirm Order</li>
+                    </ul>
+                </div>
+                <!-- //CHECKOUT BLOCK -->
+
+                <!-- ROW -->
+                <div class="row">
+                    <div class="col-lg-9 col-md-9 padbot60">
+                        <div class="checkout_confirm_orded clearfix">
+                            <div class="checkout_confirm_orded_bordright clearfix">
+                                <div class="billing_information">
+                                    <p class="checkout_title margbot10">Billing information</p>
+
+                                    <div class="billing_information_content margbot40">
+                                        <span>{{Customer.FirstName}}</span>
+                                        <span>{{Customer.Address}}</span>
+                                        <span>{{Customer.AddressContinue}}</span>
+                                        <span>{{Customer.ShippingCountry}}</span>
+                                        <span>{{Customer.Email}}</span>
+                                    </div>
+
+                                    <p class="checkout_title margbot10">Shipping address</p>
+
+                                    <div class="billing_information_content margbot40">
+                                        <span>{{Customer.FirstNameBilling}}</span>
+                                        <span>{{Customer.AddressBilling}}</span>
+                                        <span>{{Customer.CityBilling}}</span>
+                                        <span>{{Customer.CountryBilling}}</span>
+                                        <span>{{Customer.PhoneBilling}}</span>
+                                        <span>{{Customer.EmailBilling}}</span>
+                                        <span ng-if="!Customer.FirstNameBilling && !Customer.EmailBilling 
+                                        && !Customer.CityBilling">Same As Billing</span>
+                                    </div>
+                                </div>
+
+                                <div class="payment_delivery">
+                                    <p class="checkout_title margbot10">Payment and delivery</p>
+                                    <p><span>Payment:<span>&nbsp;{{PaymentMethod}}</p>
+                                    <span style="width: 86%;display: inline-block;">{{returnpaymentDescription(PaymentMethod)}}</span>
+                                </div>
+                            </div>
+
+                            <div class="checkout_confirm_orded_products">
+                                <p class="checkout_title">Products</p>
+                                <ul class="cart-items" ng-repeat="(keyMain,Itemss) in Cart track by $index">
+                                    <li class="clearfix" ng-show="Itemss.productID">
+                                        <img ng-if="Itemss.productInfo.productImage[0].Image" class="cart_item_product" src="{{Itemss.productInfo.productImage[0].Image}}" alt="" />
+                                        <img ng-if="!Itemss.productInfo.productImage[0].Image" class="cart_item_product" src="{{BaseUrl}}/img/theme/tovar/women/1_2.jpg" alt="" />
+                                        <a href="/product/{{Itemss.productInfo.productUrl}}" class="cart_item_title">{{Itemss.productInfo.productName}}</a>
+                                        <span class="cart_item_price">{{Itemss.price * Itemss.quantity | currency:SettingGeneral.settings.currencies_format+' '}}</span>
+                                    </li>
+                                    <li class="clearfix" ng-hide="Itemss.productID" ng-repeat="(key,itm) in Itemss track by $index">
+                                        <img ng-if="itm.productInfo.productImage[0].Image" class="cart_item_product" src="{{itm.productInfo.productImage[0].Image}}" alt="" />
+                                        <img ng-if="!itm.productInfo.productImage[0].Image" class="cart_item_product" src="{{BaseUrl}}/img/theme/tovar/women/1_2.jpg" alt="" />
+                                        <a href="/product/{{itm.productInfo.productUrl}}" class="cart_item_title">{{itm.productInfo.productName}}</a>
+                                        <span class="cart_item_price">{{itm.price * itm.quantity | currency:SettingGeneral.settings.currencies_format+' '}}</span>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sidebar" class="col-lg-3 col-md-3 padbot50">
+
+                        <!-- BAG TOTALS -->
+                        <div class="sidepanel widget_bag_totals">
+                            <h3>Your Order</h3>
+                            <table class="bag_total">
+                                <tr class="cart-subtotal clearfix">
+                                    <th>total</th>
+                                    <td class="right">{{ReturnTotal()- ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}}</td>
+                                </tr>
+                                <tr class="cart-subtotal clearfix" ng-if="SettingsShippingCountry[0].TaxRate">
+                                    <th>TAX</th>
+                                    <td class="right">{{ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}}</td>
+                                </tr>
+                                <tr class="total clearfix">
+                                    <th>Sub Total</th>
+                                    <td class="right">{{ReturnTotal()| currency:SettingGeneral.settings.currencies_format+' '}}</td>
+                                </tr>
+                            </table>
+
+                            <a class="btn active" ng-click="SubmitOrder(PaymentMethod,'/thankyou')">Place Order</a>
+                           <a class="btn inactive" id="previous-step">Go to previous step</a>
+
+                           <div ng-if="StartSubmitOrder" class="inline-loaders">
+                               <img ng-src="{{BaseUrl}}img/theme/preloader.gif" style="position: absolute;right: 50%;top: 50%;">
+                           </div>
+                            
+                        </div>
+                        <!-- //REGISTRATION FORM -->
+                    </div>
+                </div>
+                <!-- //ROW -->
+            </div>
+        </div>
+        <!-- //CONTAINER -->
+    </section>
+    <!-- //CHECKOUT PAGE -->
+
+
+</div>
+
+<script type="text/javascript">
+jQuery('.shopping_bag .cart').hide();
+
+$('#InfoShippingSubmit').click(function() {
+
+
+
+    if ($('#countrytype').val() === "") {
+        // invalid
+        $('#countrytype').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#countrytype').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+$('#InfoShippingSubmit').click(function() {
+
+
+
+    if ($('#citytype').val() === "") {
+        // invalid
+        $('#citytype').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#citytype').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+
+$('#InfoShippingSubmit').click(function() {
+
+
+
+    if ($('#postcode').val() === "") {
+        // invalid
+        $('#postcode').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#postcode').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+$('#InfoShippingSubmit').click(function() {
+
+
+
+    if ($('#address').val() === "") {
+        // invalid
+        $('#address').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#address').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+$('#InfoShippingSubmit').click(function() {
+
+
+
+    if ($('#addresscontinue').val() === "") {
+        // invalid
+        $('#addresscontinue').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#addresscontinue').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+
+$('#InfoShippingSubmit').click(function() {
+
+
+
+    if ($('#name').val() === "") {
+        // invalid
+        $('#name').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#name').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+
+$('#InfoShippingSubmit').click(function() {
+
+
+
+    if ($('#lastname').val() === "") {
+        // invalid
+        $('#lastname').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#lastname').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+
+$('#InfoShippingSubmit').click(function() {
+
+
+
+    if ($('#phone').val() === "") {
+        // invalid
+        $('#phone').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#phone').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+$('#InfoShippingSubmit').click(function() {
+
+
+    
+    if ($('#email').val() === "" ) {
+        // invalid
+        $('#email').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#email').next('.city-inline').hide();
+        return true;
+    }
+
+
+});
+
+$('#InfoShippingSubmit').click(function(){
+
+    if ($('#citytype').val() !== "" && $('#postcode').val() !== "" && $('#address').val() !== "" && $('#addresscontinue').val() !== "" && $('#name').val() !== "" && $('#lastname').val() !== "" && $('#phone').val() !== "" && $('#countrytype').val() !== "" && $('#email').val() !== "") {
+        // invalid
+        $('#shipping').hide();
+        $('#billing').show();
+       
+    } 
+
+});
+
+$('#InfoBillingSubmit').click(function() {
+
+
+
+    if ($('#countrytypebilling').val() === "") {
+        // invalid
+        $('#countrytypebilling').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#countrytypebilling').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+$('#InfoBillingSubmit').click(function() {
+
+
+
+    if ($('#citytypebilling').val() === "") {
+        // invalid
+        $('#citytypebilling').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#citytypebilling').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+
+$('#InfoBillingSubmit').click(function() {
+
+
+
+    if ($('#postcodebilling').val() === "") {
+        // invalid
+        $('#postcodebilling').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#postcodebilling').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+$('#InfoBillingSubmit').click(function() {
+
+
+
+    if ($('#addressbilling').val() === "") {
+        // invalid
+        $('#addressbilling').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#addressbilling').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+$('#InfoBillingSubmit').click(function() {
+
+
+
+    if ($('#addresscontinuebilling').val() === "") {
+        // invalid
+        $('#addresscontinuebilling').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#addresscontinuebilling').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+
+$('#InfoBillingSubmit').click(function() {
+
+
+
+    if ($('#namebilling').val() === "") {
+        // invalid
+        $('#namebilling').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#namebilling').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+
+$('#InfoBillingSubmit').click(function() {
+
+
+
+    if ($('#lastnamebilling').val() === "") {
+        // invalid
+        $('#lastnamebilling').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#lastnamebilling').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+
+$('#InfoBillingSubmit').click(function() {
+
+
+
+    if ($('#phonebilling').val() === "") {
+        // invalid
+        $('#phonebilling').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#phonebilling').next('.city-inline').hide();
+
+        return true;
+    }
+
+
+});
+$('#InfoBillingSubmit').click(function() {
+
+
+    
+    if ($('#emailbilling').val() === "" ) {
+        // invalid
+        $('#emailbilling').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#emailbilling').next('.city-inline').hide();
+        return true;
+    }
+
+
+});
+
+$('#InfoBillingSubmit').click(function(){
+
+    if ($('#countrytypebilling').val() !== ""  && $('#citytypebilling').val() !== "" && $('#postcodebilling').val() !== "" && $('#addressbilling').val() !== "" && $('#addresscontinuebilling').val() !== "" && $('#namebilling').val() !== "" && $('#lastnamebilling').val() !== "" && $('#phonebilling').val() !== ""  && $('#emailbilling').val() !== "") {
+        // invalid
+        $('#shipping').hide();
+        $('#billing').hide();
+        $('#payment').show();
+       
+    } 
+
+});
+$('#InfoPaymentSubmit').click(function() {
+
+
+
+    if ($('#pay').val() === "") {
+        // invalid
+        $('#pay').next('.city-inline').show();
+        return false;
+    } else {
+        // submit the form here
+        // $('#InfroText').submit();
+        $('#pay').next('.city-inline').hide();
+        $('#shipping').hide();
+        $('#billing').hide();
+        $('#payment').hide();
+        $('#confirm').show();
+        return true;
+    }
+});
+
+$('#previous-step').click(function(){
+    $('#confirm').hide();
+    $('#payment').show();
+
+});
+</script>

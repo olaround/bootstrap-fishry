@@ -1,0 +1,190 @@
+    <!-- TOP SALE -->
+        <section class="top_sale parallax margbot50">
+            
+            <!-- CONTAINER -->
+            <div class="container">
+                <div class="top_sale_description">
+                    <p>autumn sale</p>
+                    <span>great men collection</span>
+                </div>
+                
+                <!-- ROW -->
+                <div class="row">
+                    <div class="top_sale_banners center">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 col-ss-12"><a class="banner nobord white_bord margbot30" href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/tovar/banner6.jpg" alt="" /></a></div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-ss-12"><a class="banner nobord white_bord margbot30" href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/tovar/banner7.jpg" alt="" /></a></div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 col-ss-12"><a class="banner nobord white_bord margbot30" href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/tovar/banner8.jpg" alt="" /></a></div>
+                        
+                        <div class="respond_clear_1024 respond_clear_768 respond_clear_480"></div>
+                        
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 col-ss-12"><a class="banner nobord white_bord margbot30" href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/tovar/banner9.jpg" alt="" /></a></div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 col-ss-12"><a class="banner nobord white_bord margbot30" href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/tovar/banner10.jpg" alt="" /></a></div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-ss-12"><a class="banner nobord white_bord margbot30" href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/tovar/banner11.jpg" alt="" /></a></div>
+                    </div>
+                </div><!-- //ROW -->
+            </div><!-- //CONTAINER -->
+        </section><!-- //TOP SALE -->
+        
+        
+        <!-- BRANDS -->
+        <section class="brands_carousel padbot20">
+            
+            <!-- CONTAINER -->
+            <div class="container">
+                
+                <!-- JCAROUSEL -->
+                <div class="jcarousel-wrapper">
+                    
+                    <!-- NAVIGATION -->
+                    <div class="jCarousel_pagination">
+                        <a href="javascript:void(0);" class="jcarousel-control-prev" ><i class="fa fa-angle-left"></i></a>
+                        <a href="javascript:void(0);" class="jcarousel-control-next" ><i class="fa fa-angle-right"></i></a>
+                    </div><!-- //NAVIGATION -->
+                    
+                    <div class="jcarousel">
+                        <ul>
+                            <li><a href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/brands/1.jpg" alt="" /></a></li>
+                            <li><a href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/brands/2.jpg" alt="" /></a></li>
+                            <li><a href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/brands/3.jpg" alt="" /></a></li>
+                            <li><a href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/brands/4.jpg" alt="" /></a></li>
+                            <li><a href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/brands/5.jpg" alt="" /></a></li>
+                            <li><a href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/brands/6.jpg" alt="" /></a></li>
+                            <li><a href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/brands/7.jpg" alt="" /></a></li>
+                            <li><a href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/brands/8.jpg" alt="" /></a></li>
+                            <li><a href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/brands/9.jpg" alt="" /></a></li>
+                            <li><a href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/brands/10.jpg" alt="" /></a></li>
+                            <li><a href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/brands/11.jpg" alt="" /></a></li>
+                            <li><a href="javascript:void(0);" ><img src="{{BaseUrl}}img/theme/brands/12.jpg" alt="" /></a></li>
+                        </ul>
+                    </div>
+                </div><!-- //JCAROUSEL -->
+            </div><!-- //CONTAINER -->
+        </section><!-- //BRANDS -->
+    <script type="text/javascript">
+    /*-----------------------------------------------------------------------------------*/
+    /*  FLEXSLIDER
+    /*-----------------------------------------------------------------------------------*/
+    $(document).ready(function() {
+        //Top Slider
+        $('.flexslider.top_slider').flexslider({
+            animation: "fade",
+            controlNav: true,
+            directionNav: false,
+            prevText: "",
+            nextText: ""
+        });
+
+         jQuery('.shopping_bag .cart').hide();
+        //Top Slider BG
+        jQuery('.flexslider.top_slider li img.slide_bg').each(function() {
+            jQuery(this).parent().attr('style', 'background-image:url(' + $(this).attr('src') + ');');
+        });
+
+
+        //Tovar View Carousel
+        $('#carousel2').flexslider({
+            animation: "slide",
+            controlNav: false,
+            directionNav: false,
+            animationLoop: false,
+            slideshow: false,
+            direction: "vertical",
+            asNavFor: '#slider2'
+        });
+        $('#slider2').flexslider({
+            animation: "fade",
+            controlNav: false,
+            directionNav: false,
+            animationLoop: false,
+            slideshow: false,
+            sync: "#carousel2"
+        });
+        jQuery('#carousel2 .slides li').click(function() {
+            $('#carousel2 .slides li').removeClass('flex-active-slide');
+            $(this).addClass('flex-active-slide');
+            return false;
+        });
+
+
+
+        //Article Slider
+        $('.flexslider.article_slider').flexslider({
+            animation: "fade",
+            controlNav: true,
+            directionNav: false,
+            prevText: "",
+            nextText: ""
+        });
+
+
+    });
+    (function($) {
+    $(function() {
+        $('.jcarousel').jcarousel();
+
+
+
+        if ($(window).width() >= 768) {
+
+            $('.jcarousel-control-prev')
+                .on('jcarouselcontrol:active', function() {
+                    $(this).removeClass('inactive');
+                })
+                .on('jcarouselcontrol:inactive', function() {
+                    $(this).addClass('inactive');
+                })
+                .jcarouselControl({
+                    target: '-=3'
+                });
+
+            $('.jcarousel-control-next')
+                .on('jcarouselcontrol:active', function() {
+                    $(this).removeClass('inactive');
+                })
+                .on('jcarouselcontrol:inactive', function() {
+                    $(this).addClass('inactive');
+                })
+                .jcarouselControl({
+                    target: '+=3'
+                });
+
+
+        } else {
+            $('.jcarousel-control-prev')
+                .on('jcarouselcontrol:active', function() {
+                    $(this).removeClass('inactive');
+                })
+                .on('jcarouselcontrol:inactive', function() {
+                    $(this).addClass('inactive');
+                })
+                .jcarouselControl({
+                    target: '-=1'
+                });
+
+            $('.jcarousel-control-next')
+                .on('jcarouselcontrol:active', function() {
+                    $(this).removeClass('inactive');
+                })
+                .on('jcarouselcontrol:inactive', function() {
+                    $(this).addClass('inactive');
+                })
+                .jcarouselControl({
+                    target: '+=1'
+                });
+
+        }
+
+
+        $('.jcarousel-pagination')
+            .on('jcarouselpagination:active', 'a', function() {
+                $(this).addClass('active');
+            })
+            .on('jcarouselpagination:inactive', 'a', function() {
+                $(this).removeClass('active');
+            })
+            .jcarouselPagination();
+            console.log("Width " + $(window).width());
+    });
+        
+})(jQuery);
+    </script>

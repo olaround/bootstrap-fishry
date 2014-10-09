@@ -1,0 +1,118 @@
+				<div class="footer-bg-mob">
+					<footer class="container">
+						<div class="row modules hidden-phone">
+							
+							<!-- Block categories module -->
+							<section class="block block_category_footer span3">
+								<h4>Categories</h4>
+								<ul class="toggle_content list-footer tree dhtml" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
+
+									<li ng-repeat="Nav in Navigation.link_list" ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
+										<a href="{{Nav.commaSeprated}}"><i class="icon-double-angle-right"></i>{{Nav.name}}</a>
+									</li>
+								</ul>
+							</section>
+							<!-- /Block categories module -->
+
+
+							<!-- MODULE Block footer -->
+							<section class="block blockcms_footer span3">
+								<h4 class="toggle">Information</h4>
+								<ul class="toggle_content list-footer tree dhtml" ng-repeat="Navigation in ListNavigation | filter : 'footer'">
+
+									<li ng-repeat="Nav in Navigation.link_list" ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}">
+										<a href="{{Nav.commaSeprated}}"><i class="icon-double-angle-right"></i>{{Nav.name}}</a>
+									</li>
+								</ul>
+							</section>
+
+							<!-- MODULE Block footer -->
+							<section class="block blockcms_footer span3">
+								<h4 class="toggle">My Account</h4>
+								<ul class="toggle_content list-footer tree dhtml" ng-repeat="Navigation in ListNavigation | filter : 'footer'">
+
+									<li>
+										<a href="/orders"><i class="icon-double-angle-right"></i>My Orders</a>
+									</li>
+									<li>
+										<a href="/account_info"><i class="icon-double-angle-right"></i>Update Account Information</a>
+									</li>
+									<li>
+										<a href="/reset_password"><i class="icon-double-angle-right"></i>Change Password</a>
+									</li>
+								</ul>
+							</section>
+
+							<!-- MODULE Block footer -->
+							<section class="block blockcms_footer span3">
+								<h4 class="toggle">Follow Us</h4>
+									<ul class="toggle_content list-footer tree dhtml" ng-repeat="Navigation in ListNavigation | filter : 'footer'">
+										<li>
+											<a href="https://www.facebook.com/Route2Health" target="_BLANK" style="padding-left: 0;"><img src="{{BaseUrl}}/img/theme/facebook.png" alt="facebook" width="48" /></a>
+										</li>
+										<li>
+											
+										</li>
+									</ul>
+							</section>
+
+
+							<section class="bottom_footer">&copy; 2014 Powered by <a target="_blank" href="http://www.bramerz.pk">Bramerz</a>&trade;</section>
+						</div>
+
+						<div class="row modules hidden-desktop hidden-tablet">
+							<!-- Block categories module -->
+							<section class="block block_category_footer span3" ng-init="toggleNavigation = false">
+								<h4 ng-init="toggleNavigation = false" ng-class="{active: toggleNavigation == true}" ng-click="toggleNavigation = !toggleNavigation;">Categories</h4>
+								<div ng-if="toggleNavigation">
+									<ul class="toggle_content list-footer tree dhtml" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
+
+									<li ng-repeat="Nav in Navigation.link_list" ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
+										<a href="{{Nav.commaSeprated}}"><i class="icon-double-angle-right"></i>{{Nav.name}}</a>
+									</li>
+									</ul>
+								</div>
+							</section>
+							<!-- /Block categories module -->
+
+
+							<!-- MODULE Block footer -->
+							<section class="block blockcms_footer span3">
+								<h4 class="toggle" ng-class="{active: toggleInformation == true}" ng-init="toggleInformation = false" ng-click="toggleInformation = !toggleInformation;">Information</h4>
+								<div ng-if="toggleInformation">
+									<ul class="toggle_content list-footer tree dhtml" ng-repeat="Navigation in ListNavigation | filter : 'footer'">
+										<li ng-repeat="Nav in Navigation.link_list" ng-class="{sfHoverForce:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}">
+											<a href="{{Nav.commaSeprated}}"><i class="icon-double-angle-right"></i>{{Nav.name}}</a>
+										</li>
+									</ul>
+								</div>
+							
+							</section>
+
+							<!-- MODULE Block footer -->
+							<section class="block blockcms_footer span3">
+								<h4 class="toggle" ng-class="{active: toggleAccount == true}" ng-init="toggleAccount = false" ng-click="toggleAccount = !toggleAccount;">My Account</h4>
+								<div ng-if="toggleAccount">
+									<ul class="toggle_content list-footer tree dhtml" ng-repeat="Navigation in ListNavigation | filter : 'footer'">
+										<li>
+											<a href="/orders"><i class="icon-double-angle-right"></i>My Orders</a>
+										</li>
+										<li>
+											<a href="/account_info"><i class="icon-double-angle-right"></i>Update Account Information</a>
+										</li>
+										<li>
+											<a href="/reset_password"><i class="icon-double-angle-right"></i>Change Password</a>
+										</li>
+									</ul>
+								</div>
+							</section>
+
+
+							<section class="bottom_footer">&copy; 2014 Powered by <a target="_blank" href="http://www.bramerz.pk">Bramerz</a>&trade;</section>
+						</div>
+					</footer>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

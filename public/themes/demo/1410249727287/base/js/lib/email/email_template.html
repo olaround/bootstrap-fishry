@@ -1,0 +1,79 @@
+<div id="emailBody">   
+<table class="table">
+<tr>
+<td style="border:0px;">
+<h3>Order confirmation for order <!--{{order_id}}--> BE6A6B5C-8EB5-416F-8E10-484DEE303036 </h3>
+</td>
+</tr>
+<tr>
+<td style="border:0px;">
+Thank you for placing your order with {{storeName}}!
+</td>
+<tr>
+<td style="border:0px;">
+This email is to confirm your recent order. Date {{dt|date:'medium'}}
+</td>
+<tr>
+<td style="border:0px;"> 
+ <h3>Shipping address</h3>
+    {{Customer.Address}}
+    {{Customer.AddressContinue}}
+    {{Customer.City}}, {{Customer.PostCode}}
+    {{Customer.Country}}
+ </td>
+<tr>
+<td style="border:0px;">
+  <span ng-show="!Customer.SameBilling">
+ <h3>Billing address</h3> 
+    {{Customer.AddressBilling}}
+    {{Customer.AddressContinueBilling}}
+    {{Customer.CityBilling}}
+  </span> 
+ </td>
+<tr>
+<td style="border:0px;"> 
+						<table class="table">
+                                   <thead> 
+									<tr>
+                                        <th class="col-md-4">Product Name</th>
+                                        <th class="col-md-4">Orignal Price</th>
+										<th class="col-md-4">New Price</th>
+										<th class="col-md-4">Quantity</th>
+                                        <th class="col-md-4">Total Price</th>
+									 </tr>
+									</thead> 
+									<tbody ng-repeat="(keyMain,Itemss) in Cart track by $index">
+									<tr ng-show="Itemss.productID"> 
+									     
+                                        <td class="col-md-4">{{Itemss.productInfo.productName}} </td>
+                                        <td class="col-md-4">Rs. {{Itemss.productInfo.productPrice}}</td>
+										<td class="col-md-4" ng-hide="Itemss.productInfo.newPrice"> - </td>
+										<td class="col-md-4" ng-show="Itemss.productInfo.newPrice">Rs. {{Itemss.productInfo.newPrice}}</td>
+										<td class="col-md-4">{{itm.quantity}}</td>
+                                        <td class="col-md-4" ng-hide="Itemss.productInfo.newPrice">Rs. {{Itemss.productInfo.productPrice * Itemss.quantity}}</td>
+										<td class="col-md-4" ng-show="Itemss.productInfo.newPrice">Rs. {{Itemss.productInfo.newPrice * Itemss.quantity}}</td>
+								    </tr>
+									<tr ng-hide="Itemss.productID" ng-repeat="(key,itm) in Itemss track by $index"> 
+                                        <td class="col-md-4">{{itm.productInfo.productName}} - ( {{key}} )</td>
+										<td class="col-md-4">Rs. {{itm.productInfo.productPrice}}</td>
+										<td class="col-md-4" ng-hide="itm.productInfo.newPrice"> - </td> 
+										<td class="col-md-4" ng-show="itm.productInfo.newPrice">Rs. {{itm.productInfo.newPrice}}</td>
+										<td class="col-md-4">{{itm.quantity}}</td>
+                                        <td class="col-md-4" ng-hide="itm.productInfo.newPrice">Rs. {{itm.productInfo.productPrice * itm.quantity}}</td>
+										<td class="col-md-4" ng-show="itm.productInfo.newPrice">Rs. {{itm.productInfo.newPrice * itm.quantity}}</td>
+									</tr>
+									</tbody>
+								</table>
+ 
+ </td>
+<tr>
+<td style="border:0px;"> 
+Subtotal :  {{ReturnTotal()}}| PKR
+ </td>
+<tr>
+<td style="border:0px;"> 
+Total     :  {{ReturnTotal()}}| PKR
+ </td>
+ </tr> 
+</table>
+</div>

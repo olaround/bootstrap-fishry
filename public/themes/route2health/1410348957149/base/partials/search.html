@@ -1,0 +1,115 @@
+<div class="content_bg" ng-init="init()">
+    <div id="columns" class="container ">
+        <div class="row ">
+            <div class="loader_page">
+                <div id="center_column" class="center_column span9 clearfix">
+                  <ul id="product_list" class="row grid">
+
+                          <li class="span3" ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} | filter:SearchTitleSearch | filter:SearchMinMaxPriceReturn | filter:SearchVendorsearchReturn | filter:{ProductTypeName:SearchTypeSearch} | filter:{productTags:SearchTagsSearch} | returnTotals:products | startFrom:startFromPage | limitTo:pageLimit">
+                              <a href="/product/{{products.productUrl}}" class="product_img_link" title="{{products.productName}}">
+                                  <img ng-if="products.productImage[0].Image" ng-src="{{products.productImage[0].Image}}" alt="{{products.productName}}">
+                                  <img ng-if="!products.productImage[0].Image" ng-src="{{BaseUrl}}img/theme/default.jpg" alt="{{products.prouctName}}">
+                              </a>
+                              <div class="center_block">
+                                  <div class="clear"></div>
+                                  <h3><a class="product_link" href="/product/{{products.productUrl}}" title="{{products.productName}}">{{products.productName.slice(0,30)}}<span ng-if="products.productName.length > 30">....</span></a>
+                                  </h3>
+                                  <p class="product_desc" ng-bind-html="products.productDescription.slice(0,250)+ '....'"></p>
+                                  <p class="product_desc mob" ng-bind-html="products.productDescription.slice(0,180)+ '....'"></p>
+                                  <p class="product_desc mob2" ng-bind-html="products.productDescription.slice(0,180)+ '....'"></p>
+                              </div>
+                              <div class="right_block" ng-controller="GlobalCtrl">
+                                  <span class="price" ng-if="products.productPrice">{{products.productPrice | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</span>
+                                  <div class="clear noneclass"></div>
+
+                                  <div class="actionBtns">
+                                      <a ng-if="products.productPrice" class="ajax_add_to_cart_button exclusive btn_add_cart" rel="ajax_id_product_1" href="javascript:void(0)" ng-click="addToCartEffect();addToCart(products.id,products)" title="Add to cart" style="margin: 0 10px 0px 0">
+                                          <span>Add to cart</span>
+                                      </a>
+
+                                      <a class="button" href="/product/{{products.productUrl}}" title="View">View</a> 
+                                  </div>
+
+                              </div>
+                              <div class="clearBoth"></div>
+                          </li>
+                          <div class="clearBoth"></div>
+                          <script>
+                        (function($) {
+                            $(function() {
+                                function createCookie(name, value, days) {
+                                    if (days) {
+                                        var date = new Date();
+                                        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                                        var expires = "; expires=" + date.toGMTString();
+                                    } else var expires = "";
+                                    document.cookie = name + "=" + value + expires + "; path=/";
+                                }
+
+                                function readCookie(name) {
+                                    var nameEQ = name + "=";
+                                    var ca = document.cookie.split(';');
+                                    for (var i = 0; i < ca.length; i++) {
+                                        var c = ca[i];
+                                        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                                        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+                                    }
+                                    return null;
+                                }
+
+                                function eraseCookie(name) {
+                                    createCookie(name, "", -1);
+                                }
+                                $('ul.product_view').each(function(i) {
+                                    var cookie = readCookie('tabCookie' + i);
+                                    if (cookie) $(this).find('li').eq(cookie).addClass('current').siblings().removeClass('current')
+                                        .parents('#center_column').find('#product_list').addClass('list').removeClass('grid').eq(cookie).addClass('grid').removeClass('list');
+                                })
+                                $('ul.product_view').delegate('li:not(.current)', 'click', function(i) {
+                                    $(this).addClass('current').siblings().removeClass('current')
+                                        .parents('#center_column').find('#product_list').removeClass('grid').addClass('list').eq($(this).index()).addClass('grid').removeClass('list')
+                                    var cookie = readCookie('tabCookie' + i);
+                                    if (cookie) $(this).find('#product_list').eq(cookie).removeClass('grid').addClass('list').siblings().removeClass('list')
+                                    var ulIndex = $('ul.product_view').index($(this).parents('ul.product_view'));
+                                    eraseCookie('tabCookie' + ulIndex);
+                                    createCookie('tabCookie' + ulIndex, $(this).index(), 365);
+                                })
+                            })
+                        })(jQuery)
+                        </script>
+                      </ul>
+
+                      <div class="bottom_pagination shop_box_row  clearfix" ng-if="pagesCounts().length > 1">
+                        <div id="pagination" class="pagination" ng-if="ListProduct" ng-init="numberOfPages(ListProduct,{collection:routeParam})">
+                            <ul class="pagination ng-isolate-scope ng-pristine ng-valid">
+                                <li>
+                                    <a href="javascript:void(0)" ng-hide="!startFromPage" ng-click="selectPage('p')" class="ng-binding">
+                                        <i class="glyphicon glyphicon-chevron-left" style="padding: 3px;">Previous</i>
+                                    </a>
+                                </li>
+
+                                <li ng-repeat="page in pagesCounts()" ng-class="{active:returnStateActive(page-1)}">
+                                    <a href="javascript:void(0)" ng-click="selectPage(page-1)" class="ng-binding">{{page}}</a>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:void(0)" ng-hide="currentPage == expectedPages" ng-click="selectPage('n')" class="ng-binding">
+                                        <i class="glyphicon glyphicon-chevron-right" style="padding: 3px;">Next</i>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+             
+                <aside id="right_column" class="span3" ng-class="{'homeSideBar': $location.path() == '/'}">
+                  <section id="manufacturers_block_left" class="block blockmanufacturer olumn_box" ng-include src="getCollectionSidebarPath()">
+                  </section>
+                </aside>
+
+            </div>
+        </div>
+    </div>
+</div>

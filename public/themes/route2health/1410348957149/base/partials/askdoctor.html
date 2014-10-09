@@ -1,0 +1,131 @@
+<div class="content_bg">
+  <div id="columns" class="container">
+    <div class="row ">
+      <div class="loader_page">
+
+        <div id="center_column" class="center_column span12 clearfix">
+          <!-- Breadcrumb -->
+          <div class="breadcrumb">
+            <div class="breadcrumb_inset">
+              <a class="breadcrumb-home" href="/" title="Return to Home"><i class="icon-home"></i></a>
+              <span class="navigation-pipe">&gt;</span>
+              <span class="navigation_page">Ask a Doctor</span>
+            </div>
+          </div>
+          <!-- /Breadcrumb -->
+          <div id="askContainer">
+            <h1>
+              <span>Contact Details</span>
+            </h1>
+
+            <p class="required" style="padding:10px 0 10px 0; margin:0;"><sup>*</sup> Required field</p>
+
+            <form role="form" ng-submit="sendaskDoctorEmail()" class="std titled_box" id="add_address">
+              <fieldset>
+                 <div class="row-fluid">
+                  <div class="span6">
+                    <p class="required text">
+                      <label for="firstname">First Name <sup>*</sup>
+                      </label>
+                      <input required ng-model="askDoctor.FirstName" ng-value="askDoctor.FirstName" type="text" name="firstname" id="firstname">
+                    </p>
+
+                    <p class="required  text">
+                      <label for="lastname">Last Name <sup>*</sup>
+                      </label>
+                      <input required ng-model="askDoctor.LastName" ng-value="askDoctor.LastName" type="text" id="lastname" name="lastname">
+                    </p>
+
+                    <p class="required text">
+                      <label for="email">Email <sup>*</sup>
+                      </label>
+                      <input required ng-model="askDoctor.Email" ng-value="askDoctor.Email" type="email" name="email" id="email">
+                    </p>
+
+                  </div>
+                  <div class="span6">
+                    
+                    <p class="required  text">
+                      <label for="phone">Phone <sup>*</sup>
+                      </label>
+                      <input required ng-model="askDoctor.Phone" ng-value="askDoctor.Phone" type="text" id="phone" name="phone">
+                    </p>
+
+                     <p class="required text">
+                      <label for="city">City <sup>*</sup>
+                      </label>
+                      <input required ng-model="askDoctor.City" ng-value="askDoctor.City" type="text" name="City" id="City">
+                    </p>
+
+                    <p class="required  text">
+                      <label for="postalAddress">Postal Address <sup>*</sup>
+                      </label>
+                      <input required ng-model="askDoctor.PostalAddress" ng-value="askDoctor.PostalAddress" type="text" id="postalAddress" name="postalAddress">
+                    </p>
+
+                  </div>
+
+                </div>
+              
+              </fieldset>
+
+              <h1>
+                <span>Personal Information</span>
+              </h1>
+
+              <fieldset>
+                 <div class="row-fluid">
+                  <div class="span6">
+                    <p class="required select">
+                      <label for="gender">Gender <sup>*</sup></label>
+                        <select required ng-model="Customer.gender" id="gender" name="gender">
+                            <option value="">Please Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </p>
+
+                    <p class="required  text">
+                      <label for="weight">Weight <sup>*</sup>
+                      </label>
+                      <input required ng-model="askDoctor.weight" ng-value="askDoctor.weight" type="text" id="weight" name="weight">
+                    </p>
+
+                  </div>
+                  <div class="span6">
+                    
+                    <p class="required text">
+                      <label for="height">Height <sup>*</sup>
+                      </label>
+                      <input required ng-model="askDoctor.height" ng-value="askDoctor.height" type="text" id="height" name="height" >
+                    </p>
+                    
+                   <p class="required text">
+                      <label for="healthConcern">Health Concern<sup>*</sup></label>
+                      <textarea ng-model="askDoctor.healthConcern" ng-value="askDoctor.healthConcern"></textarea>
+                      <!-- <input required ng-model="askDoctor.healthConcern" ng-value="askDoctor.healthConcern" type="text" id="healthConcern" name="healthConcern"> -->
+                    </p>
+
+                  </div>
+
+                </div>
+              
+              </fieldset>
+              <p class="submit2" style="float: right">
+                <input type="submit" name="submit" id="submit" value="Submit" class="button">
+              </p>
+            </form>
+    
+        </div>
+          
+    </div>
+
+          <!-- Right -->
+          <!-- <aside id="right_column" class="span3 column right_home">
+            <section id="manufacturers_block_left" class="block blockmanufacturer column_box" ng-include src="'partials/sidebar.html'">
+            </section>
+          </aside> -->
+        </div>
+      </div>
+    </div>
+  </div>
