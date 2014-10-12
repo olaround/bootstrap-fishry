@@ -43,7 +43,7 @@ $rootScope.storeTime = function(){
 
 }
 
-var currentTime = moment(Date()).format('H');
+var currentTime = moment(Date()).format('h');
 
   /*console.log(currentTime);
   console.log(parseInt($rootScope.ThemeSettings.theme_settings.store_start));
@@ -123,8 +123,8 @@ console.log($rootScope.startTimeTemporary);
 $rootScope.storeTime();
 
 $rootScope.timeCheck = function(){
-  
-  var currentTime = moment(Date()).format('H');
+
+  var currentTime = moment(Date()).format('h');
 
   var tempCloseTime = $rootScope.ThemeSettings.theme_settings.store_close;
 
@@ -435,7 +435,7 @@ $rootScope.postcollection = function() {
 console.log($rootScope.prevUrl);
 
 $rootScope.setLocalStorageData = function(){  
-  
+
 
   if(localStorage.getItem('Payment')){
 
@@ -1096,6 +1096,7 @@ function ThankyouCtrl($scope,$location,$rootScope){
   $rootScope.title = 'Thankyou - '+$rootScope.SettingGeneral.settings.meta_title;
   $rootScope.myCart = function(){
 
+  ga('require', 'ecommerce', 'ecommerce.js');
 
    var transaction = {
            'id': $rootScope.OrderInfo.orderid,                // Transaction ID.
@@ -1106,56 +1107,54 @@ function ThankyouCtrl($scope,$location,$rootScope){
 
           console.log(transaction);
 
-          ga('myTracker.ecommerce:addTransaction', transaction);
+          ga('ecommerce:addTransaction', transaction);
 
 
           $.each($rootScope.Cart, function(index,item){
             if(item){
               if(!item.productInfo){
                 $.each(item,function(indx,itm){
+                  if($rootScope.Cart[index][indx].productInfo){
+                    var fullCart = $rootScope.Cart[index][indx];
+                    var fullCartProductId = $rootScope.Cart[index][indx].productID;
+                    var fullCartProductName = $rootScope.Cart[index][indx].productInfo.productName;
+                    var fullCartProductPrice = $rootScope.Cart[index][indx].productInfo.productPrice;
+                    var fullCartProductQuantity = $rootScope.Cart[index][indx].productInfo.productQuantity;
+                    var fullCartProductSKU = $rootScope.Cart[index][indx].productInfo.productSKU;
+                    $.each($rootScope.Cart[index][indx].productInfo.productCollections, function(indx,category){
+                      var categoryName = category.name;
 
-                  $rootScope.fullCart = $rootScope.Cart[index][indx];
-                  $rootScope.fullCartProductId = $rootScope.Cart[index][indx].productID;
-                  $rootScope.fullCartProductName = $rootScope.Cart[index][indx].productInfo.productName;
-                  $rootScope.fullCartProductPrice = $rootScope.Cart[index][indx].productInfo.productPrice;
-                  $rootScope.fullCartProductQuantity = $rootScope.Cart[index][indx].productInfo.productQuantity;
-                  $rootScope.fullCartProductSKU = $rootScope.Cart[index][indx].productInfo.productSKU;
-
-            // $rootScope.$apply();
-          })
           //console.log($rootScope.fullCart);
           //console.log($rootScope.fullCart.productInfo.productCollections);
           //console.log( $rootScope.fullCartProductId);
           //console.log($rootScope.fullCartProductName);
           //console.log($rootScope.fullCartProductPrice);
           //console.log($rootScope.fullCartProductQuantity);
-          $.each($rootScope.fullCart.productInfo.productCollections, function(indx,category){
-            
-              $rootScope.categoryName = category.name;
-              //console.log($rootScope.categoryName);
-           
-          });
-       
+          
 
-        var item = {
-          'id': $rootScope.fullCartProductId || "Domino's ProductID",             // Transaction ID. Required.
-          'name': $rootScope.fullCartProductName || "Domino's Product",        // Product name. Required.                               
-          'sku' : $rootScope.fullCartProductSKU || "Domino's SKU",
-          'category': $rootScope.categoryName || "Domino's Pizza",
-          'price': $rootScope.fullCartProductPrice || "Domino's Price",       // Unit price.
-          'quantity': $rootScope.fullCartProductQuantity || "Domino's Quantity", // Quantity.
-          'currency': 'PKR'                                // Currency
-        };
+          if($rootScope.Cart){
+            var item = {   
+                'id':   $rootScope.OrderInfo.orderid || "Domino's Product",   
+                'name': fullCartProductName || "Domino's Product",        // Product name. Required.                               
+                'sku' : fullCartProductSKU || "Domino's SKU",
+                'category': categoryName || "Domino's Pizza",
+                'price': fullCartProductPrice || "Domino's Price",       // Unit price.
+                'quantity': fullCartProductQuantity || "Domino's Quantity", // Quantity.
+                'currency': 'PKR'                                // Currency
+              };
 
-        console.log(item);
+              console.log(item);
 
-        ga('myTracker.ecommerce:addItem', item);
+              ga('ecommerce:addItem', item);
 
-        ga('myTracker.ecommerce:send');
-
-      }
-    }
-  })
+              ga('ecommerce:send');
+            }
+          })
+}      
+})
+}
+}
+})
 $rootScope.Cart = {};
 $rootScope.SetLocalStorage('Cart');
 }
@@ -1278,7 +1277,7 @@ $.each(locationsParam,function(index,item){
 function OrderCtrl($scope, $location, $rootScope,$routeParams) {
 
 
-  
+
   $rootScope.locationParam = [];
   var locationsParam = $scope.$location.path().split('/');
   $.each(locationsParam, function(index, item) {
