@@ -1,0 +1,316 @@
+
+
+
+<div id="sliders-container">
+</div>
+<div class="page-title-container">
+  <div class="page-title">
+    <div class="page-title-wrapper">
+      <div class="page-title-captions" ng-repeat="(prodID,product) in ListProduct | CustomFilter:{productUrl : routeParam}">
+        <h1 class="entry-title">
+          {{product.productName}}
+        </h1>
+      </div>
+      <ul class="breadcrumbs">
+        <li>
+          <a class="home" href="/">
+            Home
+          </a>
+        </li>
+        <li ng-repeat="links in locationParam" ng-show="links">
+          <a href="" ng-if="$index==0">
+           {{links}}
+         </a>
+         <a href="" ng-if="$index==1">
+           {{links}}
+         </a>
+         <a href="" ng-if="$index==2">
+          {{links}}
+        </a>
+        <a href="" ng-if="$index==3">
+          {{links}}
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</div>
+</div>
+<div id="main" class="clearfix" style="" ng-init="InitProduct();">
+  <div class="avada-row" style="">
+    <div class="woocommerce-container">
+      <div id="content" style="width:100%" ng-repeat="(prodID,product) in ListProduct | CustomFilter:{productUrl : routeParam}">
+        <div itemscope itemtype="http://schema.org/Product" id="product-5984" class="post-5984 product type-product status-publish has-post-thumbnail shipping-taxable purchasable product-type-simple product-cat-accessories product-cat-hooded product-cat-jackets product-tag-hoods product-tag-outdoors product-tag-warm instock">
+          <div class="images">
+            <div class="slider-imgs">
+              <img ng-if="product.productImage[0].Image" id="image-show-zero" src="{{product.productImage[0].Image}}">
+              <img ng-if="!product.productImage[0].Image" id="image-show-zero" src="{{BaseUrl}}img/theme/placeholder.png" style="width: 500px;">
+
+              <img id="image-show-one" src="{{product.productImage[1].Image}}">
+              <img id="image-show-two" src="{{product.productImage[2].Image}}">
+              <img id="image-show-three" src="{{product.productImage[3].Image}}">
+            </div>
+
+
+            <div id="thumbnail" ng-if="product.productImage[0].Image && product.productImage[1].Image && product.productImage[2].Image && product.productImage[3].Image">
+              <img class="images-thumbnails image-1 active" id="image-zero" src="{{product.productImage[0].Image}}">
+              <img class="images-thumbnails image-2" id="image-one" src="{{product.productImage[1].Image}}">
+              <img class="images-thumbnails image-3" id="image-two" src="{{product.productImage[2].Image}}">
+              <img  class="images-thumbnails image-4" id="image-three" src="{{product.productImage[3].Image}}">
+            </div>
+          </div>
+
+           <div ng-if="product.productImage[0].Image">
+                            <script type="text/javascript">
+                                $(document).ready(function() {
+                                    $("#image-one").click(function() {
+                                        $("#image-show-zero").hide();
+                                        $("#image-show-two").hide();
+                                        $("#image-show-three").hide();
+                                        $("#image-show-one").show();
+                                        $(".image-1").removeClass("active");
+                                        $(".image-3").removeClass("active");
+                                        $(".image-4").removeClass("active");
+                                        $(".image-2").addClass("active");
+
+                                        
+                                    });
+                                    $("#image-two").click(function() {
+                                        $("#image-show-zero").hide();
+                                        $("#image-show-one").hide();
+                                        $("#image-show-three").hide();
+                                        $("#image-show-two").show();
+                                        $(".image-1").removeClass("active");
+                                        $(".image-2").removeClass("active");
+                                        $(".image-4").removeClass("active");
+                                        $(".image-3").addClass("active");
+                                        
+                                    });
+                                    $("#image-three").click(function() {
+                                        $("#image-show-zero").hide();
+                                        $("#image-show-one").hide();
+                                        $("#image-show-two").hide();
+                                        $("#image-show-three").show();
+                                        $(".image-1").removeClass("active");
+                                        $(".image-2").removeClass("active");
+                                        $(".image-3").removeClass("active");
+                                        $(".image-4").addClass("active");
+                                         
+                                    });
+                                    $("#image-zero").click(function() {
+                                        $("#image-show-three").hide();
+                                        $("#image-show-one").hide();
+                                        $("#image-show-two").hide();
+                                        $("#image-show-zero").show();
+                                        $(".image-2").removeClass("active");
+                                        $(".image-3").removeClass("active");
+                                        $(".image-4").removeClass("active");
+                                        $(".image-1").addClass("active");
+                                        
+                                    });
+                                });
+                            </script>
+                        </div>
+          <div class="summary entry-summary">
+            <h2 itemprop="name" class="product_title entry-title">
+              {{product.productName}}
+            </h2>
+            
+
+            <div class="product-border">
+            </div>
+            <div class="post-content" itemprop="description">
+              <p ng-bind-html="product.productDescription">
+
+              </p>
+
+            </div>
+
+            <div class="product_meta">
+
+              <span class="sku_wrapper">
+                SKU: 
+                <span class="sku" itemprop="sku">
+                  {{product.productSKU}}
+                </span>
+                .
+              </span>
+
+              <span class="sku_wrapper" >
+               Type: 
+               <span class="sku" itemprop="sku" ng-if="product.ProductTypeName">
+                 {{product.ProductTypeName}}
+               </span>
+
+               <span class="sku" itemprop="sku" ng-if="!product.ProductTypeName">
+                 Not Available
+               </span>
+               .
+             </span>
+
+             <span class="sku_wrapper" >
+              Brand: 
+              <span class="sku" itemprop="sku" ng-if="product.ProductVendorName" >
+               {{product.ProductVendorName}}
+             </span>
+
+             <span class="sku" itemprop="sku" ng-if="!product.ProductVendorName">
+               Not Available
+             </span>
+             .
+           </span>
+
+
+         </div>
+       </div>
+       <div class="clear"></div>
+       <ul class="social-share">
+        <li class="facebook">
+
+          <a id="fbShare" target="_blank">
+
+            <i class="fontawesome-icon medium circle-yes icon-facebook">
+            </i>
+
+            <span>
+              Share On
+            </span>
+            Facebook 
+          </a>
+        </li>
+        <li class="twitter">
+
+          <a id="twitterShare" target="_blank">
+
+            <i class="fontawesome-icon medium circle-yes icon-twitter">
+            </i>
+
+            <span>
+              Tweet This
+            </span>
+            Product 
+          </a>
+        </li>
+        <li class="pinterest">
+          <a id="gplusShare" target="_blank">
+
+            <i class="fontawesome-icon medium circle-yes icon-googleplus">
+            </i>
+
+            <span>
+              Share On
+            </span>
+            Google Plus
+          </a>
+        </li>
+        <li class="email">
+
+          <a href="http://www.cloudflare.com/email-protection#a19ed2d4c3cbc4c2d59ce3c0d3c3ced4d381ebc0c2cac4d587c0ccd19ac3cec5d89cc9d5d5d19b8e8ed5c9c4ccc48cc7d4d2c8cecf8fc2cecc8ec0d7c0c5c08ed1d3Xoduct/barbour-short-military-jacket/" target="_blank">
+
+            <i class="fontawesome-icon medium circle-yes icon-mail">
+            </i>
+
+            <span>
+              Mail This
+            </span>
+            Product 
+          </a>
+        </li>
+      </ul>
+      <div class="related products">
+        <h2>
+          Related Products
+        </h2>
+        <ul class="products clearfix products-4">
+
+
+
+          <li ng-repeat="products in ListProduct  | filter: {productType: product.productType} | limitTo:4" ng-show="products.productName != product.productName" class="post-6064 product type-product status-publish has-post-thumbnail last featured shipping-taxable purchasable product-type-simple product-cat-accessories product-cat-bags product-cat-travel product-tag-fabric product-tag-outdoors product-tag-travel instock" style="margin-right:10px;">
+
+            <a href="/product/{{products.productUrl}}" class="product-images">
+              <span class="crossfade-images">
+                <img width="500" height="638" src="{{products.productImage[1].Image}}" class="hover-image" alt="{{products.productName}}" sf_validated="1">
+                <img ng-if="products.productImage[0].Image" width="500" height="638" src="{{products.productImage[0].Image}}" class="attachment-shop_catalog wp-post-image" alt="{{products.productName}}" sf_validated="1">
+                 <img ng-if="!products.productImage[0].Image" width="500" height="638" src="{{BaseUrl}}img/theme/placeholder.png" class="attachment-shop_catalog wp-post-image" alt="{{products.productName}}
+                 " sf_validated="1" style="height: 301px;">
+                <span class="cart-loading">
+                  <i class="icon-spinner">
+                  </i>
+                </span>
+              </span>
+
+            </a>
+            <div class="product-details">
+              <div class="product-details-container">
+                <h3 class="product-title">
+                  <a href="/product/{{products.productUrl}}">
+                    {{products.productName}}
+                  </a>
+                </h3>
+                
+              </div>
+            </div>
+            <div class="product-buttons">
+              <div class="product-buttons-container clearfix">
+
+                <a href="/product/{{products.productUrl}}" class="show_details_button">
+                  Details
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+   
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+<script type="text/javascript">
+ $(document).ready(function(){
+
+
+    $("#image-one").click(function() {
+    $("#image-show-zero").hide();
+    $("#image-show-one").show();
+
+    alert(Helloo);
+   
+    
+  });
+
+   var currentURL = document.URL;
+   var currentTitle = document.title;
+
+   function socialShare() {
+     var fbShare = document.getElementById("fbShare");
+     var gplusShare = document.getElementById("gplusShare");
+     var twitterShare = document.getElementById("twitterShare");
+
+     fbShare.onclick = function() {
+      window.open("https://www.facebook.com/sharer.php?u="+currentURL,"","height=368,width=600,left=100,top=100,menubar=0");
+      return false;
+    }
+    gplusShare.onclick = function() {
+      window.open("https://plus.google.com/share?url="+currentURL,"","height=550,width=525,left=100,top=100,menubar=0");
+      return false;
+    }	
+    twitterShare.onclick = function() {
+      window.open("https://twitter.com/share?url="+currentURL+"&text="+currentTitle,"","height=260,width=500,left=100,top=100,menubar=0");
+      return false;
+    }
+    fbShare.setAttribute("href","http://www.facebook.com/sharer.php?u="+currentURL);
+    gplusShare.setAttribute("href","https://plus.google.com/share?url="+currentURL);
+    twitterShare.setAttribute("href","https://twitter.com/share?url="+currentURL+"&text="+currentTitle);
+  }
+
+  socialShare();
+
+
+}); 
+
+
+</script>	
+

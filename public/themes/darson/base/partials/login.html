@@ -1,0 +1,69 @@
+<div id="page">
+    <!-- //MY ACCOUNT PAGE -->
+
+        <section  class="my_account parallax">
+            <div >
+   
+        <!-- CONTAINER -->
+        <div class="container">
+
+            <div class="row my_account_block clearfix" ng-if="!User.info.CustomerEmail && ListPaymentGateways.accountsDisabled != 'disabled'">
+            <h2>Login/Create Account</h2>
+            <h2>{{ThemeSettings.theme_settings.slide_collection_40_img}}</h2>
+            <hr class="login-hr">
+                <div class="login col-md-12 col-sm-6 col-xs-12">
+                    <h2 class="text-no-margin">Existing Customer</h2>
+                    <p class="text-signup">Enter your email address and password to login.</p>
+
+                    <form class="login_form" role="form" ng-submit="CheckLogin('cart')">        
+
+                         <div class="alert alert-warning" id="error" style="display:none; color:black;font-weight: bolder;font-size: 14px;">The email address or password you entered is incorrect.Try again or reset your password.</div>
+                        <label class="mediumm" for="exampleInputEmail1">Email Address*</label>
+                        <input type="email" name="username" value="Username or email" placeholder="Username or email" ng-model="Customer.email" required />
+                        <label class="mediumm" for="exampleInputEmail1">Password*</label>
+                        <input class="last" type="password" name="password" value="Password" placeholder="Password" ng-model="Customer.password" required />
+                        
+                        <a class="forgot_pass" href="/forgot_password">Have you forgotten your password?</a>
+
+                        <div class="clearfix">  
+                        </div>
+
+
+                        <div class="center">
+                            <input type="submit"  class="btn active" value="Login" style="float:right;margin-right:80px;">
+
+                        </div>
+                        <div ng-if="StartLogin" class="inline-loaders">
+                        <img  ng-src="{{BaseUrl}}img/theme/preloader.gif" style="position: absolute;right: 50%;top: 50%;">
+                        </div>
+                    </form>
+                </div>
+                <div class="new_customers col-md-12 col-sm-6 col-xs-12">
+                 <div class="border-bottom">
+                    <h2 class="text-no-margin">New Customer</h2>
+                    <p class="text-signup">If you still don't have an account, use this option to access the registration form.</p>
+                    <p class="text-signup">By giving your details, purchasing will be a faster and enjoyable experience.</p>
+
+                    <div><a class="btn active" href="/signup">Create Account</a>
+                    </div>
+                    </div>
+
+                    <div class="guest-login">
+                    <h2 class="text-no-margin">Continue As A Guest</h2>
+                    <p class="text-signup">You can still place an order without creating an account.</p>
+                    <div><a class="btn active" ng-click="GuestLogin('cart')">Order As Guest</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my_account_block clearfix" ng-if="User.info.CustomerEmail || ListPaymentGateways.accountsDisabled == 'disabled'">
+                <div class="login" ng-if="User.info.CustomerEmail && ListPaymentGateways.accountsDisabled == 'disabled'">
+                    <h4 style="color: white;font-weight: bold;margin-top: -90px;">Login is disabled</h4>
+                </div>
+            </div>
+        </div>
+        <!-- //CONTAINER -->
+        </div>
+    </section>
+</div>

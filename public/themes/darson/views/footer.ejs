@@ -1,0 +1,107 @@
+
+ 
+
+<footer class="footer-area">
+<div class="avada-row">
+<section class="fusion-columns row fusion-columns-4 columns columns-4"><article class="fusion-column col col-lg-3 col-md-3 col-sm-3 ">
+<div id="text-2" class="footer-widget-col widget_text">
+<div class="textwidget">
+
+<h1 style="color: #ddd;margin: 4px 0px 30px;">Darson Industries</h1>
+
+<p>
+Since 1953, Darson Industries has delivered excellence, top notch quality and unmatched customer care. With its operation expanded in more than 25 countries across the globe, Darson Industries is at the forefront of leading manufactures of industrial and automobile rubber products & hoses.
+</p>
+</div>
+<div style="clear:both;">
+</div>
+</div>
+</article><article class="fusion-column col col-lg-3 col-md-3 col-sm-3">
+<div id="recent-posts-3" class="footer-widget-col widget_recent_entries">
+<h3>Quick Links</h3>
+<ul ng-repeat="Navigation in ListNavigation | filter : 'footer'">
+<li ng-repeat="Nav in Navigation.link_list"  ng-show="Nav.optionSelected == 'frontpage'"><a href="/">{{Nav.name}}</a></li>
+<li ng-repeat="Nav in Navigation.link_list"  ng-show="Nav.commaSeprated"><a href="{{Nav.commaSeprated}}">{{Nav.name}}</a></li>
+<li ng-repeat="Nav in Navigation.link_list"   ng-show="Nav.http"><a href="{{Nav.http}}">{{Nav.name}}</a></li>
+</ul>
+<div style="clear:both;">
+</div>
+</div>
+</article>
+<article  class="fusion-column col col-lg-3 col-md-3 col-sm-3">
+<div id="tweets-widget-7" class="footer-widget-col tweets">
+<h3>Recent Tweets</h3>
+<div class="twitter-box">
+<div class="twitter-holder">
+<div class="b">
+<div class="tweets-container" id="tweets_tweets-widget-7">
+
+<!-- BEGIN: Twitter website widget (http://twitterforweb.com) -->
+<div style="width:220px;font-size:8px;text-align:right;"><script type="text/javascript">
+document.write(unescape("%3Cscript src='http://twitterforweb.com/twitterbox.js?username=webgadget&settings=1,0,3,220,310,f4f4f4,0,c4c4c4,101010,1,1,336699' type='text/javascript'%3E%3C/script%3E"));</script></div>
+<!-- END: Twitter website widget (http://twitterforweb.com) -->
+
+</div>
+</div>
+</div>
+<span class="arrow"></span>
+</div>
+<div style="clear:both;">
+</div>
+</div>
+</article><article class="fusion-column col last col-lg-3 col-md-3 col-sm-3">
+<div id="recent_works-widget-4" class="footer-widget-col recent_works">
+<h3>Recent Shows</h3>
+<div class="recent-works-items clearfix">
+<a href="" title="Half Video Post"><img width="66" height="66" src="http://theme-fusion.com/avada/wp-content/uploads/2013/05/blog_tall_31_rev-66x66.jpg" class="attachment-recent-works-thumbnail wp-post-image" alt="blog_tall_31_rev"/></a
+><a href="" title="Quisque Sit Amet"><img width="66" height="66" src="http://theme-fusion.com/avada/wp-content/uploads/2012/08/port_slide_10-66x66.jpg" class="attachment-recent-works-thumbnail wp-post-image" alt="port_slide_10"/></a><a href="" title="Wide Video Post"><img width="66" height="66" src="http://theme-fusion.com/avada/wp-content/uploads/2012/07/video_screen2-66x66.jpg" class="attachment-recent-works-thumbnail wp-post-image" alt="video_screen2"/></a><a href="" title="Mauris Fringillas"><img width="66" height="66" src="http://theme-fusion.com/avada/wp-content/uploads/2012/07/port5-66x66.jpg" class="attachment-recent-works-thumbnail wp-post-image" alt="port5"/></a><a href="" title="Aliquam Quis Tortor"><img width="66" height="66" src="http://theme-fusion.com/avada/wp-content/uploads/2012/08/port1-66x66.jpg" class="attachment-recent-works-thumbnail wp-post-image" alt="port1"/></a><a href="" title="Proin Sodales Quam"><img width="66" height="66" src="http://theme-fusion.com/avada/wp-content/uploads/2012/07/bla1-66x66.jpg" class="attachment-recent-works-thumbnail wp-post-image" alt="bla"/></a>
+</div>
+<div style="clear:both;">
+</div>
+</div>
+</article>
+<div class="fusion-clearfix">
+</div>
+</section>
+</div>
+</footer><footer id="footer">
+<div class="avada-row">
+<div class="copyright-area-content">
+<div class="copyright">
+<div>
+Copyright 2014 Darson Theme by <a href='http://bramerz.pk' target="_blank">Bramerz</a>
+</div>
+</div>
+<div class="fusion-social-links-footer">
+<div class="fusion-social-networks">
+<a ng-if="ThemeSettings.theme_settings.facebook_link" class="fusion-social-network-icon fusion-tooltip fusion-facebook icon-facebook" style="color:#46494a;" href="{{ThemeSettings.theme_settings.facebook_link}}" target="_blank" data-placement="top" data-title="Facebook" data-toggle="tooltip"></a>
+
+<a ng-if="ThemeSettings.theme_settings.twitter_link" class="fusion-social-network-icon fusion-tooltip fusion-twitter icon-twitter" style="color:#46494a;" href="{{ThemeSettings.theme_settings.twitter_link}}" target="_blank" data-placement="top" data-title="Rss" data-toggle="tooltip"></a>
+
+
+<a ng-if="ThemeSettings.theme_settings.instagram_link" class="fusion-social-network-icon fusion-tooltip fusion-instagram icon-instagram" style="color:#46494a;" href="{{ThemeSettings.theme_settings.instagram_link}}" target="_blank" data-placement="top" data-title="Instagram" data-toggle="tooltip"></a>
+
+<a ng-if="ThemeSettings.theme_settings.pinterest_link" class="fusion-social-network-icon fusion-tooltip fusion-pinterest icon-pinterest" style="color:#46494a;" href="{{ThemeSettings.theme_settings.pinterest_link}}" target="_blank" data-placement="top" data-title="Pinterest" data-toggle="tooltip"></a>
+
+
+
+</div>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</div>
+
+ <script type="text/javascript" src="<%= BaseUrl %>js/customjs/a.js"></script>
+<script type="text/javascript" src="<%= BaseUrl %>js/customjs/b.js"></script>
+<script type="text/javascript" src="<%= BaseUrl %>js/customjs/c.js"></script>
+<script type="text/javascript" src="<%= BaseUrl %>js/customjs/d.js"></script>
+<script type="text/javascript" src="<%= BaseUrl %>js/customjs/e.js"></script>
+<script type="text/javascript" src="<%= BaseUrl %>js/customjs/avada.js"></script>
+ <script type="text/javascript" src="/themes/darson/active/base/js/customjs/f.js"></script>
+
+
+</body>
+</html>
+

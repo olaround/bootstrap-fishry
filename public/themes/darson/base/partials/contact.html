@@ -1,0 +1,206 @@
+<style type="text/css">
+  .input-website.select_box{
+border: 1px solid #d2d2d2;
+width: 33%;
+font-size: 13px;
+color: #747474;
+-webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
+-moz-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
+box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
+padding: 8px 2%;
+float: left;
+margin-right: 1%;    
+}
+
+</style>
+
+<div>
+  <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.ca/maps?hl=en&amp;client=safari&amp;q=Darson+Industries,+GT Rd,+Wazirabaad+Punjab+Pakistan&amp;ie=UTF8&amp;hq=&amp;hnear=33+Victoria+St,+Toronto,+Ontario+M5C+3A1&amp;gl=ca&amp;t=m&amp;ll=32.425063,74.117705&amp;spn=0.696882,2.526855&amp;z=9&amp;iwloc=A&amp;output=embed"></iframe>
+</div>
+  <!-- <div class="fusion-one-half one_half fusion-column last"><div class="fusion-alert alert success alert-dismissable alert-success alert-shadow"> <button type="button" class="close toggle-alert" data-dismiss="alert" aria-hidden="true">×</button> <span class="alert-icon"><i class="fa fa-lg fa-check-circle"></i></span>Message Box Shortcodes</div></div> -->
+
+      <div id="main" class="clearfix " style="">
+        <div class="avada-row" style="">
+          <div id="content" style="float:left;">
+        
+            <div id="post-86" class="post-86 page type-page status-publish hentry">
+              <div class="post-content">
+                <div class="fusion-title title">
+                  <h2 class="title-heading-left">
+                    We&#8217;d Love to Hear From You, Lets Get In Touch!
+                  </h2>
+                  <div class="title-sep-container">
+                    <div class="title-sep sep-double">
+                    </div>
+                  </div>
+                </div>
+             
+              <div class="fusion-sep-clear">
+              </div>
+              <div class="fusion-separator sep-none" style="border-color:#e0dede;margin-top:7px;margin-bottom:7px;">
+              </div>
+            </div>
+            <form role="form" ng-submit="sendaskDoctorEmail()" class="std titled_box">
+              <div id="comment-input">
+                <input ng-model="askDoctor.FirstName" ng-value="askDoctor.FirstName" type="text" name="contact_name" id="author" value="" placeholder="Name (required)" size="22" class="input-name" required>
+                <input ng-model="askDoctor.Email" ng-value="askDoctor.Email" type="email" name="email" id="email" value="" placeholder="Email (required)" size="22"  class="input-email" required>
+                <input ng-model="askDoctor.Phone" ng-value="askDoctor.Phone" type="tel" name="url" id="url" value="" placeholder="Phone(required)" size="22"  class="input-website" required>
+               
+              </div>
+              <div id="comment-input">
+                 <select class="input-website select_box" required ng-model="askDoctor.Country" ng-value="askDoctor.Country">
+                  <option value="">Select Country</option>
+                  <option value="Pakistan">Pakistan</option>
+                </select>
+                 <select class="input-website select_box" required ng-model="askDoctor.Department" ng-value="askDoctor.Department">
+                  <option value="">Select Department</option>
+                  <option value="Sales">Sales</option>
+                  <option value="Export">Export</option>
+                  <option value="Development">Development</option>
+                  <option value="Quality Assurance">Quality Assurance</option>
+                </select>
+              </div>
+              <div id="comment-textarea">
+                <textarea ng-model="askDoctor.height" ng-value="askDoctor.height" name="msg" id="comment" cols="39" rows="4"  class="textarea-comment" placeholder="Message" required>
+                </textarea>
+              </div>
+              <div id="comment-submit-container">
+                <p>
+                  <div>
+                    <input type="submit" name="submit" id="submit" value="Submit" tabindex="5" value="Submit Form" class="comment-submit btn btn-default button default small fusion-button button-small button-default button-round button-flat">
+                </div>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="sidebar" style="float:right;">
+        <div ng-if="ThemeSettings.theme_settings.facebook_link || ThemeSettings.theme_settings.twitter_link || ThemeSettings.theme_settings.pinterest_link || ThemeSettings.theme_settings.tumblr_link || ThemeSettings.theme_settings.google_link" id="social_links-widget-3" class="widget social_links">
+          <div class="heading">
+            <h3>
+              Keep In Touch!
+            </h3>
+          </div>
+          <ul class="fusion-social-networks">
+            
+            <a ng-if="ThemeSettings.theme_settings.facebook_link" class="fusion-social-network-icon fusion-tooltip fusion-facebook icon-facebook" href="{{ThemeSettings.theme_settings.facebook_link}}" data-placement="top" data-title="Facebook" data-toggle="tooltip" data-original-title="" title=""  target="_blank" style="color:#fff;background-color:#000;border-color:#000;padding:10px;border-radius:4px;">
+            </a>
+            
+           
+            
+            <a ng-if="ThemeSettings.theme_settings.twitter_link" class="fusion-social-network-icon fusion-tooltip fusion-twitter icon-twitter" href="{{ThemeSettings.theme_settings.twitter_link}}" data-placement="top" data-title="Twitter" data-toggle="tooltip" data-original-title="" title=""  target="_blank" style="color:#fff;background-color:#000;border-color:#000;padding:10px;border-radius:4px;">
+            </a>
+            
+            
+            
+           
+            <a ng-if="ThemeSettings.theme_settings.pinterest_link" class="fusion-social-network-icon fusion-tooltip fusion-pinterest icon-pinterest" href="{{ThemeSettings.theme_settings.pinterest_link}}" data-placement="top" data-title="Pinterest" data-toggle="tooltip" data-original-title="" title=""  target="_blank" style="color:#fff;background-color:#000;border-color:#000;padding:10px;border-radius:4px;">
+            </a>
+            
+            <a ng-if="ThemeSettings.theme_settings.tumblr_link" class="fusion-social-network-icon fusion-tooltip fusion-tumblr icon-tumblr" href="{{ThemeSettings.theme_settings.tumblr_link}}" data-placement="top" data-title="Tumblr" data-toggle="tooltip" data-original-title="" title=""  target="_blank" style="color:#fff;background-color:#000;border-color:#000;padding:10px;border-radius:4px;">
+            </a>
+            
+            <a ng-if="ThemeSettings.theme_settings.google_link" class="fusion-social-network-icon fusion-tooltip fusion-googleplus icon-googleplus" href="{{ThemeSettings.theme_settings.google_link}}" data-placement="top" data-title="Google+" data-toggle="tooltip" data-original-title="" title=""  target="_blank" style="color:#fff;background-color:#000;border-color:#000;padding:10px;border-radius:4px;">
+            </a>
+            
+           
+            
+            
+            
+           
+           
+          </ul>
+        </div>
+        <div id="contact_info-widget-3" class="widget contact_info" ng-if="SettingGeneral">
+          <div class="heading">
+            <h3>
+              Contact Info
+            </h3>
+          </div>
+          <div class="contact-info-container">
+            <p ng-if="SettingGeneral.name || SettingGeneral.address1" class="address" class="address">
+              {{SettingGeneral.name}} , {{SettingGeneral.address1}}
+              <br>
+              {{SettingGeneral.city}} , {{SettingGeneral.country}}
+            </p>
+            <p ng-if="SettingGeneral.phone" class="phone">
+              Phone: {{SettingGeneral.phone}}
+            </p>
+            <p ng-if="SettingGeneral.contactEmail" class="email">
+              Email: 
+              <a href="http://www.cloudflare.com/email-protection#dcafa9acacb3aea89ca8b4b9b1b9f1baa9afb5b3b2f2bfb3b1">
+                <span class="__cf_email__" data-cfemail="097a7c7979667b7d497d616c646c246f7c7a606667276a6664">
+                  {{SettingGeneral.contactEmail}}
+                </span>
+                
+              </a>
+            </p>
+            <p class="web">
+              Web: 
+              <a href="http://theme-fusion.com">
+                darson.fishry.com
+              </a>
+            </p>
+          </div>
+        </div>
+        <div id="text-13" class="widget widget_text">
+          <div class="textwidget">
+            <div class="accordian fusion-accordian">
+              <div class="panel-group" id="accordion-1">
+                <div class="fusion-panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title toggle">
+                      <a data-toggle="collapse" data-parent="#accordion-1" data-target="#8e74e7178ec1f94c8" >
+                        <i class="fa-fusion-box">
+                        </i>
+                        Our Company Mission
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="8e74e7178ec1f94c8" class="panel-collapse collapse ">
+                    <div class="panel-body toggle-content">
+                      Fugiat dapibus, tellus ac cursus commodo, mauris sit condim eser ntumsi nibh, uum a justo vitaes amet risus amets un. Posi sectetut amet fermntum orem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia nons.
+                    </div>
+                  </div>
+                </div>
+                <div class="fusion-panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title toggle">
+                      <a data-toggle="collapse" data-parent="#accordion-1" data-target="#8d796abdf942e9d1e" >
+                        <i class="fa-fusion-box">
+                        </i>
+                        Our Company Vision
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="8d796abdf942e9d1e" class="panel-collapse collapse ">
+                    <div class="panel-body toggle-content">
+                      Fugiat dapibus, tellus ac cursus commodo, mauris sit condim eser ntumsi nibh, uum a justo vitaes amet risus amets un. Posi sectetut amet fermntum orem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia nons.
+                    </div>
+                  </div>
+                </div>
+                <div class="fusion-panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title toggle">
+                      <a data-toggle="collapse" data-parent="#accordion-1" data-target="#291bbe60d087874cf">
+                        <i class="fa-fusion-box">
+                        </i>
+                        Our Promise
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="291bbe60d087874cf" class="panel-collapse collapse ">
+                    <div class="panel-body toggle-content">
+                      Fugiat dapibus, tellus ac cursus commodo, mauris sit condim eser ntumsi nibh, uum a justo vitaes amet risus amets un. Posi sectetut amet fermntum orem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia nons.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  

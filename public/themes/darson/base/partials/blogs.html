@@ -1,0 +1,175 @@
+<div id="sliders-container">
+</div>
+<div class="page-title-container">
+  <div class="page-title">
+    <div class="page-title-wrapper">
+      <div class="page-title-captions">
+        <h1 class="entry-title">
+        Grid Full Width
+        </h1>
+      </div>
+      <ul class="breadcrumbs">
+        <li>
+          
+          <a href="http://theme-fusion.com/avada">
+            Home
+          </a>
+        </li>
+        <li>
+          Grid Full Width
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div id="main" class="clearfix " style="">
+  <div class="avada-row" style="">
+    <div id="content" class="full-width">
+      <div id="post-5761" class="post-5761 page type-page status-publish hentry">
+
+        <div class="post-content" >
+          <div class="fusion-blog-shortcode fusion-blog-grid fusion-blog-infinite">
+            <div  class="fusion-posts-container posts-container-infinite grid-layout grid-layout-3 isotope" style="position: relative; overflow: hidden; height: auto;">
+          
+              <div ng-repeat="products in ListProduct | CustomFilter:{collection:'Blogs'}"  class="post-213 post type-post status-publish format-gallery has-post-thumbnail hentry category-image category-photography category-wordpress tag-video blog-grid col-lg-4 col-md-4 col-sm-4 isotope-item" style="position: absolute; width: 283.3333333333333px; left: 0px; top: 0px;">
+                <div class="post-content-wrapper">
+                  <div class="fusion-flexslider flexslider post-slideshow">
+                    <ul class="slides">
+                      <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 1; opacity: 0;">
+                        <div class="image" aria-haspopup="true">
+                          
+                          <img width="880" height="587" src="{{products.productImage[0].Image}}" class="attachment-full wp-post-image" alt="blog_opt_6" draggable="false">
+                          
+                        </div>
+                      </li>
+                      <li style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 2; opacity: 1;" class="flex-active-slide">
+                        <div class="image">
+                          
+                          <a href="http://theme-fusion.com/avada/praesent-et-urna-turpis-sadips/">
+                            <img src="{{products.productImage[1].Image}}" alt="" draggable="false">
+                          </a>
+                          
+                          
+                        </div>
+                      </li>
+                    </ul>
+                   <!--  <ol class="flex-control-nav flex-control-paging">
+                      <li>
+                        <a class="">
+                          1
+                        </a>
+                      </li>
+                      <li>
+                        <a class="flex-active">
+                          2
+                        </a>
+                      </li>
+                    </ol> -->
+                    <!-- <ul class="flex-direction-nav">
+                      <li>
+                        <a class="flex-prev" href="#">
+                          
+                        </a>
+                      </li>
+                      <li>
+                        <a class="flex-next" href="#">
+                          
+                        </a>
+                      </li>
+                    </ul> -->
+                  </div>
+                  <div class="post-content-container">
+                    <h2 class="entry-title">
+                    <a href="http://theme-fusion.com/avada/praesent-et-urna-turpis-sadips/">
+                     {{products.productName}}
+                    </a>
+                    </h2>
+                    <!-- <div class="entry-meta-single">
+                      <p class="entry-meta-details">
+                      <span class="entry-author fn">
+                      By
+                      <a href="http://theme-fusion.com/avada/author/admin/">
+                        admin
+                      </a>
+                      </span>
+                      <span class="meta-separator">
+                      |
+                      </span>
+                      <span class="entry-time">
+                      <span class="updated" style="display:none;">
+                      2014-01-23T13:08:18+00:00
+                      </span>
+                      <time class="published">
+                      May 23rd, 2013
+                      </time>
+                      </span>
+                      <span class="meta-separator">
+                      |
+                      </span>
+                      </p>
+                    </div> -->
+                    <div class="content-sep">
+                    </div>
+                    <div class="excerpt-container strip-html">
+                      <p ng-bind-html="products.productDescription | cut:true:300:'...'">
+                     
+                      </p>
+                    </div>
+                    <p class="entry-read-more">
+                    <a href="http://theme-fusion.com/avada/praesent-et-urna-turpis-sadips/">
+                      Read More
+                    </a>
+                    </p>
+                   
+                    <div class="fusion-clearfix">
+                    </div>
+                  </div>
+                  <div class="fusion-clearfix">
+                  </div>
+                </div>
+              </div>
+           
+              
+              
+              
+              
+              
+              <div class="fusion-clearfix">
+              </div>
+              
+              
+              
+              
+              
+              
+              
+            </div>
+            <div class="pagination clearfix" style="display: none;">
+              <span class="current">
+              1
+              </span>
+              <a href="http://theme-fusion.com/avada/blog-grid-full-width/page/2/" class="inactive">
+                2
+              </a>
+              <a href="http://theme-fusion.com/avada/blog-grid-full-width/page/3/" class="inactive">
+                3
+              </a>
+              <a class="pagination-next" href="http://theme-fusion.com/avada/blog-grid-full-width/page/2/">
+                Next
+                <span class="page-next">
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+         <!--  <div class="content" >
+                                    <ul class="genericList border" ng-repeat="products in ListProduct | CustomFilter:{collection:'Blogs'}" itemscope itemtype="http://schema.org/Product" >
+                                        <li><a href="collections/hot-deals" itemprop="name">{{products.productName}}</a>
+                                        </li>
+                                    </ul>
+                                </div> -->
+      </div>
+    </div>
+  </div>
+</div>

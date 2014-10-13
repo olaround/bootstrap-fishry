@@ -1,0 +1,254 @@
+<div ng-if="routeParam != 'shows'">
+<div class="page-title-container">
+            <div class="page-title">
+              <div class="page-title-wrapper">
+                <div class="page-title-captions">
+                  <h1 class="entry-title" ng-repeat="collection in ListCollection  | filter:{collectionName:SearchCollection}">
+                   <span  ng-if="routeParam == collection.collectionUrl || routeParam == 'all' || !routeParam">{{collection.collectionName}}</span>
+                  </h1>
+                </div>
+                <ul class="breadcrumbs">
+                  <li>
+                    <a class="home" href="/">
+                      Home
+                    </a>
+                  </li>
+                  <li ng-repeat="links in locationParam" ng-show="links">
+                <a href="" ng-if="$index==0">
+                 {{links}}
+                </a>
+                <a href="" ng-if="$index==1">
+                 {{links}}
+                </a>
+                <a href="" ng-if="$index==2">
+                  {{links}}
+                </a>
+                <a href="" ng-if="$index==3">
+                  {{links}}
+                </a>
+              </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div>
+    <br/>
+   <!--  <div class="select_join" style="margin-left:15px"><select name="txtCountry">
+          <option>-- Select Country --</option>
+        <option value="1">Georgia</option>
+          <option value="2">Afghanistan</option>
+        </select></div>
+</div> -->
+          <div id="main" class="clearfix " style="" ng-init="InitCollection()">
+            <div class="avada-row" style="" ng-init="init()">
+              <div class="woocommerce-container">
+                <div id="content" style="width:100%">
+                  <div class="catalog-ordering clearfix">
+                    <div class="orderby-order-container">
+                      <div class="select_join">
+                      <select ng-model="SearchTypeSearch" name="txtCountry">
+                      <option value="">Sort By Type</option>
+                        <option ng-repeat="Types in ListProductType" value="{{Types.productTypeName}}">{{Types.productTypeName}}</option>
+                        
+                      </select></div>
+
+                      <div class="select_join">
+                      <select  ng-model="SearchVendorsearch">
+                      <option value="">Sort By Vehicle</option>
+                          <option   ng-repeat="vendors in ListProductVendor" value="{{vendors.productVendorName}}">{{vendors.productVendorName}} ({{hasBrandInCollection(vendors.id)}})</option>
+                        
+                      </select>
+
+
+                      
+                      </div>
+                      
+                    </div>
+
+                    </div>
+                  </div>
+
+                 
+                  <div ng-repeat="collection in ListCollection  | filter:{collectionName:SearchCollection}" >
+                  <ul class="products clearfix products-4" ng-if="routeParam == collection.collectionUrl">
+                 
+                    <li ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} |  filter:{productName:SearchTitleSearch} | filter:{ProductVendorName:SearchVendorsearch} | filter:{ProductTypeName:SearchTypeSearch} | filter:{productTags:SearchTagsSearch} | returnTotals:products | startFrom:startFromPage | limitTo:pageLimit " class="post-6023 product type-product status-publish has-post-thumbnail shipping-taxable purchasable product-type-simple product-cat-accessories product-cat-books product-cat-travel product-tag-books-2 product-tag-coffee-table product-tag-reading product-tag-travel instock">
+                      
+                      <a href="/product/{{products.productUrl}}" class="product-images">
+                        <span class="crossfade-images">
+                          <img width="500" height="638" src="{{products.productImage[1].Image}}" class="hover-image" sf_validated="1">
+                          <img ng-if="products.productImage[0].Image" width="500" height="638" src="{{products.productImage[0].Image}}" class="attachment-shop_catalog wp-post-image"  sf_validated="1">
+                          <img ng-if="!products.productImage[0].Image" width="500" height="638" src="{{BaseUrl}}img/theme/placeholder.png" class="attachment-shop_catalog wp-post-image"  sf_validated="1" style="height: 301px;">
+                          <span class="cart-loading">
+                            <i class="icon-spinner">
+                            </i>
+                          </span>
+                        </span>
+                        
+                      </a>
+                      <div class="product-details">
+                        <div class="product-details-container">
+                          <h3 class="product-title">
+                            <a href="/product/{{products.productUrl}}">
+                              {{products.productName}}
+                            </a>
+                          </h3>
+                          
+                        </div>
+                      </div>
+                      <div class="product-buttons">
+                        <div class="product-buttons-container clearfix">
+                          
+                          <a href="/product/{{products.productUrl}}" class="show_details_button">
+                            Details
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                   
+                  </ul>
+
+
+                  </div>
+                  
+            
+                  <div class="clearfix">
+                        <ul class="pagination ng-isolate-scope ng-pristine ng-valid">
+                            <li>
+                                <a href="javascript:void(0)" ng-hide="!startFromPage" ng-click="selectPage('p')" class="ng-binding">
+                                    <i class="glyphicon glyphicon-chevron-left" style="padding-top: 12px;padding-bottom: 13px;">Previous</i>
+                                </a>
+                            </li>
+
+                            <li ng-repeat="page in pagesCounts()" ng-class="{active:returnStateActive(page-1)}">
+                                <a href="javascript:void(0)" ng-click="selectPage(page-1)" class="ng-binding">{{page}}</a>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)" ng-hide="currentPage == expectedPages" ng-click="selectPage('n')" class="ng-binding">
+                                    <i class="glyphicon glyphicon-chevron-right" style="padding-top: 12px;padding-bottom: 13px;">Next</i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+</div>
+
+
+
+<div ng-if="routeParam == 'shows'">
+  <div class="page-title-container">
+            <div class="page-title">
+              <div class="page-title-wrapper">
+                <div class="page-title-captions">
+                  <h1 class="entry-title" ng-repeat="collection in ListCollection  | filter:{collectionName:SearchCollection}">
+                   <span  ng-if="routeParam == collection.collectionUrl || routeParam == 'all' || !routeParam">{{collection.collectionName}}</span>
+                  </h1>
+                </div>
+                <ul class="breadcrumbs">
+                  <li>
+                    <a class="home" href="/">
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                <a href="" >
+                 Shows
+                </a>
+                
+              </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div>
+    <br/>
+   <!--  <div class="select_join" style="margin-left:15px"><select name="txtCountry">
+          <option>-- Select Country --</option>
+        <option value="1">Georgia</option>
+          <option value="2">Afghanistan</option>
+        </select></div>
+</div> -->
+          <div id="main" class="clearfix " style="" ng-init="InitCollection()">
+            <div class="avada-row" style="" ng-init="init()">
+              <div class="woocommerce-container">
+               
+
+                 
+                  <div ng-repeat="collection in ListCollection  | filter:{collectionName:SearchCollection}" >
+                  <ul class="products clearfix products-4" ng-if="routeParam == collection.collectionUrl || routeParam == 'all' || !routeParam">
+                 
+                    <li ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} |  filter:{productName:SearchTitleSearch}  | filter:SearchVendorsearchReturn | filter:{ProductTypeName:SearchTypeSearch}  | returnTotals:products | startFrom:startFromPage | limitTo:pageLimit" class="post-6023 product type-product status-publish has-post-thumbnail shipping-taxable purchasable product-type-simple product-cat-accessories product-cat-books product-cat-travel product-tag-books-2 product-tag-coffee-table product-tag-reading product-tag-travel instock">
+                      
+                      <a href="/product/{{products.productUrl}}" class="product-images">
+                        <span class="crossfade-images">
+                          <img width="500" height="638" src="{{products.productImage[1].Image}}" class="hover-image" sf_validated="1">
+                          <img ng-if="products.productImage[0].Image" width="500" height="638" src="{{products.productImage[0].Image}}" class="attachment-shop_catalog wp-post-image"  sf_validated="1">
+                          <img ng-if="!products.productImage[0].Image" width="500" height="638" src="{{BaseUrl}}img/theme/placeholder.png" class="attachment-shop_catalog wp-post-image"  sf_validated="1" style="height: 301px;">
+                          <span class="cart-loading">
+                            <i class="icon-spinner">
+                            </i>
+                          </span>
+                        </span>
+                        
+                      </a>
+                      <div class="product-details">
+                        <div class="product-details-container">
+                          <h3 class="product-title">
+                            <a href="/product/{{products.productUrl}}">
+                              {{products.productName}}
+                            </a>
+                          </h3>
+                          
+                        </div>
+                      </div>
+                      <div class="product-buttons">
+                        <div class="product-buttons-container clearfix">
+                        <p ng-bind-html="products.productDescription | cut:true:300:'...'">
+                     
+                      </p>
+                          
+                          <a href="/product/{{products.productUrl}}" class="show_details_button">
+                           Read More
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                   
+                  </ul>
+
+
+                  </div>
+                  
+            
+                  <div class="clearfix">
+                        <ul class="pagination ng-isolate-scope ng-pristine ng-valid">
+                            <li>
+                                <a href="javascript:void(0)" ng-hide="!startFromPage" ng-click="selectPage('p')" class="ng-binding">
+                                    <i class="glyphicon glyphicon-chevron-left" style="padding-top: 12px;padding-bottom: 13px;">Previous</i>
+                                </a>
+                            </li>
+
+                            <li ng-repeat="page in pagesCounts()" ng-class="{active:returnStateActive(page-1)}">
+                                <a href="javascript:void(0)" ng-click="selectPage(page-1)" class="ng-binding">{{page}}</a>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)" ng-hide="currentPage == expectedPages" ng-click="selectPage('n')" class="ng-binding">
+                                    <i class="glyphicon glyphicon-chevron-right" style="padding-top: 12px;padding-bottom: 13px;">Next</i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+</div>
+
+          

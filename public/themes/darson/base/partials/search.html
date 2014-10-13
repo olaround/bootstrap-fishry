@@ -1,0 +1,162 @@
+<div id="sliders-container"></div>
+<div class="page-title-container"><div class="page-title"><div class="page-title-wrapper"><div class="page-title-captions"><h1 class="entry-title">Search results for: {{SearchTitleSearch}}</h1></div><ul class="breadcrumbs"><li> <a href="http://theme-fusion.com/avada">Home</a></li><li>Search</li></ul></div></div></div>
+
+<div id="main" class="clearfix " style="" ng-init="init()">
+  <div class="avada-row" style="">
+    <div id="content" class="" style="float:left;">
+      <div class="search-page-search-form">
+        <h2>Need a new search?</h2>
+        <p>If you didn't find what you were looking for, try a new search!</p>
+        <form ng-submit="$location.path('/search')" id="searchform" class="seach-form" role="search" method="get">
+          <div class="search-table">
+            <div class="search-field">
+              <input placeholder="Search..." ng-model="SearchTitleSearch" type="text"  id="s" placeholder="Search ...">
+            </div>
+            <div class="search-button">
+              <input type="submit" id="searchsubmit" value="">
+            </div>
+          </div>
+        </form>
+      </div>
+
+
+
+<h3 ng-if="!(ListProduct| filter:{productName:SearchTitleSearch}).length">Your search - ({{SearchTitleSearch}}) - did not match any documents.</h3>
+  
+
+
+      <div>
+      <ul class="products clearfix products-4">
+
+        <li  ng-repeat="products in ListProduct | CustomFilter:{collection:collection.collectionName} |  filter:{productName:SearchTitleSearch} | filter:{ProductVendorName:SearchVendorsearch} | filter:{ProductTypeName:SearchTypeSearch} | filter:{productTags:SearchTagsSearch} | returnTotals:products | startFrom:startFromPage | limitTo:pageLimit " class="post-6023 product type-product status-publish has-post-thumbnail shipping-taxable purchasable product-type-simple product-cat-accessories product-cat-books product-cat-travel product-tag-books-2 product-tag-coffee-table product-tag-reading product-tag-travel instock">
+        
+
+         <a href="/product/{{products.productUrl}}" class="product-images">
+                        <span class="crossfade-images">
+                          <img width="500" height="638" src="{{products.productImage[0].Image}}" class="hover-image" alt="product_4c" sf_validated="1">
+                          <img width="500" height="638" src="{{products.productImage[1].Image}}" class="attachment-shop_catalog wp-post-image" alt="product_4b" sf_validated="1">
+                          <span class="cart-loading">
+                            <i class="icon-spinner">
+                            </i>
+                          </span>
+                        </span>
+                        
+                      </a>
+                      <div class="product-details">
+                        <div class="product-details-container">
+                          <h3 class="product-title">
+                            <a href="http://theme-fusion.com/avada/product/clarks-in-jamaica-2/">
+                              {{products.productName}}
+                            </a>
+                          </h3>
+                          <div class="clearfix">
+                            <span class="price">
+                              <span class="amount">
+                                £ {{products.productPrice}}
+                              </span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-buttons">
+                        <div class="product-buttons-container clearfix">
+                          
+                          <a href="http://theme-fusion.com/avada/product/clarks-in-jamaica-2/" class="show_details_button">
+                            Details
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                   
+        
+      </ul>
+      </div>
+      <div class="clearfix">
+                        <ul class="pagination ng-isolate-scope ng-pristine ng-valid">
+                            <li>
+                                <a href="javascript:void(0)" ng-hide="!startFromPage" ng-click="selectPage('p')" class="ng-binding">
+                                    <i class="glyphicon glyphicon-chevron-left" style="padding-top: 12px;padding-bottom: 13px;">Previous</i>
+                                </a>
+                            </li>
+
+                            <li ng-repeat="page in pagesCounts()" ng-class="{active:returnStateActive(page-1)}">
+                                <a href="javascript:void(0)" ng-click="selectPage(page-1)" class="ng-binding">{{page}}</a>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)" ng-hide="currentPage == expectedPages" ng-click="selectPage('n')" class="ng-binding">
+                                    <i class="glyphicon glyphicon-chevron-right" style="padding-top: 12px;padding-bottom: 13px;">Next</i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+    </div>
+
+    <div id="sidebar" style="float:right;">
+
+      <div id="categories-3" class="widget widget_categories">
+        <div class="heading">
+          <h3>Main Menu</h3>
+        </div>
+        <ul class="navigation menu fusion-navbar-nav" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
+          <li ng-repeat="Nav in Navigation.link_list"  ng-show="Nav.optionSelected == 'frontpage'" class="cat-item cat-item-84"><a href="/" title="View all posts filed under Creative">{{Nav.name}}</a>
+          </li>
+          <li  ng-repeat="Nav in Navigation.link_list"  ng-show="Nav.commaSeprated" class="cat-item cat-item-84"><a href="{{Nav.commaSeprated}}" title="View all posts filed under Creative">{{Nav.name}}</a>
+          </li>
+          <li ng-repeat="Nav in Navigation.link_list"   ng-show="Nav.http" class="cat-item cat-item-84"><a href="{{Nav.http}}" title="View all posts filed under Creative">{{Nav.name}}</a>
+          </li>
+         
+        </ul>
+      </div>
+
+
+    
+      <div id="text-4" class="widget widget_text">
+        <div class="textwidget">
+          <div class="accordian fusion-accordian">
+            <div class="panel-group" id="accordion-1">
+              <div class="fusion-panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title toggle"><a data-toggle="collapse" data-parent="#accordion-1" data-target="#8e74e7178ec1f94c8"><i class="fa-fusion-box"></i>Our Company Mission</a></h4>
+                </div>
+                <div id="8e74e7178ec1f94c8" class="panel-collapse collapse ">
+                  <div class="panel-body toggle-content">Fugiat dapibus, tellus ac cursus commodo, mauris sit condim eser ntumsi nibh, uum a justo vitaes amet risus amets un. Posi sectetut amet fermntum orem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia nons.</div>
+                </div>
+              </div>
+              <div class="fusion-panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title toggle"><a data-toggle="collapse" data-parent="#accordion-1" data-target="#8d796abdf942e9d1e"><i class="fa-fusion-box"></i>Our Company Vision</a></h4>
+                </div>
+                <div id="8d796abdf942e9d1e" class="panel-collapse collapse ">
+                  <div class="panel-body toggle-content">Fugiat dapibus, tellus ac cursus commodo, mauris sit condim eser ntumsi nibh, uum a justo vitaes amet risus amets un. Posi sectetut amet fermntum orem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia nons.</div>
+                </div>
+              </div>
+              <div class="fusion-panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title toggle"><a data-toggle="collapse" data-parent="#accordion-1" data-target="#291bbe60d087874cf" ><i class="fa-fusion-box"></i>Our Promise</a></h4>
+                </div>
+                <div id="291bbe60d087874cf" class="panel-collapse collapse ">
+                  <div class="panel-body toggle-content">Fugiat dapibus, tellus ac cursus commodo, mauris sit condim eser ntumsi nibh, uum a justo vitaes amet risus amets un. Posi sectetut amet fermntum orem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia nons.</div>
+                </div>
+              </div>
+              <div class="fusion-panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title toggle"><a data-toggle="collapse" data-parent="#accordion-1" data-target="#2152a4046863f23f7"><i class="fa-fusion-box"></i>We Can Deliver On Projects</a></h4>
+                </div>
+                <div id="2152a4046863f23f7" class="panel-collapse collapse ">
+                  <div class="panel-body toggle-content">Fugiat dapibus, tellus ac cursus commodo, mauris sit condim eser ntumsi nibh, uum a justo vitaes amet risus amets un. Posi sectetut amet fermntum orem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia nons.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      
+    </div>
+  </div>
+</div>

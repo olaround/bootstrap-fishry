@@ -1,0 +1,86 @@
+<div id="page">
+    <!-- BREADCRUMBS -->
+    <section ng-if="!ThemeSettings.theme_settings.slide_collection_3_img" class="breadcrumb parallax margbot30"></section>
+    <section ng-if="ThemeSettings.theme_settings.slide_collection_3_img" class="breadcrumb parallax margbot30" style="background: url({{ThemeSettings.theme_settings.slide_collection_3_img}}) no-repeat;background-size:cover;"></section>
+    <!-- //BREADCRUMBS -->
+    <!-- TOVAR DETAILS -->
+    <section class="tovar_details padbot70">
+        <!-- CONTAINER -->
+        <div class="container">
+            <!-- ROW -->
+            <div class="row">
+                <!-- SIDEBAR TOVAR DETAILS -->
+                <div id="sidebar" class="col-lg-3 col-md-3 col-sm-3 padbot50">
+
+
+                    <div class="sidepanel widget_categories">
+
+                        <h3>My Account </h3>
+                        <ul class="clearfix">
+                            <li><B>{{Customer.FirstName}} {{Customer.LastName}}</B></li>
+                            <li>{{Customer.Email}}</li>
+                            <li>Phone: {{Customer.Phone}}</li>
+                            <li>Address: {{Customer.Address}} {{Customer.AddressContinue}}</li>
+                            <li>Postal Code: {{Customer.PostCode}}</li>
+                            <li>City: {{Customer.City}}</li>
+                            <li>Country: {{Customer.Country}}</li>
+                            <li ng-controller="ModalDemoCtrl"><a ng-click="open('lg');" style="color:rgb(207, 25, 25); cursor:pointer;font-weight:bold;">Edit Account</a></li>
+                            <li><a href="/reset_password" style="color:rgb(207, 25, 25); cursor:pointer;font-weight:bold;">Change Password</a></li>
+                            <li ng-if="User.info.CustomerEmail && !User.info.GuestAuth"><a  href="javascript:void(0)" ng-click="Logout()" style="color:rgb(207, 25, 25); cursor:pointer;font-weight:bold;">Log out</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- //SIDEBAR TOVAR DETAILS -->
+                <!-- TOVAR DETAILS WRAPPER -->
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 tovar_details_wrapper clearfix"  ng-init="LoadOrders();">
+                    <div class="tovar_details_header clearfix margbot35" style="margin-bottom: 5px !important;">
+                        <h3><b>Orders</b></h3>
+                    </div>    
+                    
+                    <div ng-show="!Orders.length" style="padding-top: 24px;">
+                        <h4 class="center">You Haven't placed any orders yet.</h4>
+                        <h4 class="center">Once you place an order you will be able to see its history and status on this page.</h4>
+                    </div>
+
+                    <div class="table-responsive table-border">
+                        <table class="table" ng-show="Orders.length" style="font-size:12px;">
+                            <thead>
+                                <tr class="active">
+                                    <th>#</th>
+                                    <th>Order ID</th>
+                                    <th>Total</th>
+                                    <th>Payment Method</th>
+                                    <th>Status</th>
+
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="(keyMain,Itemss) in Orders track by $index">
+                                <tr class="info">
+                                    <td>{{$index}}</td>
+                                    <td>{{Itemss.id}}</td>
+                                    <td ng-model="ItemssTotal">{{SettingGeneral.settings.currencies_format}}. {{Itemss.orderTotal}}</td>
+                                    <td>{{Itemss.paymentInfo}}</td>
+                                    <td><div ng-hide="Itemss.paymentStatus">
+                                        <span ng-show="Itemss.payment">Fullfilled</span>
+                                        <span ng-hide="Itemss.payment">Not Fullfilled</span>
+                                    </div>
+                                    <div ng-show="Itemss.paymentStatus">
+                                        <span>Canceled</span>
+                                    </div></td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- //TOVAR DETAILS WRAPPER -->
+            </div>
+            <!-- //ROW -->
+        </div>
+        <!-- //CONTAINER -->
+    </section>
+    <!-- //TOVAR DETAILS -->
+
+
+</div>
+
+

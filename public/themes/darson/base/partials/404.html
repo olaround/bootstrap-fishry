@@ -1,0 +1,65 @@
+<div id="sliders-container"></div>
+<div class="page-title-container">
+    <div class="page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-captions">
+                <h1 class="entry-title">Error 404 Page</h1>
+            </div>
+            <ul class="breadcrumbs">
+                <li> <a href="http://theme-fusion.com/avada">Home</a>
+                </li>
+                <li>404 - Page not Found</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="main" class="clearfix " style="" ng-init="init()">
+    <div class="avada-row" style="">
+        <div id="content" class="full-width"> <span class="vcard" style="display: none;"><span class="fn"><a href="http://theme-fusion.com/avada/author/admin/" title="Posts by admin" rel="author">admin</a></span></span> <span class="updated" style="display:none;">2014-01-23T13:09:44+00:00</span>
+            <div id="post-404page">
+                <div class="post-content">
+                    <div class="fusion-title title">
+                        <h2 class="title-heading-left">Oops, This Page Could Not Be Found!</h2>
+                        <div class="title-sep-container">
+                            <div class="title-sep sep-double"></div>
+                        </div>
+                    </div>
+                    <div class="fusion-clearfix"></div>
+                    <div class="error_page">
+                        <div class="one_third">
+                            <div class="error-message">404</div>
+                        </div>
+                        <div class="one_third useful_links">
+                            <h3>Here are some useful links:</h3>
+                            <ul  ng-repeat="Navigation in ListNavigation | filter : 'main-menu'" id="checklist-1" class="error-menu list-icon list-icon-arrow circle-yes">
+                                <li ng-repeat="Nav in Navigation.link_list"  ng-show="Nav.optionSelected == 'frontpage'" id="menu-item-2841" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2841"><a href="/" style="padding-left: 20px;">{{Nav.name}}</a>
+                                </li>
+                                <li ng-repeat="Nav in Navigation.link_list"  ng-show="Nav.commaSeprated" id="menu-item-2841" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2841"><a href="{{Nav.commaSeprated}}" style="padding-left: 20px;">{{Nav.name}}</a>
+                                </li>
+                                 <li  ng-repeat="Nav in Navigation.link_list"   ng-show="Nav.http" id="menu-item-2841" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2841"><a href="{{Nav.commaSeprated}}" style="padding-left: 20px;">{{Nav.name}}</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div class="one_third last">
+                            <h3>Search Our Website</h3>
+                            <p>Can't find what you need? Take a moment and do a search below!</p>
+                            <div class="search-page-search-form" ng-controller="SearchCtrl">
+                                <form ng-submit="$location.path('/search')" role="search" id="searchform" method="get">
+                                    <div class="search-table">
+                                        <div class="search-field">
+                                            <input placeholder="Search..." ng-model="SearchTitleSearch" type="text" type="text" value="" name="s" id="s"/>
+                                        </div>
+                                        <div class="search-button">
+                                            <input type="submit" id="searchsubmit" value="&#xf002;"/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

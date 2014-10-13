@@ -1,0 +1,57 @@
+<div id="sliders-container">
+      </div>
+      <div class="page-title-container" ng-init="InitPage()">
+        <div class="page-title">
+          <div class="page-title-wrapper">
+            <div class="page-title-captions">
+              <h1 class="entry-title" ng-repeat="page in ListPage | CustomFilter:{pageUrl : routeParam}">
+                 {{page.pageName}} 
+              </h1>
+            </div>
+            <ul class="breadcrumbs">
+                  <li>
+                    <a class="home" href="/">
+                      Home
+                    </a>
+                  </li>
+                  <li ng-repeat="links in locationParam" ng-show="links">
+                <a href="" ng-if="$index==0">
+                 {{links}}
+                </a>
+                <a href="" ng-if="$index==1">
+                 {{links}}
+                </a>
+                <a href="" ng-if="$index==2">
+                  {{links}}
+                </a>
+                <a href="" ng-if="$index==3">
+                  {{links}}
+                </a>
+              </li>
+                </ul>
+          </div>
+        </div>
+      </div>
+      <div id="main" class="clearfix " style="" ng-init="InitPage()">
+        <div class="avada-row" style="" ng-repeat="page in ListPage | CustomFilter:{pageUrl : routeParam}">
+          <div id="content" class="full-width">
+            <div id="post-84" class="post-84 page type-page status-publish hentry">
+              
+
+              <div class="post-content">
+                <p>
+                  <img class="alignnone size-full wp-image-180" title="full_width" src="{{ThemeSettings.theme_settings.slide_8_img}}" alt="" width="940" height="305">
+                </p>
+                
+              
+                
+                
+                <p ng-bind-html="page.pageDescription">
+                  
+                </p>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
