@@ -128,10 +128,10 @@ $rootScope.timeCheck = function(){
 
   var tempCloseTime = $rootScope.ThemeSettings.theme_settings.store_close;
 
- if($rootScope.ThemeSettings.theme_settings.store_close < $rootScope.ThemeSettings.theme_settings.store_start) {
-  tempCloseTime = 24 + $rootScope.ThemeSettings.theme_settings.store_start;
+  if($rootScope.ThemeSettings.theme_settings.store_close < $rootScope.ThemeSettings.theme_settings.store_start) {
+    tempCloseTime = 24 + $rootScope.ThemeSettings.theme_settings.store_start;
 
-}
+  }
 
   if(currentTime >= parseInt($rootScope.ThemeSettings.theme_settings.store_start) && currentTime < parseInt(tempCloseTime)){
     $("#myModal1").hide();
@@ -139,19 +139,19 @@ $rootScope.timeCheck = function(){
 
 
   } else if (!$rootScope.ThemeSettings.theme_settings.enable_store_timings) {
-     $("#myModal1").hide();
-    $rootScope.SubmitOrder($rootScope.PaymentMethod,'/thankyou','clear');
+   $("#myModal1").hide();
+   $rootScope.SubmitOrder($rootScope.PaymentMethod,'/thankyou','clear');
 
-  }else {
-    $("#myModal1").show();
-    $rootScope.StartSubmitOrder = false;
-    
-    
-  }
+ }else {
+  $("#myModal1").show();
+  $rootScope.StartSubmitOrder = false;
+  
+  
+}
 
-  $("#close-popup").click(function(){
-    $("#myModal1").hide();
-  });
+$("#close-popup").click(function(){
+  $("#myModal1").hide();
+});
 
 } 
 
@@ -1097,51 +1097,53 @@ function ThankyouCtrl($scope,$location,$rootScope){
   $rootScope.myCart = function(){
 
 
-     var transaction = {
+   var transaction = {
            'id': $rootScope.OrderInfo.orderid,                // Transaction ID.
            'affiliation': "Domino's Pakistan",                // Affiliation or store name.
             'revenue': $rootScope.ReturnTotal(),              // Grand Total.
             'tax': $rootScope.ReturnTaxPrice()                // Tax.
-        };
+          };
 
-      console.log(transaction);
+          console.log(transaction);
 
-      ga('myTracker.ecommerce:addTransaction', transaction);
+          ga('myTracker.ecommerce:addTransaction', transaction);
 
 
-    $.each($rootScope.Cart, function(index,item){
-      if(item){
-        if(!item.productInfo){
-          $.each(item,function(indx,itm){
+          $.each($rootScope.Cart, function(index,item){
+            if(item){
+              if(!item.productInfo){
+                $.each(item,function(indx,itm){
 
-            $rootScope.fullCart = $rootScope.Cart[index][indx];
-            $rootScope.fullCartProductId = $rootScope.Cart[index][indx].productID;
-            $rootScope.fullCartProductName = $rootScope.Cart[index][indx].productInfo.productName;
-            $rootScope.fullCartProductPrice = $rootScope.Cart[index][indx].productInfo.productPrice;
-            $rootScope.fullCartProductQuantity = $rootScope.Cart[index][indx].productInfo.productQuantity;
-            $rootScope.fullCartProductSKU = $rootScope.Cart[index][indx].productInfo.productSKU;
+                  $rootScope.fullCart = $rootScope.Cart[index][indx];
+                  $rootScope.fullCartProductId = $rootScope.Cart[index][indx].productID;
+                  $rootScope.fullCartProductName = $rootScope.Cart[index][indx].productInfo.productName;
+                  $rootScope.fullCartProductPrice = $rootScope.Cart[index][indx].productInfo.productPrice;
+                  $rootScope.fullCartProductQuantity = $rootScope.Cart[index][indx].productInfo.productQuantity;
+                  $rootScope.fullCartProductSKU = $rootScope.Cart[index][indx].productInfo.productSKU;
 
             // $rootScope.$apply();
           })
-          // console.log($rootScope.fullCart.productInfo.productCollections);
+          //console.log($rootScope.fullCart);
+          //console.log($rootScope.fullCart.productInfo.productCollections);
           //console.log( $rootScope.fullCartProductId);
           //console.log($rootScope.fullCartProductName);
           //console.log($rootScope.fullCartProductPrice);
           //console.log($rootScope.fullCartProductQuantity);
           $.each($rootScope.fullCart.productInfo.productCollections, function(indx,category){
-            if(indx == 0) {
+            
               $rootScope.categoryName = category.name;
-            }
+              //console.log($rootScope.categoryName);
+           
           });
-        // $rootScope.categoryName = 'Drinks';
+       
 
         var item = {
-          'id': $rootScope.fullCartProductId,             // Transaction ID. Required.
-          'name': $rootScope.fullCartProductName,        // Product name. Required.                               
-          'sku' : $rootScope.fullCartProductSKU,
-          'category': $rootScope.categoryName,
-          'price': $rootScope.fullCartProductPrice,       // Unit price.
-          'quantity': $rootScope.fullCartProductQuantity, // Quantity.
+          'id': $rootScope.fullCartProductId || "Domino's ProductID",             // Transaction ID. Required.
+          'name': $rootScope.fullCartProductName || "Domino's Product",        // Product name. Required.                               
+          'sku' : $rootScope.fullCartProductSKU || "Domino's SKU",
+          'category': $rootScope.categoryName || "Domino's Pizza",
+          'price': $rootScope.fullCartProductPrice || "Domino's Price",       // Unit price.
+          'quantity': $rootScope.fullCartProductQuantity || "Domino's Quantity", // Quantity.
           'currency': 'PKR'                                // Currency
         };
 
@@ -1151,13 +1153,14 @@ function ThankyouCtrl($scope,$location,$rootScope){
 
         ga('myTracker.ecommerce:send');
 
-        }
       }
-    })
-    $rootScope.Cart = {};
-  }
-  $rootScope.myCart();
- 
+    }
+  })
+$rootScope.Cart = {};
+$rootScope.SetLocalStorage('Cart');
+}
+$rootScope.myCart();
+
 }
 function AccountCtrl($scope,$location,$rootScope){
   $rootScope.locationParam = [];
