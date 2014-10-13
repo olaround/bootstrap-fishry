@@ -144,15 +144,15 @@ html[xmlns] .slides {display: block;}
 
 
 /* Top Slider Caption */
-.flexslider.top_slider .slide1 {
+.flexslider.top_slider .slide1  {
 	width:100%;
-	background-image:url({{ThemeSettings.theme_settings.slide_1_img}});
+	background-image:url(../../img/theme/slider/sale_bg1.jpg);
 	background-size:cover;
 }
-.flexslider.top_slider .slide2 {
+.flexslider.top_slider .slide2  {
 	width:100%;
 	background-color:#0b8e79;
-	background-image:url(../../img/theme/slider/woman_bg2.jpg);
+	background-image:url(../../img/theme/slider/sale_bg1.jpg);
 	background-size:cover;
 }
 .flexslider.top_slider .slide3 {

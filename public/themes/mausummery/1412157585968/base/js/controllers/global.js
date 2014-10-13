@@ -1,6 +1,18 @@
 function GlobalCtrl($scope,$location,$rootScope){
 
+	$rootScope.isCollapsed = false;
+	$rootScope.clickProductPop = function(){
+		$rootScope.productPop = true;
+	}
 
+	$rootScope.unclickProductPop = function(){
+		$rootScope.productPop = false;
+	}
+
+
+	$rootScope.lengthSlider = $('ul#slider-length li').length;
+	$rootScope.lengthSlider = $rootScope.lengthSlider - 3;
+	console.log($rootScope.lengthSlider);
 
 	$scope.$on('$locationChangeStart',function(evt, absNewUrl, absOldUrl){
        // $scope.oldUrl = absOldUrl.split('/');
@@ -42,8 +54,19 @@ function GlobalCtrl($scope,$location,$rootScope){
 					  }
        }
 	   
+ $rootScope.getHomeTemplatePath = function(template){
+   if (template == null) { template = 'default'};
+   return BaseUrl + 'partials/'+ template +'.html';
+ }
 
-       
+     $rootScope.cartEffect = function() {
+        $("html, body").animate({
+            scrollTop: $("body").offset().top
+        }, 800);
+        $('.shopping_bag .cart').show();
+        $rootScope.cartHandler = true;
+
+    }
 	$rootScope.locationParam = [];
 	var locationsParam = $scope.$location.path().split('/');	
 	$.each(locationsParam,function(index,item){
@@ -69,6 +92,7 @@ function HomeCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+
 
 	// $scope.carouselPrev = function(){
  //   		$('#myCarousel').carousel('prev');
@@ -179,10 +203,27 @@ function CollectionCtrl($scope,$location,AzureMobileClient,$rootScope,$routePara
    }
    $rootScope.productCount = 0;	
    $scope.routeParam = $routeParams.CollectionName;
+   $rootScope.title = unescape(seoTitle);
+	$scope.InitCollection = function(){
+		console.log($scope.routeParam);
+		if($scope.routeParam == 'all'){
+			$rootScope.title = $rootScope.SettingGeneral.settings.meta_title;
+			return true;
+		}
+		$.each($rootScope.ListCollection,function(index,item){
+			if(item.collectionUrl == $scope.routeParam){
+				$rootScope.title = item.collectionSeoTitle;
+			}
+		});
+		$scope.startFromPage = 0;
+		$scope.pageLimit = $rootScope.ThemeSettings.theme_settings.pagination_limit;
+		
+	}
 	$scope.init = function(){
 		$scope.startFromPage = 0;
 		$scope.pageLimit = 6;
 	}
+	
 	$scope.totalProducts = 0;
 	$scope.noOfPages = [];
 	$scope.addProductCount = function(){
@@ -317,6 +358,15 @@ function ProductCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,
 		}
 	});
 	$scope.routeParam = $routeParams.ProductSlug;
+	$rootScope.title = unescape(seoTitle);
+	$scope.InitProduct = function(){		
+		$.each($rootScope.ListProduct,function(index,item){
+			if(item.productUrl == $scope.routeParam){
+				$rootScope.title = item.productSeoTitle;
+			}
+		});
+		
+	}
 }
 function CarouselDemoCtrl($scope) {
   $scope.myInterval = 5000;
@@ -343,6 +393,42 @@ function PageCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,$co
 		}
 	});
 	$scope.routeParam = $routeParams.PageUrl;
+	$rootScope.title = unescape(seoTitle);
+	$scope.InitPage = function(){		
+		$.each($rootScope.ListPage,function(index,item){
+			if(item.pageUrl == $scope.routeParam){
+				$rootScope.title = item.pageSeoTitle;
+			}
+		});
+		
+	}
+
+	$rootScope.userFeedback = {};
+
+	$rootScope.userFeedback.Result = false;
+	$rootScope.userFeedback.fullForm = true;
+
+
+	$rootScope.senduserFeedbackEmail = function() {
+       
+        $rootScope.emailTo = $rootScope.SettingGeneral.contactEmail;
+      
+        $rootScope.byFrom = $rootScope.userFeedback.Email;
+        $rootScope.toBCC = '';
+        $rootScope.subjectEmail = 'Contact us via' + $rootScope.storeName;
+        $rootScope.emailBody = '<h1>Contact Details</h1><table style="width:900px"><tr><td>Name</td><td>Email</td><td>Phone</td>><td>Message</td></tr><tr><td>' + $rootScope.userFeedback.FirstName + '</td><td>'+ $rootScope.userFeedback.Email + '</td><td>' + $rootScope.userFeedback.Phone + '</td><td>'  + $rootScope.userFeedback.Message + '</td></tr></table>';
+        var dataEmail = {
+            data: $rootScope.emailBody,
+            email: $rootScope.emailTo,
+            subject: $rootScope.subjectEmail,
+            toBCC: $rootScope.toBCC,
+            byFrom: $rootScope.byFrom,
+            fromName: $rootScope.storeName
+        };
+        $rootScope.sendEmail(dataEmail);
+        $rootScope.userFeedback.fullForm = false;
+        $rootScope.userFeedback.Result = true;
+    }
 }
 // JavaScript Document
 function CartCtrl($scope,$location,$rootScope){
@@ -353,6 +439,7 @@ function CartCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	 $rootScope.title = 'Cart - '+$rootScope.SettingGeneral.settings.meta_title;
 }
 
 function ConfirmCtrl($scope,$location,$rootScope){
@@ -363,6 +450,7 @@ function ConfirmCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	$rootScope.title = 'Confirm - '+$rootScope.SettingGeneral.settings.meta_title;
 }
 // JavaScript Document
 function LoginCtrl($scope,$location,$rootScope){
@@ -373,7 +461,7 @@ function LoginCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
-
+	$rootScope.title = 'Login - '+$rootScope.SettingGeneral.settings.meta_title;
 }
 function ForgotCtrl($scope,$location,$rootScope){
 	$rootScope.locationParam = [];
@@ -383,6 +471,7 @@ function ForgotCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	 $rootScope.title = 'Forgot Password - '+$rootScope.SettingGeneral.settings.meta_title;
 }
 function ResetCtrl($scope,$location,$rootScope){
 	$rootScope.locationParam = [];
@@ -392,6 +481,7 @@ function ResetCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	$rootScope.title = 'Reset Password - '+$rootScope.SettingGeneral.settings.meta_title;
 }
 function SignupCtrl($scope,$location,$rootScope){
 	$rootScope.locationParam = [];
@@ -401,6 +491,18 @@ function SignupCtrl($scope,$location,$rootScope){
 			$rootScope.locationParam.push(item);
 		}
 	});
+	$rootScope.title = 'Signup - '+$rootScope.SettingGeneral.settings.meta_title;
+}
+function ThankyouCtrl($scope,$location,$rootScope){
+  $rootScope.locationParam = [];
+  var locationsParam = $scope.$location.path().split('/');  
+  $.each(locationsParam,function(index,item){
+    if(item && item != ''){
+      $rootScope.locationParam.push(item);
+    }
+  });
+  $rootScope.title = 'Thankyou - '+$rootScope.SettingGeneral.settings.meta_title;
+
 }
 function AccountCtrl($scope,$location,$rootScope){
 	$rootScope.locationParam = [];
@@ -475,7 +577,7 @@ function SearchCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,$
 		}
 	});
 	
-	console.log('start');
+	//console.log('start');
 	$scope.nextPage = function(){
 		$scope.startFromPage = $scope.startFromPage + 1;
 	}
@@ -488,26 +590,22 @@ function SearchCtrl($scope,$location,AzureMobileClient,$rootScope,$routeParams,$
 	$scope.numberOfPages=function(item,filters){
 		if(item.length){
 			$scope.TotalCounts = 0;
-			console.log('bda');
-			console.log(item.length);
-			console.log(filters);
+			//console.log('bda');
+			//console.log(item.length);
+			//console.log(filters);
 			
 			$.each(item,function(ind,itm){
-				//console.log(itm.productCollections);
+				////console.log(itm.productCollections);
 				if(itm.productCollections){
 					$.each(itm.productCollections,function(inds,itms){
-						console.log(itms.urlParam);
-						console.log(filters.collection);
+						//console.log(itms.urlParam);
+						//console.log(filters.collection);
 						if(itms.urlParam == filters.collection){
 							$scope.TotalCounts= parseInt($scope.TotalCounts) + 1;
 						}
 					});
 				}
 			});
-			
-				console.log($scope.TotalCounts +'asdasdasd');
-				 //return  $scope.TotalCounts;
-				 //return Math.ceil($scope.TotalCounts/$scope.pageSize); 
 			
 		}
     }

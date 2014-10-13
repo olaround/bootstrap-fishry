@@ -1,4 +1,3 @@
-
 function AECtrl ($rootScope,$location,AzureMobileClient,$routeParams,$cookies,$http,$compile,$timeout) {
 	//alert(localStorage.getItem('myFirstKey'));
 	////console.log($routeParams);
@@ -84,7 +83,7 @@ $rootScope.loadPositionSetter = function(){
 	if($rootScope.LoadPositions >= 90){		
 			$rootScope.LoadPositions = 100;
 			$('#loadingbar').width($rootScope.LoadPositions+'%');
-			$('.container,.loading_container').fadeIn(function(){
+			$('.container').fadeIn(function(){
 				$('#loadingbar').hide();
 				$('#loadingbar').width(0+'%');
 			});
@@ -188,9 +187,9 @@ $rootScope.GetSettingShippingCountry = function(param){
 										delete $rootScope.SettingShipping[index];
 									}
 							});
-							//console.log('Strat');
-							//console.log($rootScope.SettingShipping);
-							//console.log($rootScope.SettingsShippingCountry);
+							console.log('Strat');
+							console.log($rootScope.SettingShipping);
+							console.log($rootScope.SettingsShippingCountry);
 						 }
 						 $rootScope.loadPositionSetter();
 						 
@@ -642,7 +641,7 @@ $rootScope.addToCart = function(productID,productInfo,redirect){
 					  if(varrientArray == ''){
 					  	varrientArray += varientItem;
 					  }else{
-					  	varrientArray += ','+varientItem;
+					  	varrientArray += ', '+varientItem;
 					  }
 				  }
 				 counters++;
@@ -837,15 +836,223 @@ $rootScope.ReturnTax= function(){
 	var Tax= 0;
 	////console.log($rootScope.Cart);
 	if($rootScope.SettingsShippingCountry){
+		var hasGlobal = false;
 		$.each($rootScope.SettingsShippingCountry,function(index,item){
-				if(item.CountryName == $rootScope.Customer.ShippingCountry){
+			if(item && item.CountryName == 'Globally'){
+				hasGlobal = true;
+				if(item.TaxRate){
+						Tax = item.TaxRate;
+				}
+			}
+		});
+		if(!hasGlobal){
+			var foundCountry = false;
+			$.each($rootScope.SettingsShippingCountry,function(index,item){
+					if(item.CountryName == $rootScope.Customer.ShippingCountry){
+						foundCountry = true;
+						if(item.TaxRate){
+							Tax = item.TaxRate;
+						}
+					}
+			});
+		}
+		if(!foundCountry){
+			$.each($rootScope.SettingsShippingCountry,function(index,item){
+				if(item && item.CountryName == 'Rest Of World'){
 					if(item.TaxRate){
 						Tax = item.TaxRate;
 					}
 				}
-		});
+			});
+		}
 	}
 	return Tax;
+	
+}
+$rootScope.hasGlobalCountries = function(){
+	var hasGlobal = false;
+	if($rootScope.SettingsShippingCountry){
+		$.each($rootScope.SettingsShippingCountry,function(index,item){
+			if(item && (item.CountryName == 'Globally' || item.CountryName == 'Rest Of World')){
+				hasGlobal = true
+			}
+		});
+	}
+	return hasGlobal;
+}
+$rootScope.ReturnProductShippingRate = function(key,rate){
+	var shiipingRate = 0;
+	if($rootScope.SettingsShippingCountry){
+	var hasGlobal = false;
+	$.each($rootScope.SettingsShippingCountry,function(index,item){
+		if(item && item.CountryName == 'Globally'){
+			hasGlobal = true;
+			$.each($rootScope.SettingShipping,function(indexInner,itemInner){
+							if(itemInner){
+							//console.log(itemInner);
+								if(itemInner.ShippingCountryID){
+								//	console.log(itemInner.ShippingCountryID);
+									//console.log(item.id);
+										if(itemInner.ShippingCountryID == item.id){
+											if(key == 1 && itemInner.ShippingCriteria == 'price-based'){
+												if(itemInner.ShippingMaxPrice){
+													if(parseFloat(rate) >= parseFloat(itemInner.ShippingMinPrice) && parseFloat(rate) <= parseFloat(itemInner.ShippingMaxPrice)){
+														shiipingRate =  parseFloat(itemInner.ShippingPrice);
+													}
+												}else{
+													if(parseFloat(rate) >= parseFloat(itemInner.ShippingMinPrice)){
+														shiipingRate =  parseFloat(itemInner.ShippingPrice);
+													}
+												}
+											}else if(key == 2 && itemInner.ShippingCriteria == 'weight-based'){
+												if(itemInner.ShippingMaxWeight){
+													if(parseFloat(rate) >= parseFloat(itemInner.ShippingMinWeight) && parseFloat(rate) <= parseFloat(itemInner.ShippingMaxWeight)){
+														
+														shiipingRate = parseFloat(itemInner.ShippingPrice);
+													}
+												}else{
+													if(parseFloat(rate) >= parseFloat(itemInner.ShippingMinWeight)){
+														shiipingRate = parseFloat(itemInner.ShippingPrice);
+													}
+												}
+											}
+										}
+								}
+							}
+						})
+		}
+	});
+	if(hasGlobal){
+		return shiipingRate;
+	}
+	var hasCountry = false;
+	
+		//console.log($rootScope.Customer.ShippingCountry);
+		$.each($rootScope.SettingsShippingCountry,function(index,item){
+				if(item.CountryName == $rootScope.Customer.ShippingCountry){
+					hasCountry = true;
+					if(item.id){
+						//console.log('=============Pointer============');
+						//console.log(item.id);
+						$.each($rootScope.SettingShipping,function(indexInner,itemInner){
+							if(itemInner){
+							//console.log(itemInner);
+								if(itemInner.ShippingCountryID){
+								//	console.log(itemInner.ShippingCountryID);
+									//console.log(item.id);
+										if(itemInner.ShippingCountryID == item.id){
+											if(key == 1 && itemInner.ShippingCriteria == 'price-based'){
+												if(itemInner.ShippingMaxPrice){
+													if(parseFloat(rate) >= parseFloat(itemInner.ShippingMinPrice) && parseFloat(rate) <= parseFloat(itemInner.ShippingMaxPrice)){
+														shiipingRate =  parseFloat(itemInner.ShippingPrice);
+													}
+												}else{
+													if(parseFloat(rate) >= parseFloat(itemInner.ShippingMinPrice)){
+														shiipingRate =  parseFloat(itemInner.ShippingPrice);
+													}
+												}
+											}else if(key == 2 && itemInner.ShippingCriteria == 'weight-based'){
+												if(itemInner.ShippingMaxWeight){
+													if(parseFloat(rate) >= parseFloat(itemInner.ShippingMinWeight) && parseFloat(rate) <= parseFloat(itemInner.ShippingMaxWeight)){
+														
+														shiipingRate = parseFloat(itemInner.ShippingPrice);
+													}
+												}else{
+													if(parseFloat(rate) >= parseFloat(itemInner.ShippingMinWeight)){
+														shiipingRate = parseFloat(itemInner.ShippingPrice);
+													}
+												}
+											}
+										}
+								}
+							}
+						})
+					}
+				}
+		});
+	
+	if(hasCountry){
+		return shiipingRate;
+	}
+	var hasRestWorld = false;
+	$.each($rootScope.SettingsShippingCountry,function(index,item){
+		if(item && item.CountryName == 'Rest Of World'){
+			hasRestWorld = true;
+			$.each($rootScope.SettingShipping,function(indexInner,itemInner){
+							if(itemInner){
+							//console.log(itemInner);
+								if(itemInner.ShippingCountryID){
+								//	console.log(itemInner.ShippingCountryID);
+									//console.log(item.id);
+										if(itemInner.ShippingCountryID == item.id){
+											if(key == 1 && itemInner.ShippingCriteria == 'price-based'){
+												if(itemInner.ShippingMaxPrice){
+													if(parseFloat(rate) >= parseFloat(itemInner.ShippingMinPrice) && parseFloat(rate) <= parseFloat(itemInner.ShippingMaxPrice)){
+														shiipingRate =  parseFloat(itemInner.ShippingPrice);
+													}
+												}else{
+													if(parseFloat(rate) >= parseFloat(itemInner.ShippingMinPrice)){
+														shiipingRate =  parseFloat(itemInner.ShippingPrice);
+													}
+												}
+											}else if(key == 2 && itemInner.ShippingCriteria == 'weight-based'){
+												if(itemInner.ShippingMaxWeight){
+													if(parseFloat(rate) >= parseFloat(itemInner.ShippingMinWeight) && parseFloat(rate) <= parseFloat(itemInner.ShippingMaxWeight)){
+														
+														shiipingRate = parseFloat(itemInner.ShippingPrice);
+													}
+												}else{
+													if(parseFloat(rate) >= parseFloat(itemInner.ShippingMinWeight)){
+														shiipingRate = parseFloat(itemInner.ShippingPrice);
+													}
+												}
+											}
+										}
+								}
+							}
+						})
+		}
+	});
+	if(hasRestWorld){
+		return shiipingRate;
+	}
+	}
+	return shiipingRate;
+	
+	
+}
+$rootScope.ReturnShipping = function(){	
+	var Shipping= 0;
+	////console.log($rootScope.Cart);
+	//console.log($rootScope.SettingShipping);
+	//console.log($rootScope.SettingsShippingCountry);
+	
+								var Shipping  = 0;
+									$.each($rootScope.Cart,function(indexCart,itemCart){
+										
+											if(!itemCart.productID){
+												$.each(itemCart,function(indx, itmx){
+													if(indx != '$$hashKey'){
+														//Amount += parseInt(itmx.price) * parseInt(itmx.quantity);
+														if(itmx.productInfo.productWeight){															
+															 Shipping = Shipping + $rootScope.ReturnProductShippingRate(2,itmx.productInfo.productWeight)  * parseInt(itmx.quantity);
+														}else{
+															 Shipping = Shipping + $rootScope.ReturnProductShippingRate(1,parseInt(itmx.price))  * parseInt(itmx.quantity);
+														}
+													}
+												})
+										    }else{
+											    //Amount += parseInt(itemCart.price) * parseInt(itemCart.quantity);
+														if(itemCart.productInfo.productWeight){
+															 Shipping = Shipping + $rootScope.ReturnProductShippingRate(2,itemCart.productInfo.productWeight)  * parseInt(itemCart.quantity);
+														}else{
+															 Shipping = Shipping + $rootScope.ReturnProductShippingRate(1,parseInt(itemCart.price))  * parseInt(itemCart.quantity);
+														}
+										   }
+								
+									});
+							
+	return Shipping;
 	
 }
 $rootScope.ReturnTaxPrice= function(){	
@@ -896,9 +1103,11 @@ $rootScope.ReturnTotal= function(){
 			var TaxAdd = Amount * $rootScope.ReturnTax() / 100;
 				TaxAdd = TaxAdd.toFixed(2)
 		 	var TotalAmount =  parseFloat(Amount) + parseFloat(TaxAdd);
+				TotalAmount  = parseFloat($rootScope.ReturnShipping()) + TotalAmount;
 				TotalAmount = TotalAmount.toFixed(2);
 				return TotalAmount;
 		}else{
+			Amount  = parseFloat($rootScope.ReturnShipping()) + Amount;
 			return Amount.toFixed(2);
 		}
 	
@@ -1248,6 +1457,7 @@ $rootScope.SubmitOrder =  function(payment,redirect,clear){
 							orderTotal:$rootScope.ReturnTotal(),
 							productInfo: JSON.stringify($rootScope.Cart),
 							taxInfo: $rootScope.ReturnTax(),
+							shippingInfo: $rootScope.ReturnShipping(),
 							orderCartHtml: $rootScope.HTML,
 							orderCurrency: $rootScope.SettingGeneral.settings.currencies_format,
 							orderid: ''
@@ -1260,6 +1470,7 @@ $rootScope.SubmitOrder =  function(payment,redirect,clear){
 							orderTotal:$rootScope.ReturnTotal(),
 							productInfo: JSON.stringify($rootScope.Cart),
 							taxInfo: $rootScope.ReturnTax(),
+							shippingInfo: $rootScope.ReturnShipping(),
 							orderCartHtml: $rootScope.HTML,
 							orderCurrency: $rootScope.SettingGeneral.settings.currencies_format,
 							orderid: ''
@@ -1349,7 +1560,7 @@ $rootScope.$on('$routeChangeSuccess', function () {
 $('#loadingbar').width($rootScope.LoadPositions+'%');	
 //send email
  $rootScope.sendEmail = function(dataEmail){
-	$http({method: 'POST', url: 'https://ae-commerce.azure-mobile.net/api/send_grid', data: dataEmail, headers: {'Content-Type': 'application/json'}}).
+	$http({method: 'POST', url: 'https://fishry.azure-mobile.net/api/send_grid', data: dataEmail, headers: {'Content-Type': 'application/json'}}).
 		success(function(data, status, headers, config) {
 		  //console.log(data);
 		}).

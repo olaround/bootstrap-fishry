@@ -1,6 +1,20 @@
+<style type="text/css">
+    .login_form input[type="submit"] {
+float: none;
+display: inline-block;
+width: 22%;
+}
+@media(max-width: 767px){
+.login_form input[type="submit"], .my_account_block .new_customers .btn {
+display: block;
+width: 80%;
+}    
+}
+</style>
 <div id="page">
     <!-- BREADCRUMBS -->
-    <section class="breadcrumb parallax margbot30" style="background: url({{ThemeSettings.theme_settings.slide_collection_3_img}}) no-repeat;background-size:cover;"></section>
+    <section ng-if="!ThemeSettings.theme_settings.slide_collection_3_img" class="breadcrumb parallax margbot30"></section>
+    <section ng-if="ThemeSettings.theme_settings.slide_collection_3_img" class="breadcrumb parallax margbot30" style="background: url({{ThemeSettings.theme_settings.slide_collection_3_img}}) no-repeat;background-size:cover;"></section>
     <!-- //BREADCRUMBS -->
     <!-- TOVAR DETAILS -->
     <section class="tovar_details padbot70">
@@ -9,7 +23,7 @@
             <!-- ROW -->
             <div class="row">
                 <!-- SIDEBAR TOVAR DETAILS -->
-                <div id="sidebar" class="col-lg-3 col-md-3 col-sm-3 padbot50">
+                <div id="sidebar" class="col-lg-3 col-md-3 col-sm-12 padbot50">
 
 
                     <div class="sidepanel widget_categories">
@@ -23,9 +37,9 @@
                             <li>Postal Code: {{Customer.PostCode}}</li>
                             <li>City: {{Customer.City}}</li>
                             <li>Country: {{Customer.Country}}</li>
-                            <li ng-controller="ModalDemoCtrl"><a ng-click="open('lg');" style="color:rgb(207, 25, 25); cursor:pointer;font-weight:bold;">Edit Account</a></li>
+                            <li ng-controller="GlobalCtrl"><a ng-click="clickProductPop();" style="color:rgb(207, 25, 25); cursor:pointer;font-weight:bold;">Edit Account</a></li>
                             <li><a href="/reset_password" style="color:rgb(207, 25, 25); cursor:pointer;font-weight:bold;">Change Password</a></li>
-                            <li ng-if="User.info.CustomerEmail && !User.info.GuestAuth"><a  href="javascript:void(0)" ng-click="Logout()" style="color:rgb(207, 25, 25); cursor:pointer;font-weight:bold;">Log out</a></li>
+                            <li ng-if="User.info.CustomerEmail && !User.info.GuestAuth"><a  href="/" ng-click="Logout()" style="color:rgb(207, 25, 25); cursor:pointer;font-weight:bold;">Log out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -36,13 +50,13 @@
                         <h3><b>Orders</b></h3>
                     </div>    
                     
-                    <div ng-hide="Orders">
+                    <div ng-show="!Orders.length" style="padding-top: 24px;">
                         <h4 class="center">You Haven't placed any orders yet.</h4>
                         <h4 class="center">Once you place an order you will be able to see its history and status on this page.</h4>
                     </div>
 
                     <div class="table-responsive table-border">
-                        <table class="table" ng-show="Orders" style="font-size:12px;">
+                        <table class="table" ng-show="Orders.length" style="font-size:12px;">
                             <thead>
                                 <tr class="active">
                                     <th>#</th>
@@ -78,32 +92,28 @@
         <!-- //CONTAINER -->
     </section>
     <!-- //TOVAR DETAILS -->
-
-
-</div>
-<div ng-controller="ModalDemoCtrl">
-        <script type="text/ng-template" id="myModalContent.html">
-        <div id="tovar_content">
+ <div  ng-show="productPop" class="popup" style="position:absolute;">
+       <div id="tovar_content" style="position: absolute;">
     <div class="tover_view_page element_fade_in">
         <div class="tover_view_header clearfix">
             <h2 class="bold" style="margin-left:28px;">Update Details
             </h2>
-            <a ng-click="cancel()" style="float: right;margin-top: -44px;">Close<i style="border: 1px solid black;padding-left: 4px;padding-right:4px;margin-left: 6px;cursor:pointer;">X</i> </a>
+            <a ng-click="unclickProductPop();" style="float: right;margin-top: -44px;">Close<i style="border: 1px solid black;padding-left: 4px;padding-right:4px;margin-left: 6px;cursor:pointer;">X</i> </a>
         </div>
-          <div class="my_account_block clearfix">
+          <div class="my_account_block clearfix" style="margin-bottom: 25px;">
                 <div class="account">
                     
-                    <form class="login_form" role="form" ng-submit="UpdateUserInfo('/');cancel();" style="margin: 0;padding: 0;">
+                    <form class="login_form" role="form" ng-submit="UpdateUserInfo('');unclickProductPop();" style="margin: 0;padding: 0;">
             
                         <h2>Contact Details</h2>
                         <label class="mediumm" or="exampleInputEmail1">Name*</label>
                         <input class="last medium" type="text" name="username"  placeholder="Enter First Name...." ng-model="Customer.FirstName" required/>
-                        <input class="last medium" type="text" name="username" placeholder="Enter Last Name...." ng-model="Customer.LastName" required  style="margin-left:  27.4%;"/>
+                        <input class="last medium margin-input" type="text" name="username" placeholder="Enter Last Name...." ng-model="Customer.LastName" required/>
                         <label class="mediumm"  for="exampleInputEmail1">Telephone*</label>
                         <input class="last medium" type="text" name="password" placeholder="Enter Telephone no...." ng-model="Customer.Phone" required/>
                         <label class="mediumm"  for="exampleInputEmail1">Address</label>
                         <input class="last medium" type="text" name="password" placeholder="Enter Address...." ng-model="Customer.Address" required/>
-                        <input class="last medium" type="text" name="password"  placeholder="Address Continue...." ng-model="Customer.AddressContinue" required  style="margin-left:  27.4%;"/>
+                        <input class="last medium margin-input" type="text" name="password"  placeholder="Address Continue...." ng-model="Customer.AddressContinue" required />
                         <label class="mediumm"  for="exampleInputEmail1">Postal Code</label>
                         <input class="last medium" type="text" name="password" placeholder="Enter Postal Code...." ng-model="Customer.PostCode" required/>
 
@@ -127,11 +137,11 @@
     </div>
 </div>
 
+</div>
 
-        </script>
-    </div>
+</div>
 
 <script type="text/javascript">
      jQuery('.shopping_bag .cart').hide();
-     
+     $('header .navmenu').fadeOut();
 </script>

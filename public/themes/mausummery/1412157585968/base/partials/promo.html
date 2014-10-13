@@ -1,0 +1,268 @@
+<style type="text/css">
+#slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 4px;
+}
+#slider ul {
+    position: relative;
+   margin-top: 24px;
+    padding: 0;
+   height: 350px;
+    list-style: none;
+    width: 2370px;
+}
+#slider ul li {
+    position: relative;
+    display:inline-block;
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 170px;
+    height: auto;
+    text-align: center;
+    line-height: 300px;
+    margin-right: 30px;
+     -webkit-transition: 3s;
+}
+#slider ul li:last-child {
+margin-right:0px;    
+}
+a.control_prev, a.control_next {
+    z-index: 100;
+    top: -50px;
+    display: block;
+    width: 24px;
+    height: 24px;
+    font-family: FontAwesome;
+    text-align: center;
+    line-height: 19px;
+    font-size: 17px;
+    color: #999;
+    border: 2px solid #ccc;
+    display: inline-block;
+}
+a.control_prev:hover, a.control_next:hover {
+    opacity: 1;
+}
+a.control_prev {
+    border-radius: 0 2px 2px 0;
+}
+a.control_next {
+    right: 0;
+    border-radius: 2px 0 0 2px;
+}
+.slider_option {
+    position: relative;
+    margin: 10px auto;
+    width: 160px;
+    font-size: 18px;
+}
+</style>
+	<!-- TOP SALE -->
+		<section class="top_sale parallax margbot50" >
+        <div style="background: url({{ThemeSettings.theme_settings.slide_6_img}}) no-repeat;background-size:cover;">
+			
+			<!-- CONTAINER -->
+			<div class="container">
+				<div class="top_sale_description">
+					<p>autumn sale</p>
+					<span>great men collection</span>
+				</div>
+				
+				<!-- ROW -->
+				<div class="row">
+					<div class="top_sale_banners center">
+						
+						
+						<div class="respond_clear_1024 respond_clear_768 respond_clear_480"></div>
+						
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 col-ss-12">
+                           <a ng-if="ThemeSettings.theme_settings.slide_3_img" class="banner nobord white_bord margbot30" href="{{ThemeSettings.theme_settings.slide_3_link}}" ><img src="{{ThemeSettings.theme_settings.slide_3_img}}" alt="" /></a>
+                           <a  ng-if="!ThemeSettings.theme_settings.slide_3_img" class="banner nobord white_bord margbot30" href="{{ThemeSettings.theme_settings.slide_3_link}}" ><img src="{{BaseUrl}}img/theme/slider/slide1_baner1.jpg" alt="" /></a>
+                        </div>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 col-ss-12">
+                            <a ng-if="ThemeSettings.theme_settings.slide_4_img" class="banner nobord white_bord margbot30" href="{{ThemeSettings.theme_settings.slide_4_link}}" ><img src="{{ThemeSettings.theme_settings.slide_4_img}}" alt="" /></a>
+                            <a  ng-if="!ThemeSettings.theme_settings.slide_4_img" class="banner nobord white_bord margbot30" href="{{ThemeSettings.theme_settings.slide_4_link}}" ><img src="{{BaseUrl}}img/theme/slider/slide1_baner2.jpg" alt="" /></a>
+                        </div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-ss-12">
+                        <a ng-if="ThemeSettings.theme_settings.slide_5_img" class="banner nobord white_bord margbot30" href="{{ThemeSettings.theme_settings.slide_5_link}}" ><img src="{{ThemeSettings.theme_settings.slide_5_img}}" alt="" /></a>
+                        <a ng-if="!ThemeSettings.theme_settings.slide_5_img" class="banner nobord white_bord margbot30" href="{{ThemeSettings.theme_settings.slide_5_link}}" ><img src="{{BaseUrl}}img/theme/slider/slide1_baner3.jpg" alt="" /></a>
+                        </div>
+					</div>
+				</div><!-- //ROW -->
+			</div><!-- //CONTAINER -->
+		</div>
+        </section><!-- //TOP SALE -->
+		
+		
+	        
+<div class="container">
+ <h2 style="margin:0;float:left;">Featured Products</h2>
+<div class="jCarousel_pagination">
+        <a href="#" id="prev"><i class="fa fa-angle-left"></i></a>
+        <a href="#" id="more"><i class="fa fa-angle-right"></i></a>
+    </div>
+    <div id="slider">
+         <ul ng-if="ThemeSettings.theme_settings.enable_featuredproduct">
+                <div ng-repeat="(ThemeId,ThemeFeature) in ThemeSettings.theme_settings.featuredproduct track by $index">
+                    <div ng-if="ThemeFeature">          
+                        <div ng-repeat="collection in ListCollection | filter:{collectionName:SearchCollection}">
+                            <div ng-show="(collection.id == ThemeId)">
+                                <li  ng-repeat="(prodID,products) in ListProduct | CustomFilter:{collection:collection.collectionName} | limitTo:12">
+                                    <div class="tovar_item_new" >
+                                        <div class="tovar_img" ng-controller="ModalDemoCtrl">
+                                            <img ng-if="products.productImage[0].Image" ng-src="{{products.productImage[0].Image}}" style="background:url('{{BaseUrl}}img/theme/preloader.gif') center no-repeat;" />
+
+                                            <div class="open-project-link" ng-controller="GlobalCtrl"><a class="open-project tovar_view" ng-click="preproduct(products.productUrl);open('lg')">quick view</a>
+                                            </div>
+                                        </div>
+                                        <div class="tovar_description clearfix" style="text-align: left;">
+                                            <a class="tovar_title" href="/product/{{products.productUrl}}">{{products.productName}}</a>
+
+                                            <span ng-if="!products.productMultiOptions" class="tovar_price">{{SettingGeneral.settings.currencies_format}} {{products.productPrice}}</span>
+                                        </div>
+                                    </div>
+                                    <!-- //TOVAR -->
+                                </li>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+        </ul>
+        <ul ng-if="!ThemeSettings.theme_settings.enable_featuredproduct">
+           <div ng-repeat="collection in ListCollection  | filter:{collectionName:'Frontpage'}">
+            <li ng-repeat="products in ListProduct | CustomFilter:{collection:'Frontpage'}">
+                <div class="tovar_item_new">
+                    <div class="tovar_img" ng-controller="ModalDemoCtrl">
+                        <img ng-if="products.productImage[0].Image" ng-src="{{products.productImage[0].Image}}" style="background:url('{{BaseUrl}}img/theme/preloader.gif') center no-repeat;" />
+
+                        <div class="open-project-link" ng-controller="GlobalCtrl"><a class="open-project tovar_view" ng-click="preproduct(products.productUrl);open('lg')">quick view</a>
+                        </div>
+                    </div>
+                    <div class="tovar_description clearfix">
+                        <a class="tovar_title" href="/product/{{products.productUrl}}">{{products.productName}}</a>
+
+                        <span ng-if="!products.productMultiOptions" class="tovar_price">{{SettingGeneral.settings.currencies_format}} {{products.productPrice}}</span>
+                    </div>
+                </div>
+                <!-- //TOVAR -->
+            </li>
+            </div>
+        </ul>
+        </div> 
+</div>
+<script type="text/javascript">
+
+jQuery('.shopping_bag .cart').hide();
+
+$("#more").click(function(){
+  $("#slider").animate({scrollLeft: "+=400"}, 500, "swing");
+});
+
+$("#prev").click(function(){
+  $("#slider").animate({scrollLeft: "-=400"}, 500, "swing");
+});
+</script>
+<div ng-controller="ModalDemoCtrl">
+        <script type="text/ng-template" id="myModalContent.html">
+        <div id="tovar_content">
+    <div class="tover_view_page element_fade_in hidden-xs">
+        <div class="tover_view_header clearfix">
+            <p>Quick view
+            </p>
+            <a ng-click="cancel()" style="float: right;">Close<i style="border: 1px solid black;padding-left: 4px;padding-right:4px;margin-left: 6px;cursor: pointer;">X</i> </a>
+        </div>
+
+             <!-- TOVAR DETAILS -->
+    <section class="tovar_details">
+        <!-- CONTAINER -->
+        <div class="container">
+            <!-- ROW -->
+            <div class="row">
+                
+                <!-- TOVAR DETAILS WRAPPER -->
+                <div class="product-popup tovar_details_wrapper clearfix">
+                    
+
+                    <!-- CLEARFIX -->
+                    <div class="clearfix padbot30  hidden-xs" ng-repeat="(key,product) in ListProduct | CustomFilter:{productUrl : popupProductUrl}">
+                        <div class="tovar_view_fotos clearfix">
+                            <div id="slider2" class="flexslider">
+                                <ul class="slides">
+                                    <li style="margin-left:6%;">
+                                        <a href="javascript:void(0);">
+                                            <img ng-if="product.productImage[0].Image" src="{{product.productImage[0].Image}}" alt="" />
+                                            <img ng-if="!product.productImage[0].Image" src="{{BaseUrl}}/img/theme/tovar/women/1_2.jpg" alt="" />
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                           
+                        </div>
+
+                      <div class="tovar_view_description" ng-controller="GlobalCtrl">
+                            <div class="tovar_view_title">{{product.productName}}</div>
+                            <div class="tovar_article">{{product.productSKU}}</div>
+
+                            <div class="clearfix tovar_brend_price">
+                            <div class="pull-left tovar_brend">{{product.ProductVendorName}}</div>
+                                <div class="pull-right tovar_view_price" ng-if="!product.productMultiOptions">{{SettingGeneral.settings.currencies_format}} {{product.productPrice}}</div>
+                                <div class="pull-right tovar_view_price" ng-if="product.productMultiOptions && selectedVarients(product.productVarientModel) && returnPrice(product) && returnPrice(product) >= 0 ">{{SettingGeneral.settings.currencies_format}} {{product.productPrice}}</div>
+                                <div class="pull-right tovar_view_price" ng-if="product.productMultiOptions && selectedVarients(product.productVarientModel) && returnPrice(product) && returnPrice(product) >= 0 "><h4 ng-if="!returnPrice(product)">This Combination is Not Available</h4></div>
+                                <div class="clearfix"></div>
+                                <div class="prod-description"  ng-repeat="(key,product) in ListProduct | CustomFilter:{productUrl : popupProductUrl}">
+                                <h2 ng-if="product.productDescription" style="font-weight:bold;">Description</h2>
+                                <p class="no-margin-para" ng-bind-html="product.productDescription"></p>
+                                 <a ng-if="product.productMultiOptions" ng-click="product.productVarientModel = {};" onclick="$('.attributes_{{product.Index}}').removeAttr('checked');" href="javascript:void(0)"style="float: right;font-size: 16px;font-weight: bold;text-decoration: underline;padding-bottom: 4px;cursor: pointer !important;" >Reset All</a>
+                                </div>
+                            </div>
+                            <form name="addtoCart" ng-submit="addToCart(product.id,product,cancel());cartEffect();">
+                                <div ng-if="product.productMultiOptions">
+                                
+                                    <div class="tovar_color_select"  ng-repeat="valueSize in product.productMultiOptionsList">
+                                        <p>Select {{valueSize.name}}:</p>
+                                        <span ng-repeat="parms in valueSize.value" class="inline-span">
+                                     <label class="checkbox-visible" ng-class="{'deactivate':RenderOnDemand(product.productVarientModel,product,parms,valueSize.name)}">
+                                            <input ng-checked="product.productVarientModel[valueSize.name] == parms" ng-click="ResetVariendsModelBase(valueSize.name,parms,product.productVarientModel,product.Index)" class="attributes_{{product.Index}}" ng-disabled="RenderOnDemand(product.productVarientModel,product,parms,valueSize.name)" type="checkbox" id="categorymanufacturer1"  value="{{parms}}" required style="margin-right:3px;margin-top: 5px;">{{parms}}
+                                        </label>
+                                    </span>
+                                    </div>
+                                </div>
+                                <div class="tovar_view_btn">
+                                    
+                                    <div class="fancy-select">  
+
+                                   
+                                        <select class="basic" ng-model="product.productQuantity" type="number">
+                                            <option>QTY</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+
+                                    </div>
+                                    <button ng-if="!product.productMultiOptions" class="add_bag" type="submit" value="Add"><i class="fa fa-shopping-cart"></i>Add to bag</button>
+                                     <button ng-if="product.productMultiOptions && selectedVarients(product.productVarientModel) && returnPrice(product) && returnPrice(product) >= 0" class="add_bag" type="submit" value="Add"><i class="fa fa-shopping-cart"></i>Add to bag</button>
+                                    
+                                        <div class="clearfix"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- //CLEARFIX -->
+                </div>
+                <!-- //TOVAR DETAILS WRAPPER -->
+            </div>
+            <!-- //ROW -->
+        </div>
+        <!-- //CONTAINER -->
+    </section>
+    <!-- //TOVAR DETAILS -->
+
+    </div>
+</div>
+</script>   

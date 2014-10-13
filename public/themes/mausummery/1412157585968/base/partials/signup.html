@@ -1,6 +1,6 @@
 <div id="page">
     <!-- MY ACCOUNT PAGE -->
-    <section class="my_account parallax" style="background: url({{ThemeSettings.theme_settings.slide_collection_3_img}}) no-repeat;background-size:cover;">
+    <section class="my_account parallax" back-img-Collection="{{ThemeSettings.theme_settings.slide_collection_2_img}}">
 
     <style type="text/css">
         @media(max-width:768px){
@@ -33,20 +33,20 @@ width:100%;
                         <input class="last medium" required="required" type="password" class="form-control" id="confirmPassword"  oninput="check(this)" placeholder="Confirm Password...." />
                         <h3 class="create-account">Contact Details</h3>
                         <label class="mediumm" for="exampleInputEmail1">Name*</label>
-                        <input class="last medium" type="text" name="username"  placeholder="Enter First Name ...." ng-model="Customer.FirstName" required />
-                        <input class="last medium" type="text" name="password"  placeholder="Enter Last name...." ng-model="Customer.LastName" required style="margin-left:  27.4%;" /><br>
+                        <input class="last medium " type="text" name="username"  placeholder="Enter First Name ...." ng-model="Customer.FirstName" required />
+                        <input class="last medium margin-input" type="text" name="password"  placeholder="Enter Last name...." ng-model="Customer.LastName" required/><br>
                         <label class="mediumm" for="exampleInputEmail1">Telephone*</label>
                         <input class="last medium" type="tel" pattern="[0-9]{11}" name="text"  placeholder="Enter Telephone...." ng-model="Customer.Phone" required/>
                         <label class="mediumm" for="exampleInputEmail1">Address*</label>
                         <input class="last medium" type="address" name="text" ng-model="Customer.Address"  placeholder="Enter Address...." required/>
-                        <input class="last medium" type="text" name="text" ng-model="Customer.AddressContinue"  placeholder="Address Continue...." required style="margin-left:  27.4%;;" />
+                        <input class="last medium margin-input" type="text" name="text" ng-model="Customer.AddressContinue"  placeholder="Address Continue...." required />
                         <label class="mediumm" for="exampleInputEmail1">Postal Code*</label>
                        <input class="last medium" type="text" name="text"  placeholder="Enter Postal code...." ng-model="Customer.PostCode" required/>
                         <label class="mediumm" for="exampleInputEmail1">City*</label>
                         <input class="last medium" type="text" name="text"  placeholder="Enter City...." ng-model="Customer.City" required/>
                         <label class="mediumm" for="exampleInputEmail1">Country*</label>
                         <input class="last medium" type="text" ng-model="Customer.Country" name="password"  placeholder="Enter Country...." required/>
-                        <div class="pull-left"><input type="checkbox" id="categorymanufacturer1" required /><label for="categorymanufacturer1">I accept the privacy statement</label></div>
+                       <!--  <div class="pull-left"><input type="checkbox" id="categorymanufacturer1" required style="height:0px;margin-bottom:0px;" /><label for="categorymanufacturer1">I accept the privacy statement</label></div> -->
                         <div class="clearfix">
                         
 
@@ -79,4 +79,5 @@ width:100%;
 </div>
 <script type="text/javascript">
      jQuery('.shopping_bag .cart').hide();
+     $('header .navmenu').fadeOut();
 </script>

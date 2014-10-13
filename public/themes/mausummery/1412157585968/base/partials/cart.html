@@ -1,6 +1,7 @@
 <div id="page">
     <!-- BREADCRUMBS -->
-    <section class="breadcrumb parallax margbot30" style="background: url({{ThemeSettings.theme_settings.slide_collection_2_img}}) no-repeat;background-size:cover;"></section>
+    <section ng-if="!ThemeSettings.theme_settings.slide_collection_2_img" class="breadcrumb parallax margbot30"></section>
+     <section ng-if="ThemeSettings.theme_settings.slide_collection_2_img" class="breadcrumb parallax margbot30" style="background: url({{ThemeSettings.theme_settings.slide_collection_2_img}}) no-repeat;background-size:cover;"></section>
     <!-- //BREADCRUMBS -->
 
 
@@ -36,7 +37,7 @@
                     <table class="shop_table">
                         <thead>
                             <tr>
-                                <th class="product-thumbnail"></th>
+                                <th class="product-thumbnail hidden-xs"></th>
                                 <th class="product-name">Item</th>
                                 <th class="product-price">Price</th>
                                 <th class="product-quantity">Quantity</th>
@@ -167,4 +168,5 @@ font-size: 17px;">
 
 <script type="text/javascript">
      jQuery('.shopping_bag .cart').hide();
+     $('header .navmenu').fadeOut();
 </script>

@@ -1,7 +1,9 @@
 
-<div id="page">
+<div id="page" ng-init="InitProduct();">
     <!-- BREADCRUMBS -->
-    <section class="breadcrumb parallax margbot30" style="background: url({{ThemeSettings.theme_settings.slide_collection_2_img}}) no-repeat;background-size:cover;"></section>
+    <section ng-if="ThemeSettings.theme_settings.slide_collection_2_img" class="breadcrumb parallax margbot30" style="background: url({{ThemeSettings.theme_settings.slide_collection_2_img}}) no-repeat;background-size:cover;"></section>
+
+     <section ng-if="!ThemeSettings.theme_settings.slide_collection_2_img" class="breadcrumb parallax margbot30"></section>
     <!-- //BREADCRUMBS -->
     <!-- TOVAR DETAILS -->
     <section class="tovar_details padbot70">
@@ -9,23 +11,9 @@
         <div class="container">
             <!-- ROW -->
             <div class="row">
-                <!-- SIDEBAR TOVAR DETAILS -->
-                <div class="col-lg-3 col-md-3 sidebar_tovar_details">
-                    <h3><b>Related Products</b>
-                    </h3>
-                    <ul class="tovar_items_small clearfix">
-                        <li class="clearfix" ng-repeat="products in ListProduct  | filter: {productType: product.productType} | limitTo:4" ng-show="products.productName != product.productName">
-                            <img ng-if="products.productImage[0].Image" class="tovar_item_small_img" src="{{products.productImage[0].Image}}" alt="" />
-                            <img ng-if="!products.productImage[0].Image" class="tovar_item_small_img" src="{{BaseUrl}}img/theme/photo_default.png" alt="" />
-                            <a ng-if="products.productName != product.productName" href="/product/{{products.productUrl}}" class="tovar_item_small_title">{{products.productName}}</a>
-                            <span ng-if="!products.productMultiOptions" class="tovar_item_small_price">{{SettingGeneral.settings.currencies_format}} {{products.productPrice}}</span>
-                            <span ng-if="products.productMultiOptions" class="tovar_item_small_price">{{SettingGeneral.settings.currencies_format}} {{products.productPrice}}</span>
-                        </li>
-                    </ul>
-                </div>
-                <!-- //SIDEBAR TOVAR DETAILS -->
+                
                 <!-- TOVAR DETAILS WRAPPER -->
-                <div class="col-lg-9 col-md-9 tovar_details_wrapper clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tovar_details_wrapper clearfix">
 
                         <div class="tovar_details_header clearfix margbot35" ng-repeat="(key,product) in ListProduct | CustomFilter:{productUrl : routeParam}">
                             <h3 class="pull-left"><b>{{product.productName}}</b></h3>
@@ -38,34 +26,34 @@
                     <div class="clearfix padbot30" ng-repeat="(prodID,product) in ListProduct | CustomFilter:{productUrl : routeParam}">
                         <div class="tovar_view_fotos clearfix">
                             <div class="slider-product">
-                                <ul>
+                                <ul style="border: 1px solid lightgray;">
                                     <li>
                                         <a>
-                                            <img id="image-show-zero" ng-if="product.productImage[0].Image" src="{{product.productImage[0].Image}}" alt="" style="background:url('{{BaseUrl}}img/theme/preloader.gif') center no-repeat;"/>
-                                            <img ng-if="!product.productImage[0].Image" src="{{BaseUrl}}/img/theme/tovar/women/1_2.jpg" alt="" />
+                                            <img id="image-show-zero" ng-if="product.productImage[0].Image" src="{{product.productImage[0].Image}}" alt="" style="background:url('{{BaseUrl}}img/theme/preloader.gif') center no-repeat;width:100%;"/>
+                                            <img ng-if="!product.productImage[0].Image" src="{{BaseUrl}}/img/theme/tovar/women/1_2.jpg" alt="" style="width:100%;" />
                                         </a>
                                     </li>
                                     <li>
                                         <a>
-                                            <img id="image-show-one" src="{{product.productImage[1].Image}}" alt="" style="background:url('{{BaseUrl}}img/theme/preloader.gif') center no-repeat;"/>
+                                            <img id="image-show-one" src="{{product.productImage[1].Image}}" alt="" style="background:url('{{BaseUrl}}img/theme/preloader.gif') center no-repeat;width:100%;"/>
                                            
                                         </a>
                                     </li>
                                     <li>
                                         <a>
-                                            <img id="image-show-two" src="{{product.productImage[2].Image}}" alt="" style="background:url('{{BaseUrl}}img/theme/preloader.gif') center no-repeat;"/>
+                                            <img id="image-show-two" src="{{product.productImage[2].Image}}" alt="" style="background:url('{{BaseUrl}}img/theme/preloader.gif') center no-repeat;width:100%;"/>
                                            
                                         </a>
                                     </li>
                                     <li>
                                         <a>
-                                            <img id="image-show-three" src="{{product.productImage[3].Image}}" alt="" style="background:url('{{BaseUrl}}img/theme/preloader.gif') center no-repeat;"/>
+                                            <img id="image-show-three" src="{{product.productImage[3].Image}}" alt="" style="background:url('{{BaseUrl}}img/theme/preloader.gif') center no-repeat;width:100%;"/>
                                            
                                         </a>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="slider-products-2" ng-if="product.productImage[0].Image &&product.productImage[1].Image || product.productImage[2].Image || product.productImage[3].Image">
+                            <div class="slider-products-2" ng-if="product.productImage[0].Image &&product.productImage[1].Image && product.productImage[2].Image && product.productImage[3].Image">
                                 <ul class="pics">
                                     <li class="active">
                                         <a href="">
@@ -94,34 +82,34 @@
                             <script type="text/javascript">
                                 $(document).ready(function() {
                                     $("#image-one").click(function() {
-                                        $("#image-show-zero").fadeOut(0.5);
-                                        $("#image-show-two").fadeOut(0.5);
-                                        $("#image-show-three").fadeOut(0.5);
-                                        $("#image-show-one").fadeIn(2000);
+                                        $("#image-show-zero").hide();
+                                        $("#image-show-two").hide();
+                                        $("#image-show-three").hide();
+                                        $("#image-show-one").show();
                                         $("ul.pics li").addClass('active');
                                         $("ul.pics li").removeClass('active');
                                     });
                                     $("#image-two").click(function() {
-                                        $("#image-show-zero").fadeOut(0.5);
-                                        $("#image-show-one").fadeOut(0.5);
-                                        $("#image-show-three").fadeOut(0.5);
-                                        $("#image-show-two").fadeIn(2000);
+                                        $("#image-show-zero").hide();
+                                        $("#image-show-one").hide();
+                                        $("#image-show-three").hide();
+                                        $("#image-show-two").show();
                                          $("ul.pics li").addClass('active');
                                         $("ul.pics li").removeClass('active');
                                     });
                                     $("#image-three").click(function() {
-                                        $("#image-show-zero").fadeOut(0.5);
-                                        $("#image-show-one").fadeOut(0.5);
-                                        $("#image-show-two").fadeOut(0.5);
-                                        $("#image-show-three").fadeIn(2000);
+                                        $("#image-show-zero").hide();
+                                        $("#image-show-one").hide();
+                                        $("#image-show-two").hide();
+                                        $("#image-show-three").show();
                                          $("ul.pics li").addClass('active');
                                         $("ul.pics li").removeClass('active');
                                     });
                                     $("#image-zero").click(function() {
-                                        $("#image-show-three").fadeOut(0.5);
-                                        $("#image-show-one").fadeOut(0.5);
-                                        $("#image-show-two").fadeOut(0.5);
-                                        $("#image-show-zero").fadeIn(2000);
+                                        $("#image-show-three").hide();
+                                        $("#image-show-one").hide();
+                                        $("#image-show-two").hide();
+                                        $("#image-show-zero").show();
                                          $("ul.pics li").addClass('active');
                                         $("ul.pics li").removeClass('active');
                                     });
@@ -129,23 +117,23 @@
                             </script>
                         </div>
 
-                        <div class="tovar_view_description">
-                            <div class="tovar_view_title">{{product.productName}}</div>
+                        <div class="tovar_view_description" ng-controller="GlobalCtrl">
+                            <div class="tovar_view_title">{{product.productName}} <div class="pull-right tovar_view_price" ng-if="!product.productMultiOptions">{{SettingGeneral.settings.currencies_format}} {{product.productPrice}}</div>
+                                <div class="pull-right tovar_view_price" ng-if="product.productMultiOptions">{{SettingGeneral.settings.currencies_format}} {{product.productPrice}}</div></div>
                             <div class="tovar_article">{{product.productSKU}}</div>
 
                             <div class="clearfix tovar_brend_price">
-                            <div class="pull-left tovar_brend">{{product.ProductVendorName}}</div>
-                                <div class="pull-right tovar_view_price" ng-if="!product.productMultiOptions">{{SettingGeneral.settings.currencies_format}} {{product.productPrice}}</div>
-                                <div class="pull-right tovar_view_price" ng-if="product.productMultiOptions && selectedVarients(product.productVarientModel) && returnPrice(product) && returnPrice(product) >= 0 ">{{SettingGeneral.settings.currencies_format}} {{product.productPrice}}</div>
+                            <div class="pull-left tovar_brend">Description</div>
+                               
                                 <div class="pull-right tovar_view_price" ng-if="product.productMultiOptions && selectedVarients(product.productVarientModel) && returnPrice(product) && returnPrice(product) >= 0 "><h4 ng-if="!returnPrice(product)">This Combination is Not Available</h4></div>
                                 <div class="clearfix"></div>
                                 <div class="prod-description"  ng-repeat="(key,product) in ListProduct | CustomFilter:{productUrl : routeParam}">
-                                <h2 ng-if="product.productDescription" style="font-weight:bold;">Description</h2>
+                               
                                 <p class="no-margin-para" ng-bind-html="product.productDescription"></p>
                                  <a ng-if="product.productMultiOptions" ng-click="product.productVarientModel = {};" onclick="$('.attributes_{{product.Index}}').removeAttr('checked');" href="javascript:void(0)"style="float: right;font-size: 16px;font-weight: bold;text-decoration: underline;padding-bottom: 4px;cursor: pointer !important;" >Reset All</a>
                                 </div>
                             </div>
-                            <form name="addtoCart" ng-submit="addToCart(product.id,product);">
+                            <form name="addtoCart" ng-submit="addToCart(product.id,product);cartEffect();">
                                 <div ng-if="product.productMultiOptions">
                                 
                                     <div class="tovar_color_select"  ng-repeat="valueSize in product.productMultiOptionsList">
@@ -162,9 +150,9 @@
                                     <div class="fancy-select">  
 
                                    
-                                        <select class="basic" ng-model="product.productQuantity" type="number">
+                                        <select class="basic" ng-model="product.productQuantity" type="number" required>
                                             <option>QTY</option>
-                                            <option>1</option>
+                                            <option value="1">1</option>
                                             <option>2</option>
                                             <option>3</option>
                                             <option>4</option>
@@ -173,7 +161,7 @@
 
                                     </div>
                                     <button ng-if="!product.productMultiOptions" class="add_bag" type="submit" value="Add"><i class="fa fa-shopping-cart"></i>Add to bag</button>
-                                     <button ng-if="product.productMultiOptions && selectedVarients(product.productVarientModel) && returnPrice(product) && returnPrice(product) >= 0" class="add_bag" type="submit" value="Add"><i class="fa fa-shopping-cart"></i>Add to bag</button>
+                                     <button ng-if="product.productMultiOptions" class="add_bag" type="submit" value="Add"><i class="fa fa-shopping-cart"></i>Add to bag</button>
                                     
                                         <div class="clearfix"></div>
                                 </div>
@@ -197,7 +185,24 @@
                     <!-- //CLEARFIX -->
                 </div>
                 <!-- //TOVAR DETAILS WRAPPER -->
+                 
             </div>
+
+             <div class="col-lg-12 col-md-12 sidebar_tovar_details">
+                    <h3><b>Related Products</b>
+                    </h3>
+                    <ul class="tovar_items_small clearfix">
+                        <li class="col-md-3 col-lg-3 col-sm-6 col-xs-12 clearfix" ng-repeat="products in ListProduct  | filter: {productType: product.productType} | limitTo:4" ng-show="products.productName != product.productName">
+                            <img ng-if="products.productImage[0].Image" class="tovar_item_small_img" src="{{products.productImage[0].Image}}" alt="" />
+                            <img ng-if="!products.productImage[0].Image" class="tovar_item_small_img" src="{{BaseUrl}}img/theme/photo_default.png" alt="" />
+                            <a ng-if="products.productName != product.productName" href="/product/{{products.productUrl}}" class="tovar_item_small_title">{{products.productName}}</a>
+                            <span ng-if="!products.productMultiOptions" class="tovar_item_small_price">{{SettingGeneral.settings.currencies_format}} {{products.productPrice}}</span>
+                            <span ng-if="products.productMultiOptions" class="tovar_item_small_price">{{SettingGeneral.settings.currencies_format}} {{products.productPrice}}</span>
+                        </li>
+                    </ul>
+                </div>
+
+
             <!-- //ROW -->
         </div>
         <!-- //CONTAINER -->
@@ -210,6 +215,7 @@
 
 <script type="text/javascript">
     jQuery('.shopping_bag .cart').hide();
+    $('header .navmenu').fadeOut();
 
    $(document).ready(function(){
    'use strict';
@@ -241,6 +247,7 @@ function socialShare() {
 
 	socialShare();
 	}); 
+
 
 </script>
 

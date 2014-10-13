@@ -1,7 +1,8 @@
 <div id="page">
 
     <!-- BREADCRUMBS -->
-    <section class="breadcrumb parallax margbot30" style="background: url({{ThemeSettings.theme_settings.slide_collection_2_img}}) no-repeat;background-size:cover;"></section>
+    <section ng-if="ThemeSettings.theme_settings.slide_collection_2_img" class="breadcrumb parallax margbot30" style="background: url({{ThemeSettings.theme_settings.slide_collection_2_img}}) no-repeat;background-size:cover;"></section>
+     <section ng-if="!ThemeSettings.theme_settings.slide_collection_2_img" class="breadcrumb parallax margbot30"></section>
     <!-- //BREADCRUMBS -->
 
 
@@ -103,7 +104,7 @@
                                 <span class="color_red">*</span>
                             </label>
                             <input id="phone" type="text" name="name" value="" placeholder="" ng-model="Customer.Phone" required/>
-                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Phone no is required</span>
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Valid phone no is required(Eleven Digit No)</span>
                         </div>
 
                         <div class="checkout_form_input last E-mail">
@@ -111,7 +112,7 @@
                                 <span class="color_red">*</span>
                             </label>
                             <input id="email" type="email" name="name" value="" placeholder="" ng-model="Customer.Email" required="required" />
-                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Email is required</span>
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Valid email id is required</span>
                         </div>
 
                         <div class="clear"></div>
@@ -143,13 +144,13 @@
                             </label>
 
                             <span style="font-weight: bold;display: block;padding-bottom: 6px;">
-                                <input type="checkbox" ng-model="Customer.SameBilling" class="checkbox js-agreeToTerms" style="display:inline-block;margin-top: 0px;margin-right: 6px;" />Same as Shipping Address</span>
+                                <input type="checkbox" ng-model="Customer.SameBilling" class="checkbox js-agreeToTerms" style="display:inline-block;margin-top: 0px;margin-right: 6px;opacity:1;" />Same as Shipping Address</span>
                         </div>
                         <div ng-if="!Customer.SameBilling" class="checkout_form_input country">
                             <label>Country
                                 <span class="color_red">*</span>
                             </label>
-                            <select id="countrytypebilling" ng-options="country.CountryName as country.CountryName for country in SettingsShippingCountry" ng-model="Customer.CountryBilling" class="form-control" style="margin-bottom:16px;">
+                            <select id="countrytypebilling" ng-options="country.CountryName as country.CountryName for country in SettingsShippingCountry" ng-model="Customer.Country" class="form-control" style="margin-bottom:16px;">
                                 <option value="">Select Country</option>
                             </select>
                             <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Country is required</span>
@@ -209,7 +210,7 @@
                                 <span class="color_red">*</span>
                             </label>
                             <input id="phonebilling" type="text" name="name" value="" placeholder="" ng-model="Customer.PhoneBilling" />
-                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Phone is required</span>
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Valid phone no is required(Eleven Digit No)</span>
                         </div>
 
                         <div ng-if="!Customer.SameBilling" class="checkout_form_input last E-mail">
@@ -217,7 +218,7 @@
                                 <span class="color_red">*</span>
                             </label>
                             <input id="emailbilling" type="email" name="name" value="" placeholder="" ng-model="Customer.EmailBilling" />
-                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Email is required</span>
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Valid email id is required</span>
                         </div>
 
                     </div>
@@ -513,45 +514,54 @@ $('#InfoShippingSubmit').click(function() {
 
 });
 
-$('#InfoShippingSubmit').click(function() {
+$('#InfoShippingSubmit').click(function(e) {
 
+    var phone = $('#phone');
+    var phoneValue = $('#phone').val();
+    var phoneReg = /[0-9]{11}/;
 
+    if (!phoneReg.test(phone.val())) {
+           $('#phone').next('.city-inline').show();
+           
+        } else {
+            
+             $('#phone').next('.city-inline').hide();
+        }
 
-    if ($('#phone').val() === "") {
-        // invalid
-        $('#phone').next('.city-inline').show();
-        return false;
-    } else {
-        // submit the form here
-        // $('#InfroText').submit();
-        $('#phone').next('.city-inline').hide();
-
-        return true;
-    }
+         e.preventDefault();
 
 
 });
-$('#InfoShippingSubmit').click(function() {
+$('#InfoShippingSubmit').click(function(e) {
 
-
+    var email = $('#email');
+    var emailaddressValue = $('#email').val();
+    var emailReg =  /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
     
-    if ($('#email').val() === "" ) {
-        // invalid
-        $('#email').next('.city-inline').show();
-        return false;
-    } else {
-        // submit the form here
-        // $('#InfroText').submit();
-        $('#email').next('.city-inline').hide();
-        return true;
-    }
+    if (!emailReg.test(email.val())) {
+           $('#email').next('.city-inline').show();
+           
+        } else {
+            
+             $('#email').next('.city-inline').hide();
+        }
 
-
+         e.preventDefault();
 });
+    
+  
 
 $('#InfoShippingSubmit').click(function(){
+    
+    var phone = $('#phone');
+    var phoneValue = $('#phone').val();
+    var phoneReg = /[0-9]{11}/;
 
-    if ($('#citytype').val() !== "" && $('#postcode').val() !== "" && $('#address').val() !== "" && $('#addresscontinue').val() !== "" && $('#name').val() !== "" && $('#lastname').val() !== "" && $('#phone').val() !== "" && $('#countrytype').val() !== "" && $('#email').val() !== "") {
+    var email = $('#email');
+    var emailaddressValue = $('#email').val();
+    var emailReg =  /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+
+    if ($('#citytype').val() !== "" && $('#postcode').val() !== "" && $('#address').val() !== "" && $('#addresscontinue').val() !== "" && $('#name').val() !== "" && $('#lastname').val() !== "" && phoneReg.test(phone.val()) == true && $('#countrytype').val() !== "" && emailReg.test(email.val()) == true) {
         // invalid
         $('#shipping').hide();
         $('#billing').show();
@@ -762,4 +772,6 @@ $('#previous-step').click(function(){
     $('#payment').show();
 
 });
+
+$('header .navmenu').fadeOut();
 </script>

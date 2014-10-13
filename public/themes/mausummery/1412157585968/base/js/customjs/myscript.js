@@ -19,18 +19,6 @@ jQuery(window).load(function () {
 /*	MENU
 /*-----------------------------------------------------------------------------------*/
 /* Superfish */
-jQuery(document).ready(function() {
-	if ($(window).width() >= 768){
-		$('.navmenu').superfish({
-			animation:{height:"show"},
-			speed:250,
-			speedOut:250,
-			delay:0,
-			cssArrows:false,
-			pathClass:"current"
-		});
-	}
-});
 
 
 
@@ -40,33 +28,12 @@ jQuery(document).ready(function() {
 /*	SHOPPING BAG
 /*-----------------------------------------------------------------------------------*/
 jQuery(document).ready(function() {
-	jQuery('.shopping_bag .cart').slideUp(1);
+	
 	jQuery('.shopping_bag_btn').click(function(){
 		jQuery('.shopping_bag .cart').slideToggle();
 		jQuery('.shopping_bag .cart').parent().toggleClass('cart_active');
 	});
 });
-
-
-
-
-
-
-/*-----------------------------------------------------------------------------------*/
-/*	LOVE LIST
-/*-----------------------------------------------------------------------------------*/
-jQuery(document).ready(function() {
-	jQuery('.love_list .cart').slideUp(1);
-	jQuery('.love_list_btn').click(function(){
-		jQuery('.love_list .cart').slideToggle();
-		jQuery('.love_list .cart').parent().toggleClass('cart_active');
-	});
-});
-
-
-
-
-
 
 /*-----------------------------------------------------------------------------------*/
 /*	TOP SEARCH FORM
@@ -142,13 +109,7 @@ $(document).ready(function() {
 /*-----------------------------------------------------------------------------------*/
 /*	PARRALAX
 /*-----------------------------------------------------------------------------------*/
-$(window).load(function() {
-	if ($(window).width() > 1025){
-		jQuery('.flexslider.top_slider .slides li').parallax("50%", -0.5);
-		jQuery('.parallax').parallax("50%", -0.5);
-	}
-	
-});
+
 
 
 

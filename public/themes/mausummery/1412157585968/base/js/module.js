@@ -7,87 +7,67 @@ function aeCommerceRouter ($routeProvider,$locationProvider,$provide,$compilePro
 		.when('/', {
 			templateUrl: BaseUrl+'partials/home.html',
 			controller: 'HomeCtrl',
-			title : storeNameMeta,
-		 })
-		.when('/home1', {
-			templateUrl: BaseUrl+'partials/home1.html',
-			controller: 'HomeCtrl',
-			title : storeNameMeta,
-		 })
-		.when('/home2', {
-			templateUrl: BaseUrl+'partials/home2.html',
-			controller: 'HomeCtrl',
-			title : storeNameMeta,
-		 })
-		.when('/home3', {
-			templateUrl: BaseUrl+'partials/home3.html',
-			controller: 'HomeCtrl',
-			title : storeNameMeta,
-		 })
-		.when('/home4', {
-			templateUrl: BaseUrl+'partials/home4.html',
-			controller: 'HomeCtrl',
-			title : storeNameMeta,
+			title : unescape(seoTitle),
 		 })
 		 .when('/collections', {
 			templateUrl: BaseUrl+'partials/collections.html',
 			controller: 'CollectionCtrl',
-			title : storeNameMeta,
+			title : unescape(seoTitle),
 		 })
 		 .when('/collections/:CollectionName', {
 			templateUrl: BaseUrl+'partials/collections.html',
 			controller: 'CollectionCtrl',
-			title : storeNameMeta, 
+			title : unescape(seoTitle), 
 		 })
 		 .when('/products/:ProductSlug', {
 			templateUrl: BaseUrl+'partials/product.html',
 			controller: 'ProductCtrl',
-			title : storeNameMeta,
+			title : unescape(seoTitle),
 		 })
 		 .when('/products', {
 			templateUrl: BaseUrl+'partials/product.html',
 			controller: 'ProductCtrl',
-			title : storeNameMeta,
+			title : unescape(seoTitle),
 		 })
 		 .when('/product/:ProductSlug', {
 			templateUrl: BaseUrl+'partials/product.html',
 			controller: 'ProductCtrl',
-			title : storeNameMeta,
+			title : unescape(seoTitle),
 		 })
 		 .when('/product', {
 			templateUrl: BaseUrl+'partials/product.html',
 			controller: 'ProductCtrl',
-			title : storeNameMeta,
+			title : unescape(seoTitle),
 		 })
 		 .when('/cart', {
 			templateUrl: BaseUrl+'partials/cart.html',
 			controller: '',
-			title : 'Cart - '+storeNameMeta,
+			title : unescape(seoTitle),
 		 })
 		 .when('/confirm', {
 			templateUrl: BaseUrl+'partials/confirm.html',
 			controller: '',
-			title : 'Confirm Order - '+storeNameMeta,
+			title : unescape(seoTitle),
 		 })
 		  .when('/search', {
 			templateUrl: BaseUrl+'partials/search.html',
 			controller: 'SearchCtrl',
-			title : 'Search - '+storeNameMeta,
+			title : unescape(seoTitle),
 		 })
 		 .when('/thankyou', {
 			templateUrl: BaseUrl+'partials/thankyou.html',
 			controller: '',
-			title : storeNameMeta+ ' | Thankyou'
+			title : unescape(seoTitle)
 		 })
 		 .when('/login', {
 			templateUrl: BaseUrl+'partials/login.html',
 			controller: 'LoginCtrl',
-			title : 'Login - '+storeNameMeta,
+			title : unescape(seoTitle),
 		 })
 		 .when('/forgot_password', {
 			templateUrl: BaseUrl+'partials/forgot_password.html',
 			controller: 'ForgotCtrl',
-			title : 'Forgot Password - '+storeNameMeta,
+			title : unescape(seoTitle),
 		 })
 		 .when('/reset_password', {
 			templateUrl: BaseUrl+'partials/reset_password.html',
@@ -97,32 +77,37 @@ function aeCommerceRouter ($routeProvider,$locationProvider,$provide,$compilePro
 		 .when('/reset_password/:id', {
 			templateUrl: BaseUrl+'partials/reset_password.html',
 			controller: 'ResetCtrl',
-			title : 'Reset Password - '+storeNameMeta,
+			title : unescape(seoTitle),
 		 })
 		  .when('/account_info', {
 			templateUrl: BaseUrl+'partials/account_info.html',
 			controller: 'AccountCtrl',
-			title : storeNameMeta+ ' | Login'
+			title : unescape(seoTitle),
 		 })
 		  .when('/orders', {
 			templateUrl: BaseUrl+'partials/orders.html',
 			controller: 'OrdersCtrl',
-			title : 'Orders - '+storeNameMeta,
+			title : unescape(seoTitle),
+		 })
+		  .when('/page/contactus', {
+			templateUrl: BaseUrl+'partials/contactus.html',
+			controller: 'PageCtrl',
+			title : 'Contact Us',
 		 })
 		 .when('/signup', {
 			templateUrl: BaseUrl+'partials/signup.html',
 			controller: 'SignupCtrl',
-			title : 'Signup - '+storeNameMeta,
+			title : unescape(seoTitle),
 		 })
 		 .when('/page/:PageUrl', {
 			templateUrl: BaseUrl+'partials/page.html',
 			controller: 'PageCtrl',
-			title : storeNameMeta,
+			title : unescape(seoTitle),
 		 })
 		 .when('/:any', {
 			templateUrl: BaseUrl+'partials/404.html',
 			controller: '',
-			title : '404 Not Found - '+storeNameMeta,
+			title : unescape(seoTitle),
 		 });
 		 $locationProvider.html5Mode(true).hashPrefix('navigate');	
 		 	 	 
@@ -279,5 +264,25 @@ angular.module('ng').filter('cut', function() {
         }
 
         return value + (tail || ' …');
+    };
+});
+
+aeCommerce.directive('backImg', function(){
+    return function(scope, element, attrs){
+        var url = attrs.backImg;
+        element.css({
+            'background-image': 'url(' + url +')',
+            'background-size' : 'cover'
+        });
+    };
+});
+
+aeCommerce.directive('backImgCollection', function(){
+    return function(scope, element, attrs){
+        var url = attrs.backImgCollection;
+        element.css({
+            'background-image': 'url(' + url +')',
+    
+        });
     };
 });

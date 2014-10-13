@@ -1,10 +1,10 @@
 <html ng-app="aeCommerce" ng-controller="AECtrl">
   <head>
    <meta name="fragment" content="!">
-   <link rel="icon" type="image/vnd.microsoft.icon" ng-if="ThemeSettings.theme_settings.favicon" href="{{ThemeSettings.theme_settings.favicon}}"/>
+    <link rel="icon" type="image/vnd.microsoft.icon" ng-if="ThemeSettings.theme_settings.favicon" href="{{ThemeSettings.theme_settings.favicon}}"/>
     <base href="/">
 	 <title ng-bind="title">
-                 <%= title %>
+                 <%= unescape(title) %>
               </title>
 		<% if (typeof(meta) != "undefined") { %>
 			  <% for (var metaItem in meta) { %>
@@ -27,7 +27,6 @@
               </head>
               <body id="index">
 			  <div id='loadingbar'></div>
-			 
 			  
 				<div class="loading_container" style="display:none;">
                	 <div id="page">
@@ -41,12 +40,14 @@
 				<!-- CONTAINER -->
 				<div class="container clearfix">
 					<ul class="secondary_menu">
+
 						<li ng-if="!User.info.CustomerEmail"><a href="/login" >Login</a></li>
-						<li ng-if="!User.info.CustomerEmail  && ListPaymentGateways.accountsDisabled == 'optional'"><a href="/signup" >Create Account</a></li>
-						<li ng-if="User.info.CustomerEmail">Welcome <span  ng-if="User.info.CustomerEmail">{{User.info.CustomerFirstName}}</span></li>
-						<li ng-if="User.info.CustomerEmail && !User.info.GuestAuth"><a  href="/account_info"> My Account</a></li>
-						<li ng-if="User.info.CustomerEmail && !User.info.GuestAuth"  href="javascript:void(0)" ng-click="Logout()">Sign Out</li>
-						<li ng-if="User.info.CustomerEmail && User.info.GuestAuth" href="javascript:void(0)" ng-click="Logout('signup')">Register now</li>
+						<li ng-if="!User.info.CustomerEmail  && ListPaymentGateways.accountsDisabled == 'optional'" style="padding-left: 6px;"><a href="/signup" >Create Account</a></li>
+						<li ng-if="User.info.CustomerEmail"><a href="javascript:void(0)">Welcome {{User.info.CustomerFirstName}}</a></li>
+						<li ng-if="User.info.CustomerEmail && !User.info.GuestAuth"><a  href="/account_info" style="padding-left: 8px;"> My Account</a></li>
+						<li ng-if="User.info.CustomerEmail && !User.info.GuestAuth" style="padding-left: 8px;"><a ng-click="Logout()">Sign Out</a>
+						</li>
+						<li ng-if="User.info.CustomerEmail && User.info.GuestAuth" style="padding-left: 8px;"><a  ng-click="Logout('signup')">Register now</a></li>
 					
 						
 					</ul>					
@@ -80,7 +81,7 @@
 					
 					<!-- SHOPPING BAG -->
 					<div class="shopping_bag">
-						<a class="shopping_bag_btn" href="javascript:void(0);" ><i class="fa fa-shopping-cart"></i><p>shopping bag</p><span ng-if="IfCart()">{{ReturnItems()}}</span></a>
+						<a class="shopping_bag_btn" href="javascript:void(0);" ><i class="fa fa-shopping-cart"></i><p>shopping bag</p><span ng-if="IfCart()">{{ReturnItems()}}</span><span ng-if="!IfCart()" style="background-color: rgb(75, 71, 71);">0</span></a>
 						<div class="cart" ng-if="!IfCart()">
 						<ul  class="cart-items">
 								<li>Cart is empty</li>
@@ -141,23 +142,29 @@
                                     </li>
 						
 					</ul><!-- //MENU -->
-					
-					<div ng-if="Navigation in ListNavigation | filter : 'main-menu'">
-						<script type="text/javascript">
-							jQuery(document).ready(function() {
-								if ($(window).width() < 768){
-									jQuery('.menu_block .container').prepend('<a href="javascript:void(0)" class="menu_toggler"><i class="fa fa-align-justify"></i></a>');
-									jQuery('header .navmenu').hide();
-									jQuery('.menu_toggler, .navmenu ul li a').click(function(){
-										jQuery('header .navmenu').slideToggle(100);
-									});
 
-									jQuery(".navmenu").before('<div class="clear"></div>');
-								}
-							});
-						</script>
-					</div>
+					<!-- MENU -->
+					<ul class="navmenuu center hidden-xs hidden-sm" ng-repeat="Navigation in ListNavigation | filter : 'main-menu'">
 					
+						<li class="sub-menu" ng-repeat="Nav in Navigation.link_list"  ng-class="{active:  $location.path() == '/'}" ng-show="Nav.optionSelected == 'frontpage'">
+                                      <a href="/"  >
+                                        {{Nav.name}}
+                                      </a>
+
+                         </li>
+						<li class="sub-menu" ng-repeat="Nav in Navigation.link_list"  ng-class="{active:  $location.path().indexOf('{{Nav.commaSeprated}}') >= 0}" ng-show="Nav.commaSeprated">
+                                      <a href="{{Nav.commaSeprated}}"  >
+                                        {{Nav.name}}
+                                      </a>
+
+                                    </li>
+                                    <li class="sub-menu" ng-repeat="Nav in Navigation.link_list"  ng-class="{active:  $location.path().indexOf('{{Nav.http}}') >= 0}" ng-show="Nav.http">
+                                      <a href="{{Nav.http}}" target="_blank"  >
+                                        {{Nav.name}}
+                                      </a>
+                                    </li>
+						
+					</ul><!-- //MENU -->
 					
 					
 				</div><!-- //MENU BLOCK -->
@@ -166,10 +173,29 @@
 		</header><!-- //HEADER -->
 	</div>	
 <script type="text/javascript">
+
+jQuery('.shopping_bag .cart').hide();
 /* Sticky */
-jQuery(document).ready(function(){
-	if (jQuery(window).width() >= 768){
+jQuery(window).load(function(){
+	if (jQuery(window).width() >= 200){
 		jQuery(".menu_block").sticky({ topSpacing: 0 });
 	}
 });
+
+//MobileMenu
+$(document).ready(function() {
+	if ($(window).width() < 993){
+		$('.menu_block .container').prepend('<a href="javascript:void(0)" class="menu_toggler"><i class="fa fa-align-justify"></i></a>');
+		
+		$('.menu_toggler, .navmenu ul li a').click(function(){
+			$('header .navmenu').slideToggle(300);
+		});
+		
+		$(".navmenu").before('<div class="clear"></div>');
+	}
+
+});
+
+$('header .navmenu').fadeOut();
+
 </script>
