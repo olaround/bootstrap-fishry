@@ -434,8 +434,8 @@ $rootScope.postcollection = function() {
 
 console.log($rootScope.prevUrl);
 
-$rootScope.setLocalStorageData = function(){	
-	
+$rootScope.setLocalStorageData = function(){  
+  
 
   if(localStorage.getItem('Payment')){
 
@@ -756,7 +756,7 @@ $.each(locationsParam,function(index,item){
     });
     $scope.routeParam = $routeParams.ProductSlug;
     $rootScope.title = unescape(seoTitle);
-    $scope.InitProduct = function(){		
+    $scope.InitProduct = function(){    
       $.each($rootScope.ListProduct,function(index,item){
        if(item.productUrl == $scope.routeParam){
         $rootScope.title = item.productSeoTitle;
@@ -792,7 +792,7 @@ $.each(locationsParam,function(index,item){
     });
     $scope.routeParam = $routeParams.PageUrl;
     $rootScope.title = unescape(seoTitle);
-    $scope.InitPage = function(){		
+    $scope.InitPage = function(){   
       $.each($rootScope.ListPage,function(index,item){
        if(item.pageUrl == $scope.routeParam){
         $rootScope.title = item.pageSeoTitle;
@@ -1096,6 +1096,19 @@ function ThankyouCtrl($scope,$location,$rootScope){
   $rootScope.title = 'Thankyou - '+$rootScope.SettingGeneral.settings.meta_title;
   $rootScope.myCart = function(){
 
+
+     var transaction = {
+           'id': $rootScope.OrderInfo.orderid,                // Transaction ID.
+           'affiliation': "Domino's Pakistan",                // Affiliation or store name.
+            'revenue': $rootScope.ReturnTotal(),              // Grand Total.
+            'tax': $rootScope.ReturnTaxPrice()                // Tax.
+        };
+
+      console.log(transaction);
+
+      ga('myTracker.ecommerce:addTransaction', transaction);
+
+
     $.each($rootScope.Cart, function(index,item){
       if(item){
         if(!item.productInfo){
@@ -1106,36 +1119,37 @@ function ThankyouCtrl($scope,$location,$rootScope){
             $rootScope.fullCartProductName = $rootScope.Cart[index][indx].productInfo.productName;
             $rootScope.fullCartProductPrice = $rootScope.Cart[index][indx].productInfo.productPrice;
             $rootScope.fullCartProductQuantity = $rootScope.Cart[index][indx].productInfo.productQuantity;
+            $rootScope.fullCartProductSKU = $rootScope.Cart[index][indx].productInfo.productSKU;
 
-            $scope.$apply();
+            // $rootScope.$apply();
           })
-          //console.log($rootScope.fullCart);
+          // console.log($rootScope.fullCart.productInfo.productCollections);
           //console.log( $rootScope.fullCartProductId);
           //console.log($rootScope.fullCartProductName);
           //console.log($rootScope.fullCartProductPrice);
           //console.log($rootScope.fullCartProductQuantity);
-          var transaction = {
-           'id': $rootScope.OrderInfo.orderid,                // Transaction ID.
-           'affiliation': "Domino's Pakistan",                // Affiliation or store name.
-            'revenue': $rootScope.ReturnTotal(),              // Grand Total.
-            'tax': $rootScope.ReturnTaxPrice()                // Tax.
-          };
+          $.each($rootScope.fullCart.productInfo.productCollections, function(indx,category){
+            if(indx == 0) {
+              $rootScope.categoryName = category.name;
+            }
+          });
+        // $rootScope.categoryName = 'Drinks';
 
-        ga('myTracker.ecommerce:addTransaction', transaction);
-
-          var item = {
-          
+        var item = {
           'id': $rootScope.fullCartProductId,             // Transaction ID. Required.
           'name': $rootScope.fullCartProductName,        // Product name. Required.                               
+          'sku' : $rootScope.fullCartProductSKU,
+          'category': $rootScope.categoryName,
           'price': $rootScope.fullCartProductPrice,       // Unit price.
           'quantity': $rootScope.fullCartProductQuantity, // Quantity.
           'currency': 'PKR'                                // Currency
         };
 
+        console.log(item);
+
         ga('myTracker.ecommerce:addItem', item);
 
         ga('myTracker.ecommerce:send');
-
 
         }
       }
@@ -1261,7 +1275,7 @@ $.each(locationsParam,function(index,item){
 function OrderCtrl($scope, $location, $rootScope,$routeParams) {
 
 
-	
+  
   $rootScope.locationParam = [];
   var locationsParam = $scope.$location.path().split('/');
   $.each(locationsParam, function(index, item) {
@@ -1271,7 +1285,7 @@ function OrderCtrl($scope, $location, $rootScope,$routeParams) {
   });
   $scope.routeParam = $routeParams.PageUrl;
   $rootScope.title = unescape(seoTitle);
-  $scope.InitPage = function(){		
+  $scope.InitPage = function(){   
     $.each($rootScope.ListPage,function(index,item){
      if(item.pageUrl == $scope.routeParam){
       $rootScope.title = item.pageSeoTitle;

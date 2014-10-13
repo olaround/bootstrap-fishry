@@ -107,7 +107,8 @@ aeCommerce.run(['$location', '$rootScope', function($location, $rootScope) {
 			$rootScope.setLocalStorageData();
 		}
 
-        ga('send', 'pageview', $location.path());
+        // ga('send', 'pageview', $location.path());
+        ga('send', 'pageview', { page: $location.path() });
 	});
     
 }]);
