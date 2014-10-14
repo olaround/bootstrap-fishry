@@ -2,7 +2,7 @@
 ================================================== */
 @media only screen and (min-width: 1200px)  {	
 
-.grid li:hover a.product_img_link {border-bottom:3px solid #629F01; margin-bottom:-2px;}
+.grid li:hover a.product_img_link {border-bottom: 3px solid #238f46; margin-bottom:-2px;}
 }
 @media only screen and (min-width: 980px) and (max-width: 1199px) {	
 			.list li .center_block {width: 335px;}
@@ -157,7 +157,7 @@
 }
 
 #customcontent_top {
-    padding-bottom: 10px;
+    padding-bottom: 22px;
 }
 
 #customcontent_top ul .abs {

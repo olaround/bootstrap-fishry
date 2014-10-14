@@ -5000,13 +5000,13 @@ input[type="submit"].btn.btn-mini {
 .pagination ul > li > a:focus,
 .pagination ul > .active > a,
 .pagination ul > .active > span {
-  background-color: #f5f5f5;
+  background-color: #238f46;
 }
 
 .pagination ul > .active > a,
 .pagination ul > .active > span {
-  color: #999999;
-  cursor: default;
+  color: white;
+cursor: default;
 }
 
 .pagination ul > .disabled > span,

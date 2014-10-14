@@ -6,7 +6,7 @@
 		 GENERAL STYLE
 		************************************************************************************************ */
 		#wrapp{ padding-top:10px;}
-		body {padding: 0;}
+		body {padding: 0;overflow: hidden;}
 		 .container {margin: 0 2.127659574468085%;}
 		#columns { padding:0px 0 0px 0;z-index:1;}
 		#right_column  {padding-top:0px;}
@@ -396,7 +396,7 @@ margin-top: 2px;}
 }
 @media only screen and (max-width: 420px) {
 	.page_product_box a.prev, .page_product_box a.next { top:80px;}
-			#order-detail-content table#cart_summary td.cart_product a img { padding-right:10px; width:110px;}
+			#order-detail-content table#cart_summary td.cart_product a img { padding-right:10px; width: 115px;}
 
 
 }
@@ -424,4 +424,11 @@ margin-top: 2px;}
 		float:none !important;
 		width:45px;	
 	}
+}
+@media(max-width: 380px){
+	table#cart_summary td {
+min-width: 0px !important;
+display: inline-block;
+}
+
 }

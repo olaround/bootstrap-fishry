@@ -1,5 +1,5 @@
 <div class="content_bg">
-  <div id="columns" class="container">
+  <div id="columns" class="container" ng-init="Customer.ShippingCountry = 'Pakistan'">
     <div class="row ">
       <div class="loader_page">
 
@@ -223,36 +223,35 @@
                         </label>
                         <input required ng-readonly="User.info.CustomerEmail && !User.info.GuestAuth" ng-model="Customer.FirstName" ng-value="Customer.FirstName" type="text" name="firstname" id="firstname">
                       </p>
-
-                      <p class="required  text">
-                        <label for="lastname">Last name <sup>*</sup>
-                        </label>
-                        <input required ng-readonly="User.info.CustomerEmail && !User.info.GuestAuth" ng-model="Customer.LastName" ng-value="Customer.LastName" type="text" id="lastname" name="lastname">
-                      </p>
-                    </div>
-                    <div class="span6">
-                    
-                    <p class="required text">
+                       <p class="required text">
                       <label for="address1">Address <sup>*</sup>
                       </label>
                       <input required ng-model="Customer.Address" ng-value="Customer.Address" type="text" id="address1" name="address1" >
                     </p>
+
+                      <p class="required text">
+                      <label for="city">City <sup>*</sup>
+                      </label>
+                      <input required type="text" name="city" id="city" ng-value="Customer.City" maxlength="64" ng-model="Customer.City">
+                    </p>
+                     
+                    </div>
+                    <div class="span6">
+                     <p class="required  text">
+                        <label for="lastname">Last name <sup>*</sup>
+                        </label>
+                        <input required ng-readonly="User.info.CustomerEmail && !User.info.GuestAuth" ng-model="Customer.LastName" ng-value="Customer.LastName" type="text" id="lastname" name="lastname">
+                      </p>
+                   
 
                    <p class="required text">
                       <label for="address2">Address (Line 2)</label>
                       <input ng-model="Customer.AddressContinue" ng-value="Customer.AddressContinue" type="text" id="address2" name="address2">
                     </p>
 
-                    <p class="required text">
-                      <label for="city">City <sup>*</sup>
-                      </label>
-                      <input required type="text" name="city" id="city" ng-value="Customer.City" maxlength="64" ng-model="Customer.City">
-                    </p>
+                  
 
-                    <p class="required postcode text">
-                      <label for="postcode">Zip / Postal Code</label>
-                      <input type="tel" id="postcode" name="postcode" ng-value="Customer.PostCode" ng-model="Customer.PostCode">
-                    </p>
+                   
 
                     <p class="required select">
                       <label for="id_country">Country <sup>*</sup>

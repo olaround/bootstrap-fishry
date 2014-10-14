@@ -1,5 +1,5 @@
 <div class="content_bg">
-	<div id="columns" class="container ">
+	<div id="columns" class="container" ng-init="Customer.email = '' && Customer.password = ''">
 		<div class="row ">
 			<div class="loader_page">
 				<div id="center_column" class="center_column span9 clearfix">
@@ -38,7 +38,7 @@
 											<input type="password" id="passwd" name="passwd" value="" class="account_input" ng-model="Customer.password" required="required">
 										</span>
 									</p>
-									<p class="lost_password"><a href="javascript:void(0)">Forgot your password?</a>
+									<p class="lost_password"><a href="/forgot_password">Forgot your password?</a>
 									</p>
 									<p class="submit">
 										<div id="actionLoader" ng-show="StartLogin">&nbsp;&nbsp;</div>
@@ -52,7 +52,7 @@
 							</fieldset>
 						</form>
 
-						<form action="#" method="post" id="create-account_form" class="std span6">
+						<form  method="post" id="create-account_form" class="std span6">
 							<fieldset class="titled_box">
 								<h2>
 									<span>Create an account</span>
