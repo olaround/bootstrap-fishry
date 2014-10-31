@@ -34,39 +34,27 @@ $rootScope.storeTime = function(){
  $rootScope.ThemeSettings.theme_settings.store_start = schedule[d.getDay()].start;
  $rootScope.ThemeSettings.theme_settings.store_close = schedule[d.getDay()].close;
 
- 
 
- var tempCloseTime = $rootScope.ThemeSettings.theme_settings.store_close;
+ var currentTime = moment(Date()).format('H');
 
- if($rootScope.ThemeSettings.theme_settings.store_close < $rootScope.ThemeSettings.theme_settings.store_start) {
-  tempCloseTime = 24 + $rootScope.ThemeSettings.theme_settings.store_start;
 
+
+ if(currentTime >= parseInt($rootScope.ThemeSettings.theme_settings.store_close) && currentTime < parseInt($rootScope.ThemeSettings.theme_settings.store_start)){
+  $rootScope.isStoreOpen = false;
+
+
+} else {
+  $rootScope.isStoreOpen = true;
+  
 }
-
-var currentTime = moment(Date()).format('h');
-
-  /*console.log(currentTime);
-  console.log(parseInt($rootScope.ThemeSettings.theme_settings.store_start));
-  console.log(parseInt($rootScope.ThemeSettings.theme_settings.store_close));
-  console.log(tempCloseTime);*/
-
-
-  if(currentTime >= parseInt($rootScope.ThemeSettings.theme_settings.store_start) && currentTime < parseInt(tempCloseTime)){
-    $rootScope.isStoreOpen = true;
-
-
-  } else {
-    $rootScope.isStoreOpen = false;
-    
-  }
-  /* console.log(currentTime);
-  console.log(parseInt(tempCloseTime));*/
+  //console.log(currentTime);
+  
   var closeTime = $rootScope.ThemeSettings.theme_settings.store_close;
   var startTime = $rootScope.ThemeSettings.theme_settings.store_start;
   $rootScope.closeTimeMinutes =closeTime.slice(3,5);
   $rootScope.startTimeMinutes =startTime.slice(3,5);
 
-  /*  console.log($rootScope.closeTimeMinutes);*/
+  //console.log($rootScope.closeTimeMinutes);
   if(parseInt($rootScope.ThemeSettings.theme_settings.store_close) > 12){
     $rootScope.closeTimeTemporary = parseInt($rootScope.ThemeSettings.theme_settings.store_close) - 12;
   } else{
@@ -78,45 +66,7 @@ var currentTime = moment(Date()).format('h');
 } else{
   $rootScope.startTimeTemporary =  parseInt($rootScope.ThemeSettings.theme_settings.store_start);
 }
-console.log($rootScope.startTimeTemporary);
-/*console.log($rootScope.closeTimeTemporary);*/
-  /*if(currentTime >= parseInt($rootScope.ThemeSettings.theme_settings.store_start_monday) && currentTime <=  tempCloseTime ){
-    $rootScope.isStoreOpen = true; 
-    console.log('Condition True');
-
-
-  } else{
-    $rootScope.isStoreOpen = false; 
-    console.log('Condition False');
-
-  }*/
-
-  /*$rootScope.timeShowStart = moment($rootScope.ThemeSettings.theme_settings.store_start).format();
-
-  var startTime = $rootScope.ThemeSettings.theme_settings.store_start;
-  var closeTime = $rootScope.ThemeSettings.theme_settings.store_close;
-
-  var startHours = parseInt(startTime.slice(0,2));
-  var startTimeMinutes = parseInt(startTime.slice(3,5));
-
-  var closeHours = parseInt(closeTime.slice(0,2));
-  var closeTimeMinutes = parseInt(closeTime.slice(3,5));
-
-  var currentStartDate  = moment(Date()).format('YYYY-MM-DD');
-  var currentCloseDate  = moment(Date()).format('YYYY-MM-DD');
-
-  currentStartDate = moment(currentStartDate).add('minutes', startTimeMinutes);
-  currentStartDate = moment(currentStartDate).add('hours', startHours);  
-
-  $rootScope.ThemeSettings.theme_settings.store_start = currentStartDate.format('H:mm a');
-
-  currentCloseDate = moment(currentCloseDate).add('minutes', closeTimeMinutes);
-  currentCloseDate = moment(currentCloseDate).add('hours', closeHours);  
-
-  $rootScope.ThemeSettings.theme_settings.store_close = currentCloseDate.format('H:mm a');
-
-  console.log($rootScope.ThemeSettings.theme_settings.store_start);
-  console.log($rootScope.ThemeSettings.theme_settings.store_close);*/
+//console.log($rootScope.startTimeTemporary);
 
 }
 
@@ -124,32 +74,27 @@ $rootScope.storeTime();
 
 $rootScope.timeCheck = function(){
 
-  var currentTime = moment(Date()).format('h');
+  var currentTime = moment(Date()).format('H');
 
-  var tempCloseTime = $rootScope.ThemeSettings.theme_settings.store_close;
+  
 
-  if($rootScope.ThemeSettings.theme_settings.store_close < $rootScope.ThemeSettings.theme_settings.store_start) {
-    tempCloseTime = 24 + $rootScope.ThemeSettings.theme_settings.store_start;
+  if(currentTime >= parseInt($rootScope.ThemeSettings.theme_settings.store_close) && currentTime < parseInt($rootScope.ThemeSettings.theme_settings.store_start)){
+    
+   $("#myModal1").show();
+   $rootScope.StartSubmitOrder = false;
+   
 
-  }
-
-  if(currentTime >= parseInt($rootScope.ThemeSettings.theme_settings.store_start) && currentTime < parseInt(tempCloseTime)){
-    $("#myModal1").hide();
-    $rootScope.SubmitOrder($rootScope.PaymentMethod,'/thankyou','clear');
-
-
-  } else if (!$rootScope.ThemeSettings.theme_settings.enable_store_timings) {
+ } else if (!$rootScope.ThemeSettings.theme_settings.enable_store_timings) {
    $("#myModal1").hide();
    $rootScope.SubmitOrder($rootScope.PaymentMethod,'/thankyou','clear');
 
  }else {
-  $("#myModal1").show();
-  $rootScope.StartSubmitOrder = false;
-  
-  
-}
+   $("#myModal1").hide();
+   $rootScope.SubmitOrder($rootScope.PaymentMethod,'/thankyou','clear');
+   
+ }
 
-$("#close-popup").click(function(){
+ $("#close-popup").click(function(){
   $("#myModal1").hide();
 });
 
@@ -1085,7 +1030,7 @@ function SignupCtrl($scope,$location,$rootScope){
   });
   $rootScope.title = 'Signup - '+$rootScope.SettingGeneral.settings.meta_title;
 }
-function ThankyouCtrl($scope,$location,$rootScope){
+function ThankyouCtrl($scope,$location,$rootScope,$window){
   $rootScope.locationParam = [];
   var locationsParam = $scope.$location.path().split('/');  
   $.each(locationsParam,function(index,item){
@@ -1096,9 +1041,9 @@ function ThankyouCtrl($scope,$location,$rootScope){
   $rootScope.title = 'Thankyou - '+$rootScope.SettingGeneral.settings.meta_title;
   $rootScope.myCart = function(){
 
-  ga('require', 'ecommerce', 'ecommerce.js');
+    ga('require', 'ecommerce', 'ecommerce.js');
 
-   var transaction = {
+    var transaction = {
            'id': $rootScope.OrderInfo.orderid,                // Transaction ID.
            'affiliation': "Domino's Pakistan",                // Affiliation or store name.
             'revenue': $rootScope.ReturnTotal(),              // Grand Total.
@@ -1134,7 +1079,7 @@ function ThankyouCtrl($scope,$location,$rootScope){
 
           if($rootScope.Cart){
             var item = {   
-                'id':   $rootScope.OrderInfo.orderid || "Domino's Product",   
+              'id':   $rootScope.OrderInfo.orderid || "Domino's Product",   
                 'name': fullCartProductName || "Domino's Product",        // Product name. Required.                               
                 'sku' : fullCartProductSKU || "Domino's SKU",
                 'category': categoryName || "Domino's Pizza",
@@ -1160,6 +1105,17 @@ $rootScope.SetLocalStorage('Cart');
 }
 $rootScope.myCart();
 
+ $scope.fireConversion = function() {
+ $window.google_trackConversion({
+ google_conversion_id : 965411833,
+ google_conversion_language : "en",
+ google_conversion_format : "2",
+ google_conversion_color : "ffffff",
+ google_conversion_label : "hLx9CMfa2ggQ-YeszAM",
+ google_conversion_value : 0
+ });
+ }
+$scope.fireConversion();
 }
 function AccountCtrl($scope,$location,$rootScope){
   $rootScope.locationParam = [];
