@@ -757,7 +757,7 @@ function CartCtrl($scope,$location,$rootScope){
   });
   $rootScope.title = 'Cart - '+$rootScope.SettingGeneral.settings.meta_title;
 
-  $scope.returnShippingCountry = function(Shipping) {
+  /*$scope.returnShippingCountry = function(Shipping) {
 
     var countries = [];
     $.each($rootScope.SettingShipping, function(index, item) {
@@ -863,7 +863,7 @@ function CartCtrl($scope,$location,$rootScope){
 
     });
     return countries;
-  }
+  }*/
 
 
 
@@ -878,7 +878,7 @@ function ConfirmCtrl($scope,$location,$rootScope){
       $rootScope.locationParam.push(item);
     }
   });
-  $scope.returnShippingCountry = function(Shipping) {
+ /* $scope.returnShippingCountry = function(Shipping) {
 
     var countries = [];
     $.each($rootScope.SettingShipping, function(index, item) {
@@ -984,7 +984,7 @@ function ConfirmCtrl($scope,$location,$rootScope){
 
     });
     return countries;
-  }
+  }*/
   $rootScope.title = 'Confirm - '+$rootScope.SettingGeneral.settings.meta_title;
 }
 // JavaScript Document
@@ -1107,12 +1107,14 @@ $rootScope.myCart();
 
  $scope.fireConversion = function() {
  $window.google_trackConversion({
+  /* <![CDATA[ */
  google_conversion_id : 965411833,
  google_conversion_language : "en",
  google_conversion_format : "2",
  google_conversion_color : "ffffff",
  google_conversion_label : "hLx9CMfa2ggQ-YeszAM",
- google_conversion_value : 0
+ google_conversion_value : 1
+  /* ]]> */
  });
  }
 $scope.fireConversion();

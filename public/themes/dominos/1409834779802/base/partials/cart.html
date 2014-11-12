@@ -44,7 +44,7 @@
                                             </h3>
                                             <ul class="genericList">
                                                 <div class="entryGroup">
-                                                    <select  ng-change="UpdateCountryName(User.info.CountryName);SetCityLocalStorage(User.info.CountryName,'City');" id="citytype" ng-options="Shipping as Shipping for Shipping in returnShippingCountry()" name="city" class="mini js-region" style="width: 200px;height: 25px;margin-bottom: 6px;" title="Select City" ng-model="User.info.CountryName">
+                                                    <select  ng-change="UpdateCountryName(User.info.CountryName);SetCityLocalStorage(User.info.CountryName,'City');" id="citytype" ng-options="Location.City as Location.City for Location in ListSettingsLocation" name="city" class="mini js-region" style="width: 200px;height: 25px;margin-bottom: 6px;" title="Select City" ng-model="User.info.CountryName">
                                                         <option value="">Select City</option>
                                                         
                                                         
@@ -54,44 +54,16 @@
                                                 </div>
                                             </ul>
                                             
-                                            <h3 ng-if="!User.info.CountryName || !User.info.LocalityName || User.info.LocalityName == 'null'" class="dominosColororder">My Location
-                                            </h3>
-                                            <h3 ng-if="User.info.CountryName && User.info.LocalityName && User.info.LocalityName != 'null'" class="dominoscolorok">My Location
-                                            <img ng-src="{{BaseUrl}}img/theme/tick.png" style="width: 12px;padding-left: 2px;">
-                                            </h3>
-                                            <ul class="genericList">
-                                                <div class="entryGroup">
-                                                    <select ng-change="UpdateLocalityName(User.info.LocalityName);SetLocalityLocalStorage(User.info.LocalityName,'Locality');" id="localitytype" ng-options="Shipping as Shipping for Shipping in returnShippingLocality()"  title="Select Locality" name="locality" class="mini js-region" style="width: 200px;height: 25px;margin-bottom: 6px;" ng-model="User.info.LocalityName">
-                                                        <option value="">Select Locality</option>
-                                                        
-                                                    </select>
-                                                    <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;">Locality is required</span>
-                                                </div>
-                                            </ul>
                                             
-                                            <h3 ng-if="!User.info.CountryName || !User.info.LocalityName || !User.info.AreaName || User.info.AreaName == 'null'" class="dominosColororder">My Area
-                                            </h3>
-                                            <h3 ng-if="User.info.CountryName &&  User.info.LocalityName && User.info.AreaName && User.info.AreaName != 'null'" class="dominoscolorok">My Area
-                                            <img ng-src="{{BaseUrl}}img/theme/tick.png" style="width: 12px;padding-left: 2px;">
-                                            </h3>
-                                            <ul class="genericList">
-                                                <div class="entryGroup">
-                                                    <select ng-change="UpdateAreaName(User.info.AreaName);SetAreaLocalStorage(User.info.AreaName,'Area');" id="areatype" ng-options="Shipping as Shipping for Shipping in returnShippingArea()" title="Select Area" name="locality" class="mini js-region" style="width: 200px;height: 25px;margin-bottom: 6px;" ng-model="User.info.AreaName">
-                                                        <option value="">Select Area</option>
-                                                        
-                                                    </select>
-                                                    <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;">Area is required</span>
-                                                </div>
-                                            </ul>
                                             
-                                            <h3 ng-if="!User.info.CountryName || !User.info.LocalityName || !User.info.AreaName || !User.info.outletName || User.info.outletName == 'null'" class="dominosColororder">My Outlet
+                                            <h3 ng-if="!User.info.CountryName || !User.info.outletName || User.info.outletName == 'null'" class="dominosColororder">My Outlet
                                             </h3>
-                                            <h3 ng-if="User.info.CountryName && User.info.LocalityName && User.info.AreaName && User.info.outletName && User.info.outletName != 'null'" class="dominoscolorok">My Outlet
+                                            <h3 ng-if="User.info.CountryName  && User.info.outletName && User.info.outletName != 'null'" class="dominoscolorok">My Outlet
                                             <img ng-src="{{BaseUrl}}img/theme/tick.png" style="width: 12px;padding-left: 2px;">
                                             </h3>
                                             <ul class="genericList">
                                                 <div class="entryGroup">
-                                                    <select ng-change="UpdateoutletName(User.info.outletName);SetLocalStorageGlobal(User.info.outletName,'Outlet');"  id="outlettype" ng-options="Shipping as Shipping for Shipping in returnShippingOutlet()" title="Select Outlet"  name="outlet" class="mini js-region" style="width: 200px;height: 25px;margin-bottom: 6px;" ng-model="User.info.outletName">
+                                                    <select ng-change="UpdateoutletName(User.info.outletName);SetLocalStorageGlobal(User.info.outletName,'Outlet');"  id="outlettype" ng-options="Location.Name as Location.Name for Location in ListSettingsLocation | filter: {City: User.info.CountryName}" title="Select Outlet"  name="outlet" class="mini js-region" style="width: 200px;height: 25px;margin-bottom: 6px;" ng-model="User.info.outletName">
                                                         <option value="">Select Outlet</option>
                                                         
                                                     </select>

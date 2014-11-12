@@ -1,6 +1,4 @@
 <link rel="stylesheet" type="text/css" media="all" ng-href="{{BaseUrl}}css/theme/style-locations.css">
-
-
 <div id="pageFrame">
     <div id="genericHeader">
         <div class="subNavigation">
@@ -13,7 +11,6 @@
     <div id="pageBody">
         <div id="pageContent">
             <div id="wrapper" class="hfeed">
-
                 <!-- #header -->
                 <div id="main">
                     <div id="container">
@@ -26,17 +23,10 @@
                                         </div>
                                         <div id="brancheslist">
                                             <ul>
-                                                <li>
-                                                    <h3>Blue Area Branch</h3>
-                                                    <h4>G-7, Block I, Jinnah Avenue.</h4>
-                                                    <a href="javascript:void(0);">
-                                                        <img ng-src="{{BaseUrl}}img/theme/area_we_covered.png">
-                                                    </a>
-                                                    <div id="areascoverdwrap" onclick="hideareacoverd();" style="display: none;">
-                                                        <div class="areacoverdpiv">
-                                                            <img ng-src="{{BaseUrl}}img/theme/areas_coverd.jpg">
-                                                        </div>
-                                                    </div>
+                                                <li ng-repeat="Location in ListSettingsLocation | filter: {City: 'Islamabad'}">
+                                                    <h3>{{Location.Name}}</h3>
+                                                    <h4>{{Location.Address}}</h4>
+                                                   
                                                 </li>
                                             </ul>
                                         </div>
@@ -48,17 +38,10 @@
                                         </div>
                                         <div id="brancheslist">
                                             <ul>
-                                                <li>
-                                                    <h3>Chaklala Scheme III Branch</h3>
-                                                    <h4>Plot No. 12, Survey 159/112, Commercial Market, Chaklala Scheme III</h4>
-                                                    <a href="javascript:void(0);">
-                                                        <img ng-src="{{BaseUrl}}img/theme/area_we_covered.png">
-                                                    </a>
-                                                    <div id="areascoverdwrap" onclick="hideareacoverd();" style="display: none;">
-                                                        <div class="areacoverdpiv">
-                                                            <img ng-src="{{BaseUrl}}img/theme/Ares-Covered2.jpg">
-                                                        </div>
-                                                    </div>
+                                                <li ng-repeat="Location in ListSettingsLocation | filter: {City: 'Rawalpindi'}">
+                                                    <h3>{{Location.Name}}</h3>
+                                                    <h4>{{Location.Address}}</h4>
+                                                   
                                                 </li>
                                             </ul>
                                         </div>
@@ -70,48 +53,10 @@
                                         </div>
                                         <div id="brancheslist">
                                             <ul>
-                                                <li>
-                                                    <h3>M.M Alam Branch</h3>
-                                                    <h4>Blue Mall, Near Mini Market, MM Alam rd, Lahore.</h4>
-                                                    <a href="javascript:void(0);">
-                                                        <img ng-src="{{BaseUrl}}img/theme/area_we_covered.png">
-                                                    </a>
-                                                    <div id="areascoverdwrap" onclick="hideareacoverd();" style="display: none;">
-                                                        <div class="areacoverdpiv">
-                                                            <img ng-src="{{BaseUrl}}img/theme/lahore_gulbarg.jpg">
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <h3>D.H.A Lahore Branch</h3>
-                                                    <h4>337, Z block, D.H.A LAHORE BRANCH.</h4>
-                                                    <a href="javascript:void(0);">
-                                                        <img ng-src="{{BaseUrl}}img/theme/area_we_covered.png">
-                                                    </a>
-                                                    <div id="areascoverdwrap" onclick="hideareacoverd();" style="display: none;">
-                                                        <div class="areacoverdpiv">
-                                                            <img ng-src="{{BaseUrl}}img/theme/lahore_defence.jpg">
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <h3>Model Town Branch</h3>
-                                                    <h4>Sipra Mansion, plot no 5, main link road, Model Town, Lahore.</h4>
-                                                    <a href="javascript:void(0);">
-                                                        <img ng-src="{{BaseUrl}}img/theme/area_we_covered.png">
-                                                    </a>
-                                                    <div id="areascoverdwrap" onclick="hideareacoverd();" style="display: none;">
-                                                        <div class="areacoverdpiv">
-                                                            <img ng-src="{{BaseUrl}}img/theme/lahore_modeltown.jpg">
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <h3>Johar Town Branch</h3>
-                                                    <h4>64- BLOCK R-1 Mummad Ali Road, near meezan bank johar town, Lahore.</h4>
-                                                    <a href="javascript:void(0)">
-                                                        <img ng-src="{{BaseUrl}}img/theme/area_we_covered.png">
-                                                    </a>
+                                                <li ng-repeat="Location in ListSettingsLocation | filter: {City: 'Lahore'}">
+                                                    <h3>{{Location.Name}}</h3>
+                                                    <h4>{{Location.Address}}</h4>
+                                                   
                                                 </li>
                                             </ul>
                                         </div>
@@ -123,66 +68,14 @@
                                         </div>
                                         <div id="brancheslist">
                                             <ul>
-                                                <li>
-                                                    <h3>Gulshan Branch</h3>
-                                                    <h4>Plot # B-29, Block 13-A, Master Square.</h4>
-                                                    <a href="javascript:void(0);">
-                                                        <img ng-src="{{BaseUrl}}img/theme/area_we_covered.png">
-                                                    </a>
-                                                    <div id="areascoverdwrap" onclick="hideareacoverd();" style="display: none;">
-                                                        <div class="areacoverdpiv">
-                                                            <img ng-src="{{BaseUrl}}img/theme/karachi_gulshan.jpg">
-                                                        </div>
-                                                    </div>
+                                                
+                                                   <li ng-repeat="Location in ListSettingsLocation | filter: {City: 'Karachi'}">
+                                                    <h3>{{Location.Name}}</h3>
+                                                    <h4>{{Location.Address}}</h4>
+                                                   
                                                 </li>
-                                                <li>
-                                                    <h3>Zamzama Branch</h3>
-                                                    <h4>Mall Square, Main Zamzama, Phase V, D.H.A.</h4>
-                                                    <a href="javascript:void(0);">
-                                                        <img ng-src="{{BaseUrl}}img/theme/area_we_covered.png">
-                                                    </a>
-                                                    <div id="areascoverdwrap" onclick="hideareacoverd();" style="display: none;">
-                                                        <div class="areacoverdpiv">
-                                                            <img ng-src="{{BaseUrl}}img/theme/karachi_clifton.jpg">
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <h3>Bahadurabad Branch</h3>
-                                                    <h4>Ismail Centre, Main Roundabout, Four Menar Chorangi, Bahadurabad.</h4>
-                                                    <a href="javascript:void(0);">
-                                                        <img ng-src="{{BaseUrl}}img/theme/area_we_covered.png">
-                                                    </a>
-                                                    <div id="areascoverdwrap" onclick="hideareacoverd();" style="display: none;">
-                                                        <div class="areacoverdpiv">
-                                                            <img ng-src="{{BaseUrl}}img/theme/karachi_bhadurabad.jpg">
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <h3>Khy Shujaat Branch</h3>
-                                                    <h4>Plot 11-C/1, Lane 13 Bukhari Commercial Phase 6 DHA</h4>
-                                                    <a href="javascript:void(0);">
-                                                        <img ng-src="{{BaseUrl}}img/theme/area_we_covered.png">
-                                                    </a>
-                                                    <div id="areascoverdwrap" onclick="hideareacoverd();" style="display: none;">
-                                                        <div class="areacoverdpiv">
-                                                            <img ng-src="{{BaseUrl}}img/theme/karachi_shujaat.jpg">
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <h3>Hyderi Branch</h3>
-                                                    <h4>Plot SB-54, Block K North Nazimabad</h4>
-                                                    <a href="javascript:void(0);">
-                                                        <img ng-src="{{BaseUrl}}img/theme/area_we_covered.png">
-                                                    </a>
-                                                    <div id="areascoverdwrap" onclick="hideareacoverd();" style="display: none;">
-                                                        <div class="areacoverdpiv">
-                                                            <img ng-src="{{BaseUrl}}img/theme/karchi_hyderi.jpg">
-                                                        </div>
-                                                    </div>
-                                                </li>
+                                                
+                                                
                                             </ul>
                                         </div>
                                     </div>
@@ -205,96 +98,95 @@
                 <!-- #footer -->
             </div>
         </div>
+       
     </div>
 </div>
+<style>
+table, th, td {
+border: 1px solid black;
+margin: auto;
+margin-bottom: 30px;
+}
+th, td {
+padding: 15px;
+}
+</style>
 <script type="text/javascript">
-    $(document).ready(function () {
-    $("#karachi").hide();
-    $("#islamabad").hide();
-    $("#lahore").hide();
-    $("#rawalpindi").hide();
-    $("#karachi").addClass("active");
-    $("#menudetailbox").hide();
-    $("#areascoverdwrap ").hide();
-    
-
-    $(".isb_flag").click(function () {
-        $("#karachi").removeClass("active");
-        $("#lahore").removeClass("active");
-        $("#rawalpindi").hide("active");
-        $("#islamabad").addClass("active");
-        
-    });
-    $(".lhr_flag").click(function () {
-        $("#karachi").removeClass("active");
-        $("#lahore").addClass("active");
-        $("#islamabad").removeClass("active");
-        $("#rawalpindi").hide("active");
-    });
-    $(".khi_flag").click(function () {
-        $("#karachi").addClass("active");
-        $("#lahore").removeClass("active");
-        $("#islamabad").removeClass("active");
-        $("#rawalpindi").hide("active");
-    });
-     $(".rwl_flag").click(function () {
-        $("#rawalpindi").show();
-        $("#karachi").removeClass("active");
-        $("#lahore").removeClass("active");
-        $("#islamabad").removeClass("active");
-        
-    });
-    
-
-    $("span.closebtn").click(function closereglog() {
-        $("#reglogin").hide("slow");
-        //window.location = 'http://teamants.com/clients/dominos_live/order/';
-    });
-    $("#normalcontent .leftarea ul li").click(function (){
-         $("#normalcontent .leftarea ul li").removeClass('active');
-         $("#normalcontent .leftarea").removeClass('bogleftarea');
-         $(this).addClass('active');
-         
-    });
-    $("#normalcontent .leftarea ul li.biglongarea").click(function (){
-         $("#normalcontent .leftarea").addClass('bogleftarea');
-         $(this).addClass('active');
-         
-    });
-    $('p.applynow').click (function () {
-       $('#formwrap').fadeIn('slow'); 
-    });    
-    $('div.closeapplywrap').click (function () {
-       $('#formwrap').fadeOut('slow'); 
-    });
-    $('#brancheslist ul li a').click(function () {
-        $('#brancheslist ul li').removeClass('shoarea');
-        $(this).parent().addClass('shoarea');
-    });  
+$(document).ready(function () {
+$("#karachi").hide();
+$("#islamabad").hide();
+$("#lahore").hide();
+$("#rawalpindi").hide();
+$("#karachi").addClass("active");
+$("#menudetailbox").hide();
+$("#areascoverdwrap ").hide();
+$(".isb_flag").click(function () {
+$("#karachi").removeClass("active");
+$("#lahore").removeClass("active");
+$("#rawalpindi").hide("active");
+$("#islamabad").addClass("active");
 });
-
+$(".lhr_flag").click(function () {
+$("#karachi").removeClass("active");
+$("#lahore").addClass("active");
+$("#islamabad").removeClass("active");
+$("#rawalpindi").hide("active");
+});
+$(".khi_flag").click(function () {
+$("#karachi").addClass("active");
+$("#lahore").removeClass("active");
+$("#islamabad").removeClass("active");
+$("#rawalpindi").hide("active");
+});
+$(".rwl_flag").click(function () {
+$("#rawalpindi").show();
+$("#karachi").removeClass("active");
+$("#lahore").removeClass("active");
+$("#islamabad").removeClass("active");
+});
+$("span.closebtn").click(function closereglog() {
+$("#reglogin").hide("slow");
+//window.location = 'http://teamants.com/clients/dominos_live/order/';
+});
+$("#normalcontent .leftarea ul li").click(function (){
+$("#normalcontent .leftarea ul li").removeClass('active');
+$("#normalcontent .leftarea").removeClass('bogleftarea');
+$(this).addClass('active');
+});
+$("#normalcontent .leftarea ul li.biglongarea").click(function (){
+$("#normalcontent .leftarea").addClass('bogleftarea');
+$(this).addClass('active');
+});
+$('p.applynow').click (function () {
+$('#formwrap').fadeIn('slow');
+});
+$('div.closeapplywrap').click (function () {
+$('#formwrap').fadeOut('slow');
+});
+$('#brancheslist ul li a').click(function () {
+$('#brancheslist ul li').removeClass('shoarea');
+$(this).parent().addClass('shoarea');
+});
+});
 function hidedetails() {
-    $("#menudetailbox").hide();
-    $("#menudetailboxwrap").hide();
+$("#menudetailbox").hide();
+$("#menudetailboxwrap").hide();
 }
 function closeformwrap() {
-   $('#formwrap').fadeOut('slow'); 
+$('#formwrap').fadeOut('slow');
 }
-
 function closefran() {
-   $('#franchiseForm').hide(); 
+$('#franchiseForm').hide();
 }
 function closereglog() {
-        $("#reglogin").hide("slow");
-        //window.location = 'http://teamants.com/clients/dominos_live/order/';
-    }
+$("#reglogin").hide("slow");
+//window.location = 'http://teamants.com/clients/dominos_live/order/';
+}
 function showareas(id) {
-    $("#areascoverdwrap ").show();
+$("#areascoverdwrap ").show();
 }
 function hideareacoverd() {
-    $('#brancheslist ul li').removeClass('shoarea');
+$('#brancheslist ul li').removeClass('shoarea');
 }
-
-    
 
 </script>

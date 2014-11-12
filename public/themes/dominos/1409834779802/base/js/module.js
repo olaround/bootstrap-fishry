@@ -48,6 +48,7 @@ function aeCommerceRouter($routeProvider, $locationProvider, $provide) {
             controller: 'ThankyouCtrl',
             title : unescape(seoTitle),
         })
+        
         .when('/login', {
             templateUrl: BaseUrl + 'partials/login.html',
             controller: 'LoginCtrl',
