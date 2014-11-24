@@ -118,8 +118,9 @@
                         </div>
 
                         <div class="tovar_view_description" ng-controller="GlobalCtrl">
-                            <div class="tovar_view_title">{{product.productName}} <div class="pull-right tovar_view_price" ng-if="!product.productMultiOptions">{{SettingGeneral.settings.currencies_format}} {{product.productPrice}}</div>
-                                <div class="pull-right tovar_view_price" ng-if="product.productMultiOptions">{{SettingGeneral.settings.currencies_format}} {{product.productPrice}}</div></div>
+                            <div class="tovar_view_title">{{product.productName}} <div class="hidden-xs  pull-right tovar_view_price" ng-if="!product.productMultiOptions">{{SettingGeneral.settings.currencies_format}} {{product.productPrice}}</div>
+                             <div class="hidden-xs pull-right tovar_view_price" ng-if="product.productPriceCompare"  style="font-size: 13px;"><strike>({{SettingGeneral.settings.currencies_format}} {{product.productPriceCompare}})</strike></div>
+                                <div class="hidden-xs pull-right tovar_view_price" ng-if="product.productMultiOptions && selectedVarients(product.productVarientModel) && returnPrice(product) && returnPrice(product) >= 0">{{SettingGeneral.settings.currencies_format}} {{returnPrice(product)}}</div></div>
                             <div class="tovar_article">{{product.productSKU}}</div>
 
                             <div class="clearfix tovar_brend_price">
@@ -160,6 +161,10 @@
                                         </select>
 
                                     </div>
+
+                                    <div class="visible-xs pull-right tovar_view_price" ng-if="!product.productMultiOptions">{{SettingGeneral.settings.currencies_format}} {{product.productPrice}}</div>
+                                     <div class="visible-xs pull-right tovar_view_price" ng-if="product.productPriceCompare"  style="font-size: 13px;"><strike>({{SettingGeneral.settings.currencies_format}} {{product.productPriceCompare}})</strike></div>
+                                <div class="visible-xs pull-right tovar_view_price" ng-if="product.productMultiOptions && selectedVarients(product.productVarientModel) && returnPrice(product) && returnPrice(product) >= 0">{{SettingGeneral.settings.currencies_format}} {{returnPrice(product)}}</div>
                                     <button ng-if="!product.productMultiOptions" class="add_bag" type="submit" value="Add"><i class="fa fa-shopping-cart"></i>Add to bag</button>
                                      <button ng-if="product.productMultiOptions" class="add_bag" type="submit" value="Add"><i class="fa fa-shopping-cart"></i>Add to bag</button>
                                     
@@ -193,8 +198,10 @@
                     </h3>
                     <ul class="tovar_items_small clearfix">
                         <li class="col-md-3 col-lg-3 col-sm-6 col-xs-12 clearfix" ng-repeat="products in ListProduct  | filter: {productType: product.productType} | limitTo:4" ng-show="products.productName != product.productName">
+                        <a href="/product/{{products.productUrl}}">
                             <img ng-if="products.productImage[0].Image" class="tovar_item_small_img" src="{{products.productImage[0].Image}}" alt="" />
                             <img ng-if="!products.productImage[0].Image" class="tovar_item_small_img" src="{{BaseUrl}}img/theme/photo_default.png" alt="" />
+                         </a>   
                             <a ng-if="products.productName != product.productName" href="/product/{{products.productUrl}}" class="tovar_item_small_title">{{products.productName}}</a>
                             <span ng-if="!products.productMultiOptions" class="tovar_item_small_price">{{SettingGeneral.settings.currencies_format}} {{products.productPrice}}</span>
                             <span ng-if="products.productMultiOptions" class="tovar_item_small_price">{{SettingGeneral.settings.currencies_format}} {{products.productPrice}}</span>

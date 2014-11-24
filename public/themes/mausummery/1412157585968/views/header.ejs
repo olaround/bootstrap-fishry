@@ -95,7 +95,7 @@
 									<img  ng-if="Itemss.productInfo.productImage[0].Image" class="cart_item_product" src="{{Itemss.productInfo.productImage[0].Image}}" alt="" />
 									<img ng-if="!Itemss.productInfo.productImage[0].Image" class="cart_item_product" src="{{BaseUrl}}/img/theme/tovar/women/1_2.jpg" alt="" />
 									<a href="/product/{{Itemss.productInfo.productUrl}}" class="cart_item_title">{{Itemss.productInfo.productName | cut:true:60:' ...'}}</a>
-									<span class="cart_item_price">{{Itemss.quantity}} × {{SettingGeneral.settings.currencies_format}} {{Itemss.price}} </span>
+									<span class="cart_item_price">{{Itemss.quantity}}  × {{Itemss.price | nfcurrency:SettingGeneral.settings.currencies_format+' '}} </span>
 									
                                     <span class="remove" ng-click="RemoveCartItem(Itemss.productID,false)">Remove</span>
 								</li>
@@ -103,16 +103,16 @@
 									<img ng-if="itm.productInfo.productImage[0].Image" class="cart_item_product" src="{{itm.productInfo.productImage[0].Image}}" alt="" />
 									<img ng-if="!itm.productInfo.productImage[0].Image" class="cart_item_product" src="{{BaseUrl}}/img/theme/tovar/women/1_2.jpg" alt="" />
 									<a href="/product/{{itm.productInfo.productUrl}}" class="cart_item_title">{{itm.productInfo.productName | cut:true:60:' ...'}}</a>
-									<span class="cart_item_price">{{itm.quantity}} × {{SettingGeneral.settings.currencies_format}} {{itm.price}} </span>
+									<span class="cart_item_price">{{itm.quantity}}  × {{itm.price | nfcurrency:SettingGeneral.settings.currencies_format+' '}} </span>
 									<span class="remove" ng-click="RemoveCartItem(itm.productID,key)">Remove</span>
 								</li>
 							
 							</ul>
 							<div class="cart_total" ng-show="IfCart()">
-								<div class="clearfix"><span class="cart_subtotal">total:<b>{{ReturnTotal()- ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}}</b></span></div>
+								<!-- <div class="clearfix"><span class="cart_subtotal">total:<b>{{ReturnTotal()- ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}}</b></span></div>
 								
-								<div class="clearfix border-cart-navigation" ng-if="SettingsShippingCountry[0].TaxRate"><span class="cart_subtotal">tax:<b>{{ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}}</b></span></div>
-								<div class="clearfix"><span class="cart_subtotal">subtotal:<b>{{ReturnTotal()| currency:SettingGeneral.settings.currencies_format+' '}}</b></span></div>
+								<div class="clearfix border-cart-navigation" ng-if="SettingsShippingCountry[0].TaxRate"><span class="cart_subtotal">tax:<b>{{ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}}</b></span></div> -->
+								<div class="clearfix"><span class="cart_subtotal">subtotal:<b>{{ReturnTotal() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</b></span></div>
 								
 
 								<a class="btn active" href="/cart">Checkout</a>

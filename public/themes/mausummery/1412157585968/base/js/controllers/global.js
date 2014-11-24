@@ -1,58 +1,52 @@
 function GlobalCtrl($scope,$location,$rootScope){
 
+	$scope.$on('$locationChangeStart',function(evt, absNewUrl, absOldUrl){
+       // $scope.oldUrl = absOldUrl.split('/');
+       console.log('start', evt, absNewUrl, absOldUrl);
+       $rootScope.prevUrl = absOldUrl.split('/');
+       console.log($rootScope.prevUrl);
+     });
+
+
+ if($rootScope.prevUrl == undefined){
+  $rootScope.prevUrl = false;
+
+}
+	console.log($rootScope.prevUrl);
+	$rootScope.redirectHandler = function(){
+
+		if($rootScope.prevUrl == false){
+			$rootScope.GuestLogin('/'); 
+		} else if($rootScope.prevUrl[3] == 'signup'){
+			$rootScope.GuestLogin('/'); 
+		}else if($rootScope.prevUrl[3] == 'cart'){
+			$rootScope.GuestLogin('confirm'); 
+		}else if($rootScope.prevUrl[3] == 'reset_password'){
+			$rootScope.GuestLogin('/'); 
+		}else{
+			$rootScope.GuestLogin('window.history.back()');
+		}
+		console.log($rootScope.prevUrl[3]);
+	}
+
 	$rootScope.isCollapsed = false;
 	$rootScope.clickProductPop = function(){
 		$rootScope.productPop = true;
+		$('body').css("overflow","hidden");
 	}
 
 	$rootScope.unclickProductPop = function(){
 		$rootScope.productPop = false;
+		$('body').css("overflow","auto");
 	}
 
 
 	$rootScope.lengthSlider = $('ul#slider-length li').length;
 	$rootScope.lengthSlider = $rootScope.lengthSlider - 3;
-	console.log($rootScope.lengthSlider);
+	//console.log($rootScope.lengthSlider);
 
-	$scope.$on('$locationChangeStart',function(evt, absNewUrl, absOldUrl){
-       // $scope.oldUrl = absOldUrl.split('/');
-			console.log('start', evt, absNewUrl, absOldUrl);
-		    $rootScope.prevUrl = absOldUrl.split('/');
-        });
-		$rootScope.redirectHandler = function(){
-			
-               if($rootScope.prevUrl[$rootScope.prevUrl.length-1] == 'signup'){
-                          $rootScope.CheckLogin('/'); 
-                }else if($rootScope.prevUrl[$rootScope.prevUrl.length-1] == 'cart'){
-					  $rootScope.CheckLogin('confirm'); 
-                }else if($rootScope.prevUrl[3] && $rootScope.prevUrl[3] == 'reset_password'){
-					  $rootScope.CheckLogin('/'); 
-                }else{
-					  $rootScope.CheckLogin('window.history.back()');
-					  }
-       }
-	   $rootScope.redirectHandlerGuest = function(){
-		   console.log($rootScope.prevUrl[$rootScope.prevUrl.length-1]);
-               if($rootScope.prevUrl[$rootScope.prevUrl.length-1] == 'signup'){
-                          $rootScope.GuestLogin('/'); 
-			   }else if($rootScope.prevUrl[$rootScope.prevUrl.length-1] == 'cart'){
-				  $rootScope.GuestLogin('confirm'); 
-			   }else if($rootScope.prevUrl[3] && $rootScope.prevUrl[3] == 'reset_password'){
-					  $rootScope.CheckLogin('/'); 
-                }else{
-				  $rootScope.GuestLogin('window.history.back()');
-				  }
-       }
-	   
-	   $rootScope.redirectHandlerSignup = function(){
-               if($rootScope.prevUrl[$rootScope.prevUrl.length-1] == 'login' && !$rootScope.IfCart()){
-                          $rootScope.SignUp('/'); 
-                  } else if($rootScope.prevUrl[$rootScope.prevUrl.length-1] == 'login' && $rootScope.IfCart()){
-					  $rootScope.SignUp('confirm'); 
-                  }else{
-					  $rootScope.SignUp('window.history.back()');
-					  }
-       }
+	
+	
 	   
  $rootScope.getHomeTemplatePath = function(template){
    if (template == null) { template = 'default'};

@@ -64,7 +64,7 @@
                                 <span class="color_red">*</span>
                             </label>
                             <input id="postcode" type="text" name="name" value="" placeholder="" ng-model="Customer.PostCode" required="required" />
-                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">PostCode is required</span>
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Postcode is required</span>
                         </div>
 
                         <div class="checkout_form_input2 adress">
@@ -104,7 +104,7 @@
                                 <span class="color_red">*</span>
                             </label>
                             <input id="phone" type="text" name="name" value="" placeholder="" ng-model="Customer.Phone" required/>
-                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Valid phone no is required(Eleven Digit No)</span>
+                            <span class="hide city-inline" style="display:none;color: #cc3333;font-weight: bold;">Phone no is required</span>
                         </div>
 
                         <div class="checkout_form_input last E-mail">
@@ -326,13 +326,13 @@
                                         <img ng-if="Itemss.productInfo.productImage[0].Image" class="cart_item_product" src="{{Itemss.productInfo.productImage[0].Image}}" alt="" />
                                         <img ng-if="!Itemss.productInfo.productImage[0].Image" class="cart_item_product" src="{{BaseUrl}}/img/theme/tovar/women/1_2.jpg" alt="" />
                                         <a href="/product/{{Itemss.productInfo.productUrl}}" class="cart_item_title">{{Itemss.productInfo.productName}}</a>
-                                        <span class="cart_item_price">{{Itemss.price * Itemss.quantity | currency:SettingGeneral.settings.currencies_format+' '}}</span>
+                                        <span class="cart_item_price">{{Itemss.price * Itemss.quantity | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</span>
                                     </li>
                                     <li class="clearfix" ng-hide="Itemss.productID" ng-repeat="(key,itm) in Itemss track by $index">
                                         <img ng-if="itm.productInfo.productImage[0].Image" class="cart_item_product" src="{{itm.productInfo.productImage[0].Image}}" alt="" />
                                         <img ng-if="!itm.productInfo.productImage[0].Image" class="cart_item_product" src="{{BaseUrl}}/img/theme/tovar/women/1_2.jpg" alt="" />
                                         <a href="/product/{{itm.productInfo.productUrl}}" class="cart_item_title">{{itm.productInfo.productName}}</a>
-                                        <span class="cart_item_price">{{itm.price * itm.quantity | currency:SettingGeneral.settings.currencies_format+' '}}</span>
+                                        <span class="cart_item_price">{{itm.price * itm.quantity | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</span>
                                     </li>
 
                                 </ul>
@@ -346,17 +346,18 @@
                         <div class="sidepanel widget_bag_totals">
                             <h3>Your Order</h3>
                             <table class="bag_total">
-                                <tr class="cart-subtotal clearfix">
-                                    <th>total</th>
-                                    <td class="right">{{ReturnTotal()- ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}}</td>
-                                </tr>
+                                
                                 <tr class="cart-subtotal clearfix" ng-if="SettingsShippingCountry[0].TaxRate">
                                     <th>TAX</th>
-                                    <td class="right">{{ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}}</td>
+                                    <td class="right">{{ReturnTaxPrice() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                                 </tr>
                                 <tr class="total clearfix">
                                     <th>Sub Total</th>
-                                    <td class="right">{{ReturnTotal()| currency:SettingGeneral.settings.currencies_format+' '}}</td>
+                                    <td class="right">{{ReturnTotal() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
+                                </tr>
+                                <tr class="cart-subtotal clearfix">
+                                    <th>total</th>
+                                    <td class="right">{{ReturnTotal()- ReturnTaxPrice() | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                                 </tr>
                             </table>
 
@@ -457,24 +458,7 @@ $('#InfoShippingSubmit').click(function() {
 
 
 });
-$('#InfoShippingSubmit').click(function() {
 
-
-
-    if ($('#addresscontinue').val() === "") {
-        // invalid
-        $('#addresscontinue').next('.city-inline').show();
-        return false;
-    } else {
-        // submit the form here
-        // $('#InfroText').submit();
-        $('#addresscontinue').next('.city-inline').hide();
-
-        return true;
-    }
-
-
-});
 
 $('#InfoShippingSubmit').click(function() {
 
@@ -518,7 +502,7 @@ $('#InfoShippingSubmit').click(function(e) {
 
     var phone = $('#phone');
     var phoneValue = $('#phone').val();
-    var phoneReg = /[0-9]{11}/;
+    var phoneReg = /[0-9]/;
 
     if (!phoneReg.test(phone.val())) {
            $('#phone').next('.city-inline').show();
@@ -555,13 +539,13 @@ $('#InfoShippingSubmit').click(function(){
     
     var phone = $('#phone');
     var phoneValue = $('#phone').val();
-    var phoneReg = /[0-9]{11}/;
+    var phoneReg = /[0-9]/;
 
     var email = $('#email');
     var emailaddressValue = $('#email').val();
     var emailReg =  /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
 
-    if ($('#citytype').val() !== "" && $('#postcode').val() !== "" && $('#address').val() !== "" && $('#addresscontinue').val() !== "" && $('#name').val() !== "" && $('#lastname').val() !== "" && phoneReg.test(phone.val()) == true && $('#countrytype').val() !== "" && emailReg.test(email.val()) == true) {
+    if ($('#citytype').val() !== "" && $('#postcode').val() !== "" && $('#address').val() !== ""  && $('#name').val() !== "" && $('#lastname').val() !== "" && phoneReg.test(phone.val()) == true && $('#countrytype').val() !== "" && emailReg.test(email.val()) == true) {
         // invalid
         $('#shipping').hide();
         $('#billing').show();
@@ -738,7 +722,7 @@ $('#InfoBillingSubmit').click(function() {
 
 $('#InfoBillingSubmit').click(function(){
 
-    if ($('#countrytypebilling').val() !== ""  && $('#citytypebilling').val() !== "" && $('#postcodebilling').val() !== "" && $('#addressbilling').val() !== "" && $('#addresscontinuebilling').val() !== "" && $('#namebilling').val() !== "" && $('#lastnamebilling').val() !== "" && $('#phonebilling').val() !== ""  && $('#emailbilling').val() !== "") {
+    if ($('#countrytypebilling').val() !== ""  && $('#citytypebilling').val() !== "" && $('#postcodebilling').val() !== "" && $('#addressbilling').val() !== ""  && $('#namebilling').val() !== "" && $('#lastnamebilling').val() !== "" && $('#phonebilling').val() !== ""  && $('#emailbilling').val() !== "") {
         // invalid
         $('#shipping').hide();
         $('#billing').hide();

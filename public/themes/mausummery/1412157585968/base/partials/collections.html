@@ -390,7 +390,8 @@ display: none;
   </div>
   <div class="tovar_view_description" ng-controller="GlobalCtrl">
     <div class="tovar_view_title">{{product.productName}}<div class="pull-right tovar_view_price" ng-if="!product.productMultiOptions">{{SettingGeneral.settings.currencies_format}} {{product.productPrice}}</div>
-      <div class="pull-right tovar_view_price" ng-if="product.productMultiOptions">{{SettingGeneral.settings.currencies_format}} {{product.productPrice}}</div></div>
+    <div class="pull-right tovar_view_price" ng-if="product.productPriceCompare"  style="font-size: 13px;"><strike>({{SettingGeneral.settings.currencies_format}} {{product.productPriceCompare}})</strike></div>
+      <div class="pull-right tovar_view_price" ng-if="product.productMultiOptions && selectedVarients(product.productVarientModel) && returnPrice(product) && returnPrice(product) >= 0">{{SettingGeneral.settings.currencies_format}} {{returnPrice(product)}}</div></div>
     <div class="tovar_article">{{product.productSKU}}</div>
     <div class="clearfix tovar_brend_price">
       <div class="pull-left tovar_brend">Description</div>
@@ -399,8 +400,8 @@ display: none;
       <div class="clearfix"></div>
       <div class="prod-description"  ng-repeat="(key,product) in ListProduct | CustomFilter:{productUrl : popupProductUrl}">
        
-        <p class="no-margin-para" ng-bind-html="product.productDescription"></p>
-        <a ng-if="product.productMultiOptions" ng-click="product.productVarientModel = {};" onclick="$('.attributes_{{product.Index}}').removeAttr('checked');" href="javascript:void(0)"style="float: right;font-size: 16px;font-weight: bold;text-decoration: underline;padding-bottom: 4px;cursor: pointer !important;" >Reset All</a>
+        <p class="no-margin-para" ng-bind-html="product.productDescription"  style="margin: 0;height: 100px;overflow-y: auto;overflow-x: hidden;"></p>
+        <a ng-if="product.productMultiOptions" ng-click="product.productVarientModel = {};" onclick="$('.attributes_{{product.Index}}').removeAttr('checked');" href="javascript:void(0)"style="float: right;font-size: 16px;font-weight: bold;text-decoration: underline;padding-bottom: 4px;cursor: pointer !important;padding-right: 20px;" >Reset All</a>
       </div>
     </div>
     <form name="addtoCart" ng-submit="addToCart(product.id,product,unclickProductPop());cartEffect();">

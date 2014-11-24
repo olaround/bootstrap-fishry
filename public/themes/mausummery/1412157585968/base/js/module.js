@@ -115,17 +115,13 @@ function aeCommerceRouter ($routeProvider,$locationProvider,$provide,$compilePro
 
 aeCommerce.run(['$location', '$rootScope', function($location, $rootScope) {
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-		var addedTitle = '';
-		if(current.params.CollectionName){
-			addedTitle = current.params.CollectionName+' - ';
+		if($rootScope.setLocalStorageData){
+			$rootScope.setLocalStorageData();
 		}
-		if(current.params.ProductSlug){
-			addedTitle = current.params.ProductSlug+' - ';
-		}
-		console.log(current);
-        $rootScope.title =  addedTitle + current.$$route.title;
-    });
-	
+
+       
+	});
+    
 }]);
 
 aeCommerce.directive('bootCarousel', function(){
@@ -286,3 +282,13 @@ aeCommerce.directive('backImgCollection', function(){
         });
     };
 });
+aeCommerce.filter('nfcurrency', ['$filter', '$locale',
+    function($filter, $locale) {
+        var currency = $filter('currency'),
+            formats = $locale.NUMBER_FORMATS;
+        return function(amount, symbol) {
+            var value = currency(amount, symbol);
+            return value.replace(new RegExp('\\' + formats.DECIMAL_SEP + '\\d{2}'), '')
+        }
+    }
+]);

@@ -59,7 +59,7 @@
                                     <a href="javascript:void(0)">{{Itemss.productInfo.productName}}</a>
                                 </td>
 
-                                <td class="product-price">{{Itemss.price | currency:SettingGeneral.settings.currencies_format+' '}}</td>
+                                <td class="product-price">{{Itemss.price | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
 
                                 <td class="product-quantity">
                                     <select class="basic" ng-change="changeQuantity()" ng-model="Itemss.quantity" type="number">
@@ -72,7 +72,7 @@
                                     </select>
                                 </td>
 
-                                <td class="product-subtotal">{{Itemss.price * Itemss.quantity | currency:SettingGeneral.settings.currencies_format+' '}}</td>
+                                <td class="product-subtotal">{{Itemss.price * Itemss.quantity | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
 
                                 <td class="product-remove">
                                     <a ng-click="RemoveCartItem(Itemss.productID,false)">
@@ -93,7 +93,7 @@
 
                                 </td>
 
-                                <td class="product-price">{{itm.price | currency:SettingGeneral.settings.currencies_format+' '}}</td>
+                                <td class="product-price">{{itm.price | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
 
                                 <td class="product-quantity">
                                     <select class="basic" ng-change="changeQuantity()" ng-model="itm.quantity" type="number">
@@ -107,7 +107,7 @@
                                 </td>
 
 
-                                <td class="product-subtotal">{{itm.price * itm.quantity | currency:SettingGeneral.settings.currencies_format+' '}}</td>
+                                <td class="product-subtotal">{{itm.price * itm.quantity | nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
 
                                 <td class="product-remove">
                                     <a ng-click="RemoveCartItem(itm.productID,key)">
@@ -137,18 +137,19 @@ font-size: 17px;">
                     <div class="sidepanel widget_bag_totals">
                         <h3>BAG TOTALS</h3>
                         <table class="bag_total">
+                            <tr class="total clearfix" ng-if="SettingsShippingCountry[0].TaxRate">
+                                <th>Sub Total</th>
+                                <td class="right">{{ReturnTotal()| nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
+                            </tr>
                             <tr class="cart-subtotal clearfix">
                                 <th>total</th>
-                                <td class="right">{{ReturnTotal()- ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}}</td>
+                                <td class="right">{{ReturnTotal()- ReturnTaxPrice()| nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                             </tr>
                             <tr class="cart-subtotal clearfix" ng-if="SettingsShippingCountry[0].TaxRate">
                                 <th>TAX</th>
-                                <td class="right">{{ReturnTaxPrice()| currency:SettingGeneral.settings.currencies_format+' '}}</td>
+                                <td class="right">{{ReturnTaxPrice()| nfcurrency:SettingGeneral.settings.currencies_format+' '}}</td>
                             </tr>
-                            <tr class="total clearfix">
-                                <th>Sub Total</th>
-                                <td class="right">{{ReturnTotal()| currency:SettingGeneral.settings.currencies_format+' '}}</td>
-                            </tr>
+                            
                         </table>
 
                         <a ng-if="!User.info.CustomerEmail && IfCart()" class="btn active" href="/login">Check out</a>

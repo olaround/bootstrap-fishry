@@ -3,102 +3,25 @@ var aeCommerce = angular.module('aeCommerce', ['ngCookies', 'ngResource', 'ui.bo
 
 function aeCommerceRouter($routeProvider, $locationProvider, $provide) {
     $routeProvider
-        .when('/', {
-            templateUrl: BaseUrl + 'partials/home.html',
-            controller: 'HomeCtrl',
-           title : unescape(seoTitle),
-        })
-        .when('/collections/:CollectionName', {
-            templateUrl: BaseUrl + 'partials/collections.html',
-            controller: 'CollectionCtrl',
-            title : unescape(seoTitle),
-        })
-        .when('/product/:ProductSlug', {
-            templateUrl: BaseUrl + 'partials/product.html',
-            controller: 'ProductCtrl',
-           title : unescape(seoTitle),
-        })
-        .when('/products/:ProductSlug', {
-            templateUrl: BaseUrl + 'partials/products.html',
-            controller: 'ProductCtrl',
-            title : unescape(seoTitle),
-        })
-        .when('/cart', {
-            templateUrl: BaseUrl + 'partials/cart.html',
-            controller: 'CartCtrl',
-            title : unescape(seoTitle),
-        })
-        .when('/account_info', {
-            templateUrl: BaseUrl+'partials/account_info.html',
-            controller: 'AccountCtrl',
-            title : unescape(seoTitle),
-         })
-        .when('/orders', {
-            templateUrl: BaseUrl+'partials/orders.html',
-            controller: 'OrdersCtrl',
-            title : unescape(seoTitle),
-         })
-        .when('/confirm', {
-            templateUrl: BaseUrl + 'partials/confirm.html',
-            controller: 'ConfirmCtrl',
-           title : unescape(seoTitle),
-        })
-        .when('/thankyou', {
-            templateUrl: BaseUrl + 'partials/thankyou.html',
-            controller: 'ThankyouCtrl',
-            title : unescape(seoTitle),
-        })
-        
-        .when('/login', {
-            templateUrl: BaseUrl + 'partials/login.html',
-            controller: 'LoginCtrl',
-            title : unescape(seoTitle),
-        })
-        .when('/signup', {
-            templateUrl: BaseUrl + 'partials/signup.html',
-            controller: 'SignupCtrl',
-             title : unescape(seoTitle),
-        })
-        .when('/page/order', {
-            templateUrl: BaseUrl + 'partials/order.html',
-            controller: 'OrderCtrl',
-            title : unescape(seoTitle),
-        })
-        .when('/app', {
-            templateUrl: BaseUrl + 'partials/app.html',
-            controller: 'PageCtrl',
-            title : "Dominos's Android App",
-        })
-        .when('/page/locations', {
-            templateUrl: BaseUrl + 'partials/locations.html',
-            controller: 'PageCtrl',
-          	 title : unescape(seoTitle),
-        })
-        .when('/forgot_password', {
-            templateUrl: BaseUrl+'partials/forgot_password.html',
-            controller: 'ForgotCtrl',
-            title : unescape(seoTitle),
-         })
-         .when('/reset_password', {
-            templateUrl: BaseUrl+'partials/reset_password.html',
-            controller: 'ResetCtrl',
-             title : unescape(seoTitle),
-         })
-		 .when('/reset_password/:id', {
-			templateUrl: BaseUrl+'partials/reset_password.html',
-			controller: 'ResetCtrl',
-			title : 'Reset Password - '+storeNameMeta,
-		 })
-        .when('/page/:PageUrl', {
-            templateUrl: BaseUrl + 'partials/page.html',
-            controller: 'PageCtrl',
-            title : unescape(seoTitle),
-        })
-        .when('/:any', {
-            templateUrl: BaseUrl + 'partials/404.html',
-            controller: '',
-            title : unescape(seoTitle),
-        });
+        .when('/', {templateUrl: BaseUrl + 'partials/home.html',controller: 'HomeCtrl',title : unescape(seoTitle),})
+        .when('/collections/:CollectionName', {templateUrl: BaseUrl + 'partials/collections.html',controller: 'CollectionCtrl',title : unescape(seoTitle),})
+        .when('/product/:ProductSlug', {templateUrl: BaseUrl + 'partials/product.html',controller: 'ProductCtrl',title : unescape(seoTitle),})
+        .when('/products/:ProductSlug', {templateUrl: BaseUrl + 'partials/products.html',controller: 'ProductCtrl',title : unescape(seoTitle),})
+        .when('/cart', {templateUrl: BaseUrl + 'partials/cart.html',controller: 'CartCtrl',title : unescape(seoTitle),})
+        .when('/account_info', {templateUrl: BaseUrl+'partials/account_info.html',controller: 'AccountCtrl',title : unescape(seoTitle),})
+        .when('/orders', {templateUrl: BaseUrl+'partials/orders.html',controller: 'OrdersCtrl',title : unescape(seoTitle),})
+        .when('/confirm', {templateUrl: BaseUrl + 'partials/confirm.html',controller: 'ConfirmCtrl',title : unescape(seoTitle),})
+        .when('/thankyou', {templateUrl: BaseUrl + 'partials/thankyou.html',controller: 'ThankyouCtrl',title : unescape(seoTitle),})
+        .when('/login', {templateUrl: BaseUrl + 'partials/login.html',controller: 'LoginCtrl',title : unescape(seoTitle),})
+        .when('/signup', {templateUrl: BaseUrl + 'partials/signup.html',controller: 'SignupCtrl',title : unescape(seoTitle),})
+        .when('/page/order', {templateUrl: BaseUrl + 'partials/order.html',controller: 'OrderCtrl',title : unescape(seoTitle),})
+        .when('/app', {templateUrl: BaseUrl + 'partials/app.html',controller: 'PageCtrl',title : "Dominos's Android App",})
+        .when('/page/locations', {templateUrl: BaseUrl + 'partials/locations.html',controller: 'PageCtrl',title : unescape(seoTitle),})
+        .when('/forgot_password', {templateUrl: BaseUrl+'partials/forgot_password.html',controller: 'ForgotCtrl',title : unescape(seoTitle),})
+        .when('/reset_password', {templateUrl: BaseUrl+'partials/reset_password.html',controller: 'ResetCtrl',title : unescape(seoTitle),})
+		 .when('/reset_password/:id', {templateUrl: BaseUrl+'partials/reset_password.html',controller: 'ResetCtrl',title : 'Reset Password - '+storeNameMeta,})
+        .when('/page/:PageUrl', {templateUrl: BaseUrl + 'partials/page.html',controller: 'PageCtrl',title : unescape(seoTitle),})
+        .when('/:any', {templateUrl: BaseUrl + 'partials/404.html',controller: '',title : unescape(seoTitle),});
     $locationProvider.html5Mode(true).hashPrefix('navigate');
 }
 

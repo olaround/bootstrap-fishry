@@ -1,178 +1,8 @@
-
-
-<div id="pageFrame">
-    <div id="genericheader">
-        <div class="subNavigation">
-
-            <div id="notch">
-                <img ng-src="https://cache.dominos.com/nolo/us/en/013167/assets/build/images/img/logoNotch.gif" alt="Domino's Pizza" />
-            </div>
-
-            <a href="/" class="logo">Domino's Pizza</a>
-
-        </div>
-    </div>
-
-    <div id="pageBody">
-        <div id="pageContent">
-            <div id="js-customerPage" class="w100">
-                <div class="profileMsg">
-                    <p>With a Pizza Profile, your address and payment information will be saved so it will be even easier and faster to order than ever.</p>
-                </div>
-                <form role="form" ng-submit="redirectHandlerSignup();">
-                    <div class="formArea horizontal right wide">
-                        <h1 class="sectionHeading">
-                            <span class="profileIcon">Create a Pizza Profile</span>
-                        </h1>
-                        <div class="pageBox">
-                            <div class="formEntry">
-                                <label for="First_Name" class="entryLabel">
-                                    <strong>*</strong>First Name:</label>
-                                    <div class="entryGroup">
-                                        <input ng-model="Customer.FirstName" placeholder="Enter First Name" type="text" id="name_signup" maxlength="40" class="medium" value="">
-                                         <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 8px;">First Name is required</span>
-                                    </div>
-                                </div>
-                                <div class="formEntry">
-                                    <label for="Last_Name" class="entryLabel">
-                                        <strong>*</strong>Last Name:</label>
-                                        <div class="entryGroup">
-                                            <input ng-model="Customer.LastName" placeholder="Enter Last Name" required="required" type="text" id="sign_last_name"  maxlength="40" class="medium" value="">
-                                             <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 8px;">Last Name is required</span>
-                                        </div>
-                                    </div>
-                                    <div class="formEntry">
-                                        <label for="Email" class="entryLabel">
-                                            <strong>*</strong>Email Address:</label>
-                                            <div class="entryGroup">
-                                                <input ng-model="Customer.Email" required="required" placeholder="Enter Email Address" type="email" id="sign_email" name="Email" maxlength="100" class="medium js-email" value="">
-                                                 <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 8px;">Email is required</span>
-                                            </div>
-                                        </div>
-                                        <div class="formEntry">
-                                            <label for="Email" class="entryLabel">
-                                                <strong>*</strong>Address:</label>
-                                                <div class="entryGroup">
-                                                    <textarea id="sign_address" rows="3" cols="26" placeholder="Enter Address" ng-model="Customer.Address" required>
-                                                    </textarea>
-                                                     <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 3px;vertical-align: top;">Address is required</span>
-                                                </div>
-                                            </div>
-                                            <div class="formEntry">
-                                                <label for="Phone" alt="required" class="entryLabel">
-                                                    <strong>*</strong>Mobile Number:</label>
-                                                    <div class="entryGroup">
-                                                        <input type="tel" pattern="[0-9]{11}" title="Eleven Digit Number" id="sign_phone" placeholder="Enter Phone No" ng-model="Customer.Phone" required="required" name="Phone"  placeholder="Phone" class="small js-phone" value="">
-                                                         <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 8px;">Mobile no is required</span>
-
-                                                    </div>
-                                                </div>
-                                                <div class="formEntry">
-                                                    <label for="Phone" alt="required" class="entryLabel">
-                                                        <strong>*</strong>Country:</label>
-                                                        <div class="entryGroup">
-                                                            <select ng-model="Customer.Country" id="sign_country" class="form-control ng-pristine ng-valid" data-event-change="resetProvince" data-addclass-error="customer.errors.addresses.first.country_code.length" style="width:229px;">
-                                                                <option value="">
-                                                                  Please Select
-                                                              </option>
-                                                            
-                                                              <option data-bind="key.name" data-bind-value="key.code" value="Pakistan">
-                                                                  Pakistan
-                                                              </option>
-                                                              
-                                                              <!--batman-iterator-key="sortedCountries"-->
-                                                          </select>
-                                                           <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 8px;">Country is required</span>
-
-
-                                                      </div>
-                                                  </div>
-                                                  <div class="formEntry">
-                                                    <label for="Phone" alt="required" class="entryLabel">
-                                                        <strong>*</strong>City:</label>
-                                                        <div class="entryGroup">
-                                                         <select ng-model="Customer.City" id="sign_city" class="form-control" data-event-change="resetProvince" data-addclass-error="customer.errors.addresses.first.country_code.length"  style="width: 229px;" required>
-                                                            <option value="">
-                                                                Please Select
-                                                            </option>
-                                                            <option data-bind="key.name" data-bind-value="key.code" value="Lahore">
-                                                             Lahore
-                                                         </option>
-
-                                                         <option data-bind="key.name" data-bind-value="key.code" value="Karachi">
-                                                             Karachi
-                                                         </option>
-                                                         <option data-bind="key.name" data-bind-value="key.code" value="Islamabad">
-                                                             Islamabad
-                                                         </option>
-                                                         <option data-bind="key.name" data-bind-value="key.code" value="Rawalpindi">
-                                                             Rawalpindi
-                                                         </option>                                                
-                                                     </select>
-                                                      <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 8px;">City is required</span>
-
-                                                 </div>
-                                             </div>
-                                             
-                                             <div class="formEntry">
-                                                <label for="Create_Password" class="entryLabel">
-                                                    <strong>*</strong>Password:</label>
-                                                    <div class="entryGroup">
-                                                        <input ng-model="Customer.Password" placeholder="Enter Password" required="required" type="password" id="Password" name="Create_Password" maxlength="40" class="medium">
-                                                         <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 8px;">Password is required</span>
-                                                    </div>
-                                                </div>
-                                                <div class="formEntry">
-                                                    <label for="Confirm_Password" class="entryLabel">
-                                                        <strong>*</strong>Confirm Password:</label>
-                                                        <div class="entryGroup">
-                                                            <input required="required" placeholder="Confirm Password" type="password" id="sign_confirm_password" oninput="check(this)" name="Confirm_Password" maxlength="40" class="medium">
-                                                             <span class="hide help-inline" style="display:none;color: #fa001f;font-weight: 700;padding-top: 8px;padding-left: 8px;">Confirm Password is required</span>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="formEntry entryGroup leftAlign">
-                                                        <label for="Agree_To_Terms_Of_Use" class="entryToggle">
-                                                            <input type="checkbox" class="checkbox js-agreeToTerms" required="required" id="Agree_To_Terms_Of_Use" name="Agree_To_Terms_Of_Use">
-                                                            <strong>*</strong>Yes. I agree to the <a class="js-isContentPopup" href="page/privacy">Terms of Use</a> and I am 13 or older</label>
-                                                        </div>
-
-                                                        <div ng-if="DuplicateEmailError"  class="label label-warning" style="color:red;font-weight: bolder;margin-left:106px;margin-top:24px;">Email address already exits in our system</div>
-                                                    </div>
-                                                    <div class="requiredFieldsText">
-                                                        <strong>*</strong>
-                                                        <span>Indicates required field.</span>
-                                                    </div>
-                                                    <div class="actions right">
-                                                        <button type="submit" class="sign-btn btn btnLarge"  title="Create your profile">
-                                                            Create Profile
-                                                        </button><img ng-if="StartSignup && !DuplicateEmailError" ng-src="{{BaseUrl}}img/theme/wait.gif" style="float: right;margin-top: 8px;margin-right: 14px;">
-                                                        <div class="clr">
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="row clearfix" ng-if="User.info.CustomerEmail  || ListPaymentGateways.accountsDisabled != 'optional'">
-
-                                            <div class="col-md-6 login-signup" ng-if="ListPaymentGateways.accountsDisabled != 'optional'">
-                                                <h4>Signup is disabled</h4>
-                                            </div>
-
-                                            <div class="col-md-6 login-signup" ng-if="User.info.CustomerEmail && ListPaymentGateways.accountsDisabled == 'optional'">
-                                                <h4>You are already logged in</h4>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-<script type="text/javascript">
-$('.sign-btn').click(function(){
+<div id=pageFrame><div id=genericheader><div class=subNavigation><div id=notch><img ng-src=https://cache.dominos.com/nolo/us/en/013167/assets/build/images/img/logoNotch.gif alt="Domino's Pizza"></div><a href="/" class=logo>Domino's Pizza</a></div></div><div id=pageBody><div id=pageContent><div id=js-customerPage class=w100><div class=profileMsg><p>With a Pizza Profile, your address and payment information will be saved so it will be even easier and faster to order than ever.</p></div><form role=form ng-submit="redirectHandler('Signup');"><div class="formArea horizontal right wide"><h1 class=sectionHeading><span class=profileIcon>Create a Pizza Profile</span></h1><div class=pageBox><div class=formEntry><label for=First_Name class=entryLabel><strong>*</strong>First Name:</label><div class=entryGroup><input ng-model=Customer.FirstName placeholder="Enter First Name" id=name_signup maxlength=40 class=medium> <span class="hide help-inline" style=display:none;color:#fa001f;font-weight:700;padding-top:8px;padding-left:8px>First Name is required</span></div></div><div class=formEntry><label for=Last_Name class=entryLabel><strong>*</strong>Last Name:</label><div class=entryGroup><input ng-model=Customer.LastName placeholder="Enter Last Name" required id=sign_last_name maxlength=40 class=medium> <span class="hide help-inline" style=display:none;color:#fa001f;font-weight:700;padding-top:8px;padding-left:8px>Last Name is required</span></div></div><div class=formEntry><label for=Email class=entryLabel><strong>*</strong>Email Address:</label><div class=entryGroup><input ng-model=Customer.Email required placeholder="Enter Email Address" type=email id=sign_email name=Email maxlength=100 class="medium js-email"> <span class="hide help-inline" style=display:none;color:#fa001f;font-weight:700;padding-top:8px;padding-left:8px>Email is required</span></div></div><div class=formEntry><label for=Email class=entryLabel><strong>*</strong>Address:</label><div class=entryGroup><textarea id=sign_address rows=3 cols=26 placeholder="Enter Address" ng-model=Customer.Address required>
+                                    </textarea><span class="hide help-inline" style=display:none;color:#fa001f;font-weight:700;padding-top:8px;padding-left:3px;vertical-align:top>Address is required</span></div></div><div class=formEntry><label for=Phone alt=required class=entryLabel><strong>*</strong>Mobile Number:</label><div class=entryGroup><input type=tel pattern=[0-9]{11} title="Eleven Digit Number" id=sign_phone placeholder="Enter Phone No" ng-model=Customer.Phone required name=Phone placeholder=Phone class="small js-phone"> <span class="hide help-inline" style=display:none;color:#fa001f;font-weight:700;padding-top:8px;padding-left:8px>Mobile no is required</span></div></div><div class=formEntry><label for=Phone alt=required class=entryLabel><strong>*</strong>Country:</label><div class=entryGroup><select ng-model=Customer.Country id=sign_country class="form-control ng-pristine ng-valid" data-event-change=resetProvince data-addclass-error=customer.errors.addresses.first.country_code.length style=width:229px><option value="">Please Select<option data-bind=key.name data-bind-value=key.code value=Pakistan>Pakistan</select><span class="hide help-inline" style=display:none;color:#fa001f;font-weight:700;padding-top:8px;padding-left:8px>Country is required</span></div></div><div class=formEntry><label for=Phone alt=required class=entryLabel><strong>*</strong>City:</label><div class=entryGroup><select ng-model=Customer.City id=sign_city class=form-control data-event-change=resetProvince data-addclass-error=customer.errors.addresses.first.country_code.length style=width:229px required><option value="">Please Select<option data-bind=key.name data-bind-value=key.code value=Lahore>Lahore<option data-bind=key.name data-bind-value=key.code value=Karachi>Karachi<option data-bind=key.name data-bind-value=key.code value=Islamabad>Islamabad<option data-bind=key.name data-bind-value=key.code value=Rawalpindi>Rawalpindi</select><span class="hide help-inline" style=display:none;color:#fa001f;font-weight:700;padding-top:8px;padding-left:8px>City is required</span></div></div><div class=formEntry><label for=Create_Password class=entryLabel><strong>*</strong>Password:</label><div class=entryGroup><input ng-model=Customer.Password placeholder="Enter Password" required type=password id=Password name=Create_Password maxlength=40 class=medium> <span class="hide help-inline" style=display:none;color:#fa001f;font-weight:700;padding-top:8px;padding-left:8px>Password is required</span></div></div><div class=formEntry><label for=Confirm_Password class=entryLabel><strong>*</strong>Confirm Password:</label><div class=entryGroup><input required placeholder="Confirm Password" type=password id=sign_confirm_password oninput=check(this) name=Confirm_Password maxlength=40 class=medium> <span class="hide help-inline" style=display:none;color:#fa001f;font-weight:700;padding-top:8px;padding-left:8px>Confirm Password is required</span></div></div><div class="formEntry entryGroup leftAlign"><label for=Agree_To_Terms_Of_Use class=entryToggle><input type=checkbox class="checkbox js-agreeToTerms" required id=Agree_To_Terms_Of_Use name=Agree_To_Terms_Of_Use> <strong>*</strong>Yes. I agree to the <a class=js-isContentPopup href=page/privacy>Terms of Use</a> and I am 13 or older</label></div><div ng-if=DuplicateEmailError class="label label-warning" style=color:red;font-weight:bolder;margin-left:106px;margin-top:24px>Email address already exits in our system</div></div><div class=requiredFieldsText><strong>*</strong> <span>Indicates required field.</span></div><div class="actions right"><button type=submit class="sign-btn btn btnLarge" title="Create your profile">Create Profile</button><img ng-if="StartSignup && !DuplicateEmailError" ng-src={{BaseUrl}}img/theme/wait.gif style=float:right;margin-top:8px;margin-right:14px><div class=clr></div></div></div></form></div><div class="row clearfix" ng-if="User.info.CustomerEmail  || ListPaymentGateways.accountsDisabled != 'optional'"><div class="col-md-6 login-signup" ng-if="ListPaymentGateways.accountsDisabled != 'optional'"><h4>Signup is disabled</h4></div><div class="col-md-6 login-signup" ng-if="User.info.CustomerEmail && ListPaymentGateways.accountsDisabled == 'optional'"><h4>You are already logged in</h4></div></div></div></div></div>
+   <!--  /* Validation Javascript Code For Signup Form */ -->
+    <script type="text/javascript">
+    $('.sign-btn').click(function(){
     
     
     if ($('#name_signup').val()==="") {
@@ -187,7 +17,6 @@ $('.sign-btn').click(function(){
     return true;
     }
     });
-
     $('.sign-btn').click(function(){
     
     if ($('#sign_last_name').val()==="") {
@@ -300,5 +129,4 @@ $('.sign-btn').click(function(){
     return true;
     }
     });
-
     </script>

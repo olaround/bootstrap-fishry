@@ -10,12 +10,12 @@
             <div class="row my_account_block clearfix" ng-if="!User.info.CustomerEmail && ListPaymentGateways.accountsDisabled != 'disabled'">
             <h2>Login/Create Account</h2>
             
-            <hr class="login-hr">
+            <hr class="hidden-xs login-hr">
                 <div class="login col-md-12 col-sm-6 col-xs-12">
                     <h2 class="text-no-margin">Existing Customer</h2>
                     <p class="text-signup">Enter your email address and password to login.</p>
 
-                    <form class="login_form" role="form" ng-submit="CheckLogin('cart')">        
+                    <form class="login_form" role="form" ng-submit="CheckLogin('confirm')">        
 
                          <div class="alert alert-warning" id="error" style="display:none; color:black;font-weight: bolder;font-size: 14px;">The email address or password you entered is incorrect.Try again or reset your password.</div>
                         <label class="mediumm" for="exampleInputEmail1">Email Address*</label>
@@ -38,6 +38,7 @@
                         </div>
                     </form>
                 </div>
+                <hr class="login-hr">
                 <div class="new_customers col-md-12 col-sm-6 col-xs-12">
                  <div class="border-bottom">
                     <h2 class="text-no-margin">New Customer</h2>
@@ -51,7 +52,7 @@
                     <div class="guest-login">
                     <h2 class="text-no-margin">Continue As A Guest</h2>
                     <p class="text-signup">You can still place an order without creating an account.</p>
-                    <div><a class="btn active" ng-click="GuestLogin('cart')">Order As Guest</a>
+                    <div><a class="btn active" ng-click="redirectHandler();">Order As Guest</a>
                     </div>
                     </div>
                 </div>
